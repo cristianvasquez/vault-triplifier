@@ -16,14 +16,13 @@ const mappers = {
 }
 
 const index = await buildIndex(dir)
-// console.log(index)
 
 async function content (path) {
   return await readFile(path, 'utf8')
 }
 
-for (const file of index.files.filter(x=>x.endsWith('.md')).filter(x=>x.endsWith('links.md'))) {
-  console.log('File', file)
+for (const file of index.files.filter(x=>x.endsWith('.md'))) {
+  console.log('Processing file:', file)
   const text = await content(resolve(dir, file))
   const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
   const pointer = toRdf(text, { termMapper, path:file })

@@ -10,6 +10,7 @@ function populateData (data, { pointer, termMapper }, options) {
   for (const [key, value] of Object.entries(data)) {
 
     const candidate = termMapper.toNamed(key, options)
+    // Turtle serialization don't like blanknodes as predicate, should I care?
     const predicate = candidate.termType === 'BlankNode'
       ? ns.dot.undefined
       : candidate

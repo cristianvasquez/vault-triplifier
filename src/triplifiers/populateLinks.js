@@ -11,20 +11,22 @@ function populateLinks (links, context, options) {
 
     function getNamed (txt) {
       if (isValidUrl(txt)) {
-
-        const named = rdf.namedNode(txt)
-        if (alias) {
-          pointer.node(named).addOut(ns.schema.name, alias)
-        }
-        return named
+        // Normal URL
+        return rdf.namedNode(txt)
       } else if (type === 'wikiLink') {
+        // Wikilinks
         return termMapper.toNamed(`[[${txt}]]`)
       }
+      // Relative links
       const resolved = path ? `.${resolve('/', path, txt)}` : txt
       return termMapper.fromPath(resolved)
     }
 
     const named = getNamed(value)
+
+    if (alias) {
+      pointer.node(named).addOut(ns.schema.name, alias)
+    }
 
     if (named.termType === 'BlankNode') {
       pointer.node(named).addOut(ns.schema.name, value)

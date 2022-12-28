@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toRDF Break on identifiers 1`] = `
+exports[`splitOnIdentifiers splitOnIdentifiers false 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -9,24 +9,22 @@ exports[`toRDF Break on identifiers 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b1 dot:contains [
-		<foaf:knows> _:b3 ;
-		dot:related [
-			schema:name \\"Alison\\" ;
-			rdf:type dot:Wikilink ;
-		] ;
-	], [
-		<foaf:knows> _:b6 ;
-		dot:related [
-			schema:name \\"Alice\\" ;
-			rdf:type dot:Wikilink ;
-		] ;
+_:b21 dot:contains <b21/alice>, <b21/alison> .
+
+<b21/alice> <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+<b21/alison> <foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
 	] .
 
 "
 `;
 
-exports[`toRDF Break on tags 1`] = `
+exports[`splitOnIdentifiers splitOnIdentifiers true 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -35,13 +33,56 @@ exports[`toRDF Break on tags 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b8 dot:contains [
+_:b22 dot:contains <b22/alice>, <b22/alison> .
+
+<b22/alice> <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+<b22/alison> <foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
+exports[`splitOnTag splitOnTag false 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b17 <http://www.vault/age> \\"37\\", \\"42\\" ;
+	dot:tag \\"person\\" ;
+	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+
+"
+`;
+
+exports[`splitOnTag splitOnTag true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b18 dot:contains [
+		<http://www.vault/age> \\"37\\" ;
 		dot:tag \\"person\\" ;
 		<http://www.vault/name> \\"Alice\\" ;
 	], [
-		dot:tag \\"person\\" ;
 		<http://www.vault/age> \\"42\\" ;
-	] .
+		dot:tag \\"person\\" ;
+		<http://www.vault/name> \\"Bob\\" ;
+	] ;
+	<http://www.vault/name> \\"Charlie\\" .
 
 "
 `;
@@ -55,9 +96,8 @@ exports[`toRDF Headings 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b15 dot:contains _:b16, [
-		dot:tag \\"tag\\" ;
-	] .
+_:b3 dot:contains <b3/blockId> ;
+	dot:tag \\"tag\\" .
 
 "
 `;
@@ -71,7 +111,7 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b23 <http://www.vault/inline> \\"field\\" ;
+_:b9 <http://www.vault/inline> \\"field\\" ;
 	<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
 	<http://www.vault/**Rating**> \\"6'\\" ;
 	<http://www.vault/subject> [
@@ -88,20 +128,20 @@ _:b23 <http://www.vault/inline> \\"field\\" ;
 			<http://www.vault/inline> \\"fields\\" ;
 		] ;
 	] ;
-	<foaf:knows> _:b30 ;
-	dot:related [
+	<foaf:knows> [
 		schema:name \\"Alison\\" ;
-		rdf:type dot:Wikilink ;
-	], [
-		schema:name \\"Alice\\" ;
-		rdf:type dot:Wikilink ;
-	], [
-		schema:name \\"Bob\\" ;
 		rdf:type dot:Wikilink ;
 	] ;
 	dot:undefined [
-		<foaf:knows> _:b34 ;
+		<foaf:knows> _:Alice ;
+	] ;
+	dot:related _:Alice, [
+		schema:name \\"Bob\\" ;
+		rdf:type dot:Wikilink ;
 	] .
+
+_:Alice schema:name \\"Alice\\" ;
+	a dot:Wikilink .
 
 "
 `;
@@ -115,11 +155,11 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b11 dot:related <http://www.vault/../houses/img.png>, [
+_:b1 dot:related <http://www.vault/../houses/img.png>, [
 		schema:name \\"link 1\\" ;
 		rdf:type dot:Wikilink ;
 	], <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, [
-		schema:name \\"link 1 \\" ;
+		schema:name \\"Alias 1\\", \\"link 1 \\" ;
 		rdf:type dot:Wikilink ;
 	], <http://www.vault/protocol>, <https://example2.com> .
 
@@ -148,7 +188,7 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b18 <http://www.vault/number> \\"42\\" ;
+_:b4 <http://www.vault/number> \\"42\\" ;
 	<http://www.vault/age> \\"42\\", \\"56\\" .
 
 "
@@ -163,7 +203,7 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b19 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+_:b5 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	<http://www.vault/one> [
 		<http://www.vault/0> \\"Two\\" ;
 		<http://www.vault/1> [

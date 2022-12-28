@@ -1,5 +1,5 @@
 import tests from 'docs-and-graphs/test/tests.js'
-import breakOnIdentifiers from './support/breakOnIdentifiers.js'
-import breakOnTags from './support/breakOnTags.js'
+import splitOnIdentifiers from './support/splitOnIdentifiers.js'
+import splitOnTags from './support/splitOnTags.js'
 
-export default [breakOnIdentifiers, breakOnTags, ...tests]
+export { tests, splitOnTags, splitOnIdentifiers }

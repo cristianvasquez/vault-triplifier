@@ -1,5 +1,5 @@
 export default {
-  title: 'Break on identifiers', markdown: `# People
+  title: 'Split on identifiers', markdown: `# People
 
 ## Alice ^alice
 

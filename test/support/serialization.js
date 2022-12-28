@@ -4,13 +4,13 @@ import getStream from 'get-stream'
 
 function toPlain (prefixes) {
   const result = {}
-  for (const [key, value] of Object.entries({ ...ns, ...prefixes })) {
+  for (const [key, value] of Object.entries({ ...prefixes })) {
     result[key] = value().value
   }
   return result
 }
 
-async function prettyPrint (dataset, prefixes = {}) {
+async function prettyPrint (dataset, prefixes = ns) {
   const sink = await turtle({
     prefixes: toPlain(prefixes),
   })

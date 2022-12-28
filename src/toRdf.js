@@ -3,18 +3,22 @@ import rdf from 'rdf-ext'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
 import { createTermMapper } from './termMapper/defaultUriResolver.js'
 
-function toRdf (fullText, context = {},
-  options = { splitOnTag: true, splitOnId: true, normalize: true }) {
+const defaultOptions = { splitOnTag: false, splitOnId: true, normalize: true }
+
+function toRdf (fullText, context = {}, options = {}) {
 
   const termMapper = context.termMapper ?? createTermMapper()
-  const term = context.path
+  const documentUri = context.path
     ? termMapper.fromPath(context.path)
     : rdf.blankNode()
   const pointer = context.pointer ??
-    rdf.clownface({ dataset: rdf.dataset(), term })
+    rdf.clownface({ dataset: rdf.dataset(), term: documentUri })
 
-  const json = simpleAst(fullText, options)
-  return astTriplifier(json, { ...context, pointer, termMapper }, options)
+  const _options = { ...defaultOptions, ...options }
+
+  const json = simpleAst(fullText, _options)
+  return astTriplifier(json, { ...context, pointer, termMapper, documentUri },
+    _options)
 }
 
 export { toRdf }
