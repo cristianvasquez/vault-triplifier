@@ -16,9 +16,14 @@ function toRdf (fullText, context = {}, options = {}) {
 
   const _options = { ...defaultOptions, ...options }
 
-  const json = simpleAst(fullText, _options)
-  return astTriplifier(json, { ...context, pointer, termMapper, documentUri },
-    _options)
+  try {
+    const json = simpleAst(fullText, _options)
+    return astTriplifier(json, { ...context, pointer, termMapper, documentUri },
+      _options)
+  } catch (error) {
+    console.log('could not triplify', context.path)
+  }
+
 }
 
 export { toRdf }

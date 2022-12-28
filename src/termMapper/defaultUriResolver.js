@@ -9,11 +9,9 @@ const defaultOptions = {
   }, mappers: {},
 }
 
-
-function clean(txt){
+function clean (txt) {
   return txt.replaceAll(' ', '-').replaceAll('*', '').toLowerCase()
 }
-
 
 function createTermMapper (options = {}) {
 
@@ -28,7 +26,8 @@ function createTermMapper (options = {}) {
   }
 
   function toNamed (txt) {
-    return maybeKnown(txt, _options) ?? _options.baseNamespace(encodeURI(clean(txt)))
+    return maybeKnown(txt, _options) ??
+      _options.baseNamespace(encodeURI(clean(txt)))
   }
 
   return {
@@ -73,19 +72,28 @@ function maybeKnown (txt, options) {
     return mappers[txt]
   }
 
-  // If it's something like [[Bob | alias]], tries to find it in the index
-  if (txt.startsWith('[[') && txt.endsWith(']]')) {
-    const [fullName] = txt.replace(/^\[\[/, '').replace(/\]\]$/, '').split('|')
+  if (typeof txt === 'string') {
 
-    const [name, id] = fullName.split('#')
-
-    const uri = getUriFromName(name, options)
-    // Point to a sub-block if applies
-    return (id && id.startsWith('^')) ? blockUri(uri, id) : uri
   }
 
-  if (isValidUrl(txt)) {
-    return rdf.namedNode(txt)
+  if (typeof txt === 'string') {
+
+    // If it's something like [[Bob | alias]], tries to find it in the index
+    if (txt.startsWith('[[') && txt.endsWith(']]')) {
+      const [fullName] = txt.replace(/^\[\[/, '').
+        replace(/\]\]$/, '').
+        split('|')
+
+      const [name, id] = fullName.split('#')
+
+      const uri = getUriFromName(name, options)
+      // Point to a sub-block if applies
+      return (id && id.startsWith('^')) ? blockUri(uri, id) : uri
+    }
+
+    if (isValidUrl(txt)) {
+      return rdf.namedNode(txt)
+    }
   }
 }
 

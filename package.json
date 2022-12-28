@@ -8,7 +8,7 @@
     "test": "mocha --recursive"
   },
   "dependencies": {
-    "docs-and-graphs": "^0.1.14",
+    "docs-and-graphs": "^0.1.15",
     "rdf-ext": "^2.1.0"
   },
   "devDependencies": {
