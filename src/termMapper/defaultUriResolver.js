@@ -9,6 +9,12 @@ const defaultOptions = {
   }, mappers: {},
 }
 
+
+function clean(txt){
+  return txt.replaceAll(' ', '-').replaceAll('*', '').toLowerCase()
+}
+
+
 function createTermMapper (options = {}) {
 
   const _options = { ...defaultOptions, ...options }
@@ -22,7 +28,7 @@ function createTermMapper (options = {}) {
   }
 
   function toNamed (txt) {
-    return maybeKnown(txt, _options) ?? _options.baseNamespace(encodeURI(txt))
+    return maybeKnown(txt, _options) ?? _options.baseNamespace(encodeURI(clean(txt)))
   }
 
   return {

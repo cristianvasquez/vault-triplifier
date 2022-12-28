@@ -124,18 +124,18 @@ exports[`toRDF Inline fields 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 _:b9 <http://www.vault/inline> \\"field\\" ;
-	<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
-	<http://www.vault/**Rating**> \\"6'\\" ;
+	<http://www.vault/thoughts> \\"It was decent.\\" ;
+	<http://www.vault/rating> \\"6'\\" ;
 	<http://www.vault/subject> [
 		<http://www.vault/inline> \\"field\\" ;
 	], [
 		<http://www.vault/inline> \\"field\\" ;
 	], [
-		<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
+		<http://www.vault/thoughts> \\"It was decent.\\" ;
 	], [
-		<http://www.vault/**Rating**> \\"6\\" ;
+		<http://www.vault/rating> \\"6\\" ;
 	] ;
-	<http://www.vault/Too> [
+	<http://www.vault/too> [
 		<http://www.vault/many> [
 			<http://www.vault/inline> \\"fields\\" ;
 		] ;
@@ -211,11 +211,11 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b5 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+_:b5 <http://www.vault/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	<http://www.vault/one> [
 		<http://www.vault/0> \\"Two\\" ;
 		<http://www.vault/1> [
-			<http://www.vault/Three> [
+			<http://www.vault/three> [
 				<http://www.vault/0> \\"Other\\" ;
 			] ;
 		] ;

@@ -28,11 +28,8 @@ const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
 // console.log(ptr.dataset.toString())
 
 for (const file of index.files.filter(x => x.endsWith('.md'))) {
-  if (file.endsWith('Details.md')){
-    console.log('Processing file:', file)
-    const text = await content(resolve(dir, file))
-    const pointer = toRdf(text, { termMapper, path: file })
-    console.log(pointer.dataset.toString())
-  }
-
+  console.log('Processing file:', file)
+  const text = await content(resolve(dir, file))
+  const pointer = toRdf(text, { termMapper, path: file })
+  console.log(pointer.dataset.toString())
 }
