@@ -14,7 +14,7 @@ _:b1 dot:contains [
 		<http://www.vault/name> \\"Alice\\" ;
 	], [
 		dot:tag \\"#person\\" ;
-		<http://www.vault/age%20> \\"42\\" ;
+		<http://www.vault/age> \\"42\\" ;
 	] .
 
 "
@@ -40,29 +40,27 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b12 <http://www.vault/inline%20> \\"field\\" ;
-	<http://www.vault/%20inline%20> \\"field\\" ;
+_:b12 <http://www.vault/inline> \\"field\\" ;
 	<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
 	<http://www.vault/**Rating**> \\"6'\\" ;
 	<http://www.vault/mood> \\"okay\\" ;
 	<http://www.vault/length> \\"2 hours\\" ;
-	<http://www.vault/subject%20> [
-		<http://www.vault/%20inline%20> \\"field\\" ;
+	<http://www.vault/subject> [
+		<http://www.vault/inline> \\"field\\" ;
 	], [
-		<http://www.vault/%20**Thoughts**> \\"It was decent.\\" ;
+		<http://www.vault/inline> \\"field\\" ;
 	], [
-		<http://www.vault/%20**Rating**> \\"6\\" ;
+		<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
 	], [
-		<http://www.vault/%20mood> \\"okay\\" ;
+		<http://www.vault/**Rating**> \\"6\\" ;
 	], [
-		<http://www.vault/%20length> \\"2 hours\\" ;
+		<http://www.vault/mood> \\"okay\\" ;
+	], [
+		<http://www.vault/length> \\"2 hours\\" ;
 	] ;
-	<http://www.vault/%20subject%20> [
-		<http://www.vault/%20inline%20> \\"field\\" ;
-	] ;
-	<http://www.vault/Too%20> [
-		<http://www.vault/%20many%20> [
-			<http://www.vault/%20inline%20> \\"fields\\" ;
+	<http://www.vault/Too> [
+		<http://www.vault/many> [
+			<http://www.vault/inline> \\"fields\\" ;
 		] ;
 	] .
 
@@ -103,8 +101,8 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b7 <http://www.vault/number%20> \\"42\\" ;
-	<http://www.vault/age%20> \\"42\\", \\"56\\" .
+_:b7 <http://www.vault/number> \\"42\\" ;
+	<http://www.vault/age> \\"42\\", \\"56\\" .
 
 "
 `;

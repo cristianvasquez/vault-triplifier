@@ -8,11 +8,11 @@
     "test": "mocha --recursive"
   },
   "dependencies": {
-    "@rdfjs-elements/formats-pretty": "^0.5.1",
-    "docs-and-graphs": "^0.1.5",
+    "docs-and-graphs": "^0.1.10",
     "rdf-ext": "^2.1.0"
   },
   "devDependencies": {
+    "@rdfjs-elements/formats-pretty": "^0.5.1",
     "expect": "^29.3.1",
     "expect-mocha-snapshot": "^2.1.5",
     "mocha": "^10.1.0"
