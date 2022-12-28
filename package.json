@@ -1,0 +1,34 @@
+{
+  "name": "rdf-from-markdown",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "dependencies": {
+    "@rdfjs-elements/formats-pretty": "^0.5.1",
+    "docs-and-graphs": "^0.1.5",
+    "rdf-ext": "^2.1.0"
+  },
+  "devDependencies": {
+    "expect": "^29.3.1",
+    "expect-mocha-snapshot": "^2.1.5",
+    "mocha": "^10.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianvasquez/rdf-from-markdown.git"
+  },
+  "keywords": [
+    "markdown",
+    "rdf"
+  ],
+  "author": "Cristian Vasquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cristianvasquez/rdf-from-markdown/issues"
+  },
+  "homepage": "https://github.com/cristianvasquez/rdf-from-markdown#readme"
+}

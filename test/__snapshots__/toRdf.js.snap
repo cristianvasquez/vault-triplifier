@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toRDF Break on tags 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b1 dot:tag \\"#person\\" ;
+	<http://www.vault/name> \\"Alice\\" ;
+	<http://www.vault/age%20> \\"42\\" .
+
+"
+`;
+
+exports[`toRDF Headings 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+"
+`;
+
+exports[`toRDF Inline fields 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b10 <http://www.vault/inline%20> \\"field\\" ;
+	<http://www.vault/%20inline%20> \\"field\\" ;
+	<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
+	<http://www.vault/**Rating**> \\"6'\\" ;
+	<http://www.vault/mood> \\"okay\\" ;
+	<http://www.vault/length> \\"2 hours\\" ;
+	<http://www.vault/subject%20> [
+		<http://www.vault/%20inline%20> \\"field\\" ;
+	], [
+		<http://www.vault/%20**Thoughts**> \\"It was decent.\\" ;
+	], [
+		<http://www.vault/%20**Rating**> \\"6\\" ;
+	], [
+		<http://www.vault/%20mood> \\"okay\\" ;
+	], [
+		<http://www.vault/%20length> \\"2 hours\\" ;
+	] ;
+	<http://www.vault/%20subject%20> [
+		<http://www.vault/%20inline%20> \\"field\\" ;
+	] ;
+	<http://www.vault/Too%20> [
+		<http://www.vault/%20many%20> [
+			<http://www.vault/%20inline%20> \\"fields\\" ;
+		] ;
+	] .
+
+"
+`;
+
+exports[`toRDF Links 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b2 dot:related <http://www.vault/link%201>, <http://www.vault//full/path/link%201>, <http://www.vault//full/path/link%201.md>, <http://example.com>, <http://www.vault/link%201%20>, <protocol> .
+
+"
+`;
+
+exports[`toRDF Outline 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+"
+`;
+
+exports[`toRDF People 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b5 <http://www.vault/number%20> \\"42\\" ;
+	<http://www.vault/age%20> \\"42\\", \\"56\\" .
+
+"
+`;
+
+exports[`toRDF Yaml 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b6 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://www.vault/one> [
+		<http://www.vault/0> \\"Two\\" ;
+		<http://www.vault/1> [
+			<http://www.vault/Three> [
+				<http://www.vault/0> \\"Other\\" ;
+			] ;
+		] ;
+	] ;
+	dot:tag \\"cats\\", \\"dogs\\" .
+
+"
+`;
