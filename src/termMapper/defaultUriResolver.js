@@ -4,11 +4,9 @@ import rdf from 'rdf-ext'
 import { isValidUrl } from '../triplifiers/strings.js'
 
 const defaultOptions = {
-  baseNamespace: rdf.namespace('http://www.vault/'),
-  index: {
+  baseNamespace: rdf.namespace('http://www.vault/'), index: {
     namesPaths: new Map(),
-  },
-  mappers: {},
+  }, mappers: {},
 }
 
 function createTermMapper (options = {}) {
@@ -28,7 +26,7 @@ function createTermMapper (options = {}) {
   }
 
   return {
-    toTerm, toNamed, fromPath,
+    toTerm, toNamed, fromPath, blockUri,
   }
 
 }
@@ -57,6 +55,9 @@ function getUriFromName (name, options) {
   return rdf.blankNode(name)
 }
 
+const blockUri = (uri, blockId) => rdf.namedNode(
+  `${uri.value}/${blockId.replace(/^\^/, '')}`)
+
 function maybeKnown (txt, options) {
 
   const { mappers } = options
@@ -68,8 +69,13 @@ function maybeKnown (txt, options) {
 
   // If it's something like [[Bob | alias]], tries to find it in the index
   if (txt.startsWith('[[') && txt.endsWith(']]')) {
-    const [name] = txt.replace(/^\[\[/, '').replace(/\]\]$/, '').split('|')
-    return getUriFromName(name, options)
+    const [fullName] = txt.replace(/^\[\[/, '').replace(/\]\]$/, '').split('|')
+
+    const [name, id] = fullName.split('#')
+
+    const uri = getUriFromName(name, options)
+    // Point to a sub-block if applies
+    return (id && id.startsWith('^')) ? blockUri(uri, id) : uri
   }
 
   if (isValidUrl(txt)) {

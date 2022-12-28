@@ -34,7 +34,7 @@ function astTriplifier (node, context, options) {
 }
 
 function handleSplit (node, context, options) {
-  const { documentUri } = context
+  const { documentUri, termMapper } = context
 
   if (options.splitOnTag && node.type !== 'root' && node.tags) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
@@ -43,7 +43,7 @@ function handleSplit (node, context, options) {
     const [id] = node.ids
     const childUri = documentUri === 'BlankNode'
       ? rdf.blankNode()
-      : rdf.namedNode(`${documentUri.value}/${id}`)
+      : termMapper.blockUri(documentUri, id)
     return { shouldSplit: true, childUri }
   }
   return {

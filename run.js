@@ -6,6 +6,7 @@ import { toRdf } from './src/toRdf.js'
 import {
   createTermMapper,
 } from './src/termMapper/defaultUriResolver.js'
+import { triplifyIndex } from './src/triplifiers/indexTriplifier.js'
 
 const dir = './test/markdown/'
 
@@ -21,10 +22,17 @@ async function content (path) {
   return await readFile(path, 'utf8')
 }
 
-for (const file of index.files.filter(x=>x.endsWith('.md'))) {
-  console.log('Processing file:', file)
-  const text = await content(resolve(dir, file))
-  const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
-  const pointer = toRdf(text, { termMapper, path:file })
-  console.log(pointer.dataset.toString())
+const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
+
+// const ptr = triplifyIndex(index, {termMapper})
+// console.log(ptr.dataset.toString())
+
+for (const file of index.files.filter(x => x.endsWith('.md'))) {
+  if (file.endsWith('Details.md')){
+    console.log('Processing file:', file)
+    const text = await content(resolve(dir, file))
+    const pointer = toRdf(text, { termMapper, path: file })
+    console.log(pointer.dataset.toString())
+  }
+
 }

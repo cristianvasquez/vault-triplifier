@@ -87,7 +87,7 @@ _:b18 dot:contains [
 "
 `;
 
-exports[`toRDF Headings 1`] = `
+exports[`toRDF BlockIds 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -96,8 +96,20 @@ exports[`toRDF Headings 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b3 dot:contains <b3/blockId> ;
-	dot:tag \\"tag\\" .
+_:b3 dot:contains <b3/1>, <b3/2>, <b3/3> ;
+	<http://www.vault/description> \\"Section 4\\" ;
+	dot:tag \\"Section\\" .
+
+<b3/1> <http://www.vault/description> \\"Section 1\\" ;
+	dot:related <Bob\\\\u0020Details/2> .
+
+<b3/2> <http://www.vault/description> \\"Section 2\\" ;
+	dot:related <Bob\\\\u0020Details/3\\\\u0020> .
+
+<Bob\\\\u0020Details/3\\\\u0020> schema:name \\" Pointer to section 3\\" .
+
+<b3/3> <http://www.vault/description> \\"Section 3\\" ;
+	dot:related <Unknown/1> .
 
 "
 `;
@@ -127,10 +139,6 @@ _:b9 <http://www.vault/inline> \\"field\\" ;
 		<http://www.vault/many> [
 			<http://www.vault/inline> \\"fields\\" ;
 		] ;
-	] ;
-	<foaf:knows> [
-		schema:name \\"Alison\\" ;
-		rdf:type dot:Wikilink ;
 	] ;
 	dot:undefined [
 		<foaf:knows> _:Alice ;

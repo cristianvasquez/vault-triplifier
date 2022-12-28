@@ -9,34 +9,39 @@ function getName (url) {
   return url.split('/').splice(url.split('/').length - 1)[0]
 }
 
-function triplifyIndex ({ index, uriResolver }) {
+function triplifyIndex (index, { termMapper }) {
   const { files, directories } = index
-  const result = rdf.dataset()
+  const dataset = rdf.dataset()
 
   for (const path of files) {
     const container = getParent(path)
-    const containerUri = container === '.'
-      ? ns.dot.root
-      : uriResolver.getUriFromPath(container)
-    const fileUri = uriResolver.getUriFromPath(path)
-    result.add(rdf.quad(containerUri, ns.dot.contains, fileUri, ns.dot.index))
-    result.add(rdf.quad(fileUri, ns.schema.name, rdf.literal(getName(path)), ns.dot.index))
-    result.add(rdf.quad(fileUri, ns.dot.path, rdf.literal(path), fileUri))
+    const containerUri = container === '.' ? ns.dot.root : termMapper.fromPath(
+      container)
+    const fileUri = termMapper.fromPath(path)
+    dataset.add(rdf.quad(containerUri, ns.dot.contains, fileUri, ns.dot.index))
+    dataset.add(rdf.quad(fileUri, ns.schema.name, rdf.literal(getName(path)),
+      ns.dot.index))
+    dataset.add(rdf.quad(fileUri, ns.dot.path, rdf.literal(path), fileUri))
   }
 
   for (const path of directories) {
     const parent = getParent(path)
-    const parentUri = parent === '.' ? ns.dot.root :uriResolver.getUriFromPath(parent)
-    const containerUri = uriResolver.getUriFromPath(path)
-    result.add(rdf.quad(parentUri, ns.dot.contains, containerUri, ns.dot.index))
-    result.add(rdf.quad(containerUri, ns.schema.name, rdf.literal(getName(path)), ns.dot.index))
-    result.add(rdf.quad(containerUri, ns.rdf.type, ns.dot.Folder, ns.dot.index))
+    const parentUri = parent === '.' ? ns.dot.root : termMapper.fromPath(parent)
+    const containerUri = termMapper.fromPath(path)
+    dataset.add(
+      rdf.quad(parentUri, ns.dot.contains, containerUri, ns.dot.index))
+    dataset.add(
+      rdf.quad(containerUri, ns.schema.name, rdf.literal(getName(path)),
+        ns.dot.index))
+    dataset.add(
+      rdf.quad(containerUri, ns.rdf.type, ns.dot.Folder, ns.dot.index))
   }
 
-  result.add(rdf.quad(ns.dot.root, ns.rdf.type, ns.dot.Folder, ns.dot.index))
-  result.add(rdf.quad(ns.dot.root, ns.schema.name, rdf.literal("Root"), ns.dot.index))
+  dataset.add(rdf.quad(ns.dot.root, ns.rdf.type, ns.dot.Folder, ns.dot.index))
+  dataset.add(
+    rdf.quad(ns.dot.root, ns.schema.name, rdf.literal('Root'), ns.dot.index))
 
-  return result
+  return rdf.clownface({ dataset, term: ns.dot.root })
 }
 
 export { triplifyIndex }
