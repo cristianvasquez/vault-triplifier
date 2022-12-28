@@ -22,12 +22,10 @@ async function content (path) {
   return await readFile(path, 'utf8')
 }
 
-for (const file of index.files) {
-  if (file.endsWith('ob.md')) {
-    console.log('FILE: ', file)
-    const text = await content(resolve(dir, file))
-    const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
-    const pointer = toRdf(text, { termMapper, path:file })
-    console.log(pointer.dataset.toString())
-  }
+for (const file of index.files.filter(x=>x.endsWith('.md')).filter(x=>x.endsWith('links.md'))) {
+  console.log('File', file)
+  const text = await content(resolve(dir, file))
+  const termMapper = createTermMapper({ index, mappers, baseNamespace: vault })
+  const pointer = toRdf(text, { termMapper, path:file })
+  console.log(pointer.dataset.toString())
 }

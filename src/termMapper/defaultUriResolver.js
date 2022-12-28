@@ -22,6 +22,7 @@ function getUriFromName (fullName, { namesPaths, baseNamespace }) {
     const [path] = namesPaths.get(name)
     return uriFromPath(path, { baseNamespace })
   }
+
   console.log(`Warning, [${fullName}] not found`)
   return rdf.blankNode()
 }
@@ -43,6 +44,7 @@ function createTermMapper (options = {}) {
       const [name] = txt.replace(/^\[\[/, '').replace(/\]\]$/, '').split('|')
       return getUriFromName(name, { namesPaths, baseNamespace })
     }
+
     if (isValidUrl(txt)) {
       return rdf.namedNode(txt)
     }

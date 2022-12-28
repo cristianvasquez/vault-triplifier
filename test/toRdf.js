@@ -11,6 +11,7 @@ describe('toRDF', async function () {
     it(current.title, async function () {
       const fullText = current.markdown
       const pointer = toRdf(fullText)
+      console.log(pointer.dataset.toString())
       const pretty = await prettyPrint(pointer.dataset)
       expect(pretty).toMatchSnapshot(this)
     })

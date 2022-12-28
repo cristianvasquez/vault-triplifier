@@ -1,11 +1,17 @@
 import { resolve } from 'path'
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
-import { populatePointer } from './handleData.js'
+import { populateData } from './populateData.js'
 import { isValidUrl } from './strings.js'
+import { populateLinks } from './populateLinks.js'
 
-function shouldSplit (node, options) {
+function shouldSplit (node, context, options) {
+  const { pointer, termMapper, path } = context
+
   if (options.splitOnTag && node.type !== 'root' && node.tags) {
+    return true
+  }
+  if (options.splitOnId && node.type !== 'root' && node.ids) {
     return true
   }
 }
@@ -15,35 +21,19 @@ function astTriplifier (node, context, options) {
   const { pointer, termMapper, path } = context
 
   for (const data of node.data ?? []) {
-    populatePointer(data, { pointer, termMapper }, options)
+    populateData(data, context, options)
   }
 
   for (const tag of node.tags ?? []) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
   }
 
-  for (const { type, value, alias } of node.links ?? []) {
-    function getNamed (txt) {
-      if (isValidUrl(txt)) {
-        return rdf.namedNode(txt)
-      } else if (type === 'wikiLink') {
-        return termMapper.toNamed(`[[${txt}]]`)
-      }
-      const resolved = `.${resolve('/',path, txt)}`
-      return termMapper.fromPath(resolved)
-    }
-
-    if (!value) {
-      throw Error(JSON.stringify(node, null, 2))
-    }
-    const named = getNamed(value)
-    if (pointer.dataset.match(pointer.term, null, named).size === 0) {
-      pointer.addOut(ns.dot.related, named)
-    }
+  if (node.links) {
+    populateLinks(node.links, context, options)
   }
 
   for (const child of node.children ?? []) {
-    if (shouldSplit(child, options)) {
+    if (shouldSplit(child, context, options)) {
       const uri = rdf.blankNode()
       pointer.addOut(ns.dot.contains, uri)
       astTriplifier(child, { ...context, pointer: pointer.node(uri) }, options)
