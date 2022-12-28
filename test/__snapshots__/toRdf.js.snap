@@ -9,9 +9,13 @@ exports[`toRDF Break on tags 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b1 dot:tag \\"#person\\" ;
-	<http://www.vault/name> \\"Alice\\" ;
-	<http://www.vault/age%20> \\"42\\" .
+_:b1 dot:contains [
+		dot:tag \\"#person\\" ;
+		<http://www.vault/name> \\"Alice\\" ;
+	], [
+		dot:tag \\"#person\\" ;
+		<http://www.vault/age%20> \\"42\\" ;
+	] .
 
 "
 `;
@@ -36,7 +40,7 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b10 <http://www.vault/inline%20> \\"field\\" ;
+_:b12 <http://www.vault/inline%20> \\"field\\" ;
 	<http://www.vault/%20inline%20> \\"field\\" ;
 	<http://www.vault/**Thoughts**> \\"It was decent.\\" ;
 	<http://www.vault/**Rating**> \\"6'\\" ;
@@ -74,7 +78,7 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b2 dot:related <http://www.vault/link%201>, <http://www.vault//full/path/link%201>, <http://www.vault//full/path/link%201.md>, <http://example.com>, <http://www.vault/link%201%20>, <protocol> .
+_:b4 dot:related <http://www.vault/link%201>, <http://www.vault//full/path/link%201>, <http://www.vault//full/path/link%201.md>, <http://example.com>, <http://www.vault/link%201%20>, <protocol> .
 
 "
 `;
@@ -99,7 +103,7 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b5 <http://www.vault/number%20> \\"42\\" ;
+_:b7 <http://www.vault/number%20> \\"42\\" ;
 	<http://www.vault/age%20> \\"42\\", \\"56\\" .
 
 "
@@ -114,7 +118,7 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b6 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+_:b8 <http://www.vault/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	<http://www.vault/one> [
 		<http://www.vault/0> \\"Two\\" ;
 		<http://www.vault/1> [

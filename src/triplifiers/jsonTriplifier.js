@@ -2,6 +2,12 @@ import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
 import { populatePointer } from './handleData.js'
 
+function shouldSplit (node, options) {
+  if (options.splitOnTag && node.type !== 'root' && node.tags) {
+    return true
+  }
+}
+
 function astTriplifier (node, context, options) {
 
   const { pointer, uriResolver } = context
@@ -29,7 +35,15 @@ function astTriplifier (node, context, options) {
   }
 
   for (const child of node.children ?? []) {
-    astTriplifier(child, { pointer, uriResolver }, options)
+
+    if (shouldSplit(child, options)) {
+      const uri = rdf.blankNode()
+      pointer.addOut(ns.dot.contains, uri)
+      astTriplifier(child, { pointer: pointer.node(uri), uriResolver }, options)
+    } else {
+      astTriplifier(child, { pointer, uriResolver }, options)
+    }
+
   }
 
   return pointer
