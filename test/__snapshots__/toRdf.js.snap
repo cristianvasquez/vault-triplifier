@@ -9,14 +9,14 @@ exports[`splitOnIdentifiers splitOnIdentifiers false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b21 dot:contains <b21/alice>, <b21/alison> .
+_:b22 dot:contains <b22/alice>, <b22/alison> .
 
-<b21/alice> <foaf:knows> [
+<b22/alice> <foaf:knows> [
 		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
-<b21/alison> <foaf:knows> [
+<b22/alison> <foaf:knows> [
 		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
@@ -33,14 +33,14 @@ exports[`splitOnIdentifiers splitOnIdentifiers true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b22 dot:contains <b22/alice>, <b22/alison> .
+_:b23 dot:contains <b23/alice>, <b23/alison> .
 
-<b22/alice> <foaf:knows> [
+<b23/alice> <foaf:knows> [
 		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
-<b22/alison> <foaf:knows> [
+<b23/alison> <foaf:knows> [
 		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
@@ -57,7 +57,7 @@ exports[`splitOnTag splitOnTag false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b17 <http://www.vault/age> \\"37\\", \\"42\\" ;
+_:b18 <http://www.vault/age> \\"37\\", \\"42\\" ;
 	dot:tag \\"person\\" ;
 	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
@@ -73,7 +73,7 @@ exports[`splitOnTag splitOnTag true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b18 dot:contains [
+_:b19 dot:contains [
 		<http://www.vault/age> \\"37\\" ;
 		dot:tag \\"person\\" ;
 		<http://www.vault/name> \\"Alice\\" ;
@@ -96,19 +96,19 @@ exports[`toRDF BlockIds 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b3 dot:contains <b3/1>, <b3/2>, <b3/3> ;
+_:b4 dot:contains <b4/1>, <b4/2>, <b4/3> ;
 	<http://www.vault/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
 
-<b3/1> <http://www.vault/description> \\"Section 1\\" ;
+<b4/1> <http://www.vault/description> \\"Section 1\\" ;
 	dot:related <Bob\\\\u0020Details/2> .
 
-<b3/2> <http://www.vault/description> \\"Section 2\\" ;
+<b4/2> <http://www.vault/description> \\"Section 2\\" ;
 	dot:related <Bob\\\\u0020Details/3\\\\u0020> .
 
 <Bob\\\\u0020Details/3\\\\u0020> schema:name \\" Pointer to section 3\\" .
 
-<b3/3> <http://www.vault/description> \\"Section 3\\" ;
+<b4/3> <http://www.vault/description> \\"Section 3\\" ;
 	dot:related <Unknown/1> .
 
 "
@@ -123,7 +123,7 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b9 <http://www.vault/inline> \\"field\\" ;
+_:b10 <http://www.vault/inline> \\"field\\" ;
 	<http://www.vault/thoughts> \\"It was decent.\\" ;
 	<http://www.vault/rating> \\"6'\\" ;
 	<http://www.vault/subject> [
@@ -163,7 +163,7 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b1 dot:related <http://www.vault/../houses/img.png>, [
+_:b2 dot:related <http://www.vault/../houses/img.png>, [
 		schema:name \\"link 1\\" ;
 		rdf:type dot:Wikilink ;
 	], <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, [
@@ -196,7 +196,7 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b4 <http://www.vault/number> \\"42\\" ;
+_:b5 <http://www.vault/number> \\"42\\" ;
 	<http://www.vault/age> \\"42\\", \\"56\\" .
 
 "
@@ -211,7 +211,7 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b5 <http://www.vault/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
+_:b6 <http://www.vault/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	<http://www.vault/one> [
 		<http://www.vault/0> \\"Two\\" ;
 		<http://www.vault/1> [
@@ -222,5 +222,16 @@ _:b5 <http://www.vault/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	] ;
 	dot:tag \\"cats\\", \\"dogs\\" .
 
+"
+`;
+
+exports[`toRDF code fence 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
 "
 `;
