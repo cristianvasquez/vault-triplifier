@@ -4,8 +4,8 @@ import ns from './src/namespaces.js'
 
 import { createTriplifier } from './index.js'
 
-// const dir = './test/markdown/'
-const dir = './incubator/example/'
+const dir = './test/markdown/'
+// const dir = './incubator/example/'
 
 // Config
 const triplifier = await createTriplifier(dir, {
@@ -19,5 +19,6 @@ for (const file of triplifier.index.files.filter(x => x.endsWith('.md'))) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRdf(text, { path: file })
+
   console.log(pointer.dataset.toString())
 }

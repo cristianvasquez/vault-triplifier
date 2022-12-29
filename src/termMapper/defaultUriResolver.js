@@ -1,5 +1,5 @@
 import { normalize, parse } from 'path'
-import rdf from 'rdf-ext'
+import rdf from '../rdf-ext.js'
 
 import { isValidUrl } from '../triplifiers/strings.js'
 

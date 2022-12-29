@@ -1,4 +1,5 @@
-import rdf from 'rdf-ext'
+import rdf from '../rdf-ext.js'
+
 import ns from '../namespaces.js'
 import { populateData } from './populateData.js'
 import { populateLinks } from './populateLinks.js'

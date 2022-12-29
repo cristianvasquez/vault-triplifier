@@ -25,8 +25,7 @@ async function buildIndex (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   })
   const files = (await once(search, 'end'))[0]
   const directories = (await once(new Glob('**/', {
-    nodir: false,
-    cwd: basePath,
+    nodir: false, cwd: basePath,
   }), 'end'))[0].map(dir => `./${dir.slice(0, -1)}`)
   return { namesPaths, files, directories }
 }

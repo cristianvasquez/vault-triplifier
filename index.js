@@ -9,9 +9,10 @@ const defaultOptions = {
 
 async function createTriplifier (dir, options = {}) {
 
-  const _options = { ...defaultOptions, ...options }
-
   const index = await buildIndex(dir)
+
+  const _options = { ...defaultOptions, ...options, index }
+
   const termMapper = createTermMapper(_options)
 
   return {

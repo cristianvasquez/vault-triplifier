@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import rdf from 'rdf-ext'
+import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
 import { isValidUrl } from './strings.js'
 

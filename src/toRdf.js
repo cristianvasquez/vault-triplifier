@@ -1,5 +1,6 @@
 import { simpleAst } from 'docs-and-graphs'
-import rdf from 'rdf-ext'
+import rdf from './rdf-ext.js'
+
 import { createTermMapper } from './termMapper/defaultUriResolver.js'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
 
