@@ -8,14 +8,17 @@ const defaultOptions = {
 }
 
 async function createTriplifier (dir, options = {}) {
-  const index = await buildIndex(dir)
-  const _options = { ...defaultOptions, index, ...options }
 
+  const _options = { ...defaultOptions, ...options }
+
+  const index = await buildIndex(dir)
   const termMapper = createTermMapper(_options)
+
   return {
-    toRdf: (text, options) => toRdf(text, { termMapper, ...options }),
+    toRdf: (text, context, options) => toRdf(text,
+      { index, termMapper, ...context }, { ..._options, options }),
     index,
-    termMapper
+    termMapper,
   }
 
 }

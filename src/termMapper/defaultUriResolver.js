@@ -74,10 +74,6 @@ function maybeKnown (txt, options) {
 
   if (typeof txt === 'string') {
 
-  }
-
-  if (typeof txt === 'string') {
-
     // If it's something like [[Bob | alias]], tries to find it in the index
     if (txt.startsWith('[[') && txt.endsWith(']]')) {
       const [fullName] = txt.replace(/^\[\[/, '').

@@ -4,7 +4,8 @@ import ns from './src/namespaces.js'
 
 import { createTriplifier } from './index.js'
 
-const dir = './test/markdown/'
+// const dir = './test/markdown/'
+const dir = './incubator/example/'
 
 // Config
 const triplifier = await createTriplifier(dir, {
