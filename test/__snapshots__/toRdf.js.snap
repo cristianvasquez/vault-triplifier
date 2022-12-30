@@ -12,12 +12,10 @@ exports[`splitOnHeader splitOnHeader false 1`] = `
 _:b24 dot:contains <b24/alice>, <b24/alison> .
 
 <b24/alice> <foaf:knows> [
-		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
 <b24/alison> <foaf:knows> [
-		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
@@ -38,12 +36,10 @@ _:b25 dot:contains [
 	] .
 
 <b25/alice> <foaf:knows> [
-		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
 <b25/alison> <foaf:knows> [
-		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
@@ -60,10 +56,8 @@ exports[`splitOnId splitOnId false 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 _:b22 <foaf:knows> [
-		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	], [
-		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
@@ -82,60 +76,10 @@ exports[`splitOnId splitOnId true 1`] = `
 _:b23 dot:contains <b23/alice>, <b23/alison> .
 
 <b23/alice> <foaf:knows> [
-		schema:name \\"Alison\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
 <b23/alison> <foaf:knows> [
-		schema:name \\"Alice\\" ;
-		rdf:type dot:Wikilink ;
-	] .
-
-"
-`;
-
-exports[`splitOnIdentifiers splitOnIdentifiers false 1`] = `
-"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema: <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
-
-_:b22 dot:contains <b22/alice>, <b22/alison> .
-
-<b22/alice> <foaf:knows> [
-		schema:name \\"Alison\\" ;
-		rdf:type dot:Wikilink ;
-	] .
-
-<b22/alison> <foaf:knows> [
-		schema:name \\"Alice\\" ;
-		rdf:type dot:Wikilink ;
-	] .
-
-"
-`;
-
-exports[`splitOnIdentifiers splitOnIdentifiers true 1`] = `
-"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema: <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
-
-_:b23 dot:contains <b23/alice>, <b23/alison> .
-
-<b23/alice> <foaf:knows> [
-		schema:name \\"Alison\\" ;
-		rdf:type dot:Wikilink ;
-	] .
-
-<b23/alison> <foaf:knows> [
-		schema:name \\"Alice\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
@@ -200,8 +144,6 @@ _:b4 dot:contains <b4/1>, <b4/2>, <b4/3> ;
 <b4/2> <http://www.vault/description> \\"Section 2\\" ;
 	dot:related <Bob\\\\u0020Details/3\\\\u0020> .
 
-<Bob\\\\u0020Details/3\\\\u0020> schema:name \\" Pointer to section 3\\" .
-
 <b4/3> <http://www.vault/description> \\"Section 3\\" ;
 	dot:related <Unknown/1> .
 
@@ -238,12 +180,10 @@ _:b10 <http://www.vault/inline> \\"field\\" ;
 		<foaf:knows> _:Alice ;
 	] ;
 	dot:related _:Alice, [
-		schema:name \\"Bob\\" ;
 		rdf:type dot:Wikilink ;
 	] .
 
-_:Alice schema:name \\"Alice\\" ;
-	a dot:Wikilink .
+_:Alice a dot:Wikilink .
 
 "
 `;
@@ -258,14 +198,10 @@ exports[`toRDF Links 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 _:b2 dot:related <http://www.vault/../houses/img.png>, [
-		schema:name \\"link 1\\" ;
 		rdf:type dot:Wikilink ;
 	], <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, [
-		schema:name \\"Alias 1\\", \\"link 1 \\" ;
 		rdf:type dot:Wikilink ;
 	], <http://www.vault/protocol>, <https://example2.com> .
-
-<http://example.com> schema:name \\"Alias 2\\", \\"here\\" .
 
 "
 `;

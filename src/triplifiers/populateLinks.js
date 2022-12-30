@@ -5,6 +5,7 @@ import { isValidUrl } from './strings.js'
 
 function populateLinks (links, context, options) {
 
+  const { addLabels } = options
   const { pointer, termMapper, path } = context
 
   for (const { type, value, alias } of links) {
@@ -24,12 +25,14 @@ function populateLinks (links, context, options) {
 
     const named = getNamed(value)
 
-    if (alias) {
+    if (alias && addLabels) {
       pointer.node(named).addOut(ns.schema.name, alias)
     }
 
     if (named.termType === 'BlankNode') {
-      pointer.node(named).addOut(ns.schema.name, value)
+      if (addLabels){
+        pointer.node(named).addOut(ns.schema.name, value)
+      }
       pointer.node(named).addOut(ns.rdf.type, ns.dot.Wikilink)
     }
 
