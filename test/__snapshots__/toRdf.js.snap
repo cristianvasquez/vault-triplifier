@@ -9,15 +9,8 @@ exports[`splitOnHeader splitOnHeader false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b24 dot:contains <b24/alice>, <b24/alison> .
-
-<b24/alice> <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	] .
-
-<b24/alison> <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	] .
+_:b24 <http://www.vault/age> \\"37\\", \\"42\\" ;
+	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 "
 `;
@@ -32,15 +25,15 @@ exports[`splitOnHeader splitOnHeader true 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 _:b25 dot:contains [
-		dot:contains <b25/alice>, <b25/alison> ;
-	] .
-
-<b25/alice> <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	] .
-
-<b25/alison> <foaf:knows> [
-		rdf:type dot:Wikilink ;
+		dot:contains [
+			<http://www.vault/age> \\"37\\" ;
+			<http://www.vault/name> \\"Alice\\" ;
+		], [
+			<http://www.vault/age> \\"42\\" ;
+			<http://www.vault/name> \\"Bob\\" ;
+		], [
+			<http://www.vault/name> \\"Charlie\\" ;
+		] ;
 	] .
 
 "

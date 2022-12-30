@@ -2,7 +2,7 @@ import { expect } from 'expect'
 import { toRdf } from '../index.js'
 import toMatchSnapshot from 'expect-mocha-snapshot'
 import { prettyPrint } from './support/serialization.js'
-import { tests, splitOnTags, splitOnIdentifiers } from './tests.js'
+import { tests, splitOnTags, splitOnIdentifiers, splitOnHeaders} from './tests.js'
 
 expect.extend({ toMatchSnapshot })
 
@@ -55,7 +55,7 @@ describe('splitOnId', async function () {
 
 describe('splitOnHeader', async function () {
   it('splitOnHeader false', async function () {
-    const fullText = splitOnIdentifiers.markdown
+    const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: false }
     const pointer = toRdf(fullText, {}, options)
     const pretty = await prettyPrint(pointer.dataset)
@@ -63,7 +63,7 @@ describe('splitOnHeader', async function () {
   })
 
   it('splitOnHeader true', async function () {
-    const fullText = splitOnIdentifiers.markdown
+    const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: true }
     const pointer = toRdf(fullText, {}, options)
     const pretty = await prettyPrint(pointer.dataset)
