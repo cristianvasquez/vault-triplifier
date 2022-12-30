@@ -6,6 +6,7 @@ import { populateLinks } from './populateLinks.js'
 
 function astTriplifier (node, context, options) {
 
+  const {addLabels} = options
   const { pointer } = context
 
   for (const data of node.data ?? []) {
@@ -23,6 +24,11 @@ function astTriplifier (node, context, options) {
   for (const child of node.children ?? []) {
     const { shouldSplit, childUri } = handleSplit(child, context, options)
     if (shouldSplit) {
+
+      if (addLabels && child.value){
+        pointer.node(childUri).addOut(ns.schema.name, rdf.literal(child.value))
+      }
+
       pointer.addOut(ns.dot.contains, childUri)
       astTriplifier(child, { ...context, pointer: pointer.node(childUri) },
         options)

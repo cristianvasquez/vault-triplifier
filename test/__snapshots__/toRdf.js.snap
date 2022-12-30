@@ -39,6 +39,34 @@ _:b25 dot:contains [
 "
 `;
 
+exports[`splitOnHeader splitOnHeader true addLabels true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b34 dot:contains [
+		schema:name \\"People\\" ;
+		dot:contains [
+			schema:name \\"Alice\\" ;
+			<http://www.vault/age> \\"37\\" ;
+			<http://www.vault/name> \\"Alice\\" ;
+		], [
+			schema:name \\"Bob\\" ;
+			<http://www.vault/age> \\"42\\" ;
+			<http://www.vault/name> \\"Bob\\" ;
+		], [
+			schema:name \\"Charlie\\" ;
+			<http://www.vault/name> \\"Charlie\\" ;
+		] ;
+	] .
+
+"
+`;
+
 exports[`splitOnId splitOnId false 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
@@ -79,6 +107,32 @@ _:b23 dot:contains <b23/alice>, <b23/alison> .
 "
 `;
 
+exports[`splitOnId splitOnId true addLabels true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<b27/alice> schema:name \\"Alice\\" ;
+	<foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+_:b27 dot:contains <b27/alice>, <b27/alison> .
+
+<b27/alison> schema:name \\"Alison\\" ;
+	<foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
 exports[`splitOnTag splitOnTag false 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
@@ -109,6 +163,31 @@ _:b19 dot:contains [
 		dot:tag \\"person\\" ;
 		<http://www.vault/name> \\"Alice\\" ;
 	], [
+		<http://www.vault/age> \\"42\\" ;
+		dot:tag \\"person\\" ;
+		<http://www.vault/name> \\"Bob\\" ;
+	] ;
+	<http://www.vault/name> \\"Charlie\\" .
+
+"
+`;
+
+exports[`splitOnTag splitOnTag true addLabels true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b22 dot:contains [
+		schema:name \\"Alice\\" ;
+		<http://www.vault/age> \\"37\\" ;
+		dot:tag \\"person\\" ;
+		<http://www.vault/name> \\"Alice\\" ;
+	], [
+		schema:name \\"Bob\\" ;
 		<http://www.vault/age> \\"42\\" ;
 		dot:tag \\"person\\" ;
 		<http://www.vault/name> \\"Bob\\" ;

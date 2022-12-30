@@ -2,7 +2,12 @@ import { expect } from 'expect'
 import { toRdf } from '../index.js'
 import toMatchSnapshot from 'expect-mocha-snapshot'
 import { prettyPrint } from './support/serialization.js'
-import { tests, splitOnTags, splitOnIdentifiers, splitOnHeaders} from './tests.js'
+import {
+  tests,
+  splitOnTags,
+  splitOnIdentifiers,
+  splitOnHeaders,
+} from './tests.js'
 
 expect.extend({ toMatchSnapshot })
 
@@ -33,6 +38,14 @@ describe('splitOnTag', async function () {
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
   })
+
+  it('splitOnTag true addLabels true', async function () {
+    const fullText = splitOnTags.markdown
+    const options = { splitOnTag: true, addLabels: true }
+    const pointer = toRdf(fullText, {}, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
 })
 
 describe('splitOnId', async function () {
@@ -51,6 +64,14 @@ describe('splitOnId', async function () {
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
   })
+
+  it('splitOnId true addLabels true', async function () {
+    const fullText = splitOnIdentifiers.markdown
+    const options = { splitOnId: true, addLabels: true }
+    const pointer = toRdf(fullText, {}, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
 })
 
 describe('splitOnHeader', async function () {
@@ -65,6 +86,14 @@ describe('splitOnHeader', async function () {
   it('splitOnHeader true', async function () {
     const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: true }
+    const pointer = toRdf(fullText, {}, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
+
+  it('splitOnHeader true addLabels true', async function () {
+    const fullText = splitOnHeaders.markdown
+    const options = { splitOnHeader: true, addLabels: true }
     const pointer = toRdf(fullText, {}, options)
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
