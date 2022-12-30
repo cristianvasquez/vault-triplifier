@@ -4,15 +4,13 @@ import { createTermMapper } from './src/termMapper/defaultUriResolver.js'
 import { toRdf } from './src/toRdf.js'
 
 const defaultOptions = {
-  mappers: {}, baseNamespace: ns.ex.vault,
+  customMapper: (str) => undefined, baseNamespace: ns.ex.vault,
 }
 
 async function createTriplifier (dir, options = {}) {
 
   const index = await buildIndex(dir)
-
   const _options = { ...defaultOptions, ...options, index }
-
   const termMapper = createTermMapper(_options)
 
   return {

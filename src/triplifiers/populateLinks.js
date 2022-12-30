@@ -20,7 +20,7 @@ function populateLinks (links, context, options) {
       }
       // Relative links
       const resolved = path ? `.${resolve('/', path, txt)}` : txt
-      return termMapper.fromPath(resolved)
+      return termMapper.uriFromPath(resolved)
     }
 
     const named = getNamed(value)
@@ -30,7 +30,7 @@ function populateLinks (links, context, options) {
     }
 
     if (named.termType === 'BlankNode') {
-      if (addLabels){
+      if (addLabels) {
         pointer.node(named).addOut(ns.schema.name, value)
       }
       // pointer.node(named).addOut(ns.rdf.type, ns.dot.Wikilink)

@@ -29,6 +29,7 @@ function toRdf (fullText, context = {}, options = {}) {
       _options)
   } catch (error) {
     console.log('could not triplify', context.path)
+    console.error(error)
   }
 
 }

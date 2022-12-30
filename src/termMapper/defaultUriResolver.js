@@ -9,80 +9,62 @@ const defaultOptions = {
   }, mappers: {},
 }
 
-function clean (txt) {
-  return txt.replaceAll(' ', '-').replaceAll('*', '').toLowerCase()
-}
-
 function createTermMapper (options = {}) {
-
   const _options = { ...defaultOptions, ...options }
 
-  function fromPath (path) {
-    return uriFromPath(path, _options)
+  // Build the uri starting from a path
+  function uriFromPath (path) {
+    const { baseNamespace } = _options
+    return baseNamespace[encodeURI(normalize(path))]
   }
 
-  function toTerm (txt) {
-    return maybeKnown(txt, _options) ?? rdf.literal(txt)
-  }
-
+  // A named only can be a URI
+  // This function build URIs from text, which is useful for properties
+  // For example, "has name" -> http://some-vault/has-name
   function toNamed (txt) {
-    return maybeKnown(txt, _options) ??
-      _options.baseNamespace(encodeURI(clean(txt)))
+    const { baseNamespace } = _options
+    const pretty = (txt) => txt.replaceAll(' ', '-').
+      replaceAll('*', '').
+      toLowerCase()
+    return maybeKnownURI(txt, _options, uriFromPath) ??
+      baseNamespace[encodeURI(pretty(txt))]
+  }
+
+  // A term can be a literal or a URI
+  function toTerm (txt) {
+    return maybeKnownURI(txt, _options, uriFromPath) ?? rdf.literal(txt)
   }
 
   return {
-    toTerm, toNamed, fromPath, blockUri,
+    toTerm, toNamed, uriFromPath, blockUri,
   }
 
-}
-
-// The main function to get URIs from paths
-function uriFromPath (path, options) {
-  const { baseNamespace } = options
-  return baseNamespace[encodeURI(normalize(path))]
-}
-
-function getUriFromName (name, options) {
-  const { index, baseNamespace } = options
-  const { namesPaths } = index
-  const { dir, name: nameChunk, ext } = parse(name)
-  if (dir) {
-    // The Obsidian interface ensures the following: if there are two notes with the same name, use the full path.
-    // It's an absolute path, we don't look up
-    const path = `${nameChunk}${ext ?? '.md'}`  // Normally .md are omitted
-    return uriFromPath(path, options)
-  } else if (namesPaths.has(nameChunk)) {
-    // we look up otherwise
-    const [path] = namesPaths.get(nameChunk)
-    return uriFromPath(path, options)
-  }
-  // console.log(`Warning, [${fullName}] not found`)
-  return rdf.blankNode(name)
 }
 
 const blockUri = (uri, blockId) => rdf.namedNode(
   `${uri.value}/${blockId.replace(/^\^/, '')}`)
 
-function maybeKnown (txt, options) {
+function maybeKnownURI (txt, options, fromPath) {
 
-  const { mappers } = options
-
-  // If something is already in the known map, return it
-  if (mappers[txt]) {
-    return mappers[txt]
+  // Custom mapper function
+  const { customMapper } = options
+  if (customMapper) {
+    const mapped = customMapper(txt)
+    if (mapped) {
+      return mapped
+    }
   }
 
   if (typeof txt === 'string') {
-
     // If it's something like [[Bob | alias]], tries to find it in the index
     if (txt.startsWith('[[') && txt.endsWith(']]')) {
       const [fullName] = txt.replace(/^\[\[/, '').
         replace(/\]\]$/, '').
         split('|')
-
       const [name, id] = fullName.split('#')
+      const path = getPathFromName(name, options)
 
-      const uri = getUriFromName(name, options)
+      const uri = path ? fromPath(path) : rdf.blankNode(name)
       // Point to a sub-block if applies
       return (id && id.startsWith('^')) ? blockUri(uri, id) : uri
     }
@@ -90,6 +72,21 @@ function maybeKnown (txt, options) {
     if (isValidUrl(txt)) {
       return rdf.namedNode(txt)
     }
+  }
+}
+
+function getPathFromName (name, options) {
+  const { index, baseNamespace } = options
+  const { namesPaths } = index
+  const { dir, name: nameChunk, ext } = parse(name)
+  if (dir) {
+    // The Obsidian interface ensures the following: if there are two notes with the same name, use the full path.
+    // It's an absolute path, we don't look up
+    return `${nameChunk}${ext ?? '.md'}`  // Normally .md are omitted
+  } else if (namesPaths.has(nameChunk)) {
+    // we look up otherwise
+    const [path] = namesPaths.get(nameChunk)
+    return path
   }
 }
 
