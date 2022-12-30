@@ -1,5 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`splitOnHeader splitOnHeader false 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b24 dot:contains <b24/alice>, <b24/alison> .
+
+<b24/alice> <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+<b24/alison> <foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
+exports[`splitOnHeader splitOnHeader true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b25 dot:contains [
+		dot:contains <b25/alice>, <b25/alison> ;
+	] .
+
+<b25/alice> <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+<b25/alison> <foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
+exports[`splitOnId splitOnId false 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b22 <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	], [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
+exports[`splitOnId splitOnId true 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+_:b23 dot:contains <b23/alice>, <b23/alison> .
+
+<b23/alice> <foaf:knows> [
+		schema:name \\"Alison\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+<b23/alison> <foaf:knows> [
+		schema:name \\"Alice\\" ;
+		rdf:type dot:Wikilink ;
+	] .
+
+"
+`;
+
 exports[`splitOnIdentifiers splitOnIdentifiers false 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .

@@ -4,7 +4,7 @@ import rdf from './rdf-ext.js'
 import { createTermMapper } from './termMapper/defaultUriResolver.js'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
 
-const defaultOptions = { splitOnTag: false, splitOnId: true, normalize: true }
+const defaultOptions = { splitOnTag: false, splitOnHeader:false, splitOnId: true, normalize: true}
 
 function toRdf (fullText, context = {}, options = {}) {
 

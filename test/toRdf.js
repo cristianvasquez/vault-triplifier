@@ -35,18 +35,36 @@ describe('splitOnTag', async function () {
   })
 })
 
-describe('splitOnIdentifiers', async function () {
-  it('splitOnIdentifiers false', async function () {
+describe('splitOnId', async function () {
+  it('splitOnId false', async function () {
     const fullText = splitOnIdentifiers.markdown
-    const options = { splitOnIdentifiers: false }
+    const options = { splitOnId: false }
     const pointer = toRdf(fullText, {}, options)
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnIdentifiers true', async function () {
+  it('splitOnId true', async function () {
     const fullText = splitOnIdentifiers.markdown
-    const options = { splitOnIdentifiers: true }
+    const options = { splitOnId: true }
+    const pointer = toRdf(fullText, {}, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
+})
+
+describe('splitOnHeader', async function () {
+  it('splitOnHeader false', async function () {
+    const fullText = splitOnIdentifiers.markdown
+    const options = { splitOnHeader: false }
+    const pointer = toRdf(fullText, {}, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
+
+  it('splitOnHeader true', async function () {
+    const fullText = splitOnIdentifiers.markdown
+    const options = { splitOnHeader: true }
     const pointer = toRdf(fullText, {}, options)
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
