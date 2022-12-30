@@ -9,7 +9,7 @@ exports[`splitOnHeader splitOnHeader false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b24 <http://www.vault/age> \\"37\\", \\"42\\" ;
+_:b28 <http://www.vault/age> \\"37\\", \\"42\\" ;
 	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 "
@@ -24,7 +24,7 @@ exports[`splitOnHeader splitOnHeader true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b25 dot:contains [
+_:b29 dot:contains [
 		dot:contains [
 			<http://www.vault/age> \\"37\\" ;
 			<http://www.vault/name> \\"Alice\\" ;
@@ -76,11 +76,7 @@ exports[`splitOnId splitOnId false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b22 <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	], [
-		rdf:type dot:Wikilink ;
-	] .
+_:b25 <foaf:knows> _:Alison, _:Alice .
 
 "
 `;
@@ -94,15 +90,11 @@ exports[`splitOnId splitOnId true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b23 dot:contains <b23/alice>, <b23/alison> .
+_:b26 dot:contains <b26/alice>, <b26/alison> .
 
-<b23/alice> <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	] .
+<b26/alice> <foaf:knows> _:Alison .
 
-<b23/alison> <foaf:knows> [
-		rdf:type dot:Wikilink ;
-	] .
+<b26/alison> <foaf:knows> _:Alice .
 
 "
 `;
@@ -119,7 +111,6 @@ exports[`splitOnId splitOnId true addLabels true 1`] = `
 <b27/alice> schema:name \\"Alice\\" ;
 	<foaf:knows> [
 		schema:name \\"Alison\\" ;
-		rdf:type dot:Wikilink ;
 	] .
 
 _:b27 dot:contains <b27/alice>, <b27/alison> .
@@ -127,7 +118,6 @@ _:b27 dot:contains <b27/alice>, <b27/alison> .
 <b27/alison> schema:name \\"Alison\\" ;
 	<foaf:knows> [
 		schema:name \\"Alice\\" ;
-		rdf:type dot:Wikilink ;
 	] .
 
 "
@@ -251,11 +241,7 @@ _:b10 <http://www.vault/inline> \\"field\\" ;
 	dot:undefined [
 		<foaf:knows> _:Alice ;
 	] ;
-	dot:related _:Alice, [
-		rdf:type dot:Wikilink ;
-	] .
-
-_:Alice a dot:Wikilink .
+	dot:related _:Alice, _:Bob .
 
 "
 `;
@@ -269,11 +255,7 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b2 dot:related <http://www.vault/../houses/img.png>, [
-		rdf:type dot:Wikilink ;
-	], <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, [
-		rdf:type dot:Wikilink ;
-	], <http://www.vault/protocol>, <https://example2.com> .
+_:b2 dot:related <http://www.vault/../houses/img.png>, _:link 1, <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, _:link 1 , <http://www.vault/protocol>, <https://example2.com> .
 
 "
 `;

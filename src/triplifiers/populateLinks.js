@@ -1,6 +1,6 @@
 import { resolve } from 'path'
-import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
+import rdf from '../rdf-ext.js'
 import { isValidUrl } from './strings.js'
 
 function populateLinks (links, context, options) {
@@ -33,7 +33,7 @@ function populateLinks (links, context, options) {
       if (addLabels){
         pointer.node(named).addOut(ns.schema.name, value)
       }
-      pointer.node(named).addOut(ns.rdf.type, ns.dot.Wikilink)
+      // pointer.node(named).addOut(ns.rdf.type, ns.dot.Wikilink)
     }
 
     if (pointer.dataset.match(pointer.term, null, named).size === 0) {
