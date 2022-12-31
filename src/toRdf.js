@@ -1,34 +1,34 @@
 import { simpleAst } from 'docs-and-graphs'
 import rdf from './rdf-ext.js'
-
-import { createTermMapper } from './termMapper/defaultUriResolver.js'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
 
 const defaultOptions = {
-  splitOnTag: false,
-  splitOnHeader: false,
-  splitOnId: true,
-  normalize: true,
-  addLabels: false,
+  splitOnTag: false, splitOnHeader: false, splitOnId: true, addLabels: false,
 }
 
-function toRdf (fullText, context = {}, options = {}) {
+function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
 
-  const termMapper = context.termMapper ?? createTermMapper()
-  const _options = { ...defaultOptions, ...options }
+  if (!termMapper) {
+    throw Error('Requires termMapper')
+  }
 
-  const documentUri = context.path
-    ? termMapper.fromPath(context.path)
+  const term = documentUri ?? path
+    ? termMapper.uriFromPath(path)
     : rdf.blankNode()
-  const pointer = context.pointer ??
-    rdf.clownface({ dataset: rdf.dataset(), term: documentUri })
+
+  const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
+
+  if (!pointer.terms || pointer.terms.length !== 1) {
+    throw Error('requires single-term pointer')
+  }
 
   try {
-    const json = simpleAst(fullText, _options)
-    return astTriplifier(json, { ...context, pointer, termMapper, documentUri },
-      _options)
+    const json = simpleAst(fullText, { normalize: true, inlineAsArray: true })
+    return astTriplifier(json, {
+      pointer, termMapper, path,
+    }, { ...defaultOptions, ...options })
   } catch (error) {
-    console.log('could not triplify', context.path)
+    console.log('could not triplify', path)
     console.error(error)
   }
 

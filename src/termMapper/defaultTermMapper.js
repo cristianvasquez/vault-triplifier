@@ -3,18 +3,10 @@ import rdf from '../rdf-ext.js'
 
 import { isValidUrl } from '../triplifiers/strings.js'
 
-const defaultOptions = {
-  baseNamespace: rdf.namespace('http://www.vault/'), index: {
-    namesPaths: new Map(),
-  }, mappers: {},
-}
-
-function createTermMapper (options = {}) {
-  const _options = { ...defaultOptions, ...options }
+function createTermMapper ({ baseNamespace, index, customMapper }) {
 
   // Build the uri starting from a path
   function uriFromPath (path) {
-    const { baseNamespace } = _options
     return baseNamespace[encodeURI(normalize(path))]
   }
 
@@ -22,17 +14,17 @@ function createTermMapper (options = {}) {
   // This function build URIs from text, which is useful for properties
   // For example, "has name" -> http://some-vault/has-name
   function toNamed (txt) {
-    const { baseNamespace } = _options
     const pretty = (txt) => txt.replaceAll(' ', '-').
       replaceAll('*', '').
       toLowerCase()
-    return maybeKnownURI(txt, _options, uriFromPath) ??
+    return maybeKnownURI(txt, { index, customMapper }, uriFromPath) ??
       baseNamespace[encodeURI(pretty(txt))]
   }
 
   // A term can be a literal or a URI
   function toTerm (txt) {
-    return maybeKnownURI(txt, _options, uriFromPath) ?? rdf.literal(txt)
+    return maybeKnownURI(txt, { index, customMapper }, uriFromPath) ??
+      rdf.literal(txt)
   }
 
   return {
@@ -44,10 +36,9 @@ function createTermMapper (options = {}) {
 const blockUri = (uri, blockId) => rdf.namedNode(
   `${uri.value}/${blockId.replace(/^\^/, '')}`)
 
-function maybeKnownURI (txt, options, fromPath) {
+function maybeKnownURI (txt, { index, customMapper }, fromPath) {
 
   // Custom mapper function
-  const { customMapper } = options
   if (customMapper) {
     const mapped = customMapper(txt)
     if (mapped) {
@@ -56,13 +47,14 @@ function maybeKnownURI (txt, options, fromPath) {
   }
 
   if (typeof txt === 'string') {
+
     // If it's something like [[Bob | alias]], tries to find it in the index
     if (txt.startsWith('[[') && txt.endsWith(']]')) {
       const [fullName] = txt.replace(/^\[\[/, '').
         replace(/\]\]$/, '').
         split('|')
       const [name, id] = fullName.split('#')
-      const path = getPathFromName(name, options)
+      const path = index ? getPathFromName(name, { index }) : undefined
 
       const uri = path ? fromPath(path) : rdf.blankNode(name)
       // Point to a sub-block if applies
@@ -75,9 +67,14 @@ function maybeKnownURI (txt, options, fromPath) {
   }
 }
 
-function getPathFromName (name, options) {
-  const { index, baseNamespace } = options
+function getPathFromName (name, { index }) {
   const { namesPaths } = index
+
+  if (namesPaths.has(name)) {
+    const [path] = namesPaths.get(name)
+    return path
+  }
+  // Perhaps has extension or dir
   const { dir, name: nameChunk, ext } = parse(name)
   if (dir) {
     // The Obsidian interface ensures the following: if there are two notes with the same name, use the full path.

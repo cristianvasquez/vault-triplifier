@@ -7,6 +7,7 @@ import { createTriplifier } from './index.js'
 const dir = './test/markdown/'
 // const dir = './incubator/example/'
 
+// Optional function to map strings to URIs
 const customMapper = (str) => {
   const values = {
     'is a': ns.rdf.type, 'are': ns.rdf.type, 'ex:knows': ns.ex.knows,
@@ -14,12 +15,11 @@ const customMapper = (str) => {
   return values [str]
 }
 
-// Config
 const triplifier = await createTriplifier(dir, {
   baseNamespace: ns.ex, customMapper,
 })
 
-for (const file of triplifier.index.files.filter(x => x.endsWith('.md'))) {
+for (const file of triplifier.index.files.filter(x => x.endsWith('Yaml.md'))) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRdf(text, { path: file }, { addLabels: true })

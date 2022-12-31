@@ -9,8 +9,8 @@ exports[`splitOnHeader splitOnHeader false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b28 <http://www.vault/age> \\"37\\", \\"42\\" ;
-	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+_:b27 <http://my-vault.org/age> \\"37\\", \\"42\\" ;
+	<http://my-vault.org/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 "
 `;
@@ -24,15 +24,15 @@ exports[`splitOnHeader splitOnHeader true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b29 dot:contains [
+_:b28 dot:contains [
 		dot:contains [
-			<http://www.vault/age> \\"37\\" ;
-			<http://www.vault/name> \\"Alice\\" ;
+			<http://my-vault.org/age> \\"37\\" ;
+			<http://my-vault.org/name> \\"Alice\\" ;
 		], [
-			<http://www.vault/age> \\"42\\" ;
-			<http://www.vault/name> \\"Bob\\" ;
+			<http://my-vault.org/age> \\"42\\" ;
+			<http://my-vault.org/name> \\"Bob\\" ;
 		], [
-			<http://www.vault/name> \\"Charlie\\" ;
+			<http://my-vault.org/name> \\"Charlie\\" ;
 		] ;
 	] .
 
@@ -48,21 +48,25 @@ exports[`splitOnHeader splitOnHeader true addLabels true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b34 dot:contains [
+_:b33 dot:contains [
 		schema:name \\"People\\" ;
 		dot:contains [
 			schema:name \\"Alice\\" ;
-			<http://www.vault/age> \\"37\\" ;
-			<http://www.vault/name> \\"Alice\\" ;
+			<http://my-vault.org/age> \\"37\\" ;
+			<http://my-vault.org/name> \\"Alice\\" ;
 		], [
 			schema:name \\"Bob\\" ;
-			<http://www.vault/age> \\"42\\" ;
-			<http://www.vault/name> \\"Bob\\" ;
+			<http://my-vault.org/age> \\"42\\" ;
+			<http://my-vault.org/name> \\"Bob\\" ;
 		], [
 			schema:name \\"Charlie\\" ;
-			<http://www.vault/name> \\"Charlie\\" ;
+			<http://my-vault.org/name> \\"Charlie\\" ;
 		] ;
 	] .
+
+<http://my-vault.org/age> schema:name \\"age\\" .
+
+<http://my-vault.org/name> schema:name \\"name\\" .
 
 "
 `;
@@ -76,7 +80,7 @@ exports[`splitOnId splitOnId false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b25 <foaf:knows> _:Alison, _:Alice .
+_:b20 <foaf:knows> _:Alison, _:Alice .
 
 "
 `;
@@ -90,11 +94,11 @@ exports[`splitOnId splitOnId true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b26 dot:contains <b26/alice>, <b26/alison> .
-
-<b26/alice> <foaf:knows> _:Alison .
-
-<b26/alison> <foaf:knows> _:Alice .
+_:b21 dot:contains [
+		<foaf:knows> _:Alison ;
+	], [
+		<foaf:knows> _:Alice ;
+	] .
 
 "
 `;
@@ -108,17 +112,15 @@ exports[`splitOnId splitOnId true addLabels true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<b27/alice> schema:name \\"Alice\\" ;
-	<foaf:knows> [
-		schema:name \\"Alison\\" ;
-	] .
-
-_:b27 dot:contains <b27/alice>, <b27/alison> .
-
-<b27/alison> schema:name \\"Alison\\" ;
-	<foaf:knows> [
+_:b24 dot:contains [
 		schema:name \\"Alice\\" ;
+		<foaf:knows> _:Alison ;
+	], [
+		schema:name \\"Alison\\" ;
+		<foaf:knows> _:Alice ;
 	] .
+
+<foaf:knows> schema:name \\"foaf:knows\\" .
 
 "
 `;
@@ -132,9 +134,9 @@ exports[`splitOnTag splitOnTag false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b18 <http://www.vault/age> \\"37\\", \\"42\\" ;
-	dot:tag \\"person\\" ;
-	<http://www.vault/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+_:b13 dot:tag \\"person\\" ;
+	<http://my-vault.org/age> \\"37\\", \\"42\\" ;
+	<http://my-vault.org/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 "
 `;
@@ -148,16 +150,16 @@ exports[`splitOnTag splitOnTag true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b19 dot:contains [
-		<http://www.vault/age> \\"37\\" ;
+_:b14 dot:contains [
 		dot:tag \\"person\\" ;
-		<http://www.vault/name> \\"Alice\\" ;
+		<http://my-vault.org/age> \\"37\\" ;
+		<http://my-vault.org/name> \\"Alice\\" ;
 	], [
-		<http://www.vault/age> \\"42\\" ;
 		dot:tag \\"person\\" ;
-		<http://www.vault/name> \\"Bob\\" ;
+		<http://my-vault.org/age> \\"42\\" ;
+		<http://my-vault.org/name> \\"Bob\\" ;
 	] ;
-	<http://www.vault/name> \\"Charlie\\" .
+	<http://my-vault.org/name> \\"Charlie\\" .
 
 "
 `;
@@ -171,18 +173,22 @@ exports[`splitOnTag splitOnTag true addLabels true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b22 dot:contains [
+_:b17 dot:contains [
 		schema:name \\"Alice\\" ;
-		<http://www.vault/age> \\"37\\" ;
 		dot:tag \\"person\\" ;
-		<http://www.vault/name> \\"Alice\\" ;
+		<http://my-vault.org/age> \\"37\\" ;
+		<http://my-vault.org/name> \\"Alice\\" ;
 	], [
 		schema:name \\"Bob\\" ;
-		<http://www.vault/age> \\"42\\" ;
 		dot:tag \\"person\\" ;
-		<http://www.vault/name> \\"Bob\\" ;
+		<http://my-vault.org/age> \\"42\\" ;
+		<http://my-vault.org/name> \\"Bob\\" ;
 	] ;
-	<http://www.vault/name> \\"Charlie\\" .
+	<http://my-vault.org/name> \\"Charlie\\" .
+
+<http://my-vault.org/age> schema:name \\"age\\" .
+
+<http://my-vault.org/name> schema:name \\"name\\" .
 
 "
 `;
@@ -196,18 +202,18 @@ exports[`toRDF BlockIds 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b4 dot:contains <b4/1>, <b4/2>, <b4/3> ;
-	<http://www.vault/description> \\"Section 4\\" ;
+_:b4 dot:contains [
+		<http://my-vault.org/description> \\"Section 1\\" ;
+		dot:related <Bob\\\\u0020Details/2> ;
+	], [
+		<http://my-vault.org/description> \\"Section 2\\" ;
+		dot:related <Bob\\\\u0020Details/3\\\\u0020> ;
+	], [
+		<http://my-vault.org/description> \\"Section 3\\" ;
+		dot:related <Unknown/1> ;
+	] ;
+	<http://my-vault.org/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
-
-<b4/1> <http://www.vault/description> \\"Section 1\\" ;
-	dot:related <Bob\\\\u0020Details/2> .
-
-<b4/2> <http://www.vault/description> \\"Section 2\\" ;
-	dot:related <Bob\\\\u0020Details/3\\\\u0020> .
-
-<b4/3> <http://www.vault/description> \\"Section 3\\" ;
-	dot:related <Unknown/1> .
 
 "
 `;
@@ -221,27 +227,17 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b10 <http://www.vault/inline> \\"field\\" ;
-	<http://www.vault/thoughts> \\"It was decent.\\" ;
-	<http://www.vault/rating> \\"6'\\" ;
-	<http://www.vault/subject> [
-		<http://www.vault/inline> \\"field\\" ;
-	], [
-		<http://www.vault/inline> \\"field\\" ;
-	], [
-		<http://www.vault/thoughts> \\"It was decent.\\" ;
-	], [
-		<http://www.vault/rating> \\"6\\" ;
-	] ;
-	<http://www.vault/too> [
-		<http://www.vault/many> [
-			<http://www.vault/inline> \\"fields\\" ;
-		] ;
-	] ;
-	dot:undefined [
-		<foaf:knows> _:Alice ;
-	] ;
-	dot:related _:Alice, _:Bob .
+_:b12 <http://my-vault.org/inline> \\"field\\" ;
+	<http://my-vault.org/thoughts> \\"It was decent.\\" ;
+	<http://my-vault.org/rating> \\"6'\\" .
+
+<http://my-vault.org/subject> <http://my-vault.org/inline> \\"field\\" ;
+	<http://my-vault.org/thoughts> \\"It was decent.\\" ;
+	<http://my-vault.org/rating> \\"6\\" .
+
+<http://my-vault.org/too> <http://my-vault.org/many> \\"inline\\" .
+
+_:Bob <foaf:knows> _:Alice .
 
 "
 `;
@@ -255,7 +251,8 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b2 dot:related <http://www.vault/../houses/img.png>, _:link 1, <http://www.vault/link%201>, <http://www.vault/link%201.md>, <http://example.com>, _:link 1 , <http://www.vault/protocol>, <https://example2.com> .
+_:b2 <http://my-vault.org/has-image> <http://my-vault.org/../houses/img.png> ;
+	dot:related _:link 1, _:/full/path/link 1, _:/full/path/link 1.md, <http://example.com>, _:link 1 , <http://my-vault.org/protocol>, <https://example2.com> .
 
 "
 `;
@@ -280,8 +277,8 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b5 <http://www.vault/number> \\"42\\" ;
-	<http://www.vault/age> \\"42\\", \\"56\\" .
+_:b8 <http://my-vault.org/number> \\"42\\" ;
+	<http://my-vault.org/age> \\"42\\", \\"56\\" .
 
 "
 `;
@@ -295,16 +292,14 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-_:b6 <http://www.vault/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://www.vault/one> [
-		<http://www.vault/0> \\"Two\\" ;
-		<http://www.vault/1> [
-			<http://www.vault/three> [
-				<http://www.vault/0> \\"Other\\" ;
-			] ;
+_:b9 dot:tag \\"cats\\", \\"dogs\\" ;
+	<http://my-vault.org/date-updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/one> \\"Two\\", [
+		<http://my-vault.org/0> \\"Two\\" ;
+		<http://my-vault.org/1> [
+			<http://my-vault.org/three> \\"Other\\" ;
 		] ;
-	] ;
-	dot:tag \\"cats\\", \\"dogs\\" .
+	] .
 
 "
 `;
