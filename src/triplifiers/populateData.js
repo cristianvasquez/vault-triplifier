@@ -1,20 +1,26 @@
 import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
 
-function maybeLink (str, { knownLinks }) {
+function maybeLink (str, { knownLinks, pointer }, options) {
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
+    if (candidateLink.wikiPath && options.includeWikiPaths) {
+      pointer.node(candidateLink.uri).
+        addOut(ns.dot.wikiPath, rdf.literal(candidateLink.wikiPath))
+    }
     candidateLink.mapped = true
     return candidateLink.uri
   }
 }
 
 function createProperty (str, { pointer, termMapper, knownLinks }, options) {
-  return maybeLink(str, { knownLinks }) ?? termMapper.newProperty(str, options)
+  return maybeLink(str, { pointer, knownLinks }, options) ??
+    termMapper.newProperty(str, options)
 }
 
 function createLiteral (str, { pointer, termMapper, knownLinks }, options) {
-  return maybeLink(str, { knownLinks }) ?? termMapper.newLiteral(str, options)
+  return maybeLink(str, { pointer, knownLinks }, options) ??
+    termMapper.newLiteral(str, options)
 }
 
 /**

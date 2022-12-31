@@ -8,18 +8,19 @@ function createTermMapper ({ baseNamespace, customMapper, vault }) {
 
   // returns: NamedNode
   function pathToUri (path) {
-    const withoutTrailing = path.startsWith('./') ? path.replace(/^.\//, '') : path
-    return pathUriMinter.toUri(withoutTrailing)
+    return pathUriMinter.toUri(path)
   }
+
+  const maybeMapper = (txt) => customMapper ? customMapper(txt) : undefined
 
   // To build properties
   // For example, "has name" -> http://some-vault/has-name
   function newProperty (txt, options) {
-    return propertyUriMinter.toUri(txt)
+    return maybeMapper(txt) ?? propertyUriMinter.toUri(txt)
   }
 
   function newLiteral (txt, options) {
-    return rdf.literal(txt)
+    return maybeMapper(txt) ?? rdf.literal(txt)
   }
 
   // http://example.com/ + ^blockId -> http://example.com/blockId

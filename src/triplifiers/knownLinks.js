@@ -4,24 +4,34 @@ import { isValidUrl } from './strings.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({
-    uri: getUri({ type, value }, context), value, alias,
+    value, alias, ...getUri({ type, value }, context),
   }))
 }
 
 function getUri ({ type, value }, context) {
-  const { termMapper, path } = context
+  const { termMapper, path, wikiPath } = context
 
   // Normal URL
   if (isValidUrl(value)) {
-    return rdf.namedNode(value)
+    return { uri: rdf.namedNode(value) }
   } else if (type === 'wikiLink') {
     // Wikilinks
     const path = termMapper.getFirstLinkpathDest(value)
-    return path ? termMapper.pathToUri(path) : rdf.blankNode()
+    if (path) {
+      const withoutTrailing = path.startsWith('./')
+        ? path.replace(/^.\//, '')
+        : path
+      return {
+        uri: termMapper.pathToUri(withoutTrailing), wikiPath: withoutTrailing,
+      }
+    } else {
+      return { uri: rdf.blankNode() }
+    }
   }
+
   // Relative links
   const resolvedPath = path ? `.${resolve('/', path, value)}` : value
-  return termMapper.pathToUri(resolvedPath)
+  return { uri: termMapper.pathToUri(resolvedPath) }
 }
 
 export { getKnownLinks }

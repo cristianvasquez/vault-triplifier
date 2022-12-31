@@ -80,7 +80,11 @@ exports[`splitOnId splitOnId false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
+<http://my-vault.org/note/QWxpc29u> dot:wikiPath \\"Alison\\" .
+
 _:b20 <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29u>, <http://my-vault.org/note/QWxpY2U=> .
+
+<http://my-vault.org/note/QWxpY2U=> dot:wikiPath \\"Alice\\" .
 
 "
 `;
@@ -99,6 +103,10 @@ _:b21 dot:contains [
 	], [
 		<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2U=> ;
 	] .
+
+<http://my-vault.org/note/QWxpc29u> dot:wikiPath \\"Alison\\" .
+
+<http://my-vault.org/note/QWxpY2U=> dot:wikiPath \\"Alice\\" .
 
 "
 `;
@@ -120,7 +128,11 @@ _:b24 dot:contains [
 		<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2U=> ;
 	] .
 
+<http://my-vault.org/note/QWxpc29u> dot:wikiPath \\"Alison\\" .
+
 <http://my-vault.org/property/Zm9hZjprbm93cw==> schema:name \\"foaf:knows\\" .
+
+<http://my-vault.org/note/QWxpY2U=> dot:wikiPath \\"Alice\\" .
 
 "
 `;
@@ -237,7 +249,10 @@ _:b12 <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9i> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2U=> .
+<http://my-vault.org/note/Qm9i> dot:wikiPath \\"Bob\\" ;
+	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2U=> .
+
+<http://my-vault.org/note/QWxpY2U=> dot:wikiPath \\"Alice\\" .
 
 "
 `;
