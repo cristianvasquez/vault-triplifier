@@ -3,7 +3,11 @@ import rdf from './rdf-ext.js'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
 
 const defaultOptions = {
-  splitOnTag: false, splitOnHeader: false, splitOnId: true, addLabels: false,
+  splitOnTag: false,
+  splitOnHeader: false,
+  splitOnId: true,
+  addLabels: false,
+  includeWikiPaths: true,
 }
 
 function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
@@ -13,7 +17,7 @@ function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
   }
 
   const term = documentUri ?? path
-    ? termMapper.uriFromPath(path)
+    ? termMapper.pathToUri(path)
     : rdf.blankNode()
 
   const pointer = rdf.clownface({ dataset: rdf.dataset(), term })

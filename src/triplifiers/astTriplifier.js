@@ -22,14 +22,14 @@ function astTriplifier (node, context, options) {
     }
   }
 
-  for (const { named, alias, value } of knownLinks.filter(
+  for (const { uri, alias, value } of knownLinks.filter(
     link => !link.mapped)) {
-    pointer.addOut(ns.dot.related, named)
+    pointer.addOut(ns.dot.related, uri)
     if (addLabels) {
       if (alias) {
-        pointer.node(named).addOut(ns.schema.name, alias)
-      } else if (named.termType === 'BlankNode') {
-        pointer.node(named).addOut(ns.schema.name, value)
+        pointer.node(uri).addOut(ns.schema.name, alias)
+      } else if (uri.termType === 'BlankNode') {
+        pointer.node(uri).addOut(ns.schema.name, value)
       }
     }
   }

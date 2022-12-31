@@ -19,7 +19,7 @@ const triplifier = await createTriplifier(dir, {
   baseNamespace: ns.ex, customMapper,
 })
 
-for (const file of triplifier.index.files.filter(x => x.endsWith('Yaml.md'))) {
+for (const file of triplifier.vault.getMarkdownFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRdf(text, { path: file }, { addLabels: true })
