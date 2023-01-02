@@ -1,6 +1,6 @@
 {
-  "name": "rdf-from-markdown",
-  "version": "0.0.10",
+  "name": "vault-triplifier",
+  "version": "0.0.1",
   "type": "module",
   "description": "",
   "main": "index.js",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cristianvasquez/rdf-from-markdown.git"
+    "url": "git+https://github.com/cristianvasquez/vault-triplifier.git"
   },
   "keywords": [
     "markdown",
@@ -33,7 +33,7 @@
   "author": "Cristian Vasquez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cristianvasquez/rdf-from-markdown/issues"
+    "url": "https://github.com/cristianvasquez/vault-triplifier/issues"
   },
-  "homepage": "https://github.com/cristianvasquez/rdf-from-markdown#readme"
+  "homepage": "https://github.com/cristianvasquez/vault-triplifier#readme"
 }
