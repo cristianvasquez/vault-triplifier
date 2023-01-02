@@ -2,6 +2,7 @@ import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
 
 function maybeLink (str, { knownLinks, pointer }, options) {
+  // @TODO this should return a context, a label with the link to be displayed in the UIs
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
     if (candidateLink.wikiPath && options.includeWikiPaths) {

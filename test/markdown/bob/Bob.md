@@ -1,4 +1,6 @@
-has image 2 :: [[img.png]]
+Some test (with image :: [[img.png]]) embedded
+
+An untyped [[Link]]
 
 lives in :: [Test with relative](     ../houses/BobHouse.md)
 
@@ -9,7 +11,5 @@ ex:knows :: [Alice](../Alice.md)
 has image 1 :: ![Lovely image](../houses/img.png)
 
 is a :: [Test with absolute](/Person.md)
-
-An untyped [[Link]]
 
 An untyped <http://something.com>
