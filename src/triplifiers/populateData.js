@@ -1,9 +1,10 @@
 import ns from '../namespaces.js'
 import rdf from '../rdf-ext.js'
+import { isValidUrl } from '../strings/uris.js'
 
 function maybeLink (str, { knownLinks, pointer }, options) {
-  // @TODO this should return a context, a label with the link to be displayed in the UIs
 
+  // @TODO this should return a context, a label with the link to be displayed in the UIs
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
 
@@ -65,7 +66,9 @@ function populateYamlLike (data, context, options) {
     const predicate = createPredicate(key, context, options)
 
     if (literalLike(value)) {
-      const object = createObject(`${value}`, context, options)
+      const object = isValidUrl(`${value}`)
+        ? rdf.namedNode(`${value}`)
+        : createObject(`${value}`, context, options)
       pointer.addOut(predicate, object)
     } else if (Array.isArray(value) && value.length) {
 

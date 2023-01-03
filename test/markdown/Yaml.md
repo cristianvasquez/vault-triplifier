@@ -7,4 +7,5 @@ togs:
 one:
 - pepe
 - carlos
+an-uri: http://some-uri.com
 ---
