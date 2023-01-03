@@ -50,8 +50,11 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   const getMarkdownFiles = () => files.filter(x => x.endsWith('.md')).
     map(pathWithoutTrail)
 
+  const getCanvasFiles = () => files.filter(x => x.endsWith('.canvas')).
+    map(pathWithoutTrail)
+
   return {
-    directories, getPathByName, getMarkdownFiles,
+    directories, getPathByName, getMarkdownFiles, getCanvasFiles,
   }
 
 }

@@ -29,7 +29,6 @@ function createTermMapper ({
   const blockUri = (uri, blockId) => rdf.namedNode(
     `${uri.value}/${blockId.replace(/^\^/, '')}`)
 
-
   return {
     newLiteral,
     newProperty,

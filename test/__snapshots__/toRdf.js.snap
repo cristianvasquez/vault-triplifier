@@ -379,7 +379,7 @@ exports[`toRDF YAML-like 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 <http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
-	dot:related <https://github.com/zazuko/zom-ontology-demo.git>, <https://github.com/zazuko/zom-ontology-demo> .
+	dot:related <https://example-2.com/something>, <https://example-2.com/> .
 
 "
 `;

@@ -1,18 +1,13 @@
-import { simpleAst } from 'docs-and-graphs'
 import { addLabels } from './addLabels.js'
 import rdf from './rdf-ext.js'
-import { astTriplifier } from './triplifiers/astTriplifier.js'
+import { canvasTriplifier } from './triplifiers/canvasTriplifier.js'
 import ns from '../src/namespaces.js'
 
 const defaultOptions = {
-  splitOnTag: false,
-  splitOnHeader: false,
-  splitOnId: true,
-  addLabels: false,
-  includeWikiPaths: true,
+  addLabels: false, includeWikiPaths: true,
 }
 
-function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
+function canvasToRDF (json, { termMapper, documentUri, path }, options = {}) {
 
   if (!termMapper) {
     throw Error('Requires termMapper')
@@ -35,8 +30,8 @@ function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
   }
 
   try {
-    const json = simpleAst(fullText, { normalize: true, inlineAsArray: true })
-    const ptr = astTriplifier(json, {
+
+    const ptr = canvasTriplifier(json, {
       pointer, termMapper, path,
     }, _options)
 
@@ -46,10 +41,10 @@ function toRdf (fullText, { termMapper, documentUri, path }, options = {}) {
 
     return ptr
   } catch (error) {
-    console.log('could not triplify markdown', path)
+    console.log('could not triplify canvas', path)
     console.error(error)
   }
 
 }
 
-export { toRdf }
+export { canvasToRDF }

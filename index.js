@@ -2,6 +2,7 @@ import { createVaultFromDir } from './src/indexers/vault.js'
 import ns from './src/namespaces.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
 import { toRdf } from './src/toRdf.js'
+import { canvasToRDF } from './src/canvasToRDF.js'
 
 async function createTriplifier (dir, options = {}) {
 
@@ -15,6 +16,8 @@ async function createTriplifier (dir, options = {}) {
   return {
     vault,
     termMapper,
+    canvasToRDF: (json, context, options) => canvasToRDF(json,
+      { termMapper, ...context }, options),
     toRdf: (text, context, options) => toRdf(text, { termMapper, ...context },
       options),
   }

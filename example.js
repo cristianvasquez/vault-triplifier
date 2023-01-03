@@ -26,3 +26,11 @@ for (const file of triplifier.vault.getMarkdownFiles()) {
     { addLabels: true, includeWikiPaths: true, splitOnHeader: true })
   console.log(pointer.dataset.toString())
 }
+
+for (const file of triplifier.vault.getCanvasFiles()) {
+  console.log('Processing file:', file)
+  const text = await readFile(resolve(dir, file), 'utf8')
+  const pointer = triplifier.canvasToRDF(JSON.parse(text), { path: file },
+    { addLabels: true, includeWikiPaths: true, splitOnHeader: true })
+  console.log(pointer.dataset.toString())
+}
