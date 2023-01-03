@@ -9,15 +9,21 @@ class UriMinter {
     return this.namespace[Buffer.from(value).toString('base64')]
   }
 
-  toValue (uri) {
-    const str = (typeof uri === 'string' || uri instanceof String)
-      ? uri
-      : uri.value
+  toValue (term) {
+    if (!this.belongs(term)) {
+      return undefined
+    }
 
-    const base64Encoded = str.replace(new RegExp(`^${this.namespace().value}`),
-      '')
+    const base64Encoded = term.value.replace(
+      new RegExp(`^${this.namespace().value}`), '')
     return Buffer.from(base64Encoded, 'base64').toString('utf8')
   }
+
+  belongs (term) {
+    return term.termType === 'NamedNode' &&
+      term.value.startsWith(this.namespace().value)
+  }
+
 }
 
 export { UriMinter }

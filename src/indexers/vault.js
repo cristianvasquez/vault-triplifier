@@ -1,18 +1,8 @@
 import { once } from 'events'
 import pkg from 'glob'
+import { pathWithoutTrail, getNameFromPath } from '../strings/uris.js'
 
 const { Glob } = pkg
-
-function pathWithoutTrail (path) {
-  return path.startsWith('./') ? path.replace(/^.\//, '') : path
-}
-
-function getNameFromPath (filePath) {
-  const fileName = filePath.split('/').slice(-1)[0]
-  return fileName.endsWith('.md')
-    ? fileName.split('.').slice(0, -1).join('.')
-    : fileName
-}
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
@@ -57,7 +47,8 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
     }
   }
 
-  const getMarkdownFiles = () => files.filter(x => x.endsWith('.md')).map(pathWithoutTrail)
+  const getMarkdownFiles = () => files.filter(x => x.endsWith('.md')).
+    map(pathWithoutTrail)
 
   return {
     directories, getPathByName, getMarkdownFiles,

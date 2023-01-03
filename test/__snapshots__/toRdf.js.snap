@@ -54,24 +54,24 @@ exports[`splitOnHeader splitOnHeader:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://my-vault.org/note/ZmlsZS5tZA==> schema:name \\"file.md\\" ;
-	dot:wikiPath \\"file.md\\" ;
+<http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
+	schema:name \\"file\\" ;
 	dot:contains [
-		schema:name \\"People\\" ;
 		dot:wikiPath \\"file.md#People\\" ;
+		schema:name \\"People\\" ;
 		dot:contains [
-			schema:name \\"Alice\\" ;
 			dot:wikiPath \\"file.md#Alice\\" ;
+			schema:name \\"Alice\\" ;
 			<http://my-vault.org/property/YWdl> \\"37\\" ;
 			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
 		], [
-			schema:name \\"Bob\\" ;
 			dot:wikiPath \\"file.md#Bob\\" ;
+			schema:name \\"Bob\\" ;
 			<http://my-vault.org/property/YWdl> \\"42\\" ;
 			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
 		], [
-			schema:name \\"Charlie\\" ;
 			dot:wikiPath \\"file.md#Charlie\\" ;
+			schema:name \\"Charlie\\" ;
 			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
 		] ;
 	] .
@@ -165,25 +165,25 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://my-vault.org/note/ZmlsZS5tZA==> schema:name \\"file.md\\" ;
-	dot:wikiPath \\"file.md\\" ;
+<http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
+	schema:name \\"file\\" ;
 	dot:contains <http://my-vault.org/note/ZmlsZS5tZA==/alice>, <http://my-vault.org/note/ZmlsZS5tZA==/alison> .
 
-<http://my-vault.org/note/ZmlsZS5tZA==/alice> schema:name \\"Alice\\" ;
-	dot:wikiPath \\"file.md#Alice\\" ;
+<http://my-vault.org/note/ZmlsZS5tZA==/alice> dot:wikiPath \\"file.md#Alice\\" ;
+	schema:name \\"Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29u> .
+
+<http://my-vault.org/note/QWxpc29u> dot:wikiPath \\"Alison\\" ;
+	schema:name \\"Alison\\" .
 
 <http://my-vault.org/property/Zm9hZjprbm93cw==> schema:name \\"foaf:knows\\" .
 
-<http://my-vault.org/note/QWxpc29u> schema:name \\"Alison\\" ;
-	dot:wikiPath \\"Alison\\" .
-
-<http://my-vault.org/note/ZmlsZS5tZA==/alison> schema:name \\"Alison\\" ;
-	dot:wikiPath \\"file.md#Alison\\" ;
+<http://my-vault.org/note/ZmlsZS5tZA==/alison> dot:wikiPath \\"file.md#Alison\\" ;
+	schema:name \\"Alison\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2U=> .
 
-<http://my-vault.org/note/QWxpY2U=> schema:name \\"Alice\\" ;
-	dot:wikiPath \\"Alice\\" .
+<http://my-vault.org/note/QWxpY2U=> dot:wikiPath \\"Alice\\" ;
+	schema:name \\"Alice\\" .
 
 "
 `;
@@ -240,17 +240,17 @@ exports[`splitOnTag splitOnTag:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://my-vault.org/note/ZmlsZS5tZA==> schema:name \\"file.md\\" ;
-	dot:wikiPath \\"file.md\\" ;
+<http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
+	schema:name \\"file\\" ;
 	dot:contains [
-		schema:name \\"Alice\\" ;
 		dot:wikiPath \\"file.md#Alice\\" ;
+		schema:name \\"Alice\\" ;
 		dot:tag \\"person\\" ;
 		<http://my-vault.org/property/YWdl> \\"37\\" ;
 		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
 	], [
-		schema:name \\"Bob\\" ;
 		dot:wikiPath \\"file.md#Bob\\" ;
+		schema:name \\"Bob\\" ;
 		dot:tag \\"person\\" ;
 		<http://my-vault.org/property/YWdl> \\"42\\" ;
 		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
@@ -331,8 +331,10 @@ exports[`toRDF Links 1`] = `
 @prefix mark: <http://markdown.org/> .
 
 <http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/Li9ob3VzZXMvaW1nLnBuZw==> ;
-	dot:related <http://my-vault.org/note/bGluayAx>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDE=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIA==>, <http://my-vault.org/note/Li9maWxlLm1kL3Byb3RvY29s>, <https://example2.com> .
+	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+	dot:related <http://my-vault.org/note/bGluayAx>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDE=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> .
+
+<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikiPath \\"houses/img.png\\" .
 
 "
 `;
@@ -363,6 +365,21 @@ exports[`toRDF People 1`] = `
 <http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
 	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
 	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\" .
+
+"
+`;
+
+exports[`toRDF YAML-like 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://my-vault.org/note/ZmlsZS5tZA==> dot:wikiPath \\"file.md\\" ;
+	dot:related <https://github.com/zazuko/zom-ontology-demo.git>, <https://github.com/zazuko/zom-ontology-demo> .
 
 "
 `;

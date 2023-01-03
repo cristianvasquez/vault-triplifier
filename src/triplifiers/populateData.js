@@ -1,5 +1,5 @@
-import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
+import rdf from '../rdf-ext.js'
 
 function maybeLink (str, { knownLinks, pointer }, options) {
   // @TODO this should return a context, a label with the link to be displayed in the UIs
@@ -8,10 +8,6 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   if (candidateLink) {
 
     const { label, uri, wikiPath } = candidateLink
-
-    if (options.addLabels && label) {
-      pointer.node(uri).addOut(ns.schema.name, rdf.literal(label))
-    }
     if (options.includeWikiPaths && wikiPath) {
       pointer.node(uri).addOut(ns.dot.wikiPath, rdf.literal(wikiPath))
     }
@@ -21,24 +17,16 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   }
 }
 
-function createProperty (str, { pointer, termMapper, knownLinks }, options) {
-  const link = maybeLink(str, { pointer, knownLinks }, options)
-  if (link) {
-    return link
-  }
-  const propertyUri = termMapper.newProperty(str, options)
-  if (options.addLabels && propertyUri) {
-    pointer.node(propertyUri).addOut(ns.schema.name, rdf.literal(str))
-  }
-  return propertyUri
+function createPredicate (str, { pointer, termMapper, knownLinks }, options) {
+  return termMapper.maybeMapped(str) ??
+    maybeLink(str, { pointer, knownLinks }, options) ??
+    termMapper.newProperty(str, options)
 }
 
-function createLiteral (str, { pointer, termMapper, knownLinks }, options) {
-  const link = maybeLink(str, { pointer, knownLinks }, options)
-  if (link) {
-    return link
-  }
-  return termMapper.newLiteral(str, options)
+function createObject (str, { pointer, termMapper, knownLinks }, options) {
+  return termMapper.maybeMapped(str) ??
+    maybeLink(str, { pointer, knownLinks }, options) ??
+    termMapper.newLiteral(str, options)
 }
 
 /**
@@ -55,12 +43,12 @@ function populateInline (data, context, options) {
     populate(pointer.term, p, o)
   } else if (data.length > 2) {
     const [s, p, o] = data
-    populate(createProperty(s, context, options), p, o)
+    populate(createPredicate(s, context, options), p, o)
   }
 
   function populate (sTerm, p, o) {
-    const pTerm = createProperty(p, context, options)
-    const oTerm = createLiteral(o, context, options)
+    const pTerm = createPredicate(p, context, options)
+    const oTerm = createObject(o, context, options)
     pointer.node(sTerm).addOut(pTerm, oTerm)
   }
 
@@ -73,16 +61,18 @@ function populateYamlLike (data, context, options) {
   const { pointer, termMapper, knownLinks } = context
 
   for (const [key, value] of Object.entries(data)) {
-    const predicate = createProperty(key, context, options)
+
+    const predicate = createPredicate(key, context, options)
 
     if (literalLike(value)) {
-      const object = createLiteral(`${value}`, context, options)
+      const object = createObject(`${value}`, context, options)
       pointer.addOut(predicate, object)
-    } else if (Array.isArray(value)) {
+    } else if (Array.isArray(value) && value.length) {
+
       value.forEach(x => {
         if (literalLike(x)) {
-          const object = createLiteral(x, context, options)
-          pointer.addOut(predicate, object)
+          const literal = createObject(x, context, options)
+          pointer.addOut(predicate, literal)
         } else {
           const uri = rdf.blankNode()
           pointer.addOut(predicate, uri)
@@ -90,7 +80,8 @@ function populateYamlLike (data, context, options) {
             { pointer: pointer.node(uri), termMapper, knownLinks }, options)
         }
       })
-    } else if (typeof value === 'object') {
+    } else if (typeof value === 'object' && value !== null && value !==
+      undefined) {
       const uri = rdf.blankNode()
       pointer.addOut(predicate, uri)
       populateYamlLike(value,

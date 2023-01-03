@@ -6,7 +6,7 @@ import rdf from '../src/rdf-ext.js'
 import { createTermMapper } from '../src/termMapper/defaultTermMapper.js'
 import { prettyPrint } from './support/serialization.js'
 import {
-  tests, splitOnTags, splitOnIdentifiers, splitOnHeaders,
+  allTests, splitOnTags, splitOnIdentifiers, splitOnHeaders, yamlLike,
 } from './tests.js'
 
 expect.extend({ toMatchSnapshot })
@@ -15,12 +15,11 @@ const context = {
   termMapper: createTermMapper({
     baseNamespace: rdf.namespace('http://my-vault.org/'),
     documentUri: ns.ex.document,
-  }),
-  path:'file.md'
+  }), path: 'file.md',
 }
 
 describe('toRDF', async function () {
-  for (const current of tests) {
+  for (const current of allTests) {
     it(current.title, async function () {
       const fullText = current.markdown
       const pointer = toRdf(fullText, context, {})
@@ -109,7 +108,7 @@ describe('splitOnHeader', async function () {
 
   it('splitOnHeader:true includeWikiPaths:true', async function () {
     const fullText = splitOnHeaders.markdown
-    const options = { splitOnHeader: true, includeWikiPaths:true }
+    const options = { splitOnHeader: true, includeWikiPaths: true }
     const pointer = toRdf(fullText, context, options)
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)

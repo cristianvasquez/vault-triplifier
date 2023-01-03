@@ -42,8 +42,7 @@ function astTriplifier (node, context, options) {
 
       if (options.includeWikiPaths && path && child.type === 'block') {
         pointer.node(childUri).
-          addOut(ns.dot.wikiPath,
-            rdf.literal(`${path}#${child.value}`))
+          addOut(ns.dot.wikiPath, rdf.literal(`${path}#${child.value}`))
       }
 
       pointer.addOut(ns.dot.contains, childUri)
