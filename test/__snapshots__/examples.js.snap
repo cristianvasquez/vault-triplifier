@@ -12,7 +12,7 @@ exports[`triplify examples Alice.md 1`] = `
 <http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" ;
 	dot:contains [
 		schema:name \\"Alice\\" ;
-		dot:wikipath \\"Alice.md#Alice\\" ;
+		dot:linktext \\"Alice.md#Alice\\" ;
 		<http://example.org/property/aXMgYQ==> <http://example.org/note/UGVyc29u> ;
 		dot:related <http://example.org/note/SWNlIGNyZWFt> ;
 	] .
@@ -39,18 +39,18 @@ exports[`triplify examples Person.md 1`] = `
 <http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" ;
 	dot:contains [
 		schema:name \\"Person\\" ;
-		dot:wikipath \\"Person.md#Person\\" ;
+		dot:linktext \\"Person.md#Person\\" ;
 		dot:contains [
 			schema:name \\"Section\\" ;
-			dot:wikipath \\"Person.md#Section\\" ;
+			dot:linktext \\"Person.md#Section\\" ;
 			<http://example.org/property/cHJvcGVydHk=> \\"A\\" ;
 		], [
 			schema:name \\"Subsection\\" ;
-			dot:wikipath \\"Person.md#Subsection\\" ;
+			dot:linktext \\"Person.md#Subsection\\" ;
 			<http://example.org/property/cHJvcGVydHk=> \\"C\\" ;
 		], [
 			schema:name \\"Subsection\\" ;
-			dot:wikipath \\"Person.md#Subsection\\" ;
+			dot:linktext \\"Person.md#Subsection\\" ;
 			<http://example.org/property/cHJvcGVydHk=> \\"B\\" ;
 			dot:tag \\"person\\" ;
 		] ;
@@ -145,21 +145,21 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 <http://example.org/note/Ym9iL0JvYiBEZXRhaWxzLm1k> schema:name \\"Bob Details\\" ;
 	dot:contains [
 		schema:name \\"More details about Bob\\" ;
-		dot:wikipath \\"bob/Bob Details.md#More details about Bob\\" ;
+		dot:linktext \\"bob/Bob Details.md#More details about Bob\\" ;
 		dot:contains [
 			schema:name \\"Section\\" ;
-			dot:wikipath \\"bob/Bob Details.md#Section\\" ;
+			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" ;
 			<http://example.org/property/c29tZXdoYXQgcmVsYXRlZA==> <http://example.org/note/Qm9iIERldGFpbHMjXjI=> ;
 			<http://example.org/property/cG9pbnRzIHRvIHRoZSBkb2N1bWVudA==> <http://example.org/note/Qm9iIERldGFpbHMjQSBoZWFkZXI=> ;
 		], [
 			schema:name \\"Section\\" ;
-			dot:wikipath \\"bob/Bob Details.md#Section\\" ;
+			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" ;
 			dot:related <http://example.org/note/Qm9iIERldGFpbHMjXjMg> ;
 		], [
 			schema:name \\"Section\\" ;
-			dot:wikipath \\"bob/Bob Details.md#Section\\" ;
+			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" ;
 			dot:related <http://example.org/note/VW5rbm93biNeMQ==> ;
 		] ;
@@ -246,16 +246,16 @@ exports[`triplify examples dot triples.md 1`] = `
 <http://example.org/note/ZG90IHRyaXBsZXMubWQ=> schema:name \\"dot triples\\" ;
 	dot:contains [
 		schema:name \\"Dot triples syntax\\" ;
-		dot:wikipath \\"dot triples.md#Dot triples syntax\\" ;
+		dot:linktext \\"dot triples.md#Dot triples syntax\\" ;
 		dot:contains [
 			schema:name \\"Alice\\" ;
-			dot:wikipath \\"dot triples.md#Alice\\" ;
+			dot:linktext \\"dot triples.md#Alice\\" ;
 			<http://example.org/property/aGFz> \\"37 years old\\" ;
 			<http://example.org/property/ZXg6a25vd3M=> <http://example.org/note/Qm9i> ;
 			dot:related <http://example.org/note/Qm9i>, <http://example.org/note/QWxpY2U=> ;
 		], [
 			schema:name \\"Embedded\\" ;
-			dot:wikipath \\"dot triples.md#Embedded\\" ;
+			dot:linktext \\"dot triples.md#Embedded\\" ;
 			<http://example.org/property/RUE=> \\"EB\\" ;
 			<http://example.org/property/RUM=> \\"ED\\" ;
 		] ;
@@ -321,14 +321,14 @@ exports[`triplify examples links.md 1`] = `
 <http://example.org/note/bGlua3MubWQ=> schema:name \\"links\\" ;
 	dot:contains [
 		schema:name \\"Links\\" ;
-		dot:wikipath \\"links.md#Links\\" ;
+		dot:linktext \\"links.md#Links\\" ;
 		dot:contains [
 			schema:name \\"Produce two simple links\\" ;
-			dot:wikipath \\"links.md#Produce two simple links\\" ;
+			dot:linktext \\"links.md#Produce two simple links\\" ;
 			dot:related <http://web2.org>, <http://web1.org> ;
 		], [
 			schema:name \\"With alias\\" ;
-			dot:wikipath \\"links.md#With alias\\" ;
+			dot:linktext \\"links.md#With alias\\" ;
 			dot:related <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> ;
 		] ;
 	] .

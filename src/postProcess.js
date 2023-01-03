@@ -13,17 +13,17 @@ function postProcess ({ pointer, termMapper }, options) {
     }
 
     if (options.includeWikipaths) {
-      addWikiPath(pointer, quad.subject, termMapper)
-      addWikiPath(pointer, quad.object, termMapper)
+      addWikipath(pointer, quad.subject, termMapper)
+      addWikipath(pointer, quad.object, termMapper)
     }
 
   }
 }
 
-function addWikiPath (ptr, term, termMapper) {
-  const hasWikiPath = (term) => !!ptr.node(term).
+function addWikipath (ptr, term, termMapper) {
+  const hasWikipath = (term) => !!ptr.node(term).
     out(ns.dot.wikipath).terms.length
-  if (termMapper.pathUriMinter.belongs(term) && !hasWikiPath(term)) {
+  if (termMapper.pathUriMinter.belongs(term) && !hasWikipath(term)) {
     const path = termMapper.pathUriMinter.toValue(term)
 
     termMapper.

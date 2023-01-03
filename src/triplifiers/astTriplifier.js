@@ -40,9 +40,10 @@ function astTriplifier (node, context, options) {
         pointer.node(childUri).addOut(ns.schema.name, rdf.literal(child.value))
       }
 
-      if (options.includeWikipaths && path && child.type === 'block') {
+      if (options.includeLinktext && path && child.type === 'block') {
+        // This is not the same as a wikipath, it's just a selector
         pointer.node(childUri).
-          addOut(ns.dot.wikipath, rdf.literal(`${path}#${child.value}`))
+          addOut(ns.dot.linktext, rdf.literal(`${path}#${child.value}`))
       }
 
       pointer.addOut(ns.dot.contains, childUri)

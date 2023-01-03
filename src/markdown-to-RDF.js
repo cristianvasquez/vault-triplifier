@@ -6,7 +6,8 @@ const defaultOptions = {
   splitOnHeader: false,
   splitOnId: true,
   addLabels: false,
-  includeWikipaths: true,
+  includeWikipaths: true, // Real path to a resource
+  includeLinktext: true, // Path to a resource + selector
 }
 
 function markdownToRDF (fullText, { termMapper, pointer, path }, options = {}) {
