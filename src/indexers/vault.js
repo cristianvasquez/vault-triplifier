@@ -16,11 +16,6 @@ function getNameFromPath (filePath) {
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
-/**
- *
-
- */
-
 async function createVaultFromObsidian (app) {
   return {
     getPathByName: (
