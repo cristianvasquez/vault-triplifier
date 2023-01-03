@@ -13,7 +13,7 @@
     "@rdfjs/term-map": "^2.0.0",
     "@rdfjs/term-set": "^2.0.1",
     "clownface": "^1.5.1",
-    "docs-and-graphs": "^0.1.21"
+    "docs-and-graphs": "^0.1.24"
   },
   "devDependencies": {
     "readable-stream": "^4.2.0",
