@@ -37,7 +37,7 @@ function createTermMapper ({
     pathToUri,
     pathUriMinter,
     propertyUriMinter,
-    getPathByName: getPathByName ? getPathByName.path : (x) => x,
+    getPathByName: getPathByName ? getPathByName.path : (x) => `${x}.md`,
   }
 
 }
