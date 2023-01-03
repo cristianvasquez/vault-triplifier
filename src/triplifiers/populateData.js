@@ -3,12 +3,24 @@ import ns from '../namespaces.js'
 
 function maybeLink (str, { knownLinks, pointer }, options) {
   // @TODO this should return a context, a label with the link to be displayed in the UIs
+
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
+
+    const {label,uri,wikiPath} = candidateLink
+
+    if (options.addLabels && label) {
+      pointer.node(uri).addOut(ns.schema.name, rdf.literal(label))
+    }
+    if (options.includeWikiPaths && wikiPath) {
+      pointer.node(uri).addOut(ns.dot.wikiPath, rdf.literal(wikiPath))
+    }
+
     candidateLink.mapped = true
-    return candidateLink.uri
+    return uri
   }
 }
+
 
 function createProperty (str, { pointer, termMapper, knownLinks }, options) {
   return maybeLink(str, { pointer, knownLinks }, options) ??

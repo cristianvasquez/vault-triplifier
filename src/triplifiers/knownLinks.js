@@ -19,7 +19,7 @@ function getUri ({ type, value }, context) {
     const path = termMapper.getPathByName(value)
     if (path) {
       return {
-        uri: termMapper.pathToUri(path), wikiPath: path,
+        uri: termMapper.pathToUri(path), wikiPath: path, label:value
       }
     } else {
       return { uri: rdf.blankNode() }
