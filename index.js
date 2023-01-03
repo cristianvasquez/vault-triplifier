@@ -1,11 +1,11 @@
-import { createVault } from './src/indexers/vault.js'
+import { createVaultFromDir } from './src/indexers/vault.js'
 import ns from './src/namespaces.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
 import { toRdf } from './src/toRdf.js'
 
 async function createTriplifier (dir, options = {}) {
 
-  const vault = await createVault(dir)
+  const vault = await createVaultFromDir(dir)
   const termMapper = createTermMapper({
     vault,
     customMapper: options.customMapper,

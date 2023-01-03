@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import rdf from '../rdf-ext.js'
-import { isValidUrl } from './strings.js'
+import { isValidUrl } from '../strings/uris.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({

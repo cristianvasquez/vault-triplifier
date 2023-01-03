@@ -12,7 +12,7 @@ function getNameFromPath (filePath) {
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
-async function createVault (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
+async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   const namesPaths = new Map()
   const { files, directories } = await index()
 
@@ -53,4 +53,4 @@ async function createVault (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
 
 }
 
-export { createVault }
+export { createVaultFromDir }
