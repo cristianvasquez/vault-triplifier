@@ -1,7 +1,7 @@
 import dataset from '@rdfjs/dataset'
 import ns from '../src/namespaces.js'
 import { expect } from 'expect'
-import { markdownToRDF } from '../index.js'
+import { markdownToRDF } from '../src/markdown-to-RDF.js'
 import toMatchSnapshot from 'expect-mocha-snapshot'
 import rdf from '../src/rdf-ext.js'
 import { createTermMapper } from '../src/termMapper/defaultTermMapper.js'
