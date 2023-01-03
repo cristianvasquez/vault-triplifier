@@ -173,10 +173,10 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 	dot:wikiPath \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29u> .
 
+<http://my-vault.org/property/Zm9hZjprbm93cw==> schema:name \\"foaf:knows\\" .
+
 <http://my-vault.org/note/QWxpc29u> schema:name \\"Alison\\" ;
 	dot:wikiPath \\"Alison\\" .
-
-<http://my-vault.org/property/Zm9hZjprbm93cw==> schema:name \\"foaf:knows\\" .
 
 <http://my-vault.org/note/ZmlsZS5tZA==/alison> schema:name \\"Alison\\" ;
 	dot:wikiPath \\"file.md#Alison\\" ;

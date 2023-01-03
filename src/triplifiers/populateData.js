@@ -7,7 +7,7 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
 
-    const {label,uri,wikiPath} = candidateLink
+    const { label, uri, wikiPath } = candidateLink
 
     if (options.addLabels && label) {
       pointer.node(uri).addOut(ns.schema.name, rdf.literal(label))
@@ -21,15 +21,24 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   }
 }
 
-
 function createProperty (str, { pointer, termMapper, knownLinks }, options) {
-  return maybeLink(str, { pointer, knownLinks }, options) ??
-    termMapper.newProperty(str, options)
+  const link = maybeLink(str, { pointer, knownLinks }, options)
+  if (link) {
+    return link
+  }
+  const propertyUri = termMapper.newProperty(str, options)
+  if (options.addLabels && propertyUri) {
+    pointer.node(propertyUri).addOut(ns.schema.name, rdf.literal(str))
+  }
+  return propertyUri
 }
 
 function createLiteral (str, { pointer, termMapper, knownLinks }, options) {
-  return maybeLink(str, { pointer, knownLinks }, options) ??
-    termMapper.newLiteral(str, options)
+  const link = maybeLink(str, { pointer, knownLinks }, options)
+  if (link) {
+    return link
+  }
+  return termMapper.newLiteral(str, options)
 }
 
 /**
@@ -41,8 +50,6 @@ function createLiteral (str, { pointer, termMapper, knownLinks }, options) {
  */
 function populateInline (data, context, options) {
   const { pointer } = context
-  const { addLabels } = options
-
   if (data.length === 2) {
     const [p, o] = data
     populate(pointer.term, p, o)
@@ -55,9 +62,6 @@ function populateInline (data, context, options) {
     const pTerm = createProperty(p, context, options)
     const oTerm = createLiteral(o, context, options)
     pointer.node(sTerm).addOut(pTerm, oTerm)
-    if (addLabels) {
-      pointer.node(pTerm).addOut(ns.schema.name, p)
-    }
   }
 
 }
