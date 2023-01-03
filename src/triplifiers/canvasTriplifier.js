@@ -60,6 +60,14 @@ function canvasTriplifier (canvas, context, options) {
     pointer.node(s).out(p, o)
   }
 
+  // All the nodes that are not contained somewhere will hang from the canvas itself
+  for (const uri of nodeMap.values()) {
+    const containers = pointer.node(uri).in(ns.dot.contains).terms
+    if (containers.length === 0) {
+      pointer.addOut(ns.dot.contains, uri)
+    }
+  }
+
   return pointer
 }
 
