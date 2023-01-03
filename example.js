@@ -22,6 +22,7 @@ const triplifier = await createTriplifier(dir, {
 for (const file of triplifier.vault.getMarkdownFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
-  const pointer = triplifier.toRdf(text, { path: file }, { addLabels: true, includeWikiPaths:true })
+  const pointer = triplifier.toRdf(text, { path: file },
+    { addLabels: true, includeWikiPaths: true, splitOnHeader: true })
   console.log(pointer.dataset.toString())
 }

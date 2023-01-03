@@ -16,6 +16,7 @@ const context = {
     baseNamespace: rdf.namespace('http://my-vault.org/'),
     documentUri: ns.ex.document,
   }),
+  path:'file.md'
 }
 
 describe('toRDF', async function () {
@@ -30,7 +31,7 @@ describe('toRDF', async function () {
 })
 
 describe('splitOnTag', async function () {
-  it('splitOnTag false', async function () {
+  it('splitOnTag:false', async function () {
     const fullText = splitOnTags.markdown
     const options = { splitOnTag: false }
     const pointer = toRdf(fullText, context, options)
@@ -38,7 +39,7 @@ describe('splitOnTag', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnTag true', async function () {
+  it('splitOnTag:true', async function () {
     const fullText = splitOnTags.markdown
     const options = { splitOnTag: true }
     const pointer = toRdf(fullText, context, options)
@@ -46,7 +47,7 @@ describe('splitOnTag', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnTag true addLabels true', async function () {
+  it('splitOnTag:true addLabels:true', async function () {
     const fullText = splitOnTags.markdown
     const options = { splitOnTag: true, addLabels: true }
     const pointer = toRdf(fullText, context, options)
@@ -56,7 +57,7 @@ describe('splitOnTag', async function () {
 })
 
 describe('splitOnId', async function () {
-  it('splitOnId false', async function () {
+  it('splitOnId:false', async function () {
     const fullText = splitOnIdentifiers.markdown
     const options = { splitOnId: false }
     const pointer = toRdf(fullText, context, options)
@@ -64,7 +65,7 @@ describe('splitOnId', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnId true', async function () {
+  it('splitOnId:true', async function () {
     const fullText = splitOnIdentifiers.markdown
     const options = { splitOnId: true }
     const pointer = toRdf(fullText, context, options)
@@ -72,7 +73,7 @@ describe('splitOnId', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnId true addLabels true', async function () {
+  it('splitOnId:true addLabels:true', async function () {
     const fullText = splitOnIdentifiers.markdown
     const options = { splitOnId: true, addLabels: true }
     const pointer = toRdf(fullText, context, options)
@@ -82,7 +83,7 @@ describe('splitOnId', async function () {
 })
 
 describe('splitOnHeader', async function () {
-  it('splitOnHeader false', async function () {
+  it('splitOnHeader:false', async function () {
     const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: false }
     const pointer = toRdf(fullText, context, options)
@@ -90,7 +91,7 @@ describe('splitOnHeader', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnHeader true', async function () {
+  it('splitOnHeader:true', async function () {
     const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: true }
     const pointer = toRdf(fullText, context, options)
@@ -98,11 +99,20 @@ describe('splitOnHeader', async function () {
     expect(pretty).toMatchSnapshot(this)
   })
 
-  it('splitOnHeader true addLabels true', async function () {
+  it('splitOnHeader:true addLabels:true', async function () {
     const fullText = splitOnHeaders.markdown
     const options = { splitOnHeader: true, addLabels: true }
     const pointer = toRdf(fullText, context, options)
     const pretty = await prettyPrint(pointer.dataset)
     expect(pretty).toMatchSnapshot(this)
   })
+
+  it('splitOnHeader:true includeWikiPaths:true', async function () {
+    const fullText = splitOnHeaders.markdown
+    const options = { splitOnHeader: true, includeWikiPaths:true }
+    const pointer = toRdf(fullText, context, options)
+    const pretty = await prettyPrint(pointer.dataset)
+    expect(pretty).toMatchSnapshot(this)
+  })
+
 })

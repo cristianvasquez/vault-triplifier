@@ -2,11 +2,12 @@ import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
+import { pathWithoutTrail } from '../strings/uris.js'
 
 function astTriplifier (node, context, options) {
 
   const { addLabels } = options
-  const { pointer } = context
+  const { pointer, path } = context
 
   for (const tag of node.tags ?? []) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
@@ -22,8 +23,7 @@ function astTriplifier (node, context, options) {
     }
   }
 
-  for (const { uri, alias, value } of knownLinks.filter(
-    link => !link.mapped)) {
+  for (const { uri, alias, value } of knownLinks.filter(link => !link.mapped)) {
     pointer.addOut(ns.dot.related, uri)
     if (addLabels) {
       if (alias) {
@@ -40,6 +40,13 @@ function astTriplifier (node, context, options) {
       if (addLabels && child.value) {
         pointer.node(childUri).addOut(ns.schema.name, rdf.literal(child.value))
       }
+
+      if (options.includeWikiPaths && path && child.type === 'block') {
+        pointer.node(childUri).
+          addOut(ns.dot.wikiPath,
+            rdf.literal(`${pathWithoutTrail(path)}#${child.value}`))
+      }
+
       pointer.addOut(ns.dot.contains, childUri)
       astTriplifier(child, { ...context, pointer: pointer.node(childUri) },
         options)

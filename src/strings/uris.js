@@ -1,8 +1,13 @@
-const isValidUrl = urlString => {
+function isValidUrl (urlString) {
   try {
     return Boolean(new URL(urlString))
   } catch (e) {
     return false
   }
 }
-export { isValidUrl }
+
+function pathWithoutTrail (path) {
+  return path.startsWith('./') ? path.replace(/^.\//, '') : path
+}
+
+export { isValidUrl, pathWithoutTrail }

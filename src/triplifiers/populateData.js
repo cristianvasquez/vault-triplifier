@@ -5,10 +5,6 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   // @TODO this should return a context, a label with the link to be displayed in the UIs
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
-    if (candidateLink.wikiPath && options.includeWikiPaths) {
-      pointer.node(candidateLink.uri).
-        addOut(ns.dot.wikiPath, rdf.literal(candidateLink.wikiPath))
-    }
     candidateLink.mapped = true
     return candidateLink.uri
   }
