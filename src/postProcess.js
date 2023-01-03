@@ -12,20 +12,22 @@ function postProcess ({ pointer, termMapper }, options) {
       addLabel(pointer, quad.object, termMapper.pathUriMinter, getNameFromPath)
     }
 
-    if (options.includeWikiPaths) {
-      addWikiPath(pointer, quad.subject, termMapper.pathUriMinter)
-      addWikiPath(pointer, quad.object, termMapper.pathUriMinter)
+    if (options.includeWikipaths) {
+      addWikiPath(pointer, quad.subject, termMapper)
+      addWikiPath(pointer, quad.object, termMapper)
     }
 
   }
 }
 
-function addWikiPath (ptr, term, uriMinter) {
+function addWikiPath (ptr, term, termMapper) {
   const hasWikiPath = (term) => !!ptr.node(term).
-    out(ns.dot.wikiPath).terms.length
-  if (uriMinter.belongs(term) && !hasWikiPath(term)) {
-    const path = uriMinter.toValue(term)
-    ptr.node(term).addOut(ns.dot.wikiPath, path)
+    out(ns.dot.wikipath).terms.length
+  if (termMapper.pathUriMinter.belongs(term) && !hasWikiPath(term)) {
+    const path = termMapper.pathUriMinter.toValue(term)
+
+    termMapper.
+    ptr.node(term).addOut(ns.dot.wikipath, path)
   }
 }
 

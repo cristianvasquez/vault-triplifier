@@ -33,8 +33,8 @@ function canvasTriplifier (canvas, context, options) {
         pointer.node(uri).
           addOut(ns.schema.name, rdf.literal(getNameFromPath(path)))
       }
-      if (options.includeWikiPaths) {
-        pointer.node(uri).addOut(ns.dot.wikiPath, rdf.literal(path))
+      if (options.includeWikipaths) {
+        pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(path))
       }
       nodeMap.set(node.id, uri)
     }

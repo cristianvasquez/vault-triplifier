@@ -10,7 +10,7 @@ function getKnownLinks (links, context) {
 }
 
 function getUri ({ type, value }, context) {
-  const { termMapper, path, wikiPath } = context
+  const { termMapper, path } = context
 
   // Normal URL
   if (isValidUrl(value)) {
@@ -22,7 +22,7 @@ function getUri ({ type, value }, context) {
     if (path) {
       return {
         uri: termMapper.pathToUri(normalizedPath),
-        wikiPath: normalizedPath,
+        wikipath: normalizedPath,
         label: value,
       }
     } else {
@@ -34,7 +34,7 @@ function getUri ({ type, value }, context) {
   const resolvedPath = path ? `.${resolve('/', path, value)}` : value
   const normalizedPath = pathWithoutTrail(resolvedPath)
   return {
-    uri: termMapper.pathToUri(normalizedPath), wikiPath: normalizedPath,
+    uri: termMapper.pathToUri(normalizedPath), wikipath: normalizedPath,
   }
 }
 
