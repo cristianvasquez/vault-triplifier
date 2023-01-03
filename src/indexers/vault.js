@@ -3,6 +3,10 @@ import pkg from 'glob'
 
 const { Glob } = pkg
 
+function pathWithoutTrail (path) {
+  return path.startsWith('./') ? path.replace(/^.\//, '') : path
+}
+
 function getNameFromPath (filePath) {
   const fileName = filePath.split('/').slice(-1)[0]
   return fileName.endsWith('.md')
@@ -11,6 +15,19 @@ function getNameFromPath (filePath) {
 }
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
+
+/**
+ *
+
+ */
+
+async function createVaultFromObsidian (app) {
+  return {
+    getPathByName: (
+      noteMD, activePath) => app.metadataCache.getFirstLinkpathDest(noteMD,
+      activePath),
+  }
+}
 
 async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   const namesPaths = new Map()
@@ -38,19 +55,19 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   }
 
   // Should work with .md and without
-  function getFirstLinkpathDest (noteMD, activePath) {
+  function getPathByName (noteMD, activePath) {
     if (namesPaths.has(noteMD)) {
       const [path] = namesPaths.get(noteMD)
-      return path
+      return { path: pathWithoutTrail(path) }
     }
   }
 
-  const getMarkdownFiles = () => files.filter(x => x.endsWith('.md'))
+  const getMarkdownFiles = () => files.filter(x => x.endsWith('.md')).map(pathWithoutTrail)
 
   return {
-    files, directories, getFirstLinkpathDest, getMarkdownFiles
+    directories, getPathByName, getMarkdownFiles,
   }
 
 }
 
-export { createVaultFromDir }
+export { createVaultFromDir, createVaultFromObsidian }

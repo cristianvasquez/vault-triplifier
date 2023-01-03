@@ -2,7 +2,6 @@ import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
-import { pathWithoutTrail } from '../strings/uris.js'
 
 function astTriplifier (node, context, options) {
 
@@ -44,7 +43,7 @@ function astTriplifier (node, context, options) {
       if (options.includeWikiPaths && path && child.type === 'block') {
         pointer.node(childUri).
           addOut(ns.dot.wikiPath,
-            rdf.literal(`${pathWithoutTrail(path)}#${child.value}`))
+            rdf.literal(`${path}#${child.value}`))
       }
 
       pointer.addOut(ns.dot.contains, childUri)

@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import rdf from '../rdf-ext.js'
-import { isValidUrl, pathWithoutTrail } from '../strings/uris.js'
+import { isValidUrl } from '../strings/uris.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({
@@ -16,11 +16,10 @@ function getUri ({ type, value }, context) {
     return { uri: rdf.namedNode(value) }
   } else if (type === 'wikiLink') {
     // Wikilinks
-    const path = termMapper.getFirstLinkpathDest(value)
+    const path = termMapper.getPathByName(value)
     if (path) {
-      const withoutTrailing = pathWithoutTrail(path)
       return {
-        uri: termMapper.pathToUri(withoutTrailing), wikiPath: withoutTrailing,
+        uri: termMapper.pathToUri(path), wikiPath: path,
       }
     } else {
       return { uri: rdf.blankNode() }

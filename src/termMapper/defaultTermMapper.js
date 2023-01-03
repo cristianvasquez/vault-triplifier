@@ -2,9 +2,7 @@ import rdf from '../rdf-ext.js'
 import { UriMinter } from './uriMinter.js'
 
 function createTermMapper ({
-  baseNamespace,
-  customMapper,
-  getFirstLinkpathDest,
+  baseNamespace, customMapper, getPathByName,
 }) {
 
   const pathUriMinter = new UriMinter(`${baseNamespace().value}note/`)
@@ -36,9 +34,7 @@ function createTermMapper ({
     newProperty,
     blockUri,
     pathToUri,
-    getFirstLinkpathDest: getFirstLinkpathDest
-      ? getFirstLinkpathDest
-      : (x) => x,
+    getPathByName: getPathByName ? getPathByName.path : (x) => x,
   }
 
 }

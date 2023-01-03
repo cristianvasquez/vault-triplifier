@@ -6,8 +6,4 @@ function isValidUrl (urlString) {
   }
 }
 
-function pathWithoutTrail (path) {
-  return path.startsWith('./') ? path.replace(/^.\//, '') : path
-}
-
-export { isValidUrl, pathWithoutTrail }
+export { isValidUrl }
