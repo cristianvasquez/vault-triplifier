@@ -20,22 +20,20 @@ function postProcess ({ pointer, termMapper }, options) {
   }
 }
 
-function addWikipath (ptr, term, termMapper) {
-  const hasWikipath = (term) => !!ptr.node(term).
+function addWikipath (pointer, term, termMapper) {
+  const hasWikipath = (term) => !!pointer.node(term).
     out(ns.dot.wikipath).terms.length
   if (termMapper.pathUriMinter.belongs(term) && !hasWikipath(term)) {
     const path = termMapper.pathUriMinter.toValue(term)
-
-    termMapper.
-    ptr.node(term).addOut(ns.dot.wikipath, path)
+    pointer.node(term).addOut(ns.dot.wikipath, path)
   }
 }
 
-function addLabel (ptr, term, uriMinter, func = (x) => x) {
-  const hasLabel = (term) => !!ptr.node(term).out(ns.schema.name).terms.length
+function addLabel (pointer, term, uriMinter, func = (x) => x) {
+  const hasLabel = (term) => !!pointer.node(term).out(ns.schema.name).terms.length
   if (uriMinter.belongs(term) && !hasLabel(term)) {
     const label = uriMinter.toValue(term)
-    ptr.node(term).addOut(ns.schema.name, func(label))
+    pointer.node(term).addOut(ns.schema.name, func(label))
   }
 }
 

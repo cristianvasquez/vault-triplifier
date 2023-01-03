@@ -51,8 +51,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -71,12 +69,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
@@ -154,8 +147,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -174,12 +165,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
@@ -275,8 +261,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -295,12 +279,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
@@ -410,8 +389,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -430,12 +407,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
@@ -499,8 +471,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -519,12 +489,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 "
 `;
@@ -580,8 +545,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -600,12 +563,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> .
@@ -667,8 +625,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -687,12 +643,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
-
-<http://my-vault.org/note/QWxpc29uLm1k> dot:wikipath \\"Alison.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
 	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
@@ -733,8 +684,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -753,10 +702,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 "
 `;
@@ -799,8 +745,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -819,10 +763,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 "
 `;
@@ -877,8 +818,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
 	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -897,10 +836,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 "
 `;
@@ -919,8 +855,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
-
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
 
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
@@ -964,8 +898,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
 	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
 	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
@@ -984,10 +916,7 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 
 <http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> dot:wikipath \\"Bob.md\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
-
-<http://my-vault.org/note/QWxpY2UubWQ=> dot:wikipath \\"Alice.md\\" .
+<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
 
 "
 `;
@@ -1004,8 +933,6 @@ exports[`toRDF Links 1`] = `
 ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
 	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> .
 
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
-
 "
 `;
 
@@ -1020,8 +947,6 @@ exports[`toRDF Outline 1`] = `
 
 ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
 	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> .
-
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
 
 "
 `;
@@ -1042,8 +967,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 	dot:tag \\"Section\\" ;
 	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
 	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\" .
-
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
 
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;
@@ -1097,8 +1020,6 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
 		] ;
 	] .
-
-<http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> dot:wikipath \\"houses/img.png\\" .
 
 <http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
 	dot:linktext \\"file.md#Section\\" ;

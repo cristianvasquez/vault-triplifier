@@ -17,10 +17,9 @@ exports[`triplify examples Alice.md 1`] = `
 		dot:related <http://example.org/note/SWNlIGNyZWFtLm1k> ;
 	] .
 
-<http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" ;
-	dot:wikipath \\"Person.md\\" .
-
 <http://example.org/property/aXMgYQ==> schema:name \\"is a\\" .
+
+<http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" .
 
 <http://example.org/note/SWNlIGNyZWFtLm1k> schema:name \\"Ice cream\\" .
 
@@ -51,13 +50,11 @@ exports[`triplify examples People.md 1`] = `
 		] ;
 	] .
 
-<http://example.org/note/QWxpc29uLm1k> schema:name \\"Alison\\" ;
-	dot:wikipath \\"Alison.md\\" .
-
 <http://example.org/property/Zm9hZjprbm93cw==> schema:name \\"foaf:knows\\" .
 
-<http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" ;
-	dot:wikipath \\"Alice.md\\" .
+<http://example.org/note/QWxpc29uLm1k> schema:name \\"Alison\\" .
+
+<http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" .
 
 "
 `;
@@ -202,15 +199,13 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 
 <http://example.org/property/ZGVzY3JpcHRpb24=> schema:name \\"description\\" .
 
-<http://example.org/note/Qm9iIERldGFpbHMjXjIubWQ=> schema:name \\"Bob Details#^2\\" ;
-	dot:wikipath \\"Bob Details#^2.md\\" .
-
 <http://example.org/property/c29tZXdoYXQgcmVsYXRlZA==> schema:name \\"somewhat related\\" .
 
-<http://example.org/note/Qm9iIERldGFpbHMjQSBoZWFkZXIubWQ=> schema:name \\"Bob Details#A header\\" ;
-	dot:wikipath \\"Bob Details#A header.md\\" .
+<http://example.org/note/Qm9iIERldGFpbHMjXjIubWQ=> schema:name \\"Bob Details#^2\\" .
 
 <http://example.org/property/cG9pbnRzIHRvIHRoZSBkb2N1bWVudA==> schema:name \\"points to the document\\" .
+
+<http://example.org/note/Qm9iIERldGFpbHMjQSBoZWFkZXIubWQ=> schema:name \\"Bob Details#A header\\" .
 
 <http://example.org/note/Qm9iIERldGFpbHMjXjMgLm1k> schema:name \\" Pointer to section 3\\" .
 
@@ -228,9 +223,6 @@ exports[`triplify examples bob/Bob.md 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://example.org/note/aW1nLnBuZy5tZA==> dot:wikipath \\"img.png.md\\" ;
-	schema:name \\"img.png\\" .
-
 <http://example.org/note/Ym9iL0JvYi5tZA==> <http://example.org/property/d2l0aCBpbWFnZQ==> <http://example.org/note/aW1nLnBuZy5tZA==> ;
 	dot:related <http://example.org/note/TGluay5tZA==>, <http://something.com> ;
 	<http://example.org/property/bGl2ZXMgaW4=> <http://example.org/note/Ym9iL2hvdXNlcy9Cb2JIb3VzZS5tZA==> ;
@@ -242,29 +234,27 @@ exports[`triplify examples bob/Bob.md 1`] = `
 
 <http://example.org/property/d2l0aCBpbWFnZQ==> schema:name \\"with image\\" .
 
-<http://example.org/note/TGluay5tZA==> schema:name \\"Link\\" .
+<http://example.org/note/aW1nLnBuZy5tZA==> schema:name \\"img.png\\" .
 
-<http://example.org/note/Ym9iL2hvdXNlcy9Cb2JIb3VzZS5tZA==> dot:wikipath \\"bob/houses/BobHouse.md\\" ;
-	schema:name \\"BobHouse\\" .
+<http://example.org/note/TGluay5tZA==> schema:name \\"Link\\" .
 
 <http://example.org/property/bGl2ZXMgaW4=> schema:name \\"lives in\\" .
 
-<http://example.org/property/aGFzIGRldGFpbHM=> schema:name \\"has details\\" .
+<http://example.org/note/Ym9iL2hvdXNlcy9Cb2JIb3VzZS5tZA==> schema:name \\"BobHouse\\" .
 
-<http://example.org/note/Ym9iL0FsaWNlLm1k> dot:wikipath \\"bob/Alice.md\\" ;
-	schema:name \\"Alice\\" .
+<http://example.org/property/aGFzIGRldGFpbHM=> schema:name \\"has details\\" .
 
 <http://example.org/property/ZXg6a25vd3M=> schema:name \\"ex:knows\\" .
 
-<http://example.org/note/Ym9iL2hvdXNlcy9pbWcucG5n> dot:wikipath \\"bob/houses/img.png\\" ;
-	schema:name \\"img.png\\" .
+<http://example.org/note/Ym9iL0FsaWNlLm1k> schema:name \\"Alice\\" .
 
 <http://example.org/property/aGFzIGltYWdlIDE=> schema:name \\"has image 1\\" .
 
-<http://example.org/note/UGVyc29uLm1k> dot:wikipath \\"Person.md\\" ;
-	schema:name \\"Person\\" .
+<http://example.org/note/Ym9iL2hvdXNlcy9pbWcucG5n> schema:name \\"img.png\\" .
 
 <http://example.org/property/aXMgYQ==> schema:name \\"is a\\" .
+
+<http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" .
 
 "
 `;
@@ -298,10 +288,9 @@ exports[`triplify examples dot triples.md 1`] = `
 
 <http://example.org/property/aGFz> schema:name \\"has\\" .
 
-<http://example.org/note/Qm9iLm1k> schema:name \\"Bob\\" ;
-	dot:wikipath \\"Bob.md\\" .
-
 <http://example.org/property/ZXg6a25vd3M=> schema:name \\"ex:knows\\" .
+
+<http://example.org/note/Qm9iLm1k> schema:name \\"Bob\\" .
 
 <http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" .
 

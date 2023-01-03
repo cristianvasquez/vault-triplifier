@@ -30,7 +30,7 @@ function fromTermMapper (termMapper) {
       console.error(error)
     }
 
-    postProcess({ termMapper, pointer, path }, options)
+    postProcess({ termMapper, pointer }, options)
 
     return pointer
   }

@@ -22,7 +22,7 @@ for (const file of triplifier.vault.getFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRDF(text, { path: file },
-    { addLabels: true, includeWikiPaths: true, splitOnHeader: true })
+    { addLabels: true, includeWikipaths: true, splitOnHeader: true })
   console.log(pointer.dataset.toString())
 }
 

@@ -9,9 +9,10 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   if (candidateLink) {
 
     const { label, uri, wikipath } = candidateLink
-    if (options.includeWikipaths && wikipath) {
-      pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))
-    }
+    // Added as postprocess
+    // if (options.includeWikipaths && wikipath) {
+    //   pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))
+    // }
 
     candidateLink.mapped = true
     return uri
