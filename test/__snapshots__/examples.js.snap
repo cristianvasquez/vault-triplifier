@@ -1,0 +1,353 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`triplify examples Alice.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" ;
+	dot:wikiPath \\"Alice.md\\" ;
+	dot:contains [
+		schema:name \\"Alice\\" ;
+		dot:wikiPath \\"Alice.md#Alice\\" ;
+		<http://example.org/property/aXMgYQ==> <http://example.org/note/UGVyc29u> ;
+		dot:related <http://example.org/note/SWNlIGNyZWFt> ;
+	] .
+
+<http://example.org/note/UGVyc29u> schema:name \\"Person\\" ;
+	dot:wikiPath \\"Person\\" .
+
+<http://example.org/property/aXMgYQ==> schema:name \\"is a\\" .
+
+<http://example.org/note/SWNlIGNyZWFt> schema:name \\"Ice cream\\" ;
+	dot:wikiPath \\"Ice cream\\" .
+
+"
+`;
+
+exports[`triplify examples Person.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" ;
+	dot:wikiPath \\"Person.md\\" ;
+	dot:contains [
+		schema:name \\"Person\\" ;
+		dot:wikiPath \\"Person.md#Person\\" ;
+		dot:contains [
+			schema:name \\"Section\\" ;
+			dot:wikiPath \\"Person.md#Section\\" ;
+			<http://example.org/property/cHJvcGVydHk=> \\"A\\" ;
+		], [
+			schema:name \\"Subsection\\" ;
+			dot:wikiPath \\"Person.md#Subsection\\" ;
+			<http://example.org/property/cHJvcGVydHk=> \\"C\\" ;
+		], [
+			schema:name \\"Subsection\\" ;
+			dot:wikiPath \\"Person.md#Subsection\\" ;
+			<http://example.org/property/cHJvcGVydHk=> \\"B\\" ;
+			dot:tag \\"person\\" ;
+		] ;
+		<http://example.org/property/ZGVzY3JpcHRpb24=> \\"the class of persons\\" ;
+	] .
+
+<http://example.org/property/ZGVzY3JpcHRpb24=> schema:name \\"description\\" .
+
+<http://example.org/property/cHJvcGVydHk=> schema:name \\"property\\" .
+
+"
+`;
+
+exports[`triplify examples Test Canvas.canvas 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/QWxpY2UubWQ=> schema:name \\"Alice\\" ;
+	dot:wikiPath \\"Alice.md\\" .
+
+<http://example.org/note/UGVyc29uLm1k> schema:name \\"Person\\" ;
+	dot:wikiPath \\"Person.md\\" .
+
+<http://example.org/note/Ym9iL0JvYiBEZXRhaWxzLm1k> schema:name \\"Bob Details\\" ;
+	dot:wikiPath \\"bob/Bob Details.md\\" .
+
+<http://example.org/note/Ym9iL0JvYi5tZA==> schema:name \\"Bob\\" ;
+	dot:wikiPath \\"bob/Bob.md\\" .
+
+<http://example.org/note/aG91c2VzL0JvYkhvdXNlLm1k> schema:name \\"BobHouse\\" ;
+	dot:wikiPath \\"houses/BobHouse.md\\" .
+
+<http://example.org/note/aG91c2VzL2ltZy5wbmc=> schema:name \\"img.png\\" ;
+	dot:wikiPath \\"houses/img.png\\" .
+
+<http://example.org/note/VGVzdCBDYW52YXMuY2FudmFz> schema:name \\"Test Canvas.canvas\\" ;
+	dot:wikiPath \\"Test Canvas.canvas\\" ;
+	dot:contains [
+		schema:name \\"Entities\\" ;
+		dot:contains [
+			schema:name \\"People\\" ;
+			dot:contains <http://example.org/note/QWxpY2UubWQ=>, <http://example.org/note/Ym9iL0JvYi5tZA==> ;
+		], <http://example.org/note/QWxpY2UubWQ=>, <http://example.org/note/UGVyc29uLm1k>, <http://example.org/note/Ym9iL0JvYiBEZXRhaWxzLm1k>, <http://example.org/note/Ym9iL0JvYi5tZA==> ;
+	], <http://example.org/note/aG91c2VzL0JvYkhvdXNlLm1k>, [
+		schema:name \\"Resources\\" ;
+		dot:contains <http://example.org/note/aG91c2VzL2ltZy5wbmc=> ;
+	] .
+
+"
+`;
+
+exports[`triplify examples Yaml.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/WWFtbC5tZA==> dot:tag \\"cats\\", \\"dogs\\" ;
+	<http://example.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://example.org/property/dG9ncw==> \\"cats\\", \\"dogs\\" ;
+	<http://example.org/property/b25l> \\"pepe\\", \\"carlos\\" ;
+	<http://example.org/property/YW4tdXJp> <http://some-uri.com> ;
+	schema:name \\"Yaml\\" ;
+	dot:wikiPath \\"Yaml.md\\" .
+
+<http://example.org/property/ZGF0ZSB1cGRhdGVk> schema:name \\"date updated\\" .
+
+<http://example.org/property/dG9ncw==> schema:name \\"togs\\" .
+
+<http://example.org/property/b25l> schema:name \\"one\\" .
+
+<http://example.org/property/YW4tdXJp> schema:name \\"an-uri\\" .
+
+"
+`;
+
+exports[`triplify examples bob/Bob Details.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/Ym9iL0JvYiBEZXRhaWxzLm1k> schema:name \\"Bob Details\\" ;
+	dot:wikiPath \\"bob/Bob Details.md\\" ;
+	dot:contains [
+		schema:name \\"More details about Bob\\" ;
+		dot:wikiPath \\"bob/Bob Details.md#More details about Bob\\" ;
+		dot:contains [
+			schema:name \\"Section\\" ;
+			dot:wikiPath \\"bob/Bob Details.md#Section\\" ;
+			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" ;
+			<http://example.org/property/c29tZXdoYXQgcmVsYXRlZA==> <http://example.org/note/Qm9iIERldGFpbHMjXjI=> ;
+			<http://example.org/property/cG9pbnRzIHRvIHRoZSBkb2N1bWVudA==> <http://example.org/note/Qm9iIERldGFpbHMjQSBoZWFkZXI=> ;
+		], [
+			schema:name \\"Section\\" ;
+			dot:wikiPath \\"bob/Bob Details.md#Section\\" ;
+			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" ;
+			dot:related <http://example.org/note/Qm9iIERldGFpbHMjXjMg> ;
+		], [
+			schema:name \\"Section\\" ;
+			dot:wikiPath \\"bob/Bob Details.md#Section\\" ;
+			<http://example.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" ;
+			dot:related <http://example.org/note/VW5rbm93biNeMQ==> ;
+		] ;
+	] .
+
+<http://example.org/property/ZGVzY3JpcHRpb24=> schema:name \\"description\\" .
+
+<http://example.org/note/Qm9iIERldGFpbHMjXjI=> schema:name \\"Bob Details#^2\\" ;
+	dot:wikiPath \\"Bob Details#^2\\" .
+
+<http://example.org/property/c29tZXdoYXQgcmVsYXRlZA==> schema:name \\"somewhat related\\" .
+
+<http://example.org/note/Qm9iIERldGFpbHMjQSBoZWFkZXI=> schema:name \\"Bob Details#A header\\" ;
+	dot:wikiPath \\"Bob Details#A header\\" .
+
+<http://example.org/property/cG9pbnRzIHRvIHRoZSBkb2N1bWVudA==> schema:name \\"points to the document\\" .
+
+<http://example.org/note/Qm9iIERldGFpbHMjXjMg> schema:name \\" Pointer to section 3\\" ;
+	dot:wikiPath \\"Bob Details#^3 \\" .
+
+<http://example.org/note/VW5rbm93biNeMQ==> schema:name \\"Unknown#^1\\" ;
+	dot:wikiPath \\"Unknown#^1\\" .
+
+"
+`;
+
+exports[`triplify examples bob/Bob.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/aW1nLnBuZw==> dot:wikiPath \\"img.png\\" ;
+	schema:name \\"img.png\\" .
+
+<http://example.org/note/Ym9iL0JvYi5tZA==> dot:wikiPath \\"bob/Bob.md\\" ;
+	<http://example.org/property/d2l0aCBpbWFnZQ==> <http://example.org/note/aW1nLnBuZw==> ;
+	dot:related <http://example.org/note/TGluaw==>, <http://something.com> ;
+	<http://example.org/property/bGl2ZXMgaW4=> <http://example.org/note/Ym9iL2hvdXNlcy9Cb2JIb3VzZS5tZA==> ;
+	<http://example.org/property/aGFzIGRldGFpbHM=> \\"[Bob Details.md](./bob/Bob Details.md)\\" ;
+	<http://example.org/property/ZXg6a25vd3M=> <http://example.org/note/Ym9iL0FsaWNlLm1k> ;
+	<http://example.org/property/aGFzIGltYWdlIDE=> <http://example.org/note/Ym9iL2hvdXNlcy9pbWcucG5n> ;
+	<http://example.org/property/aXMgYQ==> <http://example.org/note/UGVyc29uLm1k> ;
+	schema:name \\"Bob\\" .
+
+<http://example.org/property/d2l0aCBpbWFnZQ==> schema:name \\"with image\\" .
+
+<http://example.org/note/TGluaw==> dot:wikiPath \\"Link\\" ;
+	schema:name \\"Link\\" .
+
+<http://example.org/note/Ym9iL2hvdXNlcy9Cb2JIb3VzZS5tZA==> dot:wikiPath \\"bob/houses/BobHouse.md\\" ;
+	schema:name \\"BobHouse\\" .
+
+<http://example.org/property/bGl2ZXMgaW4=> schema:name \\"lives in\\" .
+
+<http://example.org/property/aGFzIGRldGFpbHM=> schema:name \\"has details\\" .
+
+<http://example.org/note/Ym9iL0FsaWNlLm1k> dot:wikiPath \\"bob/Alice.md\\" ;
+	schema:name \\"Alice\\" .
+
+<http://example.org/property/ZXg6a25vd3M=> schema:name \\"ex:knows\\" .
+
+<http://example.org/note/Ym9iL2hvdXNlcy9pbWcucG5n> dot:wikiPath \\"bob/houses/img.png\\" ;
+	schema:name \\"img.png\\" .
+
+<http://example.org/property/aGFzIGltYWdlIDE=> schema:name \\"has image 1\\" .
+
+<http://example.org/note/UGVyc29uLm1k> dot:wikiPath \\"Person.md\\" ;
+	schema:name \\"Person\\" .
+
+<http://example.org/property/aXMgYQ==> schema:name \\"is a\\" .
+
+"
+`;
+
+exports[`triplify examples dot triples.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/ZG90IHRyaXBsZXMubWQ=> schema:name \\"dot triples\\" ;
+	dot:wikiPath \\"dot triples.md\\" ;
+	dot:contains [
+		schema:name \\"Dot triples syntax\\" ;
+		dot:wikiPath \\"dot triples.md#Dot triples syntax\\" ;
+		dot:contains [
+			schema:name \\"Alice\\" ;
+			dot:wikiPath \\"dot triples.md#Alice\\" ;
+			<http://example.org/property/aGFz> \\"37 years old\\" ;
+			<http://example.org/property/ZXg6a25vd3M=> <http://example.org/note/Qm9i> ;
+			dot:related <http://example.org/note/Qm9i>, <http://example.org/note/QWxpY2U=> ;
+		], [
+			schema:name \\"Embedded\\" ;
+			dot:wikiPath \\"dot triples.md#Embedded\\" ;
+			<http://example.org/property/RUE=> \\"EB\\" ;
+			<http://example.org/property/RUM=> \\"ED\\" ;
+		] ;
+	] .
+
+<http://example.org/property/aGFz> schema:name \\"has\\" .
+
+<http://example.org/note/Qm9i> schema:name \\"Bob\\" ;
+	dot:wikiPath \\"Bob\\" .
+
+<http://example.org/property/ZXg6a25vd3M=> schema:name \\"ex:knows\\" .
+
+<http://example.org/note/QWxpY2U=> schema:name \\"Alice\\" ;
+	dot:wikiPath \\"Alice\\" .
+
+<http://example.org/property/QQ==> <http://example.org/property/Qg==> \\"C\\" .
+
+<http://example.org/property/Qg==> schema:name \\"B\\" .
+
+<http://example.org/property/RUE=> schema:name \\"EA\\" .
+
+<http://example.org/property/RUM=> schema:name \\"EC\\" .
+
+"
+`;
+
+exports[`triplify examples houses/BobHouse.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/aG91c2VzL0JvYkhvdXNlLm1k> <http://example.org/property/aXMgYQ==> \\"House\\" ;
+	schema:name \\"BobHouse\\" ;
+	dot:wikiPath \\"houses/BobHouse.md\\" .
+
+<http://example.org/property/aXMgYQ==> schema:name \\"is a\\" .
+
+"
+`;
+
+exports[`triplify examples houses/img.png 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+"
+`;
+
+exports[`triplify examples links.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/bGlua3MubWQ=> schema:name \\"links\\" ;
+	dot:wikiPath \\"links.md\\" ;
+	dot:contains [
+		schema:name \\"Links\\" ;
+		dot:wikiPath \\"links.md#Links\\" ;
+		dot:contains [
+			schema:name \\"Produce two simple links\\" ;
+			dot:wikiPath \\"links.md#Produce two simple links\\" ;
+			dot:related <http://web2.org>, <http://web1.org> ;
+		], [
+			schema:name \\"With alias\\" ;
+			dot:wikiPath \\"links.md#With alias\\" ;
+			dot:related <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> ;
+		] ;
+	] .
+
+<https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> schema:name \\"1954\\" .
+
+"
+`;

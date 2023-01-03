@@ -1,4 +1,4 @@
-import { addLabels } from './src/addLabels.js'
+import { postProcess } from './src/postProcess.js'
 import { createVaultFromDir } from './src/indexers/vault.js'
 import ns from './src/namespaces.js'
 import rdf from './src/rdf-ext.js'
@@ -18,10 +18,6 @@ function fromTermMapper (termMapper) {
     const term = termMapper.pathToUri(path)
     const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
 
-    if (options.includeWikiPaths) {
-      pointer.addOut(ns.dot.wikiPath, rdf.literal(path))
-    }
-
     try {
       if (path.endsWith('.canvas')) {
         const json = shouldParse(contents) ? JSON.parse(contents) : contents
@@ -34,9 +30,7 @@ function fromTermMapper (termMapper) {
       console.error(error)
     }
 
-    if (options.addLabels) {
-      addLabels(pointer, termMapper)
-    }
+    postProcess({ termMapper, pointer, path }, options)
 
     return pointer
   }
