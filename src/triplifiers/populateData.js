@@ -8,7 +8,7 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   const candidateLink = knownLinks.find(link => str.includes(link.value))
   if (candidateLink) {
 
-    const { label, uri, wikipath } = candidateLink
+    const { label, uri, wikipath, linktext } = candidateLink
     // Added as postprocess
     // if (options.includeWikipaths && wikipath) {
     //   pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))

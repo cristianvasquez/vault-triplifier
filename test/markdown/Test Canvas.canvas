@@ -1,14 +1,14 @@
 {
 	"nodes":[
-		{"id":"050cd76ec3a65ab6","x":-1008,"y":-775,"width":1556,"height":1381,"type":"group","label":"Entities"},
-		{"id":"539e02882770ae3f","x":-846,"y":-627,"width":794,"height":1065,"type":"group","label":"ex:friends"},
-		{"id":"3bd1d3eeab044b9f","x":-651,"y":-53,"width":400,"height":400,"type":"file","file":"Alice.md"},
-		{"id":"04eaff90c42b6d9d","x":85,"y":-573,"width":400,"height":400,"type":"file","file":"bob/Bob Details.md"},
-		{"id":"2f5573fe8b268565","x":-651,"y":-566,"width":400,"height":400,"type":"file","file":"bob/Bob.md"},
+		{"id":"050cd76ec3a65ab6","x":-1008,"y":-775,"width":1556,"height":2006,"type":"group","label":"Entities"},
+		{"id":"539e02882770ae3f","x":-846,"y":-627,"width":794,"height":1695,"type":"group","label":"ex:friends"},
+		{"id":"2f5573fe8b268565","x":-651,"y":-566,"width":400,"height":890,"type":"file","file":"bob/Bob.md"},
 		{"id":"77ab8acb365f9d54","x":-651,"y":-1079,"width":400,"height":158,"type":"file","file":"houses/BobHouse.md"},
-		{"id":"9f5011d1ccf2c283","x":8,"y":-1885,"width":823,"height":781,"type":"group","label":"Resources"},
-		{"id":"5588de4d60d335ea","x":216,"y":-1676,"width":366,"height":400,"type":"file","file":"houses/img.png"},
-		{"id":"2d0f1e3f25453f21","x":85,"y":69,"width":373,"height":157,"type":"file","file":"Person.md"}
+		{"id":"3bd1d3eeab044b9f","x":-651,"y":453,"width":400,"height":400,"type":"file","file":"Alice.md"},
+		{"id":"2d0f1e3f25453f21","x":85,"y":575,"width":373,"height":157,"type":"file","file":"Person.md"},
+		{"id":"04eaff90c42b6d9d","x":85,"y":-321,"width":400,"height":400,"type":"file","file":"bob/Bob Details.md"},
+		{"id":"9f5011d1ccf2c283","x":73,"y":-1740,"width":823,"height":781,"type":"group","label":"Resources"},
+		{"id":"5588de4d60d335ea","x":281,"y":-1531,"width":366,"height":400,"type":"file","file":"houses/img.png"}
 	],
 	"edges":[
 		{"id":"a67001bb8fd1feda","fromNode":"2f5573fe8b268565","fromSide":"right","toNode":"04eaff90c42b6d9d","toSide":"left","label":"ex:details"},

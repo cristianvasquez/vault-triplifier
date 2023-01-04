@@ -103,12 +103,6 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
-	dot:wikipath \\"Alice.md\\" .
-
-<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" ;
-	dot:wikipath \\"bob/Bob Details.md\\" .
-
 <http://example.org/note/bob/Bob.md> schema:name \\"Bob\\" ;
 	dot:wikipath \\"bob/Bob.md\\" ;
 	ex:details <http://example.org/note/bob/Bob%20Details.md> ;
@@ -118,13 +112,19 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 <http://example.org/note/houses/BobHouse.md> schema:name \\"BobHouse\\" ;
 	dot:wikipath \\"houses/BobHouse.md\\" .
 
-<http://example.org/note/houses/img.png> schema:name \\"img.png\\" ;
-	dot:wikipath \\"houses/img.png\\" .
+<http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
+	dot:wikipath \\"Alice.md\\" .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" ;
 	dot:wikipath \\"Person.md\\" .
 
-ex:friends dot:contains <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob.md> ;
+<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" ;
+	dot:wikipath \\"bob/Bob Details.md\\" .
+
+<http://example.org/note/houses/img.png> schema:name \\"img.png\\" ;
+	dot:wikipath \\"houses/img.png\\" .
+
+ex:friends dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
 	<http://example.org/property/Same%20as> <http://example.org/note/Person.md> .
 
 <http://example.org/property/Same%20as> schema:name \\"Same as\\" .
@@ -136,7 +136,7 @@ ex:friends dot:contains <http://example.org/note/Alice.md>, <http://example.org/
 <http://example.org/note/Test%20Canvas.canvas> schema:name \\"Test Canvas.canvas\\" ;
 	dot:contains [
 		schema:name \\"Entities\\" ;
-		dot:contains <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob%20Details.md>, <http://example.org/note/bob/Bob.md>, <http://example.org/note/Person.md>, ex:friends ;
+		dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md>, <http://example.org/note/Person.md>, <http://example.org/note/bob/Bob%20Details.md>, ex:friends ;
 	], <http://example.org/note/houses/BobHouse.md>, [
 		schema:name \\"Resources\\" ;
 		dot:contains <http://example.org/note/houses/img.png> ;
@@ -189,18 +189,18 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 1\\" ;
-			<http://example.org/property/somewhat%20related> <http://example.org/note/Bob%20Details#%5E2.md> ;
-			<http://example.org/property/points%20to%20the%20document> <http://example.org/note/Bob%20Details#A%20header.md> ;
+			<http://example.org/property/somewhat%20related> <http://example.org/note/Bob%20Details.md> ;
+			<http://example.org/property/points%20to%20the%20document> <http://example.org/note/Bob%20Details.md> ;
 		], [
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 2\\" ;
-			dot:related <http://example.org/note/Bob%20Details#%5E3%20.md> ;
+			dot:related <http://example.org/note/Bob%20Details.md> ;
 		], [
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 3\\" ;
-			dot:related <http://example.org/note/Unknown#%5E1.md> ;
+			dot:related <http://example.org/note/Unknown.md> ;
 		] ;
 	] .
 
@@ -208,15 +208,11 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 
 <http://example.org/property/somewhat%20related> schema:name \\"somewhat related\\" .
 
-<http://example.org/note/Bob%20Details#%5E2.md> schema:name \\"Bob Details#^2\\" .
+<http://example.org/note/Bob%20Details.md> schema:name \\" Pointer to section 3\\" .
 
 <http://example.org/property/points%20to%20the%20document> schema:name \\"points to the document\\" .
 
-<http://example.org/note/Bob%20Details#A%20header.md> schema:name \\"Bob Details#A header\\" .
-
-<http://example.org/note/Bob%20Details#%5E3%20.md> schema:name \\" Pointer to section 3\\" .
-
-<http://example.org/note/Unknown#%5E1.md> schema:name \\"Unknown#^1\\" .
+<http://example.org/note/Unknown.md> schema:name \\"Unknown\\" .
 
 "
 `;
@@ -350,9 +346,13 @@ exports[`triplify examples links.md 1`] = `
 			dot:linktext \\"links.md#Produce two simple links\\" ;
 			dot:related <http://web2.org>, <http://web1.org> ;
 		], [
-			schema:name \\"With alias\\" ;
-			dot:linktext \\"links.md#With alias\\" ;
+			schema:name \\"Alias\\" ;
+			dot:linktext \\"links.md#Alias\\" ;
 			dot:related <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> ;
+		], [
+			schema:name \\"More data\\" ;
+			dot:linktext \\"links.md#More data\\" ;
+			dot:related <http://example.org/note/links.md> ;
 		] ;
 	] .
 
