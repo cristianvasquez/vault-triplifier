@@ -7,32 +7,35 @@ import { canvasToRDF } from './src/canvas-to-RDF.js'
 import { markdownToRDF } from './src/markdown-to-RDF.js'
 
 function fromTermMapper (termMapper) {
-  function toRDF (contents, context, options) {
 
+  function populatePointer (contents, context, options) {
     const { path } = context
-
     if (!path) {
       throw Error('Requires a path')
     }
-
     const term = termMapper.pathToUri(path)
     const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
 
     try {
       if (path.endsWith('.canvas')) {
         const json = shouldParse(contents) ? JSON.parse(contents) : contents
-        canvasToRDF(json, { termMapper, pointer, path }, options)
+        return canvasToRDF(json, { termMapper, pointer, path }, options)
       } else if (path.endsWith('.md')) {
-        markdownToRDF(contents, { termMapper, pointer, path }, options)
+        return markdownToRDF(contents, { termMapper, pointer, path }, options)
+      } else {
+        console.log('I don\'t know how to triplify', path)
+        return pointer
       }
     } catch (error) {
       console.log('could not triplify', path)
       console.error(error)
+      return pointer
     }
+  }
 
-    postProcess({ termMapper, pointer }, options)
-
-    return pointer
+  function toRDF (contents, context, options) {
+    const pointer = populatePointer(contents, context, options)
+    return pointer ? postProcess({ termMapper, pointer }, options) : pointer
   }
 
   return toRDF

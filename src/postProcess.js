@@ -1,5 +1,4 @@
 import ns from './namespaces.js'
-import rdf from './rdf-ext.js'
 import { getNameFromPath } from './strings/uris.js'
 
 function postProcess ({ pointer, termMapper }, options) {
@@ -18,6 +17,7 @@ function postProcess ({ pointer, termMapper }, options) {
     }
 
   }
+  return pointer
 }
 
 function addWikipath (pointer, term, termMapper) {
@@ -30,7 +30,8 @@ function addWikipath (pointer, term, termMapper) {
 }
 
 function addLabel (pointer, term, uriMinter, func = (x) => x) {
-  const hasLabel = (term) => !!pointer.node(term).out(ns.schema.name).terms.length
+  const hasLabel = (term) => !!pointer.node(term).
+    out(ns.schema.name).terms.length
   if (uriMinter.belongs(term) && !hasLabel(term)) {
     const label = uriMinter.toValue(term)
     pointer.node(term).addOut(ns.schema.name, func(label))

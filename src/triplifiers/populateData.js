@@ -1,6 +1,6 @@
-import ns from '../namespaces.js'
 import rdf from '../rdf-ext.js'
 import { isValidUrl } from '../strings/uris.js'
+import { reservedProperties } from './specialData.js'
 
 function maybeLink (str, { knownLinks, pointer }, options) {
 
@@ -59,37 +59,40 @@ function populateInline (data, context, options) {
 const literalLike = (value) => typeof value === 'string' || typeof value ===
   'boolean' || typeof value === 'number'
 
+
 function populateYamlLike (data, context, options) {
   const { pointer, termMapper, knownLinks } = context
 
   for (const [key, value] of Object.entries(data)) {
 
-    const predicate = createPredicate(key, context, options)
+    if (!reservedProperties.has(key)) {
+      const predicate = createPredicate(key, context, options)
 
-    if (literalLike(value)) {
-      const object = isValidUrl(`${value}`)
-        ? rdf.namedNode(`${value}`)
-        : createObject(`${value}`, context, options)
-      pointer.addOut(predicate, object)
-    } else if (Array.isArray(value) && value.length) {
+      if (literalLike(value)) {
+        const object = isValidUrl(`${value}`)
+          ? rdf.namedNode(`${value}`)
+          : createObject(`${value}`, context, options)
+        pointer.addOut(predicate, object)
+      } else if (Array.isArray(value) && value.length) {
 
-      value.forEach(x => {
-        if (literalLike(x)) {
-          const literal = createObject(x, context, options)
-          pointer.addOut(predicate, literal)
-        } else {
-          const uri = rdf.blankNode()
-          pointer.addOut(predicate, uri)
-          populateYamlLike(value,
-            { pointer: pointer.node(uri), termMapper, knownLinks }, options)
-        }
-      })
-    } else if (typeof value === 'object' && value !== null && value !==
-      undefined) {
-      const uri = rdf.blankNode()
-      pointer.addOut(predicate, uri)
-      populateYamlLike(value,
-        { pointer: pointer.node(uri), termMapper, knownLinks }, options)
+        value.forEach(x => {
+          if (literalLike(x)) {
+            const literal = createObject(x, context, options)
+            pointer.addOut(predicate, literal)
+          } else {
+            const uri = rdf.blankNode()
+            pointer.addOut(predicate, uri)
+            populateYamlLike(value,
+              { pointer: pointer.node(uri), termMapper, knownLinks }, options)
+          }
+        })
+      } else if (typeof value === 'object' && value !== null && value !==
+        undefined) {
+        const uri = rdf.blankNode()
+        pointer.addOut(predicate, uri)
+        populateYamlLike(value,
+          { pointer: pointer.node(uri), termMapper, knownLinks }, options)
+      }
     }
   }
 

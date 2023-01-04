@@ -1,5 +1,6 @@
 import { simpleAst } from 'docs-and-graphs'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
+import { peekUri } from './triplifiers/specialData.js'
 
 const defaultOptions = {
   splitOnTag: false,
@@ -12,9 +13,11 @@ const defaultOptions = {
 
 function markdownToRDF (fullText, { termMapper, pointer, path }, options = {}) {
 
-  const json = simpleAst(fullText, { normalize: true, inlineAsArray: true })
-  return astTriplifier(json, {
-    pointer, termMapper, path,
+  const node = simpleAst(fullText, { normalize: true, inlineAsArray: true })
+
+  const maybeUri = peekUri(node)
+  return astTriplifier(node, {
+    pointer: maybeUri ? pointer.node(maybeUri) : pointer, termMapper, path,
   }, { ...defaultOptions, ...options })
 
 }

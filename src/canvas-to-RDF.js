@@ -6,7 +6,7 @@ const defaultOptions = {
 
 function canvasToRDF (json, { termMapper, pointer, path }, options = {}) {
 
-  canvasTriplifier(json, {
+  return canvasTriplifier(json, {
     pointer, termMapper, path,
   }, { ...defaultOptions, ...options })
 
