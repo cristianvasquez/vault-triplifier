@@ -54,7 +54,7 @@ function canvasTriplifier (canvas, context, options) {
   for (const edge of edges) {
     const { fromNode, toNode, label } = edge
     const s = nodeMap.get(fromNode.id)
-    const p = termMapper.maybeMapped(label) ??
+    const p = termMapper.maybeMapped(label, context) ??
       termMapper.newProperty(label, options)
     const o = nodeMap.get(toNode.id)
     pointer.node(s).out(p, o)

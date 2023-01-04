@@ -8,7 +8,7 @@ function createTermMapper ({
   const pathUriMinter = new SimpleUriMinter(`${baseNamespace().value}note/`)
   const propertyUriMinter = new SimpleUriMinter(`${baseNamespace().value}property/`)
 
-  const maybeMapped = (txt) => customMapper ? customMapper(txt) : undefined
+  const maybeMapped = (txt, context) => customMapper ? customMapper(txt, context) : undefined
 
   // returns: NamedNode
   function pathToUri (path) {

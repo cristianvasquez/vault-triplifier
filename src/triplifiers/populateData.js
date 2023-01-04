@@ -19,14 +19,16 @@ function maybeLink (str, { knownLinks, pointer }, options) {
   }
 }
 
-function createPredicate (str, { pointer, termMapper, knownLinks }, options) {
-  return termMapper.maybeMapped(str) ??
+function createPredicate (str, context, options) {
+  const { pointer, termMapper, knownLinks } = context
+  return termMapper.maybeMapped(str, context) ??
     maybeLink(str, { pointer, knownLinks }, options) ??
     termMapper.newProperty(str, options)
 }
 
-function createObject (str, { pointer, termMapper, knownLinks }, options) {
-  return termMapper.maybeMapped(str) ??
+function createObject (str, context, options) {
+  const { pointer, termMapper, knownLinks } = context
+  return termMapper.maybeMapped(str, context) ??
     maybeLink(str, { pointer, knownLinks }, options) ??
     termMapper.newLiteral(str, options)
 }

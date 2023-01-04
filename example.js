@@ -7,9 +7,15 @@ import { createTriplifier } from './index.js'
 const dir = './test/markdown/'
 
 // Optional function to map strings to URIs
-const customMapper = (str) => {
+const customMapper = (str, context) => {
+  // It's of the form schema::name
+  if (str.split(':').length === 2) {
+    const [vocabulary, property] = str.split(':')
+    return ns[vocabulary][property]
+  }
+
   const values = {
-    'is a': ns.rdf.type, 'are': ns.rdf.type, 'ex:knows': ns.ex.knows,
+    'is a': ns.rdf.type,
   }
   return values [str]
 }
