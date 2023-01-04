@@ -11,7 +11,7 @@ const customMapper = (str, context) => {
   // It's of the form schema::name
   if (str.split(':').length === 2) {
     const [vocabulary, property] = str.split(':')
-    return ns[vocabulary][property]
+    return ns[vocabulary] ? ns[vocabulary][property] : undefined
   }
 
   const values = {
@@ -24,7 +24,7 @@ const triplifier = await createTriplifier(dir, {
   baseNamespace: ns.ex, customMapper,
 })
 
-for (const file of triplifier.vault.getFiles()) {
+for (const file of triplifier.vault.getCanvasFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRDF(text, { path: file },

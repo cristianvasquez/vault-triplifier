@@ -53,11 +53,13 @@ function canvasTriplifier (canvas, context, options) {
   // Add edges
   for (const edge of edges) {
     const { fromNode, toNode, label } = edge
-    const s = nodeMap.get(fromNode.id)
+
+    const s = nodeMap.get(fromNode)
     const p = termMapper.maybeMapped(label, context) ??
       termMapper.newProperty(label, options)
-    const o = nodeMap.get(toNode.id)
-    pointer.node(s).out(p, o)
+    const o = nodeMap.get(toNode)
+
+    pointer.node(s).addOut(p, o)
   }
 
   // All the nodes that are not contained somewhere will hang from the canvas itself
