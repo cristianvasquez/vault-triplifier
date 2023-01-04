@@ -1,6 +1,6 @@
 import rdf from '../rdf-ext.js'
 
-class UriMinter {
+class Base64UriMinter {
   constructor (stringBase) {
     this.namespace = rdf.namespace(stringBase)
   }
@@ -26,4 +26,30 @@ class UriMinter {
 
 }
 
-export { UriMinter }
+class SimpleUriMinter {
+  constructor (stringBase) {
+    this.namespace = rdf.namespace(stringBase)
+  }
+
+  toUri (value) {
+    return this.namespace[encodeURI(value)]
+  }
+
+  toValue (term) {
+    if (!this.belongs(term)) {
+      return undefined
+    }
+
+    const withoutBase = term.value.replace(
+      new RegExp(`^${this.namespace().value}`), '')
+    return decodeURI(withoutBase)
+  }
+
+  belongs (term) {
+    return term.termType === 'NamedNode' &&
+      term.value.startsWith(this.namespace().value)
+  }
+
+}
+
+export { Base64UriMinter, SimpleUriMinter }

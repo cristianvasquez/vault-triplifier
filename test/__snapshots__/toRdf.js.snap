@@ -9,74 +9,74 @@ exports[`splitOnHeader splitOnHeader:false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> ;
 	schema:name \\"Alison\\" .
 
 "
@@ -91,88 +91,88 @@ exports[`splitOnHeader splitOnHeader:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> ;
 	schema:name \\"Alison\\" .
 
 "
@@ -187,106 +187,106 @@ exports[`splitOnHeader splitOnHeader:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
 	], [
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 			schema:name \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 			schema:name \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 			schema:name \\"Charlie\\" ;
 		] ;
 		schema:name \\"People\\" ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> ;
 	schema:name \\"Alison\\" .
 
 "
@@ -301,59 +301,59 @@ exports[`splitOnHeader splitOnHeader:true includeWikiPaths:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
 	], [
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 			schema:name \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 			schema:name \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 			schema:name \\"Charlie\\" ;
 		] ;
 		schema:name \\"People\\" ;
@@ -361,60 +361,60 @@ ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>,
 		dot:linktext \\"file.md#People\\" ;
 		dot:contains [
 			dot:linktext \\"file.md#Alice\\" ;
-			<http://my-vault.org/property/YWdl> \\"37\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+			<http://my-vault.org/property/age> \\"37\\" ;
+			<http://my-vault.org/property/name> \\"Alice\\" ;
 		], [
 			dot:linktext \\"file.md#Bob\\" ;
-			<http://my-vault.org/property/YWdl> \\"42\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+			<http://my-vault.org/property/age> \\"42\\" ;
+			<http://my-vault.org/property/name> \\"Bob\\" ;
 		], [
 			dot:linktext \\"file.md#Charlie\\" ;
-			<http://my-vault.org/property/bmFtZQ==> \\"Charlie\\" ;
+			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> ;
 	schema:name \\"Alison\\" .
 
 "
@@ -429,67 +429,67 @@ exports[`splitOnId splitOnId:false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -503,73 +503,73 @@ exports[`splitOnId splitOnId:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> .
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -583,74 +583,74 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=>, <http://my-vault.org/note/QWxpc29uLm1k> ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md>, <http://my-vault.org/note/Alison.md> ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 <http://example.org/file/alice> dot:linktext \\"file.md#Alice\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpc29uLm1k> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alison.md> ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:linktext \\"file.md#Alison\\" ;
-	<http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> ;
+	<http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> ;
 	schema:name \\"Alison\\" .
 
 "
@@ -665,44 +665,44 @@ exports[`splitOnTag splitOnTag:false 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -716,54 +716,54 @@ exports[`splitOnTag splitOnTag:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -777,66 +777,66 @@ exports[`splitOnTag splitOnTag:true addLabels:true 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 	], [
 		dot:linktext \\"file.md#Alice\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"37\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Alice\\" ;
+		<http://my-vault.org/property/age> \\"37\\" ;
+		<http://my-vault.org/property/name> \\"Alice\\" ;
 		schema:name \\"Alice\\" ;
 	], [
 		dot:linktext \\"file.md#Bob\\" ;
 		dot:tag \\"person\\" ;
-		<http://my-vault.org/property/YWdl> \\"42\\" ;
-		<http://my-vault.org/property/bmFtZQ==> \\"Bob\\" ;
+		<http://my-vault.org/property/age> \\"42\\" ;
+		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	] ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\", \\"37\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\", \\"37\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" ;
-	<http://my-vault.org/property/bmFtZQ==> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
+	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -850,23 +850,23 @@ exports[`toRDF BlockIds 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
 "
 `;
@@ -880,43 +880,43 @@ exports[`toRDF Inline fields 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] ;
-	<http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6'\\" .
+	<http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6'\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
-<http://my-vault.org/property/c3ViamVjdA==> <http://my-vault.org/property/aW5saW5l> \\"field\\" ;
-	<http://my-vault.org/property/KipUaG91Z2h0cyoq> \\"It was decent.\\" ;
-	<http://my-vault.org/property/KipSYXRpbmcqKg==> \\"6\\" .
+<http://my-vault.org/property/subject> <http://my-vault.org/property/inline> \\"field\\" ;
+	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
+	<http://my-vault.org/property/**Rating**> \\"6\\" .
 
-<http://my-vault.org/property/VG9v> <http://my-vault.org/property/bWFueQ==> \\"inline\\" .
+<http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-<http://my-vault.org/note/Qm9iLm1k> <http://my-vault.org/property/Zm9hZjprbm93cw==> <http://my-vault.org/note/QWxpY2UubWQ=> .
+<http://my-vault.org/note/Bob.md> <http://my-vault.org/property/foaf:knows> <http://my-vault.org/note/Alice.md> .
 
 "
 `;
@@ -930,8 +930,8 @@ exports[`toRDF Links 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> .
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> .
 
 "
 `;
@@ -945,8 +945,8 @@ exports[`toRDF Outline 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> .
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> .
 
 "
 `;
@@ -960,25 +960,25 @@ exports[`toRDF People 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\" .
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\" .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
 "
 `;
@@ -1006,32 +1006,32 @@ exports[`toRDF Yaml 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/bGluayAxLm1k>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQ=>, <http://my-vault.org/note/L2Z1bGwvcGF0aC9saW5rIDEubWQubWQ=>, <http://example.com>, <http://my-vault.org/note/bGluayAxIC5tZA==>, <http://my-vault.org/note/ZmlsZS5tZC9wcm90b2NvbA==>, <https://example2.com> ;
-	<http://my-vault.org/property/aGFzIGltYWdl> <http://my-vault.org/note/aG91c2VzL2ltZy5wbmc=> ;
+ex:file dot:related <https://example-2.com/something>, <https://example-2.com/>, <http://my-vault.org/note/link%201.md>, <http://my-vault.org/note//full/path/link%201.md>, <http://my-vault.org/note//full/path/link%201.md.md>, <http://example.com>, <http://my-vault.org/note/link%201%20.md>, <http://my-vault.org/note/file.md/protocol>, <https://example2.com> ;
+	<http://my-vault.org/property/has%20image> <http://my-vault.org/note/houses/img.png> ;
 	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 4\\" ;
+	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\" ;
-	<http://my-vault.org/property/bnVtYmVy> \\"42\\" ;
-	<http://my-vault.org/property/YWdl> \\"42\\", \\"56\\" ;
-	<http://my-vault.org/property/ZGF0ZSB1cGRhdGVk> \\"2021-08-05T17:10:34+02:00\\" ;
-	<http://my-vault.org/property/b25l> \\"Two\\", [
-		<http://my-vault.org/property/MA==> \\"Two\\" ;
-		<http://my-vault.org/property/MQ==> [
-			<http://my-vault.org/property/VGhyZWU=> \\"Other\\" ;
+	<http://my-vault.org/property/number> \\"42\\" ;
+	<http://my-vault.org/property/age> \\"42\\", \\"56\\" ;
+	<http://my-vault.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
+	<http://my-vault.org/property/one> \\"Two\\", [
+		<http://my-vault.org/property/0> \\"Two\\" ;
+		<http://my-vault.org/property/1> [
+			<http://my-vault.org/property/Three> \\"Other\\" ;
 		] ;
 	] .
 
-<http://example.org/file/1> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjIubWQ=> ;
+<http://example.org/file/1> dot:related <http://my-vault.org/note/Bob%20Details#%5E2.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 1\\" .
+	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related <http://my-vault.org/note/Qm9iIERldGFpbHMjXjMgLm1k> ;
+<http://example.org/file/2> dot:related <http://my-vault.org/note/Bob%20Details#%5E3%20.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 2\\" .
+	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related <http://my-vault.org/note/VW5rbm93biNeMS5tZA==> ;
+<http://example.org/file/3> dot:related <http://my-vault.org/note/Unknown#%5E1.md> ;
 	dot:linktext \\"file.md#Section\\" ;
-	<http://my-vault.org/property/ZGVzY3JpcHRpb24=> \\"Section 3\\" .
+	<http://my-vault.org/property/description> \\"Section 3\\" .
 
 "
 `;
