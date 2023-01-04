@@ -13,11 +13,9 @@ exports[`triplify examples Alice.md 1`] = `
 	dot:contains [
 		schema:name \\"Alice\\" ;
 		dot:linktext \\"Alice.md#Alice\\" ;
-		<http://example.org/property/is%20a> <http://example.org/note/Person.md> ;
+		rdf:type <http://example.org/note/Person.md> ;
 		dot:related <http://example.org/note/Ice%20cream.md> ;
 	] .
-
-<http://example.org/property/is%20a> schema:name \\"is a\\" .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" .
 
@@ -113,7 +111,7 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 
 <http://example.org/note/bob/Bob.md> schema:name \\"Bob\\" ;
 	dot:wikipath \\"bob/Bob.md\\" ;
-	<http://example.org/property/ex:details> <http://example.org/note/bob/Bob%20Details.md> ;
+	ex:details <http://example.org/note/bob/Bob%20Details.md> ;
 	<http://example.org/property/lives%20in> <http://example.org/note/houses/BobHouse.md> ;
 	<http://example.org/property/drew> <http://example.org/note/houses/img.png> .
 
@@ -126,7 +124,8 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 <http://example.org/note/Person.md> schema:name \\"Person\\" ;
 	dot:wikipath \\"Person.md\\" .
 
-<http://example.org/property/ex:details> schema:name \\"ex:details\\" .
+ex:friends dot:contains <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob.md> ;
+	<http://example.org/property/Same%20as> <http://example.org/note/Person.md> .
 
 <http://example.org/property/Same%20as> schema:name \\"Same as\\" .
 
@@ -137,11 +136,7 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 <http://example.org/note/Test%20Canvas.canvas> schema:name \\"Test Canvas.canvas\\" ;
 	dot:contains [
 		schema:name \\"Entities\\" ;
-		dot:contains [
-			schema:name \\"People\\" ;
-			dot:contains <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob.md> ;
-			<http://example.org/property/Same%20as> <http://example.org/note/Person.md> ;
-		], <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob%20Details.md>, <http://example.org/note/bob/Bob.md>, <http://example.org/note/Person.md> ;
+		dot:contains <http://example.org/note/Alice.md>, <http://example.org/note/bob/Bob%20Details.md>, <http://example.org/note/bob/Bob.md>, <http://example.org/note/Person.md>, ex:friends ;
 	], <http://example.org/note/houses/BobHouse.md>, [
 		schema:name \\"Resources\\" ;
 		dot:contains <http://example.org/note/houses/img.png> ;
@@ -239,9 +234,9 @@ exports[`triplify examples bob/Bob.md 1`] = `
 	dot:related <http://example.org/note/Link.md>, <http://something.com> ;
 	<http://example.org/property/lives%20in> <http://example.org/note/bob/houses/BobHouse.md> ;
 	<http://example.org/property/has%20details> \\"[Bob Details.md](./bob/Bob Details.md)\\" ;
-	<http://example.org/property/ex:knows> <http://example.org/note/bob/Alice.md> ;
+	ex:knows <http://example.org/note/bob/Alice.md> ;
 	<http://example.org/property/has%20image%201> <http://example.org/note/bob/houses/img.png> ;
-	<http://example.org/property/is%20a> <http://example.org/note/Person.md> ;
+	a <http://example.org/note/Person.md> ;
 	schema:name \\"Bob\\" .
 
 <http://example.org/property/with%20image> schema:name \\"with image\\" .
@@ -256,15 +251,11 @@ exports[`triplify examples bob/Bob.md 1`] = `
 
 <http://example.org/property/has%20details> schema:name \\"has details\\" .
 
-<http://example.org/property/ex:knows> schema:name \\"ex:knows\\" .
-
 <http://example.org/note/bob/Alice.md> schema:name \\"Alice\\" .
 
 <http://example.org/property/has%20image%201> schema:name \\"has image 1\\" .
 
 <http://example.org/note/bob/houses/img.png> schema:name \\"img.png\\" .
-
-<http://example.org/property/is%20a> schema:name \\"is a\\" .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" .
 
@@ -288,7 +279,7 @@ exports[`triplify examples dot triples.md 1`] = `
 			schema:name \\"Alice\\" ;
 			dot:linktext \\"dot triples.md#Alice\\" ;
 			<http://example.org/property/has> \\"37 years old\\" ;
-			<http://example.org/property/ex:knows> <http://example.org/note/Bob.md> ;
+			ex:knows <http://example.org/note/Bob.md> ;
 			dot:related <http://example.org/note/Bob.md>, <http://example.org/note/Alice.md> ;
 		], [
 			schema:name \\"Embedded\\" ;
@@ -299,8 +290,6 @@ exports[`triplify examples dot triples.md 1`] = `
 	] .
 
 <http://example.org/property/has> schema:name \\"has\\" .
-
-<http://example.org/property/ex:knows> schema:name \\"ex:knows\\" .
 
 <http://example.org/note/Bob.md> schema:name \\"Bob\\" .
 
@@ -326,10 +315,8 @@ exports[`triplify examples houses/BobHouse.md 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://example.org/note/houses/BobHouse.md> <http://example.org/property/is%20a> \\"House\\" ;
+<http://example.org/note/houses/BobHouse.md> a \\"House\\" ;
 	schema:name \\"BobHouse\\" .
-
-<http://example.org/property/is%20a> schema:name \\"is a\\" .
 
 "
 `;

@@ -1,7 +1,7 @@
 {
 	"nodes":[
 		{"id":"050cd76ec3a65ab6","x":-1008,"y":-775,"width":1556,"height":1381,"type":"group","label":"Entities"},
-		{"id":"539e02882770ae3f","x":-846,"y":-627,"width":794,"height":1065,"type":"group","label":"People"},
+		{"id":"539e02882770ae3f","x":-846,"y":-627,"width":794,"height":1065,"type":"group","label":"ex:friends"},
 		{"id":"3bd1d3eeab044b9f","x":-651,"y":-53,"width":400,"height":400,"type":"file","file":"Alice.md"},
 		{"id":"04eaff90c42b6d9d","x":85,"y":-573,"width":400,"height":400,"type":"file","file":"bob/Bob Details.md"},
 		{"id":"2f5573fe8b268565","x":-651,"y":-566,"width":400,"height":400,"type":"file","file":"bob/Bob.md"},

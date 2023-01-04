@@ -15,18 +15,23 @@ import {
 
 expect.extend({ toMatchSnapshot })
 
-const context = {
-  termMapper: createTermMapper({
-    baseNamespace: rdf.namespace('http://my-vault.org/'),
-    documentUri: ns.ex.document,
-  }),
-  path: 'file.md',
-  pointer: rdf.clownface({ dataset: rdf.dataset(), term: ns.ex.file }),
+// Optional function to map strings to URIs
+const customMapper = (str, context) => {
+  // It's of the form schema::name
+  if (str.split(':').length === 2) {
+    const [vocabulary, property] = str.split(':')
+    return ns[vocabulary] ? ns[vocabulary][property] : undefined
+  }
+
+  const values = {
+    'is a': ns.rdf.type,
+  }
+  return values [str]
 }
 
 const dir = 'test/markdown'
 const triplifier = await createTriplifier(dir, {
-  baseNamespace: ns.ex,
+  baseNamespace: ns.ex, customMapper,
 })
 
 describe('triplify examples', async function () {

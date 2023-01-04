@@ -21,9 +21,11 @@ function canvasTriplifier (canvas, context, options) {
   // Build URIs
   for (const node of nodes) {
     if (isGroup(node)) {
-      const uri = rdf.blankNode()
-      if (options.addLabels) {
-        pointer.node(uri).addOut(ns.schema.name, rdf.literal(node.label))
+      const { label } = node
+      const maybeUri = termMapper.maybeMapped(label, context)
+      const uri = termMapper.maybeMapped(label, context) ?? rdf.blankNode()
+      if (options.addLabels && !maybeUri) {
+        pointer.node(uri).addOut(ns.schema.name, rdf.literal(label))
       }
       nodeMap.set(node.id, uri)
     } else if (isFile(node)) {
