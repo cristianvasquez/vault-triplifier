@@ -1,4 +1,4 @@
-function isValidUrl (urlString) {
+function isHTTP (urlString) {
   try {
 
     if (!(urlString.startsWith('http'))) {
@@ -22,4 +22,4 @@ function getNameFromPath (filePath) {
     : fileName
 }
 
-export { isValidUrl, pathWithoutTrail, getNameFromPath }
+export { isHTTP, pathWithoutTrail, getNameFromPath }

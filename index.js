@@ -1,10 +1,10 @@
-import { postProcess } from './src/postProcess.js'
+import { canvasToRDF } from './src/canvas-to-RDF.js'
 import { createVaultFromDir } from './src/indexers/vault.js'
+import { markdownToRDF } from './src/markdown-to-RDF.js'
 import ns from './src/namespaces.js'
+import { postProcess } from './src/postProcess.js'
 import rdf from './src/rdf-ext.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
-import { canvasToRDF } from './src/canvas-to-RDF.js'
-import { markdownToRDF } from './src/markdown-to-RDF.js'
 
 function fromTermMapper (termMapper) {
 
@@ -16,21 +16,21 @@ function fromTermMapper (termMapper) {
     const term = termMapper.pathToUri(path)
     const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
 
-    try {
-      if (path.endsWith('.canvas')) {
-        const json = shouldParse(contents) ? JSON.parse(contents) : contents
-        return canvasToRDF(json, { termMapper, pointer, path }, options)
-      } else if (path.endsWith('.md')) {
-        return markdownToRDF(contents, { termMapper, pointer, path }, options)
-      } else {
-        console.log('I don\'t know how to triplify', path)
-        return pointer
-      }
-    } catch (error) {
-      console.log('could not triplify', path)
-      console.error(error)
+    // try {
+    if (path.endsWith('.canvas')) {
+      const json = shouldParse(contents) ? JSON.parse(contents) : contents
+      return canvasToRDF(json, { termMapper, pointer, path }, options)
+    } else if (path.endsWith('.md')) {
+      return markdownToRDF(contents, { termMapper, pointer, path }, options)
+    } else {
+      console.log('I don\'t know how to triplify', path)
       return pointer
     }
+    // } catch (error) {
+    //   console.log('could not triplify', path)
+    //   console.error(error)
+    //   return pointer
+    // }
   }
 
   function toRDF (contents, context, options) {

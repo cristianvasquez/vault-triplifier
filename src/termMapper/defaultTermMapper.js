@@ -1,14 +1,21 @@
 import rdf from '../rdf-ext.js'
 import { SimpleUriMinter } from './uriMinter.js'
 
+const noMapper = (pattern, context) => ({
+  resolvedSubject: undefined, resolvedPredicate: undefined, resolvedObject: undefined,
+})
+
 function createTermMapper ({
   baseNamespace, customMapper, getPathByName,
 }) {
 
   const pathUriMinter = new SimpleUriMinter(`${baseNamespace().value}note/`)
-  const propertyUriMinter = new SimpleUriMinter(`${baseNamespace().value}property/`)
+  const propertyUriMinter = new SimpleUriMinter(
+    `${baseNamespace().value}property/`)
 
-  const maybeMapped = (txt, context) => customMapper ? customMapper(txt, context) : undefined
+  const maybeMapped = (pattern, context) => customMapper
+    ? customMapper(pattern, context)
+    : noMapper(pattern, context)
 
   // returns: NamedNode
   function pathToUri (path) {

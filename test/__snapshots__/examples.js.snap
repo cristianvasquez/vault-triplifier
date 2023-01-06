@@ -103,6 +103,10 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
+ex:friends schema:name \\"ex:friends\\" ;
+	dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
+	<http://example.org/property/Same%20as> <http://example.org/note/Person.md> .
+
 <http://example.org/note/bob/Bob.md> schema:name \\"Bob\\" ;
 	dot:wikipath \\"bob/Bob.md\\" ;
 	ex:details <http://example.org/note/bob/Bob%20Details.md> ;
@@ -124,9 +128,6 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 <http://example.org/note/houses/img.png> schema:name \\"img.png\\" ;
 	dot:wikipath \\"houses/img.png\\" .
 
-ex:friends dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
-	<http://example.org/property/Same%20as> <http://example.org/note/Person.md> .
-
 <http://example.org/property/Same%20as> schema:name \\"Same as\\" .
 
 <http://example.org/property/lives%20in> schema:name \\"lives in\\" .
@@ -136,7 +137,7 @@ ex:friends dot:contains <http://example.org/note/bob/Bob.md>, <http://example.or
 <http://example.org/note/Test%20Canvas.canvas> schema:name \\"Test Canvas.canvas\\" ;
 	dot:contains [
 		schema:name \\"Entities\\" ;
-		dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md>, <http://example.org/note/Person.md>, <http://example.org/note/bob/Bob%20Details.md>, ex:friends ;
+		dot:contains ex:friends, <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md>, <http://example.org/note/Person.md>, <http://example.org/note/bob/Bob%20Details.md> ;
 	], <http://example.org/note/houses/BobHouse.md>, [
 		schema:name \\"Resources\\" ;
 		dot:contains <http://example.org/note/houses/img.png> ;

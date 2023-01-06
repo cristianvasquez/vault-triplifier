@@ -1,15 +1,28 @@
 import ns from '../namespaces.js'
+import { isString } from '../strings/string.js'
 
-const customMapper = (str, context) => {
-  // It's of the form schema::name
-  if (str.split(':').length === 2) {
-    const [vocabulary, property] = str.split(':')
-    return ns[vocabulary] ? ns[vocabulary][property] : undefined
-  }
+const customMapper = ({ subject, predicate, object }, context) => {
 
-  const values = {
-    'is a': ns.rdf.type,
+  return {
+    resolvedSubject: undefined,
+    resolvedPredicate: isString(predicate) ? inspectStr(predicate) : undefined,
+    resolvedObject: isString(object) ? inspectStr(object) : undefined,
   }
-  return values [str]
 }
+
+function inspectStr (predStr) {
+  if (predStr) {
+    // Predicate is of the form schema:name
+    if (predStr.split(':').length === 2) {
+      const [vocabulary, property] = predStr.split(':')
+      return ns[vocabulary] ? ns[vocabulary][property] : undefined
+    }
+
+    const values = {
+      'is a': ns.rdf.type,
+    }
+    return values[predStr]
+  }
+}
+
 export { customMapper }

@@ -22,32 +22,42 @@ function canvasTriplifier (canvas, context, options) {
   for (const node of nodes) {
     if (isGroup(node)) {
       const { label } = node
-      const maybeUri = termMapper.maybeMapped(label, context)
-      const uri = termMapper.maybeMapped(label, context) ?? rdf.blankNode()
-      if (options.addLabels && !maybeUri) {
-        pointer.node(uri).addOut(ns.schema.name, rdf.literal(label))
+
+      const {
+        resolvedObject,
+      } = termMapper.maybeMapped(
+        { subject: pointer.term, predicate: undefined, object: label }, context)
+
+      const o = resolvedObject ?? rdf.blankNode()
+      if (options.addLabels && o) {
+        pointer.node(o).addOut(ns.schema.name, rdf.literal(label))
       }
-      nodeMap.set(node.id, uri)
+
+      nodeMap.set(node.id, o)
     } else if (isFile(node)) {
       const path = node.file
-      const uri = termMapper.pathToUri(path)
+      const o = termMapper.pathToUri(path)
       if (options.addLabels) {
-        pointer.node(uri).
+        pointer.node(o).
           addOut(ns.schema.name, rdf.literal(getNameFromPath(path)))
       }
       if (options.includeWikipaths) {
-        pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(path))
+        pointer.node(o).addOut(ns.dot.wikipath, rdf.literal(path))
       }
-      nodeMap.set(node.id, uri)
+      nodeMap.set(node.id, o)
     }
   }
 
-  // Handle containment
+  // Add containment
   for (const node of nodes.filter(isGroup)) {
     for (const otherNode of nodes) {
       if (contains(node, otherNode)) {
-        pointer.node(nodeMap.get(node.id)).
-          addOut(ns.dot.contains, nodeMap.get(otherNode.id))
+
+        const s = nodeMap.get(node.id)
+        const p = ns.dot.contains
+        const o = nodeMap.get(otherNode.id)
+
+        pointer.node(s).addOut(p, o)
       }
     }
   }
@@ -56,10 +66,24 @@ function canvasTriplifier (canvas, context, options) {
   for (const edge of edges) {
     const { fromNode, toNode, label } = edge
 
-    const s = nodeMap.get(fromNode)
-    const p = termMapper.maybeMapped(label, context) ??
+    const subject = nodeMap.get(fromNode)
+    const object = nodeMap.get(toNode)
+
+    const {
+      resolvedSubject,
+      resolvedPredicate,
+      resolvedObject,
+    } = termMapper.maybeMapped(
+      {
+        subject,
+        predicate: label,
+        object,
+      }, context)
+
+    const s = resolvedSubject ?? subject
+    const p = resolvedPredicate ??
       termMapper.newProperty(label, options)
-    const o = nodeMap.get(toNode)
+    const o = resolvedObject ?? object
 
     pointer.node(s).addOut(p, o)
   }

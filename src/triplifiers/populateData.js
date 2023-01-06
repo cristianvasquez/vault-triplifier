@@ -1,43 +1,69 @@
 import rdf from '../rdf-ext.js'
-import { isValidUrl } from '../strings/uris.js'
+import { isString } from '../strings/string.js'
+import { isHTTP } from '../strings/uris.js'
 import { reservedProperties } from './specialData.js'
 
-function maybeKnownLink (str, { knownLinks, pointer }, options) {
+function maybeKnown (str, { knownLinks, termMapper }, options) {
 
+  // This code smells
   // @TODO this should return a context, a label with the link to be displayed in the UIs
-  const candidateLink = knownLinks.find(link => str.includes(link.value))
-  if (candidateLink) {
+  const knownLink = knownLinks.find(link => str.includes(link.value))
+  if (knownLink) {
+    const { label, uri, wikipath, linktext } = knownLink
 
-    const { label, uri, wikipath, linktext } = candidateLink
+    // console.log('knownLink',knownLink, uri, termMapper.getPathByName(wikipath))
+
     // Added as postprocess
     // if (options.includeWikipaths && wikipath) {
     //   pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))
     // }
-
-    candidateLink.mapped = true
+    knownLink.mapped = true
     return uri
   }
+
+  if (isHTTP(str)) {
+    return rdf.namedNode(str)
+  }
+
 }
 
-function createPredicate (str, context, options) {
-  const { pointer, termMapper, knownLinks } = context
-  return termMapper.maybeMapped(str, context) ??
-    maybeKnownLink(str, { pointer, knownLinks }, options) ??
-    (isValidUrl(str) ? rdf.namedNode(str) : termMapper.newProperty(str,
-      options))
+function onlyIfTerm (term) {
+  return term.termType ? term : undefined
+
 }
 
-function createObject (str, context, options) {
-  const { pointer, termMapper, knownLinks } = context
-  return termMapper.maybeMapped(str, context) ??
-    maybeKnownLink(str, { pointer, knownLinks }, options) ??
-    (isValidUrl(str) ? rdf.namedNode(str) : termMapper.newLiteral(str, options))
-}
+function addTriple (
+  pointer, { subject, predicate, object },
+  context,
+  options) {
+  const { termMapper, knownLinks } = context
 
-function triple (uri, predicateStr, objectStr, context, options) {
-  const predicate = createPredicate(predicateStr, context, options)
-  const object = createObject(objectStr, context, options)
-  return { subject: uri, predicate, object }
+  if (!(isString(object) || object.termType)) {
+    throw Error(JSON.stringify(object, null, 2))
+  }
+
+  const {
+    resolvedSubject,
+    resolvedPredicate,
+    resolvedObject,
+  } = termMapper.maybeMapped({ subject, predicate, object }, context)
+
+  // subject
+  const s = resolvedSubject ?? onlyIfTerm(subject) ??
+    maybeKnown(subject, { termMapper, knownLinks }, options) ??
+    termMapper.newProperty(subject, options)
+
+  // predicate
+  const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
+    maybeKnown(predicate, { termMapper, knownLinks }, options) ??
+    termMapper.newProperty(predicate, options)
+
+  // object
+  const o = resolvedObject ?? onlyIfTerm(object) ??
+    maybeKnown(object, { termMapper, knownLinks }, options) ??
+    termMapper.newLiteral(object, options)
+
+  pointer.node(s).addOut(p, o)
 }
 
 /**
@@ -51,52 +77,65 @@ function populateInline (data, context, options) {
   const { pointer } = context
   if (data.length === 2) {
     const [p, o] = data
-    addTriple(pointer, triple(pointer.term, p, o, context, options))
+    addTriple(pointer,
+      { subject: pointer.term, predicate: p, object: o }, context,
+      options)
+
   } else if (data.length > 2) {
     const [s, p, o] = data
-    const uri = createPredicate(s, context, options)
-    addTriple(pointer, triple(uri, p, o, context, options))
+    addTriple(pointer,
+      { subject: s, predicate: p, object: o },
+      context, options)
   }
 }
 
-function addTriple (pointer, triple) {
-  const { subject, predicate, object } = triple
-  pointer.node(subject).addOut(predicate, object)
+function asLiteralLike (value) {
+  if (typeof value === 'string' || typeof value ===
+    'boolean' || typeof value === 'number') {
+    return `${value}`
+  }
 }
-
-const literalLike = (value) => typeof value === 'string' || typeof value ===
-  'boolean' || typeof value === 'number'
 
 function populateYamlLike (data, context, options) {
   const { pointer, termMapper, knownLinks } = context
 
-  for (const [key, value] of Object.entries(data)) {
+  for (const [predicate, value] of Object.entries(data)) {
 
-    if (!reservedProperties.has(key)) {
+    const object = asLiteralLike(value)
+    if (!reservedProperties.has(predicate)) {
+      if (object) {
 
-      if (literalLike(value)) {
         addTriple(pointer,
-          triple(pointer.term, key, `${value}`, context, options))
+          { subject: pointer.term, predicate, object },
+          context, options)
+
       } else if (Array.isArray(value) && value.length) {
         value.forEach(x => {
-          if (literalLike(x)) {
+
+          const object = asLiteralLike(x)
+          if (object) {
+
             addTriple(pointer,
-              triple(pointer.term, key, `${x}`, context, options))
+              { subject: pointer.term, predicate, object },
+              context, options)
+
           } else {
             const uri = rdf.blankNode()
-            const predicate = createPredicate(key, context, options)
-            pointer.addOut(predicate, uri)
+            addTriple(pointer,
+              { subject: pointer.term, predicate, object:uri },
+              context, options)
             populateYamlLike(value,
               { pointer: pointer.node(uri), termMapper, knownLinks }, options)
           }
         })
       } else if (typeof value === 'object' && value !== null && value !==
         undefined) {
-        const uri = rdf.blankNode()
-        const predicate = createPredicate(key, context, options)
-        pointer.addOut(predicate, uri)
+        const subject = rdf.blankNode()
+        addTriple(pointer,
+          { subject:pointer.term, predicate, object: subject },
+          context, options)
         populateYamlLike(value,
-          { pointer: pointer.node(uri), termMapper, knownLinks }, options)
+          { pointer: pointer.node(subject), termMapper, knownLinks }, options)
       }
     }
   }
