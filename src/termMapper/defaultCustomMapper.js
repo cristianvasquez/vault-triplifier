@@ -1,7 +1,22 @@
 import ns from '../namespaces.js'
 import { isString } from '../strings/string.js'
 
+// function isImage (term) {
+//   return term.termType &&
+//     (term.value.endsWith('png') || term.value.endsWith('jpg'))
+// }
+
 const customMapper = ({ subject, predicate, object }, context) => {
+
+  // Just an example of custom mapper
+  // @TODO clearly separate term mappers and semantic mappers
+  // if (isImage(object)) {
+  //   return {
+  //     resolvedSubject: undefined,
+  //     resolvedPredicate: ns.schema.image,
+  //     resolvedObject: object,
+  //   }
+  // }
 
   return {
     resolvedSubject: undefined,

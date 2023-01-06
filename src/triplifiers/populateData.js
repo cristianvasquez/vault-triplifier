@@ -103,39 +103,38 @@ function populateYamlLike (data, context, options) {
 
     const object = asLiteralLike(value)
     if (!reservedProperties.has(predicate)) {
+      // Handle literals
       if (object) {
-
         addTriple(pointer,
           { subject: pointer.term, predicate, object },
           context, options)
-
+        // Handle arrays
       } else if (Array.isArray(value) && value.length) {
         value.forEach(x => {
-
           const object = asLiteralLike(x)
           if (object) {
-
             addTriple(pointer,
               { subject: pointer.term, predicate, object },
               context, options)
-
           } else {
-            const uri = rdf.blankNode()
+            const childUri = rdf.blankNode()
             addTriple(pointer,
-              { subject: pointer.term, predicate, object:uri },
+              { subject: pointer.term, predicate, object: childUri },
               context, options)
             populateYamlLike(value,
-              { pointer: pointer.node(uri), termMapper, knownLinks }, options)
+              { pointer: pointer.node(childUri), termMapper, knownLinks },
+              options)
           }
         })
+        // Handle Objects
       } else if (typeof value === 'object' && value !== null && value !==
         undefined) {
-        const subject = rdf.blankNode()
+        const childUri = rdf.blankNode()
         addTriple(pointer,
-          { subject:pointer.term, predicate, object: subject },
+          { subject: pointer.term, predicate, object: childUri },
           context, options)
         populateYamlLike(value,
-          { pointer: pointer.node(subject), termMapper, knownLinks }, options)
+          { pointer: pointer.node(childUri), termMapper, knownLinks }, options)
       }
     }
   }
