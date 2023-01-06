@@ -2,7 +2,7 @@ import rdf from '../rdf-ext.js'
 import { isValidUrl } from '../strings/uris.js'
 import { reservedProperties } from './specialData.js'
 
-function maybeLink (str, { knownLinks, pointer }, options) {
+function maybeKnownLink (str, { knownLinks, pointer }, options) {
 
   // @TODO this should return a context, a label with the link to be displayed in the UIs
   const candidateLink = knownLinks.find(link => str.includes(link.value))
@@ -22,15 +22,22 @@ function maybeLink (str, { knownLinks, pointer }, options) {
 function createPredicate (str, context, options) {
   const { pointer, termMapper, knownLinks } = context
   return termMapper.maybeMapped(str, context) ??
-    maybeLink(str, { pointer, knownLinks }, options) ??
-    termMapper.newProperty(str, options)
+    maybeKnownLink(str, { pointer, knownLinks }, options) ??
+    (isValidUrl(str) ? rdf.namedNode(str) : termMapper.newProperty(str,
+      options))
 }
 
 function createObject (str, context, options) {
   const { pointer, termMapper, knownLinks } = context
   return termMapper.maybeMapped(str, context) ??
-    maybeLink(str, { pointer, knownLinks }, options) ??
-    termMapper.newLiteral(str, options)
+    maybeKnownLink(str, { pointer, knownLinks }, options) ??
+    (isValidUrl(str) ? rdf.namedNode(str) : termMapper.newLiteral(str, options))
+}
+
+function triple (uri, predicateStr, objectStr, context, options) {
+  const predicate = createPredicate(predicateStr, context, options)
+  const object = createObject(objectStr, context, options)
+  return { subject: uri, predicate, object }
 }
 
 /**
@@ -44,23 +51,21 @@ function populateInline (data, context, options) {
   const { pointer } = context
   if (data.length === 2) {
     const [p, o] = data
-    populate(pointer.term, p, o)
+    addTriple(pointer, triple(pointer.term, p, o, context, options))
   } else if (data.length > 2) {
     const [s, p, o] = data
-    populate(createPredicate(s, context, options), p, o)
+    const uri = createPredicate(s, context, options)
+    addTriple(pointer, triple(uri, p, o, context, options))
   }
+}
 
-  function populate (sTerm, p, o) {
-    const pTerm = createPredicate(p, context, options)
-    const oTerm = createObject(o, context, options)
-    pointer.node(sTerm).addOut(pTerm, oTerm)
-  }
-
+function addTriple (pointer, triple) {
+  const { subject, predicate, object } = triple
+  pointer.node(subject).addOut(predicate, object)
 }
 
 const literalLike = (value) => typeof value === 'string' || typeof value ===
   'boolean' || typeof value === 'number'
-
 
 function populateYamlLike (data, context, options) {
   const { pointer, termMapper, knownLinks } = context
@@ -68,21 +73,18 @@ function populateYamlLike (data, context, options) {
   for (const [key, value] of Object.entries(data)) {
 
     if (!reservedProperties.has(key)) {
-      const predicate = createPredicate(key, context, options)
 
       if (literalLike(value)) {
-        const object = isValidUrl(`${value}`)
-          ? rdf.namedNode(`${value}`)
-          : createObject(`${value}`, context, options)
-        pointer.addOut(predicate, object)
+        addTriple(pointer,
+          triple(pointer.term, key, `${value}`, context, options))
       } else if (Array.isArray(value) && value.length) {
-
         value.forEach(x => {
           if (literalLike(x)) {
-            const literal = createObject(x, context, options)
-            pointer.addOut(predicate, literal)
+            addTriple(pointer,
+              triple(pointer.term, key, `${x}`, context, options))
           } else {
             const uri = rdf.blankNode()
+            const predicate = createPredicate(key, context, options)
             pointer.addOut(predicate, uri)
             populateYamlLike(value,
               { pointer: pointer.node(uri), termMapper, knownLinks }, options)
@@ -91,6 +93,7 @@ function populateYamlLike (data, context, options) {
       } else if (typeof value === 'object' && value !== null && value !==
         undefined) {
         const uri = rdf.blankNode()
+        const predicate = createPredicate(key, context, options)
         pointer.addOut(predicate, uri)
         populateYamlLike(value,
           { pointer: pointer.node(uri), termMapper, knownLinks }, options)

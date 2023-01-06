@@ -1,5 +1,10 @@
 function isValidUrl (urlString) {
   try {
+
+    if (!(urlString.startsWith('http'))) {
+      return false
+    }
+
     return Boolean(new URL(urlString))
   } catch (e) {
     return false
