@@ -1,6 +1,6 @@
 import { once } from 'events'
 import pkg from 'glob'
-import { pathWithoutTrail, getNameFromPath } from '../strings/uris.js'
+import { getNameFromPath, pathWithoutTrail } from '../strings/uris.js'
 
 const { Glob } = pkg
 
@@ -40,9 +40,15 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   }
 
   // Should work with .md and without
+  // /bob/note
+  // /bob/note.md
+  // note
+  // note.md
   function getPathByName (noteMD, activePath) {
-    if (namesPaths.has(noteMD)) {
-      const [path] = namesPaths.get(noteMD)
+
+    const name = getNameFromPath(noteMD)
+    if (namesPaths.has(name)) {
+      const [path] = [...namesPaths.get(name)]
       return { path: pathWithoutTrail(path) }
     }
   }

@@ -14,12 +14,12 @@ exports[`triplify examples Alice.md 1`] = `
 		schema:name \\"Alice\\" ;
 		dot:linktext \\"Alice.md#Alice\\" ;
 		rdf:type <http://example.org/note/Person.md> ;
-		dot:related <http://example.org/note/Ice%20cream.md> ;
+		dot:related [
+			schema:name \\"Ice cream\\" ;
+		] ;
 	] .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" .
-
-<http://example.org/note/Ice%20cream.md> schema:name \\"Ice cream\\" .
 
 "
 `;
@@ -40,7 +40,7 @@ exports[`triplify examples People.md 1`] = `
 		dot:contains [
 			schema:name \\"Alice\\" ;
 			dot:linktext \\"People.md#Alice\\" ;
-			<http://example.org/property/foaf:knows> <http://example.org/note/Alison.md> ;
+			<http://example.org/property/foaf:knows> _:b21 ;
 		], [
 			schema:name \\"Alison\\" ;
 			dot:linktext \\"People.md#Alison\\" ;
@@ -49,8 +49,6 @@ exports[`triplify examples People.md 1`] = `
 	] .
 
 <http://example.org/property/foaf:knows> schema:name \\"foaf:knows\\" .
-
-<http://example.org/note/Alison.md> schema:name \\"Alison\\" .
 
 <http://example.org/note/Alice.md> schema:name \\"Alice\\" .
 
@@ -160,6 +158,7 @@ exports[`triplify examples Yaml.md 1`] = `
 	<http://example.org/property/togs> \\"cats\\", \\"dogs\\" ;
 	<http://example.org/property/one> \\"pepe\\", \\"carlos\\" ;
 	<http://example.org/property/an-uri> <http://some-uri.com> ;
+	<http://example.org/property/hello> \\"world\\" ;
 	schema:name \\"Yaml\\" .
 
 <http://example.org/property/date%20updated> schema:name \\"date updated\\" .
@@ -169,6 +168,8 @@ exports[`triplify examples Yaml.md 1`] = `
 <http://example.org/property/one> schema:name \\"one\\" .
 
 <http://example.org/property/an-uri> schema:name \\"an-uri\\" .
+
+<http://example.org/property/hello> schema:name \\"hello\\" .
 
 "
 `;
@@ -182,7 +183,7 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" ;
+<http://example.org/note/bob/Bob%20Details.md> schema:name \\" Pointer to section 3\\" ;
 	dot:contains [
 		schema:name \\"More details about Bob\\" ;
 		dot:linktext \\"bob/Bob Details.md#More details about Bob\\" ;
@@ -190,18 +191,20 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 1\\" ;
-			<http://example.org/property/somewhat%20related> <http://example.org/note/Bob%20Details.md> ;
-			<http://example.org/property/points%20to%20the%20document> <http://example.org/note/Bob%20Details.md> ;
+			<http://example.org/property/somewhat%20related> <http://example.org/note/bob/Bob%20Details.md> ;
+			<http://example.org/property/points%20to%20the%20document> <http://example.org/note/bob/Bob%20Details.md> ;
 		], [
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 2\\" ;
-			dot:related <http://example.org/note/Bob%20Details.md> ;
+			dot:related <http://example.org/note/bob/Bob%20Details.md> ;
 		], [
 			schema:name \\"Section\\" ;
 			dot:linktext \\"bob/Bob Details.md#Section\\" ;
 			<http://example.org/property/description> \\"Section 3\\" ;
-			dot:related <http://example.org/note/Unknown.md> ;
+			dot:related [
+				schema:name \\"Unknown#^1\\" ;
+			] ;
 		] ;
 	] .
 
@@ -209,11 +212,7 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 
 <http://example.org/property/somewhat%20related> schema:name \\"somewhat related\\" .
 
-<http://example.org/note/Bob%20Details.md> schema:name \\" Pointer to section 3\\" .
-
 <http://example.org/property/points%20to%20the%20document> schema:name \\"points to the document\\" .
-
-<http://example.org/note/Unknown.md> schema:name \\"Unknown\\" .
 
 "
 `;
@@ -227,34 +226,86 @@ exports[`triplify examples bob/Bob.md 1`] = `
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
 
-<http://example.org/note/bob/Bob.md> <http://example.org/property/with%20image> <http://example.org/note/img.png.md> ;
-	dot:related <http://example.org/note/Link.md>, <http://something.com> ;
-	<http://example.org/property/lives%20in> <http://example.org/note/bob/houses/BobHouse.md> ;
-	<http://example.org/property/has%20details> \\"[Bob Details.md](./bob/Bob Details.md)\\" ;
-	ex:knows <http://example.org/note/bob/Alice.md> ;
-	<http://example.org/property/has%20image%201> <http://example.org/note/bob/houses/img.png> ;
-	a <http://example.org/note/Person.md> ;
-	schema:name \\"Bob\\" .
+<http://example.org/note/bob/Bob.md> <http://example.org/property/with%20image> <http://example.org/note/houses/img.png> ;
+	dot:related [
+		schema:name \\"Link\\" ;
+	], <http://something.com> ;
+	schema:name \\"Bob\\" ;
+	<http://example.org/property/lives%20in> <http://example.org/note/houses/BobHouse.md> ;
+	<http://example.org/property/has%20details> <http://example.org/note/bob/Bob%20Details.md> ;
+	ex:knows <http://example.org/note/Alice.md> ;
+	<http://example.org/property/has%20image%201> <http://example.org/note/houses/img.png> ;
+	a <http://example.org/note/Person.md> .
 
 <http://example.org/property/with%20image> schema:name \\"with image\\" .
 
-<http://example.org/note/img.png.md> schema:name \\"img.png\\" .
-
-<http://example.org/note/Link.md> schema:name \\"Link\\" .
+<http://example.org/note/houses/img.png> schema:name \\"img.png\\" .
 
 <http://example.org/property/lives%20in> schema:name \\"lives in\\" .
 
-<http://example.org/note/bob/houses/BobHouse.md> schema:name \\"BobHouse\\" .
+<http://example.org/note/houses/BobHouse.md> schema:name \\"BobHouse\\" .
 
 <http://example.org/property/has%20details> schema:name \\"has details\\" .
 
-<http://example.org/note/bob/Alice.md> schema:name \\"Alice\\" .
+<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" .
+
+<http://example.org/note/Alice.md> schema:name \\"Alice\\" .
 
 <http://example.org/property/has%20image%201> schema:name \\"has image 1\\" .
 
-<http://example.org/note/bob/houses/img.png> schema:name \\"img.png\\" .
-
 <http://example.org/note/Person.md> schema:name \\"Person\\" .
+
+"
+`;
+
+exports[`triplify examples bob/links.md 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://dottriples.org/> .
+@prefix mark: <http://markdown.org/> .
+
+<http://example.org/note/bob/links.md> schema:name \\"links\\" ;
+	dot:contains [
+		schema:name \\"Links\\" ;
+		dot:linktext \\"bob/links.md#Links\\" ;
+		dot:contains [
+			schema:name \\"Produce two simple links\\" ;
+			dot:linktext \\"bob/links.md#Produce two simple links\\" ;
+			dot:related <http://web1.org>, <http://web2.org> ;
+		], [
+			schema:name \\"Alias\\" ;
+			dot:linktext \\"bob/links.md#Alias\\" ;
+			dot:related <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> ;
+		], [
+			schema:name \\"More data\\" ;
+			dot:linktext \\"bob/links.md#More data\\" ;
+			dot:related <http://example.org/note/bob/links.md>, <http://example.org/note/houses/img.png>, <http://example.org/note/dot%20triples.md>, <http://example.org/note/bob/Bob%20Details.md>, <http://example.com>, [
+				schema:name \\"Alias 1\\" ;
+			], [
+				schema:name \\"link 1\\" ;
+			], <http://example2.com>, <http://example3.com>, [
+				schema:name \\"here\\" ;
+			] ;
+			<http://example.org/property/has%20image> <http://example.org/note/houses/img.png> ;
+		] ;
+	] .
+
+<https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> schema:name \\"1954\\" .
+
+<http://example.org/property/has%20image> schema:name \\"has image\\" .
+
+<http://example.org/note/houses/img.png> schema:name \\"img.png\\" .
+
+<http://example.org/note/dot%20triples.md> schema:name \\"dot triples\\" .
+
+<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" .
+
+<http://example.com> schema:name \\"Alias 2\\" .
+
+<http://example3.com> schema:name \\"here\\" .
 
 "
 `;
@@ -276,8 +327,8 @@ exports[`triplify examples dot triples.md 1`] = `
 			schema:name \\"Alice\\" ;
 			dot:linktext \\"dot triples.md#Alice\\" ;
 			<http://example.org/property/has> \\"37 years old\\" ;
-			ex:knows <http://example.org/note/Bob.md> ;
-			dot:related <http://example.org/note/Bob.md>, <http://example.org/note/Alice.md> ;
+			ex:knows <http://example.org/note/bob/Bob.md> ;
+			dot:related <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
 		], [
 			schema:name \\"Embedded\\" ;
 			dot:linktext \\"dot triples.md#Embedded\\" ;
@@ -288,7 +339,7 @@ exports[`triplify examples dot triples.md 1`] = `
 
 <http://example.org/property/has> schema:name \\"has\\" .
 
-<http://example.org/note/Bob.md> schema:name \\"Bob\\" .
+<http://example.org/note/bob/Bob.md> schema:name \\"Bob\\" .
 
 <http://example.org/note/Alice.md> schema:name \\"Alice\\" .
 
@@ -326,38 +377,5 @@ exports[`triplify examples houses/img.png 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://dottriples.org/> .
 @prefix mark: <http://markdown.org/> .
-"
-`;
-
-exports[`triplify examples links.md 1`] = `
-"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema: <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
-
-<http://example.org/note/links.md> schema:name \\"links\\" ;
-	dot:contains [
-		schema:name \\"Links\\" ;
-		dot:linktext \\"links.md#Links\\" ;
-		dot:contains [
-			schema:name \\"Produce two simple links\\" ;
-			dot:linktext \\"links.md#Produce two simple links\\" ;
-			dot:related <http://web2.org>, <http://web1.org> ;
-		], [
-			schema:name \\"Alias\\" ;
-			dot:linktext \\"links.md#Alias\\" ;
-			dot:related <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> ;
-		], [
-			schema:name \\"More data\\" ;
-			dot:linktext \\"links.md#More data\\" ;
-			dot:related <http://example.org/note/links.md> ;
-		] ;
-	] .
-
-<https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> schema:name \\"1954\\" .
-
 "
 `;

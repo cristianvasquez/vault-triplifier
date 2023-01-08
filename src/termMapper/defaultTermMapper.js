@@ -2,7 +2,9 @@ import rdf from '../rdf-ext.js'
 import { SimpleUriMinter } from './uriMinter.js'
 
 const noMapper = (pattern, context) => ({
-  resolvedSubject: undefined, resolvedPredicate: undefined, resolvedObject: undefined,
+  resolvedSubject: undefined,
+  resolvedPredicate: undefined,
+  resolvedObject: undefined,
 })
 
 function createTermMapper ({
@@ -44,7 +46,7 @@ function createTermMapper ({
     pathToUri,
     pathUriMinter,
     propertyUriMinter,
-    getPathByName: getPathByName ? getPathByName.path : (x) => `${x}.md`,
+    getPathByName,
   }
 
 }

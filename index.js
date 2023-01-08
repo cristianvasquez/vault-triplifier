@@ -51,6 +51,7 @@ async function createTriplifier (dir, options = {}) {
     vault,
     customMapper: options.customMapper,
     baseNamespace: options.baseNamespace ?? ns.ex.vault,
+    getPathByName: vault.getPathByName,
   })
 
   return {

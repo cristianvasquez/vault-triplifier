@@ -11,10 +11,12 @@ function isHTTP (urlString) {
   }
 }
 
+// ./hello -> hello
 function pathWithoutTrail (path) {
   return path.startsWith('./') ? path.replace(/^.\//, '') : path
 }
 
+// /foo/bar/name.md -> name
 function getNameFromPath (filePath) {
   const fileName = filePath.split('/').slice(-1)[0]
   return fileName.endsWith('.md')

@@ -1,55 +1,65 @@
 import { resolve } from 'path'
 import rdf from '../rdf-ext.js'
-import { isHTTP, pathWithoutTrail } from '../strings/uris.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({
-    value, alias, ...getUri({ type, value }, context),
+    value, alias, ...populateLink({ type, value }, context),
   }))
 }
 
-function getUri ({ type, value }, context) {
-  const { termMapper } = context
-
-  // Normal URL
-  if (isHTTP(value)) {
-    return { uri: rdf.namedNode(value) }
-  } else if (type === 'wikiLink') {
-
-    // Link-text
-    if (value.startsWith('#')) {
-      return {
-        uri: termMapper.pathToUri(context.path),
-        wikipath: context.path,
-        // linktext: `${context.path}${value}`,
-        label: value,
-      }
-    }
-
-    const val = value.split('#').length === 1 ? value : value.split('#')[0]
-    // Wiki-links
-    const path = termMapper.getPathByName(val)
-    const normalizedPath = pathWithoutTrail(path)
-    if (path) {
-      return {
-        uri: termMapper.pathToUri(normalizedPath),
-        linktext: value,
-        // wikipath: normalizedPath,
-        label: value,
-      }
-    } else {
-      return { uri: rdf.blankNode() }
-    }
-  }
-
-  // Relative links
-  const resolvedPath = context.path
-    ? `.${resolve('/', context.path, value)}`
-    : value
-  const normalizedPath = pathWithoutTrail(resolvedPath)
+function getSplit (value) {
+  const [head, ...tail] = value.split('#')
   return {
-    uri: termMapper.pathToUri(normalizedPath), wikipath: normalizedPath,
+    head: head.length ? head : undefined,
+    selector: tail.length ? tail.join('#') : undefined,
   }
+}
+
+function activePath (path) {
+  const split = path.split('/')
+  return split.length === 1 ? split[0] : split.slice(0, -1).
+    join('/')
+}
+
+function resolvePath (activePath, head) {
+  if (!activePath) {
+    return head
+  }
+  return resolve('/', activePath, head).replace(/^\//, '')
+}
+
+function populateLink ({ type, value }, context) {
+  const { termMapper } = context
+  if (type === 'external') {
+    return { uri: rdf.namedNode(value) }
+  }
+
+  const { head, selector } = getSplit(value)
+
+  // [[#hello]]
+  if (!head) {
+    return {
+      uri: termMapper.pathToUri(context.path),
+      wikipath: context.path,
+      selector,
+    }
+  }
+
+  const resolvedPath = head.startsWith('.')
+    ? resolvePath(activePath(context.path), head)
+    : head
+
+  // Wiki-links
+  const maybePath = termMapper.getPathByName
+    ? termMapper.getPathByName(resolvedPath, activePath(context.path))
+    : resolvedPath
+
+  return {
+    uri: maybePath && maybePath.path ? termMapper.pathToUri(maybePath.path): rdf.blankNode(),
+    wikipath: resolvedPath,
+    selector,
+  }
+
 }
 
 export { getKnownLinks }
