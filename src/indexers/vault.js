@@ -6,14 +6,6 @@ const { Glob } = pkg
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
-async function createVaultFromObsidian (app) {
-  return {
-    getPathByName: (
-      noteMD, activePath) => app.metadataCache.getFirstLinkpathDest(noteMD,
-      activePath),
-  }
-}
-
 async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   const namesPaths = new Map()
   const { files, directories } = await index()
@@ -67,4 +59,4 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
 
 }
 
-export { createVaultFromDir, createVaultFromObsidian }
+export { createVaultFromDir }
