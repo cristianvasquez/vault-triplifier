@@ -17,6 +17,8 @@ function pathWithoutTrail (path) {
 }
 
 // /foo/bar/name.md -> name
+// /foo/bar/name -> name
+// /foo/bar/img.png -> img.png
 function getNameFromPath (filePath) {
   const fileName = filePath.split('/').slice(-1)[0]
   return fileName.endsWith('.md')
