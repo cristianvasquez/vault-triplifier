@@ -1,5 +1,5 @@
-import rdf from '../rdf-ext.js'
 import ns from '../namespaces.js'
+import rdf from '../rdf-ext.js'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 
@@ -12,7 +12,8 @@ function astTriplifier (node, context, options) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
   }
 
-  const knownLinks = node.links ? getKnownLinks(node.links, context) : []
+  const knownLinks = (node.links && node.type !== 'code') ? getKnownLinks(
+    node.links, context) : []
 
   for (const data of node.data ?? []) {
     if (Array.isArray(data)) {
