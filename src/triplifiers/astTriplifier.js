@@ -46,7 +46,7 @@ function astTriplifier (node, context, options) {
           addOut(ns.dot.selector, rdf.literal(child.value))
       }
 
-      pointer.addOut(ns.dot.related, childUri)
+      pointer.addOut(ns.dot.contains, childUri)
 
       astTriplifier(child, { ...context, pointer: pointer.node(childUri) },
         options)

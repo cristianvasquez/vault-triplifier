@@ -25,7 +25,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -139,7 +140,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -166,7 +168,9 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
-		dot:related [
+		dot:wikipath \\"file.md\\" ;
+		dot:selector \\"People\\" ;
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -181,8 +185,6 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			dot:selector \\"Charlie\\" ;
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
-		dot:wikipath \\"file.md\\" ;
-		dot:selector \\"People\\" ;
 	] ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
@@ -271,7 +273,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -298,7 +301,9 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
-		dot:related [
+		dot:wikipath \\"file.md\\" ;
+		dot:selector \\"People\\" ;
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -313,10 +318,10 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			dot:selector \\"Charlie\\" ;
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
+	], [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"People\\" ;
-	], [
-		dot:related [
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -334,8 +339,6 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 			schema:name \\"Charlie\\" ;
 		] ;
-		dot:wikipath \\"file.md\\" ;
-		dot:selector \\"People\\" ;
 		schema:name \\"People\\" ;
 	] ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
@@ -425,7 +428,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -452,7 +456,9 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		<http://my-vault.org/property/name> \\"Bob\\" ;
 		schema:name \\"Bob\\" ;
 	], <http://example.org/file/alice>, <http://example.org/file/alison>, [
-		dot:related [
+		dot:wikipath \\"file.md\\" ;
+		dot:selector \\"People\\" ;
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -467,10 +473,10 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			dot:selector \\"Charlie\\" ;
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
+	], [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"People\\" ;
-	], [
-		dot:related [
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -488,11 +494,11 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 			schema:name \\"Charlie\\" ;
 		] ;
-		dot:wikipath \\"file.md\\" ;
-		dot:selector \\"People\\" ;
 		schema:name \\"People\\" ;
 	], [
-		dot:related [
+		dot:wikipath \\"file.md\\" ;
+		dot:selector \\"People\\" ;
+		dot:contains [
 			dot:wikipath \\"file.md\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://my-vault.org/property/age> \\"37\\" ;
@@ -507,8 +513,6 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 			dot:selector \\"Charlie\\" ;
 			<http://my-vault.org/property/name> \\"Charlie\\" ;
 		] ;
-		dot:wikipath \\"file.md\\" ;
-		dot:selector \\"People\\" ;
 	] ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
@@ -597,7 +601,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -701,7 +706,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -813,7 +819,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -927,7 +934,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\", \\"person\\" ;
 	<http://my-vault.org/property/number> \\"42\\" ;
@@ -1004,7 +1012,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -1093,7 +1102,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3>, [
 		dot:wikipath \\"file.md\\" ;
 		dot:selector \\"Alice\\" ;
 		dot:tag \\"person\\" ;
@@ -1196,7 +1206,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
 
@@ -1252,7 +1263,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\" ;
 	<http://my-vault.org/property/number> \\"42\\" ;
@@ -1388,7 +1400,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" ;
 	<http://my-vault.org/property/number> \\"42\\" ;
@@ -1460,7 +1473,8 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		dot:wikipath \\"image.png\\" ;
 	], [
 		dot:wikipath \\"protocol\\" ;
-	], <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
+	] ;
+	dot:contains <http://example.org/file/1>, <http://example.org/file/2>, <http://example.org/file/3> ;
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\", \\"cats\\", \\"dogs\\" ;
 	<http://my-vault.org/property/number> \\"42\\" ;
