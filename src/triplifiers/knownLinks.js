@@ -3,17 +3,17 @@ import rdf from '../rdf-ext.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({
-    type, value, alias, ...populateLink({ type, value }, context),
+    type, value, alias, ...urisAndPaths({ type, value }, context),
   }))
 }
 
-function populateLink ({ type, value }, context) {
+function urisAndPaths ({ type, value }, context) {
   const { termMapper } = context
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
 
-  const { head, selector } = getSplit(value)
+  const { head, selector } = splitHash(value)
 
   // [[#hello]]
   if (!head) {
@@ -43,7 +43,7 @@ function populateLink ({ type, value }, context) {
 
 }
 
-function getSplit (value) {
+function splitHash (value) {
   const [head, ...tail] = value.split('#')
   return {
     head: head.length ? head : undefined,
