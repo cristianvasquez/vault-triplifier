@@ -3,29 +3,8 @@ import rdf from '../rdf-ext.js'
 
 function getKnownLinks (links, context) {
   return links.map(({ type, value, alias }) => ({
-    value, alias, ...populateLink({ type, value }, context),
+    type, value, alias, ...populateLink({ type, value }, context),
   }))
-}
-
-function getSplit (value) {
-  const [head, ...tail] = value.split('#')
-  return {
-    head: head.length ? head : undefined,
-    selector: tail.length ? tail.join('#') : undefined,
-  }
-}
-
-function activePath (path) {
-  const split = path.split('/')
-  return split.length === 1 ? split[0] : split.slice(0, -1).
-    join('/')
-}
-
-function resolvePath (activePath, head) {
-  if (!activePath) {
-    return head
-  }
-  return resolve('/', activePath, head).replace(/^\//, '')
 }
 
 function populateLink ({ type, value }, context) {
@@ -55,11 +34,34 @@ function populateLink ({ type, value }, context) {
     : resolvedPath
 
   return {
-    uri: maybePath && maybePath.path ? termMapper.pathToUri(maybePath.path): rdf.blankNode(),
+    uri: maybePath && maybePath.path
+      ? termMapper.pathToUri(maybePath.path)
+      : rdf.blankNode(),
     wikipath: resolvedPath,
     selector,
   }
 
+}
+
+function getSplit (value) {
+  const [head, ...tail] = value.split('#')
+  return {
+    head: head.length ? head : undefined,
+    selector: tail.length ? tail.join('#') : undefined,
+  }
+}
+
+function activePath (path) {
+  const split = path.split('/')
+  return split.length === 1 ? split[0] : split.slice(0, -1).
+    join('/')
+}
+
+function resolvePath (activePath, head) {
+  if (!activePath) {
+    return head
+  }
+  return resolve('/', activePath, head).replace(/^\//, '')
 }
 
 export { getKnownLinks }

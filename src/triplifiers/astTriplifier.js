@@ -2,10 +2,11 @@ import ns from '../namespaces.js'
 import rdf from '../rdf-ext.js'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
+import { populateLink } from './populateLink.js'
 
 function astTriplifier (node, context, options) {
 
-  const { addLabels } = options
+  const { addLabels, includeWikipaths, includeSelectors } = options
   const { pointer, path } = context
 
   for (const tag of node.tags ?? []) {
@@ -23,31 +24,30 @@ function astTriplifier (node, context, options) {
     }
   }
 
-  for (const { uri, alias, value } of knownLinks.filter(link => !link.mapped)) {
-    pointer.addOut(ns.dot.related, uri)
-    if (addLabels) {
-      if (alias) {
-        pointer.node(uri).addOut(ns.schema.name, alias)
-      } else if (uri.termType === 'BlankNode') {
-        pointer.node(uri).addOut(ns.schema.name, value)
-      }
-    }
-  }
+  knownLinks.filter(link => !link.mapped).
+    forEach(link => populateLink(link, context, options))
 
   for (const child of node.children ?? []) {
     const { shouldSplit, childUri } = handleSplit(child, context, options)
+
     if (shouldSplit) {
+
       if (addLabels && child.value) {
         pointer.node(childUri).addOut(ns.schema.name, rdf.literal(child.value))
       }
 
-      if (options.includeLinktext && path && child.type === 'block') {
-        // This is not the same as a wikipath, it's just a selector
+      if (includeWikipaths && path && child.type === 'block') {
         pointer.node(childUri).
-          addOut(ns.dot.linktext, rdf.literal(`${path}#${child.value}`))
+          addOut(ns.dot.wikipath, rdf.literal(path))
       }
 
-      pointer.addOut(ns.dot.contains, childUri)
+      if (includeSelectors && child.type === 'block') {
+        pointer.node(childUri).
+          addOut(ns.dot.selector, rdf.literal(child.value))
+      }
+
+      pointer.addOut(ns.dot.related, childUri)
+
       astTriplifier(child, { ...context, pointer: pointer.node(childUri) },
         options)
     } else {

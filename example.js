@@ -11,7 +11,7 @@ const triplifier = await createTriplifier(dir, {
   baseNamespace: ns.ex, customMapper,
 })
 
-for (const file of triplifier.vault.getFiles().filter(x=>x.endsWith('links.md'))) {
+for (const file of triplifier.vault.getFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
   const pointer = triplifier.toRDF(text, { path: file },
