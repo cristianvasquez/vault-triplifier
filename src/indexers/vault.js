@@ -37,7 +37,6 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   // note
   // note.md
   function getPathByName (noteMD, activePath) {
-
     const name = getNameFromPath(noteMD)
     if (namesPaths.has(name)) {
       const [path] = [...namesPaths.get(name)]
@@ -45,16 +44,11 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
     }
   }
 
-  const getMarkdownFiles = () => files.filter(x => x.endsWith('.md')).
-    map(pathWithoutTrail)
-
-  const getCanvasFiles = () => files.filter(x => x.endsWith('.canvas')).
-    map(pathWithoutTrail)
-
   const getFiles = () => files.map(pathWithoutTrail)
+  const getDirectories = () => directories.map(pathWithoutTrail)
 
   return {
-    directories, getPathByName, getFiles, getMarkdownFiles, getCanvasFiles,
+    getPathByName, getFiles, getDirectories,
   }
 
 }

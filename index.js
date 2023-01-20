@@ -3,30 +3,38 @@ import { createVaultFromDir } from './src/indexers/vault.js'
 import { markdownToRDF } from './src/markdown-to-RDF.js'
 import { postProcess } from './src/postProcess.js'
 import rdf from './src/rdf-ext.js'
-import {
-  createDefaultCustomMapper,
-} from './src/termMapper/defaultCustomMapper.js'
+import { pathWithoutTrail } from './src/strings/uris.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
 
 const shouldParse = (contents) => (typeof contents === 'string' ||
   contents instanceof String)
 
-async function createTriplifier (dir, options = {}) {
+async function createTriplifier (dir) {
 
   if (!dir) {
     throw Error('Requires a directory')
   }
 
-  const vault = await createVaultFromDir(dir)
+  const { getPathByName, getFiles, getDirectories } = await createVaultFromDir(
+    dir)
 
   const termMapper = createTermMapper({
-    customMapper: options.customMapper ||
-      createDefaultCustomMapper(options.namespaces),
-    getPathByName: vault.getPathByName,
+    getPathByName,
   })
 
+  const getMarkdownFiles = () => getFiles().filter(x => x.endsWith('.md')).
+    map(pathWithoutTrail)
+
+  const getCanvasFiles = () => getFiles().filter(x => x.endsWith('.canvas')).
+    map(pathWithoutTrail)
+
   return {
-    vault, termMapper, toRDF: fromTermMapper(termMapper),
+    getMarkdownFiles,
+    getCanvasFiles,
+    getFiles,
+    getDirectories,
+    termMapper,
+    toRDF: fromTermMapper(termMapper),
   }
 
 }

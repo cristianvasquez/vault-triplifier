@@ -1,6 +1,7 @@
 import ns from '../namespaces.js'
 import rdf from '../rdf-ext.js'
 import { getNameFromPath } from '../strings/uris.js'
+import { getMapper } from '../termMapper/defaultCustomMapper.js'
 
 const isFile = (x) => x.type === 'file'
 const isGroup = (x) => x.type === 'group'
@@ -14,6 +15,7 @@ const contains = (node, otherNode) => {
 function canvasTriplifier (canvas, context, options) {
 
   const { pointer, termMapper, path } = context
+  const maybeMapped = getMapper(options)
 
   const { nodes, edges } = canvas
   const nodeMap = new Map()
@@ -25,7 +27,7 @@ function canvasTriplifier (canvas, context, options) {
 
       const {
         resolvedObject,
-      } = termMapper.maybeMapped(
+      } = maybeMapped(
         { subject: pointer.term, predicate: undefined, object: label }, context)
 
       const o = resolvedObject ?? rdf.blankNode()
@@ -73,7 +75,7 @@ function canvasTriplifier (canvas, context, options) {
       resolvedSubject,
       resolvedPredicate,
       resolvedObject,
-    } = termMapper.maybeMapped(
+    } = maybeMapped(
       {
         subject,
         predicate: label,

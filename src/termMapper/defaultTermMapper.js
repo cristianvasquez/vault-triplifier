@@ -1,11 +1,8 @@
 import rdf from '../rdf-ext.js'
 
 function createTermMapper ({
-  customMapper, getPathByName,
+  getPathByName,
 }) {
-
-  const maybeMapped = (pattern, context) => customMapper ? customMapper(pattern,
-    context) : noMapper(pattern, context)
 
   function pathToUri (txt, options) {
     return toUri(txt, options, 'note/')
@@ -15,8 +12,7 @@ function createTermMapper ({
     return fromUri(term, options, 'note/')
   }
 
-  // To build properties
-  // For example, "has name" -> http://some-vault/has-name
+  // "has name" -> http://some-vault/property/has-name
   function propertyToUri (txt, options) {
     return toUri(txt, options, 'property/')
   }
@@ -34,18 +30,16 @@ function createTermMapper ({
     `${uri.value}/${blockId.replace(/^\^/, '')}`)
 
   return {
-    pathToUri, pathFromUri, propertyToUri, propertyFromUri,
-
-    newLiteral, maybeMapped, blockUri, getPathByName,
+    pathToUri,
+    pathFromUri,
+    propertyToUri,
+    propertyFromUri,
+    newLiteral,
+    blockUri,
+    getPathByName,
   }
 
 }
-
-const noMapper = (pattern, context) => ({
-  resolvedSubject: undefined,
-  resolvedPredicate: undefined,
-  resolvedObject: undefined,
-})
 
 function toUri (txt, options, prefix) {
   const { baseNamespace } = options

@@ -9,13 +9,11 @@ import { prettyPrint } from './support/serialization.js'
 expect.extend({ toMatchSnapshot })
 
 const dir = 'test/markdown'
-const triplifier = await createTriplifier(dir, { namespaces: ns })
-
-const baseNamespace = ns.ex
+const triplifier = await createTriplifier(dir)
 
 describe('triplify examples', async function () {
 
-  for (const file of triplifier.vault.getFiles()) {
+  for (const file of triplifier.getFiles()) {
     it(file, async function () {
 
       const text = await readFile(resolve(dir, file), 'utf8')
@@ -24,7 +22,8 @@ describe('triplify examples', async function () {
           addLabels: true,
           includeWikiPaths: true,
           splitOnHeader: true,
-          baseNamespace,
+          baseNamespace: ns.ex,
+          namespaces: ns,
         })
 
       const pretty = await prettyPrint(pointer.dataset)

@@ -6,19 +6,23 @@ const wellKnown = {
 }
 
 function inspectStr (ns, str) {
-
   if (str && isString(str)) {
     // Predicate is of the form schema:name
     if (ns && str.split(':').length === 2) {
       const [vocabulary, property] = str.split(':')
       return ns[vocabulary] ? ns[vocabulary][property] : undefined
     }
-
     return wellKnown[str]
   }
 }
 
-function createDefaultCustomMapper (namespaces) {
+function getMapper (options) {
+
+  if (options.customMapper) {
+    return options.customMapper
+  }
+
+  const { namespaces } = options
   const resolve = (term) => (term) ? inspectStr(namespaces, term) : undefined
   return ({ subject, predicate, object }, context) => {
     return {
@@ -29,4 +33,4 @@ function createDefaultCustomMapper (namespaces) {
   }
 }
 
-export { createDefaultCustomMapper }
+export { getMapper }

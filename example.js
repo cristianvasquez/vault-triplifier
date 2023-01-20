@@ -6,20 +6,19 @@ import ns from './src/namespaces.js'
 
 const dir = './test/markdown/'
 
-const triplifierOptions = {
+const triplifier = await createTriplifier(dir)
+
+const triplifyOptions = {
   baseNamespace: ns.ex,
-  namespaces: ns,
   addLabels: true,
   includeWikipaths: true,
   splitOnHeader: true,
 }
 
-const triplifier = await createTriplifier(dir)
-
-for (const file of triplifier.vault.getFiles()) {
+for (const file of triplifier.getFiles()) {
   console.log('Processing file:', file)
   const text = await readFile(resolve(dir, file), 'utf8')
-  const pointer = triplifier.toRDF(text, { path: file }, triplifierOptions)
+  const pointer = triplifier.toRDF(text, { path: file }, triplifyOptions)
   console.log(pointer.dataset.toString())
 }
 

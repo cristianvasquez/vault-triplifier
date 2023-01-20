@@ -1,6 +1,7 @@
 import rdf from '../rdf-ext.js'
 import { isString } from '../strings/string.js'
 import { isHTTP } from '../strings/uris.js'
+import { getMapper } from '../termMapper/defaultCustomMapper.js'
 import { reservedProperties } from './specialData.js'
 
 function maybeKnown (str, { knownLinks, termMapper }, options) {
@@ -42,11 +43,12 @@ function addTriple (
     throw Error(JSON.stringify(object, null, 2))
   }
 
+  const maybeMapped = getMapper(options)
   const {
     resolvedSubject,
     resolvedPredicate,
     resolvedObject,
-  } = termMapper.maybeMapped({ subject, predicate, object }, context)
+  } = maybeMapped({ subject, predicate, object }, context)
 
   // subject
   const s = resolvedSubject ?? onlyIfTerm(subject) ??
