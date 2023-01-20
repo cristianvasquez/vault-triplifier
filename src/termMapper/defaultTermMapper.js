@@ -1,33 +1,28 @@
 import rdf from '../rdf-ext.js'
-import { SimpleUriMinter } from './uriMinter.js'
-
-const noMapper = (pattern, context) => ({
-  resolvedSubject: undefined,
-  resolvedPredicate: undefined,
-  resolvedObject: undefined,
-})
 
 function createTermMapper ({
-  baseNamespace, customMapper, getPathByName,
+  customMapper, getPathByName,
 }) {
 
-  const pathUriMinter = new SimpleUriMinter(`${baseNamespace().value}note/`)
-  const propertyUriMinter = new SimpleUriMinter(
-    `${baseNamespace().value}property/`)
+  const maybeMapped = (pattern, context) => customMapper ? customMapper(pattern,
+    context) : noMapper(pattern, context)
 
-  const maybeMapped = (pattern, context) => customMapper
-    ? customMapper(pattern, context)
-    : noMapper(pattern, context)
+  function pathToUri (txt, options) {
+    return toUri(txt, options, 'note/')
+  }
 
-  // returns: NamedNode
-  function pathToUri (path) {
-    return pathUriMinter.toUri(path)
+  function pathFromUri (term, options) {
+    return fromUri(term, options, 'note/')
   }
 
   // To build properties
   // For example, "has name" -> http://some-vault/has-name
-  function newProperty (txt, options) {
-    return propertyUriMinter.toUri(txt)
+  function propertyToUri (txt, options) {
+    return toUri(txt, options, 'property/')
+  }
+
+  function propertyFromUri (term, options) {
+    return fromUri(term, options, 'property/')
   }
 
   function newLiteral (txt, options) {
@@ -39,16 +34,33 @@ function createTermMapper ({
     `${uri.value}/${blockId.replace(/^\^/, '')}`)
 
   return {
-    newLiteral,
-    newProperty,
-    maybeMapped,
-    blockUri,
-    pathToUri,
-    pathUriMinter,
-    propertyUriMinter,
-    getPathByName,
+    pathToUri, pathFromUri, propertyToUri, propertyFromUri,
+
+    newLiteral, maybeMapped, blockUri, getPathByName,
   }
 
+}
+
+const noMapper = (pattern, context) => ({
+  resolvedSubject: undefined,
+  resolvedPredicate: undefined,
+  resolvedObject: undefined,
+})
+
+function toUri (txt, options, prefix) {
+  const { baseNamespace } = options
+  return baseNamespace[`${prefix}${encodeURI(txt)}`]
+}
+
+function fromUri (term, options, prefix) {
+  const { baseNamespace } = options
+  const base = `${baseNamespace().value}${prefix}`
+  const inNamespace = term.value.startsWith(base)
+  if (!inNamespace) {
+    return undefined
+  }
+  const withoutBase = term.value.replace(new RegExp(`^${base}`), '')
+  return decodeURI(withoutBase)
 }
 
 export {

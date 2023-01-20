@@ -51,12 +51,12 @@ function addTriple (
   // subject
   const s = resolvedSubject ?? onlyIfTerm(subject) ??
     maybeKnown(subject, { termMapper, knownLinks }, options) ??
-    termMapper.newProperty(subject, options)
+    termMapper.propertyToUri(subject, options)
 
   // predicate
   const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
     maybeKnown(predicate, { termMapper, knownLinks }, options) ??
-    termMapper.newProperty(predicate, options)
+    termMapper.propertyToUri(predicate, options)
 
   // object
   const o = resolvedObject ?? onlyIfTerm(object) ??

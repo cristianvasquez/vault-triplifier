@@ -1,13 +1,13 @@
 import { resolve } from 'path'
 import rdf from '../rdf-ext.js'
 
-function getKnownLinks (links, context) {
+function getKnownLinks (links, context, options) {
   return links.map(({ type, value, alias }) => ({
-    type, value, alias, ...urisAndPaths({ type, value }, context),
+    type, value, alias, ...urisAndPaths({ type, value }, context, options),
   }))
 }
 
-function urisAndPaths ({ type, value }, context) {
+function urisAndPaths ({ type, value }, context, options) {
   const { termMapper } = context
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
@@ -18,7 +18,7 @@ function urisAndPaths ({ type, value }, context) {
   // [[#hello]]
   if (!head) {
     return {
-      uri: termMapper.pathToUri(context.path),
+      uri: termMapper.pathToUri(context.path, options),
       wikipath: context.path,
       selector,
     }
@@ -35,7 +35,7 @@ function urisAndPaths ({ type, value }, context) {
 
   return {
     uri: maybePath && maybePath.path
-      ? termMapper.pathToUri(maybePath.path)
+      ? termMapper.pathToUri(maybePath.path, options)
       : rdf.blankNode(),
     wikipath: resolvedPath,
     selector,

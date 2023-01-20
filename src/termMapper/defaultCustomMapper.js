@@ -1,43 +1,32 @@
 import ns from '../namespaces.js'
 import { isString } from '../strings/string.js'
 
-// function isImage (term) {
-//   return term.termType &&
-//     (term.value.endsWith('png') || term.value.endsWith('jpg'))
-// }
-
-const customMapper = ({ subject, predicate, object }, context) => {
-
-  // Just an example of custom mapper
-  // @TODO clearly separate term mappers and semantic mappers
-  // if (isImage(object)) {
-  //   return {
-  //     resolvedSubject: undefined,
-  //     resolvedPredicate: ns.schema.image,
-  //     resolvedObject: object,
-  //   }
-  // }
-
-  return {
-    resolvedSubject: undefined,
-    resolvedPredicate: isString(predicate) ? inspectStr(predicate) : undefined,
-    resolvedObject: isString(object) ? inspectStr(object) : undefined,
-  }
+const wellKnown = {
+  'is a': ns.rdf.type,
 }
 
-function inspectStr (predStr) {
-  if (predStr) {
+function inspectStr (ns, str) {
+
+  if (str && isString(str)) {
     // Predicate is of the form schema:name
-    if (predStr.split(':').length === 2) {
-      const [vocabulary, property] = predStr.split(':')
+    if (ns && str.split(':').length === 2) {
+      const [vocabulary, property] = str.split(':')
       return ns[vocabulary] ? ns[vocabulary][property] : undefined
     }
 
-    const values = {
-      'is a': ns.rdf.type,
-    }
-    return values[predStr]
+    return wellKnown[str]
   }
 }
 
-export { customMapper }
+function createDefaultCustomMapper (namespaces) {
+  const resolve = (term) => (term) ? inspectStr(namespaces, term) : undefined
+  return ({ subject, predicate, object }, context) => {
+    return {
+      resolvedSubject: resolve(subject),
+      resolvedPredicate: resolve(predicate),
+      resolvedObject: resolve(object),
+    }
+  }
+}
+
+export { createDefaultCustomMapper }

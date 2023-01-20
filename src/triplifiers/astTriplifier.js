@@ -14,7 +14,7 @@ function astTriplifier (node, context, options) {
   }
 
   const knownLinks = (node.links && node.type !== 'code') ? getKnownLinks(
-    node.links, context) : []
+    node.links, context, options) : []
 
   for (const data of node.data ?? []) {
     if (Array.isArray(data)) {

@@ -376,7 +376,8 @@ exports[`triplify examples dot triples.md 1`] = `
 <http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
 	dot:wikipath \\"Alice\\" .
 
-<http://example.org/property/A> <http://example.org/property/B> \\"C\\" .
+<http://example.org/property/A> schema:name \\"A\\" ;
+	<http://example.org/property/B> \\"C\\" .
 
 <http://example.org/property/B> schema:name \\"B\\" .
 

@@ -1,10 +1,35 @@
 import { canvasToRDF } from './src/canvas-to-RDF.js'
 import { createVaultFromDir } from './src/indexers/vault.js'
 import { markdownToRDF } from './src/markdown-to-RDF.js'
-import ns from './src/namespaces.js'
 import { postProcess } from './src/postProcess.js'
 import rdf from './src/rdf-ext.js'
+import {
+  createDefaultCustomMapper,
+} from './src/termMapper/defaultCustomMapper.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
+
+const shouldParse = (contents) => (typeof contents === 'string' ||
+  contents instanceof String)
+
+async function createTriplifier (dir, options = {}) {
+
+  if (!dir) {
+    throw Error('Requires a directory')
+  }
+
+  const vault = await createVaultFromDir(dir)
+
+  const termMapper = createTermMapper({
+    customMapper: options.customMapper ||
+      createDefaultCustomMapper(options.namespaces),
+    getPathByName: vault.getPathByName,
+  })
+
+  return {
+    vault, termMapper, toRDF: fromTermMapper(termMapper),
+  }
+
+}
 
 function fromTermMapper (termMapper) {
 
@@ -13,10 +38,14 @@ function fromTermMapper (termMapper) {
     if (!path) {
       throw Error('Requires a path')
     }
-    const term = termMapper.pathToUri(path)
+
+    if (!options.baseNamespace) {
+      throw Error('Requires baseNamespace')
+    }
+
+    const term = termMapper.pathToUri(path, options)
     const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
 
-    // try {
     if (path.endsWith('.canvas')) {
       const json = shouldParse(contents) ? JSON.parse(contents) : contents
       return canvasToRDF(json, { termMapper, pointer, path }, options)
@@ -26,11 +55,6 @@ function fromTermMapper (termMapper) {
       console.log('I don\'t know how to triplify', path)
       return pointer
     }
-    // } catch (error) {
-    //   console.log('could not triplify', path)
-    //   console.error(error)
-    //   return pointer
-    // }
   }
 
   function toRDF (contents, context, options) {
@@ -39,25 +63,6 @@ function fromTermMapper (termMapper) {
   }
 
   return toRDF
-}
-
-const shouldParse = (contents) => (typeof contents === 'string' ||
-  contents instanceof String)
-
-async function createTriplifier (dir, options = {}) {
-
-  const vault = await createVaultFromDir(dir)
-  const termMapper = createTermMapper({
-    vault,
-    customMapper: options.customMapper,
-    baseNamespace: options.baseNamespace ?? ns.ex.vault,
-    getPathByName: vault.getPathByName,
-  })
-
-  return {
-    vault, termMapper, toRDF: fromTermMapper(termMapper),
-  }
-
 }
 
 export { fromTermMapper, createTriplifier }

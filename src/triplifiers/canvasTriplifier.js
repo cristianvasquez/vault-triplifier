@@ -36,7 +36,7 @@ function canvasTriplifier (canvas, context, options) {
       nodeMap.set(node.id, o)
     } else if (isFile(node)) {
       const path = node.file
-      const o = termMapper.pathToUri(path)
+      const o = termMapper.pathToUri(path, options)
       if (options.addLabels) {
         pointer.node(o).
           addOut(ns.schema.name, rdf.literal(getNameFromPath(path)))
@@ -82,7 +82,7 @@ function canvasTriplifier (canvas, context, options) {
 
     const s = resolvedSubject ?? subject
     const p = resolvedPredicate ??
-      termMapper.newProperty(label, options)
+      termMapper.propertyToUri(label, options)
     const o = resolvedObject ?? object
 
     pointer.node(s).addOut(p, o)
