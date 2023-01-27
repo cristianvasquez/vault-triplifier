@@ -47,23 +47,7 @@ After running the triplifier, one gets the following RDF data:
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/Alice.md> schema:name "Alice" ;
-       dot:contains [
-                       schema:name "Alice" ;
-                       dot:selector "Alice" ;
-                       schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
-                   ] ;
-       a dot:Note .
-
-_:b4 schema:name "Wozenderlands" ;
-     dot:selector "Wozenderlands" ;
-     a schema:Place ;
-     schema:postalCode "4879" ;
-     schema:streetAddress "5 Wonderland Street" .
-
-<http://example.org/property/loves%20to%20drink%20tea%20with> schema:name "loves to drink tea with" .
-
-<http://example.org/note/WhiteRabbit.md> schema:name "WhiteRabbit" ;
+<http://example.org/note/WhiteRabbit.md> a dot:Note;
      dot:contains [
                      schema:name "White rabbit" ;
                      dot:selector "White rabbit" ;
@@ -73,7 +57,23 @@ _:b4 schema:name "Wozenderlands" ;
                      schema:address _:b4 ;
                      <http://example.org/property/loves%20to%20drink%20tea%20with> <http://example.org/note/Alice.md> ;
                  ] ;
-     a dot:Note .
+     schema:name "WhiteRabbit" .
+
+_:b4 schema:name "Wozenderlands" ;
+     dot:selector "Wozenderlands" ;
+     a schema:Place ;
+     schema:postalCode "4879" ;
+     schema:streetAddress "5 Wonderland Street" .
+
+<http://example.org/note/Alice.md> a dot:Note ;
+                                   dot:contains [
+                                                   schema:name "Alice" ;
+                                                   dot:selector "Alice" ;
+                                                   schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
+                                               ] ;
+                                   schema:name "Alice" .
+
+<http://example.org/property/loves%20to%20drink%20tea%20with> schema:name "loves to drink tea with" .
 ```
 
 Note that the concepts of Alice and the White rabbit are different entities than the Notes.
