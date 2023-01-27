@@ -5,7 +5,7 @@ const wellKnown = {
   'is a': ns.rdf.type,
 }
 
-function inspectStr (ns, str) {
+function inspectNamespaces (ns, str) {
   if (str && isString(str)) {
     // Predicate is of the form schema:name
     if (ns && str.split(':').length === 2) {
@@ -16,10 +16,14 @@ function inspectStr (ns, str) {
   }
 }
 
+function inspectCustomMappings(customMappings, str){
+  return customMappings?customMappings[str]:undefined
+}
+
 function getMapper (options) {
 
   const { namespaces, customMappings } = options
-  const resolve = (str) => customMappings[str] ?? inspectStr(namespaces, str)
+  const resolve = (str) => inspectCustomMappings(customMappings, str) ?? inspectNamespaces(namespaces, str)
   return ({ subject, predicate, object }, context) => {
     return {
       resolvedSubject: resolve(subject),

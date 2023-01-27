@@ -6,8 +6,7 @@ exports[`splitOnHeader splitOnHeader:false 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -121,8 +120,7 @@ exports[`splitOnHeader splitOnHeader:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -254,8 +252,7 @@ exports[`splitOnHeader splitOnHeader:true addLabels:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -409,8 +406,7 @@ exports[`splitOnHeader splitOnHeader:true includeWikiPaths:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -582,8 +578,7 @@ exports[`splitOnId splitOnId:false 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -687,8 +682,7 @@ exports[`splitOnId splitOnId:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -800,8 +794,7 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -915,8 +908,7 @@ exports[`splitOnTag splitOnTag:false 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -993,8 +985,7 @@ exports[`splitOnTag splitOnTag:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1083,8 +1074,7 @@ exports[`splitOnTag splitOnTag:true addLabels:true 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1187,8 +1177,7 @@ exports[`toRDF BlockIds 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1244,8 +1233,7 @@ exports[`toRDF Inline fields 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1321,8 +1309,7 @@ exports[`toRDF Links 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1351,8 +1338,7 @@ exports[`toRDF Outline 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1381,8 +1367,7 @@ exports[`toRDF People 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1440,8 +1425,7 @@ exports[`toRDF YAML-like 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something> .
 
@@ -1454,8 +1438,7 @@ exports[`toRDF Yaml 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	<http://my-vault.org/property/has%20image> _:b29 ;
@@ -1520,8 +1503,7 @@ exports[`toRDF code fence 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:file dot:external <https://example-2.com/>, <https://example-2.com/something> .
 

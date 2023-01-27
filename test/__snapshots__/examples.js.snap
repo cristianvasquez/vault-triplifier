@@ -6,8 +6,7 @@ exports[`triplify examples Alice.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
 	dot:contains [
@@ -31,8 +30,7 @@ exports[`triplify examples People.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/People.md> schema:name \\"People\\" ;
 	dot:contains [
@@ -65,8 +63,7 @@ exports[`triplify examples Person.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" ;
 	dot:contains [
@@ -106,8 +103,7 @@ exports[`triplify examples Test Canvas.canvas 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 ex:friends schema:name \\"ex:friends\\" ;
 	dot:contains <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
@@ -158,8 +154,7 @@ exports[`triplify examples Yaml.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/Yaml.md> dot:tag \\"cats\\", \\"dogs\\" ;
 	<http://example.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
@@ -188,8 +183,7 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/bob/Bob%20Details.md> schema:name \\" Pointer to section 3\\" ;
 	dot:wikipath \\"Bob Details\\" ;
@@ -238,8 +232,7 @@ exports[`triplify examples bob/Bob.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/bob/Bob.md> <http://example.org/property/with%20image> <http://example.org/note/houses/img.png> ;
 	dot:related [
@@ -280,8 +273,7 @@ exports[`triplify examples bob/links.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/bob/links.md> schema:name \\"links\\" ;
 	dot:wikipath \\"bob/links.md\\", \\"links\\" ;
@@ -344,8 +336,7 @@ exports[`triplify examples dot triples.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/dot%20triples.md> schema:name \\"dot triples\\" ;
 	dot:contains [
@@ -394,8 +385,7 @@ exports[`triplify examples houses/BobHouse.md 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 
 <http://example.org/note/houses/BobHouse.md> a \\"House\\" ;
 	schema:name \\"BobHouse\\" .
@@ -409,7 +399,6 @@ exports[`triplify examples houses/img.png 1`] = `
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
-@prefix dot: <http://dottriples.org/> .
-@prefix mark: <http://markdown.org/> .
+@prefix dot: <http://pkm-united.org/> .
 "
 `;
