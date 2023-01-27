@@ -18,12 +18,8 @@ function inspectStr (ns, str) {
 
 function getMapper (options) {
 
-  if (options.customMapper) {
-    return options.customMapper
-  }
-
-  const { namespaces } = options
-  const resolve = (term) => (term) ? inspectStr(namespaces, term) : undefined
+  const { namespaces, customMappings } = options
+  const resolve = (str) => customMappings[str] ?? inspectStr(namespaces, str)
   return ({ subject, predicate, object }, context) => {
     return {
       resolvedSubject: resolve(subject),
