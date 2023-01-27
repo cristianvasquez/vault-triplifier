@@ -6,7 +6,6 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const dir = './example-vault'
-// const dir = './test/markdown'
 
 const triplifier = await createTriplifier(dir)
 
