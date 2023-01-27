@@ -7,8 +7,22 @@ function getKnownLinks (links, context, options) {
   }))
 }
 
+function searchUriBySelector (node, selector) {
+  function traverse (node) {
+    if (node.uri && node.value === selector) {
+      return node.uri
+    }
+    for (const child of node.children ?? []) {
+      const result = traverse(child)
+      if (result) return result
+    }
+  }
+
+  return traverse(node)
+}
+
 function urisAndPaths ({ type, value }, context, options) {
-  const { termMapper } = context
+  const { termMapper, rootNode } = context
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
@@ -17,28 +31,24 @@ function urisAndPaths ({ type, value }, context, options) {
 
   // [[#hello]]
   if (!head) {
+    const maybeUri = searchUriBySelector(rootNode, selector)
     return {
-      uri: termMapper.pathToUri(context.path, options),
+      uri: maybeUri ?? termMapper.pathToUri(context.path, options),
       wikipath: context.path,
       selector,
     }
   }
 
-  const resolvedPath = head.startsWith('.')
-    ? resolvePath(activePath(context.path), head)
-    : head
+  const resolvedPath = head.startsWith('.') ? resolvePath(
+    activePath(context.path), head) : head
 
   // Wiki-links
-  const maybePath = termMapper.getPathByName
-    ? termMapper.getPathByName(resolvedPath, activePath(context.path))
-    : resolvedPath
+  const maybePath = termMapper.getPathByName ? termMapper.getPathByName(
+    resolvedPath, activePath(context.path)) : resolvedPath
 
   return {
-    uri: maybePath && maybePath.path
-      ? termMapper.pathToUri(maybePath.path, options)
-      : rdf.blankNode(),
-    wikipath: resolvedPath,
-    selector,
+    uri: maybePath && maybePath.path ? termMapper.pathToUri(maybePath.path,
+      options) : rdf.blankNode(), wikipath: resolvedPath, selector,
   }
 
 }

@@ -2,8 +2,8 @@
 
 ## Alice ^alice
 
-foaf:knows :: [[Alison]]
+foaf:knows :: [[#Alison]]
 
 ## Alison ^alison
 
-foaf:knows :: [[Alice]]
+foaf:knows :: [[#Alice]]

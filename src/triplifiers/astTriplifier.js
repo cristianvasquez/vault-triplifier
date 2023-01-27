@@ -5,6 +5,25 @@ import { populateInline, populateYamlLike } from './populateData.js'
 import { populateLink } from './populateLink.js'
 
 function astTriplifier (node, context, options) {
+  assignInternalUris(node, context, options)
+  return traverseAst(node, { ...context, rootNode: node }, options)
+}
+
+function assignInternalUris (node, context, options) {
+  function traverse (node, context, options) {
+    for (const child of node.children ?? []) {
+      const { childUri } = handleSplit(child, context, options)
+      if (childUri) {
+        child.uri = childUri
+      }
+      traverse(child, context, options)
+    }
+  }
+
+  traverse(node, context, options)
+}
+
+function traverseAst (node, context, options) {
 
   const { addLabels, includeWikipaths, includeSelectors } = options
   const { pointer, path } = context
@@ -28,30 +47,30 @@ function astTriplifier (node, context, options) {
     forEach(link => populateLink(link, context, options))
 
   for (const child of node.children ?? []) {
-    const { shouldSplit, childUri } = handleSplit(child, context, options)
+    const { shouldSplit } = handleSplit(child, context, options)
 
     if (shouldSplit) {
 
       if (addLabels && child.value) {
-        pointer.node(childUri).addOut(ns.schema.name, rdf.literal(child.value))
+        pointer.node(child.uri).addOut(ns.schema.name, rdf.literal(child.value))
       }
 
       if (includeWikipaths && path && child.type === 'block') {
-        pointer.node(childUri).
+        pointer.node(child.uri).
           addOut(ns.dot.wikipath, rdf.literal(path))
       }
 
       if (includeSelectors && child.type === 'block') {
-        pointer.node(childUri).
+        pointer.node(child.uri).
           addOut(ns.dot.selector, rdf.literal(child.value))
       }
 
-      pointer.addOut(ns.dot.contains, childUri)
+      pointer.addOut(ns.dot.contains, child.uri)
 
-      astTriplifier(child, { ...context, pointer: pointer.node(childUri) },
+      traverseAst(child, { ...context, pointer: pointer.node(child.uri) },
         options)
     } else {
-      astTriplifier(child, context, options)
+      traverseAst(child, context, options)
     }
   }
 
