@@ -3,6 +3,7 @@ import { isString } from '../strings/string.js'
 
 const wellKnown = {
   'is a': ns.rdf.type,
+  'same as': ns.rdf.sameAs,
 }
 
 function inspectNamespaces (ns, str) {
