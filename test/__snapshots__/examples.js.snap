@@ -8,16 +8,18 @@ exports[`triplify examples Alice.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
+<http://example.org/note/Alice.md> dot:wikipath \\"Alice.md\\" ;
+	schema:name \\"Alice\\" ;
 	dot:contains [
-		schema:name \\"Alice\\" ;
 		dot:wikipath \\"Alice.md\\" ;
+		schema:name \\"Alice\\" ;
 		dot:selector \\"Alice\\" ;
 		rdf:type <http://example.org/note/Person.md> ;
 		dot:related [
 			dot:wikipath \\"Ice cream\\" ;
 		] ;
-	] .
+	] ;
+	a dot:Note .
 
 <http://example.org/note/Person.md> schema:name \\"Person\\" .
 
@@ -32,23 +34,25 @@ exports[`triplify examples People.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/People.md> schema:name \\"People\\" ;
+<http://example.org/note/People.md> dot:wikipath \\"People.md\\" ;
+	schema:name \\"People\\" ;
 	dot:contains [
-		schema:name \\"People\\" ;
 		dot:wikipath \\"People.md\\" ;
+		schema:name \\"People\\" ;
 		dot:selector \\"People\\" ;
 		dot:contains <http://example.org/note/People.md/alice>, <http://example.org/note/People.md/alison> ;
-	] .
+	] ;
+	a dot:Note .
 
-<http://example.org/note/People.md/alice> schema:name \\"Alice\\" ;
-	dot:wikipath \\"People.md\\" ;
+<http://example.org/note/People.md/alice> dot:wikipath \\"People.md\\" ;
+	schema:name \\"Alice\\" ;
 	dot:selector \\"Alice\\" ;
 	<http://example.org/property/foaf:knows> <http://example.org/note/People.md/alison> .
 
 <http://example.org/property/foaf:knows> schema:name \\"foaf:knows\\" .
 
-<http://example.org/note/People.md/alison> schema:name \\"Alison\\" ;
-	dot:wikipath \\"People.md\\" ;
+<http://example.org/note/People.md/alison> dot:wikipath \\"People.md\\" ;
+	schema:name \\"Alison\\" ;
 	dot:selector \\"Alison\\" ;
 	<http://example.org/property/foaf:knows> <http://example.org/note/People.md/alice> .
 
@@ -63,30 +67,32 @@ exports[`triplify examples Person.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/Person.md> schema:name \\"Person\\" ;
+<http://example.org/note/Person.md> dot:wikipath \\"Person.md\\" ;
+	schema:name \\"Person\\" ;
 	dot:contains [
-		schema:name \\"Person\\" ;
 		dot:wikipath \\"Person.md\\" ;
+		schema:name \\"Person\\" ;
 		dot:selector \\"Person\\" ;
 		dot:contains <http://example.org/note/Person.md/named>, [
-			schema:name \\"Subsection\\" ;
 			dot:wikipath \\"Person.md\\" ;
+			schema:name \\"Subsection\\" ;
 			dot:selector \\"Subsection\\" ;
 			<http://example.org/property/property> \\"C\\" ;
 		], [
-			schema:name \\"Subsection\\" ;
 			dot:wikipath \\"Person.md\\" ;
+			schema:name \\"Subsection\\" ;
 			dot:selector \\"Subsection\\" ;
 			<http://example.org/property/property> \\"B\\" ;
 			dot:tag \\"person\\" ;
 		] ;
 		<http://example.org/property/description> \\"the class of persons\\" ;
-	] .
+	] ;
+	a dot:Note .
 
 <http://example.org/property/description> schema:name \\"description\\" .
 
-<http://example.org/note/Person.md/named> schema:name \\"Section\\" ;
-	dot:wikipath \\"Person.md\\" ;
+<http://example.org/note/Person.md/named> dot:wikipath \\"Person.md\\" ;
+	schema:name \\"Section\\" ;
 	dot:selector \\"Section\\" ;
 	<http://example.org/property/property> \\"A\\" .
 
@@ -154,12 +160,14 @@ exports[`triplify examples Yaml.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/Yaml.md> dot:tag \\"cats\\", \\"dogs\\" ;
+<http://example.org/note/Yaml.md> dot:wikipath \\"Yaml.md\\" ;
+	dot:tag \\"cats\\", \\"dogs\\" ;
 	<http://example.org/property/date%20updated> \\"2021-08-05T17:10:34+02:00\\" ;
 	<http://example.org/property/togs> \\"cats\\", \\"dogs\\" ;
 	<http://example.org/property/one> \\"pepe\\", \\"carlos\\" ;
 	<http://example.org/property/an-uri> <http://some-uri.com> ;
 	<http://example.org/property/hello> \\"world\\" ;
+	a dot:Note ;
 	schema:name \\"Yaml\\" .
 
 <http://example.org/property/date%20updated> schema:name \\"date updated\\" .
@@ -183,18 +191,19 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/bob/Bob%20Details.md> schema:name \\" Pointer to section 3\\" ;
-	dot:wikipath \\"Bob Details\\" ;
+<http://example.org/note/bob/Bob%20Details.md> dot:wikipath \\"bob/Bob Details.md\\", \\"Bob Details\\" ;
+	schema:name \\" Pointer to section 3\\" ;
 	dot:selector \\"^3 \\" ;
 	dot:contains [
-		schema:name \\"More details about Bob\\" ;
 		dot:wikipath \\"bob/Bob Details.md\\" ;
+		schema:name \\"More details about Bob\\" ;
 		dot:selector \\"More details about Bob\\" ;
 		dot:contains <http://example.org/note/bob/Bob%20Details.md/1>, <http://example.org/note/bob/Bob%20Details.md/2>, <http://example.org/note/bob/Bob%20Details.md/3> ;
-	] .
+	] ;
+	a dot:Note .
 
-<http://example.org/note/bob/Bob%20Details.md/1> schema:name \\"Section\\" ;
-	dot:wikipath \\"bob/Bob Details.md\\" ;
+<http://example.org/note/bob/Bob%20Details.md/1> dot:wikipath \\"bob/Bob Details.md\\" ;
+	schema:name \\"Section\\" ;
 	dot:selector \\"Section\\" ;
 	<http://example.org/property/description> \\"Section 1\\" ;
 	<http://example.org/property/somewhat%20related> <http://example.org/note/bob/Bob%20Details.md> ;
@@ -206,14 +215,14 @@ exports[`triplify examples bob/Bob Details.md 1`] = `
 
 <http://example.org/property/points%20to%20the%20document> schema:name \\"points to the document\\" .
 
-<http://example.org/note/bob/Bob%20Details.md/2> schema:name \\"Section\\" ;
-	dot:wikipath \\"bob/Bob Details.md\\" ;
+<http://example.org/note/bob/Bob%20Details.md/2> dot:wikipath \\"bob/Bob Details.md\\" ;
+	schema:name \\"Section\\" ;
 	dot:selector \\"Section\\" ;
 	<http://example.org/property/description> \\"Section 2\\" ;
 	dot:related <http://example.org/note/bob/Bob%20Details.md> .
 
-<http://example.org/note/bob/Bob%20Details.md/3> schema:name \\"Section\\" ;
-	dot:wikipath \\"bob/Bob Details.md\\" ;
+<http://example.org/note/bob/Bob%20Details.md/3> dot:wikipath \\"bob/Bob Details.md\\" ;
+	schema:name \\"Section\\" ;
 	dot:selector \\"Section\\" ;
 	<http://example.org/property/description> \\"Section 3\\" ;
 	dot:related [
@@ -232,7 +241,8 @@ exports[`triplify examples bob/Bob.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/bob/Bob.md> <http://example.org/property/with%20image> <http://example.org/note/houses/img.png> ;
+<http://example.org/note/bob/Bob.md> dot:wikipath \\"bob/Bob.md\\" ;
+	<http://example.org/property/with%20image> <http://example.org/note/houses/img.png> ;
 	dot:related [
 		dot:wikipath \\"Link\\" ;
 	] ;
@@ -240,7 +250,7 @@ exports[`triplify examples bob/Bob.md 1`] = `
 	<http://example.org/property/has%20details> <http://example.org/note/bob/Bob%20Details.md> ;
 	ex:knows <http://example.org/note/Alice.md> ;
 	<http://example.org/property/has%20image%201> <http://example.org/note/houses/img.png> ;
-	a <http://example.org/note/Person.md> ;
+	a <http://example.org/note/Person.md>, dot:Note ;
 	dot:external <http://something.com> ;
 	schema:name \\"Bob\\" .
 
@@ -273,38 +283,39 @@ exports[`triplify examples bob/links.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/bob/links.md> schema:name \\"links\\" ;
-	dot:wikipath \\"bob/links.md\\", \\"links\\" ;
+<http://example.org/note/bob/links.md> dot:wikipath \\"bob/links.md\\", \\"links\\" ;
+	schema:name \\"links\\" ;
 	dot:selector \\"Alias\\" ;
 	dot:contains [
-		schema:name \\"Links\\" ;
 		dot:wikipath \\"bob/links.md\\" ;
+		schema:name \\"Links\\" ;
 		dot:selector \\"Links\\" ;
 		dot:contains [
-			schema:name \\"Produce two simple links\\" ;
 			dot:wikipath \\"bob/links.md\\" ;
+			schema:name \\"Produce two simple links\\" ;
 			dot:selector \\"Produce two simple links\\" ;
 			dot:external <http://web1.org>, <http://web2.org> ;
 		], _:b13, [
-			schema:name \\"More data\\" ;
 			dot:wikipath \\"bob/links.md\\" ;
+			schema:name \\"More data\\" ;
 			dot:selector \\"More data\\" ;
 			dot:external <http://example.com>, <http://example2.com>, <http://example3.com> ;
 			dot:related <http://example.org/note/bob/links.md>, _:b13, <http://example.org/note/houses/img.png>, <http://example.org/note/dot%20triples.md>, <http://example.org/note/bob/Bob%20Details.md>, [
-				schema:name \\"Alias 1\\" ;
 				dot:wikipath \\"link 1 \\" ;
+				schema:name \\"Alias 1\\" ;
 			], [
 				dot:wikipath \\"link 1\\" ;
 			], [
-				schema:name \\"here\\" ;
 				dot:wikipath \\"protocol\\" ;
+				schema:name \\"here\\" ;
 			] ;
 			<http://example.org/property/has%20image> <http://example.org/note/houses/img.png> ;
 		] ;
-	] .
+	] ;
+	a dot:Note .
 
-_:b13 schema:name \\"Alias\\" ;
-	dot:wikipath \\"bob/links.md\\" ;
+_:b13 dot:wikipath \\"bob/links.md\\" ;
+	schema:name \\"Alias\\" ;
 	dot:selector \\"Alias\\" ;
 	dot:external <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> .
 
@@ -312,14 +323,14 @@ _:b13 schema:name \\"Alias\\" ;
 
 <http://example.org/property/has%20image> schema:name \\"has image\\" .
 
-<http://example.org/note/houses/img.png> schema:name \\"img.png\\" ;
-	dot:wikipath \\"img.png\\" .
+<http://example.org/note/houses/img.png> dot:wikipath \\"img.png\\" ;
+	schema:name \\"img.png\\" .
 
-<http://example.org/note/dot%20triples.md> schema:name \\"dot triples\\" ;
-	dot:wikipath \\"dot triples\\" .
+<http://example.org/note/dot%20triples.md> dot:wikipath \\"dot triples\\" ;
+	schema:name \\"dot triples\\" .
 
-<http://example.org/note/bob/Bob%20Details.md> schema:name \\"Bob Details\\" ;
-	dot:wikipath \\"bob/Bob Details\\" .
+<http://example.org/note/bob/Bob%20Details.md> dot:wikipath \\"bob/Bob Details\\" ;
+	schema:name \\"Bob Details\\" .
 
 <http://example.com> schema:name \\"Alias 2\\" .
 
@@ -336,34 +347,36 @@ exports[`triplify examples dot triples.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/dot%20triples.md> schema:name \\"dot triples\\" ;
+<http://example.org/note/dot%20triples.md> dot:wikipath \\"dot triples.md\\" ;
+	schema:name \\"dot triples\\" ;
 	dot:contains [
-		schema:name \\"Dot triples syntax\\" ;
 		dot:wikipath \\"dot triples.md\\" ;
+		schema:name \\"Dot triples syntax\\" ;
 		dot:selector \\"Dot triples syntax\\" ;
 		dot:contains [
-			schema:name \\"Alice\\" ;
 			dot:wikipath \\"dot triples.md\\" ;
+			schema:name \\"Alice\\" ;
 			dot:selector \\"Alice\\" ;
 			<http://example.org/property/has> \\"37 years old\\" ;
 			ex:knows <http://example.org/note/bob/Bob.md> ;
 			dot:related <http://example.org/note/bob/Bob.md>, <http://example.org/note/Alice.md> ;
 		], [
-			schema:name \\"Embedded\\" ;
 			dot:wikipath \\"dot triples.md\\" ;
+			schema:name \\"Embedded\\" ;
 			dot:selector \\"Embedded\\" ;
 			<http://example.org/property/EA> \\"EB\\" ;
 			<http://example.org/property/EC> \\"ED\\" ;
 		] ;
-	] .
+	] ;
+	a dot:Note .
 
 <http://example.org/property/has> schema:name \\"has\\" .
 
-<http://example.org/note/bob/Bob.md> schema:name \\"Bob\\" ;
-	dot:wikipath \\"Bob\\" .
+<http://example.org/note/bob/Bob.md> dot:wikipath \\"Bob\\" ;
+	schema:name \\"Bob\\" .
 
-<http://example.org/note/Alice.md> schema:name \\"Alice\\" ;
-	dot:wikipath \\"Alice\\" .
+<http://example.org/note/Alice.md> dot:wikipath \\"Alice\\" ;
+	schema:name \\"Alice\\" .
 
 <http://example.org/property/A> schema:name \\"A\\" ;
 	<http://example.org/property/B> \\"C\\" .
@@ -385,7 +398,8 @@ exports[`triplify examples houses/BobHouse.md 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/houses/BobHouse.md> a \\"House\\" ;
+<http://example.org/note/houses/BobHouse.md> dot:wikipath \\"houses/BobHouse.md\\" ;
+	a \\"House\\", dot:Note ;
 	schema:name \\"BobHouse\\" .
 
 "

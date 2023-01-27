@@ -8,7 +8,9 @@ exports[`splitOnHeader splitOnHeader:false 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -69,27 +71,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -122,7 +124,9 @@ exports[`splitOnHeader splitOnHeader:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -201,27 +205,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -254,7 +258,9 @@ exports[`splitOnHeader splitOnHeader:true addLabels:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -355,27 +361,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -408,7 +414,9 @@ exports[`splitOnHeader splitOnHeader:true includeWikiPaths:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -527,27 +535,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -580,7 +588,9 @@ exports[`splitOnId splitOnId:false 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -641,27 +651,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -684,7 +694,9 @@ exports[`splitOnId splitOnId:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -745,27 +757,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -796,7 +808,9 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -857,27 +871,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/foaf:knows> _:b64, _:b65 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -910,7 +924,9 @@ exports[`splitOnTag splitOnTag:false 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -944,27 +960,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -987,7 +1003,9 @@ exports[`splitOnTag splitOnTag:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1033,27 +1051,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1076,7 +1094,9 @@ exports[`splitOnTag splitOnTag:true addLabels:true 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1136,27 +1156,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1179,7 +1199,9 @@ exports[`toRDF BlockIds 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1200,27 +1222,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/description> \\"Section 4\\" ;
 	dot:tag \\"Section\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1235,7 +1257,9 @@ exports[`toRDF Inline fields 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1268,27 +1292,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1311,7 +1335,9 @@ exports[`toRDF Links 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1340,7 +1366,9 @@ exports[`toRDF Outline 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1369,7 +1397,9 @@ exports[`toRDF People 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1392,27 +1422,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 	<http://my-vault.org/property/number> \\"42\\" ;
 	<http://my-vault.org/property/age> \\"42\\", \\"56\\" .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1427,7 +1457,9 @@ exports[`toRDF YAML-like 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something> .
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something> ;
+	a dot:Note .
 
 "
 `;
@@ -1440,7 +1472,9 @@ exports[`toRDF Yaml 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
+	a dot:Note ;
 	<http://my-vault.org/property/has%20image> _:b41 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
@@ -1470,27 +1504,27 @@ ex:file dot:external <https://example-2.com/>, <https://example-2.com/something>
 		] ;
 	] .
 
-<http://example.org/file/1> dot:related [
+<http://example.org/file/1> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^2\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 1\\" .
 
-<http://example.org/file/2> dot:related [
+<http://example.org/file/2> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Bob Details\\" ;
 		dot:selector \\"^3 \\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 2\\" .
 
-<http://example.org/file/3> dot:related [
+<http://example.org/file/3> dot:wikipath \\"file.md\\" ;
+	dot:related [
 		dot:wikipath \\"Unknown\\" ;
 		dot:selector \\"^1\\" ;
 	] ;
-	dot:wikipath \\"file.md\\" ;
 	dot:selector \\"Section\\" ;
 	<http://my-vault.org/property/description> \\"Section 3\\" .
 
@@ -1505,7 +1539,9 @@ exports[`toRDF code fence 1`] = `
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-ex:file dot:external <https://example-2.com/>, <https://example-2.com/something> .
+ex:file dot:wikipath \\"file.md\\" ;
+	dot:external <https://example-2.com/>, <https://example-2.com/something> ;
+	a dot:Note .
 
 "
 `;

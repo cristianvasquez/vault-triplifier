@@ -6,7 +6,9 @@ import { populateLink } from './populateLink.js'
 
 function astTriplifier (node, context, options) {
   assignInternalUris(node, context, options)
-  return traverseAst(node, { ...context, rootNode: node }, options)
+  const pointer = traverseAst(node, { ...context, rootNode: node }, options)
+  pointer.addOut(ns.rdf.type,ns.dot.Note)
+  return pointer
 }
 
 function assignInternalUris (node, context, options) {
@@ -27,6 +29,10 @@ function traverseAst (node, context, options) {
 
   const { addLabels, includeWikipaths, includeSelectors } = options
   const { pointer, path } = context
+
+  if (includeWikipaths) {
+    pointer.addOut(ns.dot.wikipath, rdf.literal(path))
+  }
 
   for (const tag of node.tags ?? []) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
@@ -53,11 +59,6 @@ function traverseAst (node, context, options) {
 
       if (addLabels && child.value) {
         pointer.node(child.uri).addOut(ns.schema.name, rdf.literal(child.value))
-      }
-
-      if (includeWikipaths && path && child.type === 'block') {
-        pointer.node(child.uri).
-          addOut(ns.dot.wikipath, rdf.literal(path))
       }
 
       if (includeSelectors && child.type === 'block') {

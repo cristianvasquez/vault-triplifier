@@ -47,38 +47,36 @@ After running the triplifier, one gets the following RDF data:
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
 
-<http://example.org/note/WhiteRabbit.md> schema:name "WhiteRabbit" ;
-	dot:wikipath "WhiteRabbit" ;
-	dot:contains [
-		schema:name "White rabbit" ;
-		dot:wikipath "WhiteRabbit.md" ;
-		dot:selector "White rabbit" ;
-		dot:contains _:b4 ;
-		rdf:type ex:Rabbit ;
-		schema:address _:b4 ;
-		<http://example.org/property/loves%20to%20drink%20tea%20with> <http://example.org/note/Alice.md> ;
-		schema:image <https://miro.medium.com/max/720/1*HZazTjGg9EBSOoz34IN-tA.jpeg> ;
-	] .
+<http://example.org/note/Alice.md> schema:name "Alice" ;
+                                   dot:contains [
+                                                   schema:name "Alice" ;
+                                                   dot:selector "Alice" ;
+                                                   schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
+                                               ] ;
+                                   a dot:Note .
 
 _:b4 schema:name "Wozenderlands" ;
-	dot:wikipath "WhiteRabbit.md" ;
-	dot:selector "Wozenderlands" ;
-	a schema:Place ;
-	schema:postalCode "4879" ;
-	schema:streetAddress "5 Wonderland Street" .
+     dot:selector "Wozenderlands" ;
+     a schema:Place ;
+     schema:postalCode "4879" ;
+     schema:streetAddress "5 Wonderland Street" .
 
 <http://example.org/property/loves%20to%20drink%20tea%20with> schema:name "loves to drink tea with" .
 
-<http://example.org/note/Alice.md> schema:name "Alice", "Alice" ;
-	dot:wikipath "Alice", "Alice" ;
-	dot:contains [
-		schema:name "Alice" ;
-		dot:wikipath "Alice.md" ;
-		dot:selector "Alice" ;
-		schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
-	] .
+<http://example.org/note/WhiteRabbit.md> schema:name "WhiteRabbit" ;
+                                         dot:contains [
+                                                         schema:name "White rabbit" ;
+                                                         dot:selector "White rabbit" ;
+                                                         schema:image <https://miro.medium.com/max/720/1*HZazTjGg9EBSOoz34IN-tA.jpeg> ;
+                                                         dot:contains _:b4 ;
+                                                         rdf:type ex:Rabbit ;
+                                                         schema:address _:b4 ;
+                                                         <http://example.org/property/loves%20to%20drink%20tea%20with> <http://example.org/note/Alice.md> ;
+                                                     ] ;
+                                         a dot:Note .
 ```
 
+Note that the concepts of Alice and the White rabbit are different entities than the Notes.
 ## Usage
 
 See the [example](./example.js) for details

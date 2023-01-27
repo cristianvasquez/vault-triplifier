@@ -35,31 +35,6 @@ function postProcess ({ pointer, termMapper }, options) {
 
     }
 
-    if (options.includeWikipaths) {
-
-      const hasWikipath = (term) => !!pointer.node(term).
-        out(ns.dot.wikipath).terms.length
-
-      function wikiPathToAdd (term) {
-        if (term.termType !== 'Literal' && !hasWikipath(term)) {
-          const path = termMapper.pathFromUri(term, options)
-          return path ? getNameFromPath(path) : undefined
-        }
-      }
-
-      function addWikiPath (term) {
-        const wikiPath = wikiPathToAdd(term)
-        if (wikiPath) {
-          pointer.node(term).addOut(ns.dot.wikipath, wikiPath)
-        }
-      }
-
-      addWikiPath(quad.subject)
-      addWikiPath(quad.predicate)
-      addWikiPath(quad.object)
-
-    }
-
   }
   return pointer
 }
