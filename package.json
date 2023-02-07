@@ -13,15 +13,15 @@
     "@rdfjs/term-map": "^2.0.0",
     "@rdfjs/term-set": "^2.0.1",
     "clownface": "^1.5.1",
-    "docs-and-graphs": "^0.2.1"
+    "docs-and-graphs": "^0.2.1",
+    "glob": "^8.1.0"
   },
   "devDependencies": {
     "@rdfjs-elements/formats-pretty": "^0.5.1",
     "expect": "^29.3.1",
     "expect-mocha-snapshot": "^2.1.5",
     "mocha": "^10.1.0",
-    "readable-stream": "^4.2.0",
-    "glob": "^8.1.0"
+    "readable-stream": "^4.2.0"
   },
   "repository": {
     "type": "git",
