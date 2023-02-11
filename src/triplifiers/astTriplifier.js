@@ -66,6 +66,7 @@ function traverseAst (node, context, options) {
           addOut(ns.dot.selector, rdf.literal(child.value))
       }
 
+      pointer.node(child.uri).addOut(ns.rdf.type,ns.dot.Block)
       pointer.addOut(ns.dot.contains, child.uri)
 
       traverseAst(child, { ...context, pointer: pointer.node(child.uri) },
