@@ -1,10 +1,13 @@
 import { expect } from 'expect'
 import toMatchSnapshot from 'expect-mocha-snapshot'
+import grapoi from 'grapoi'
+import rdf from 'rdf-ext'
 import { markdownToRDF } from '../src/markdown-to-RDF.js'
 import ns from '../src/namespaces.js'
-import rdf from '../src/rdf-ext.js'
+
 import { createTermMapper } from '../src/termMapper/defaultTermMapper.js'
 import { prettyPrint } from './support/serialization.js'
+
 import {
   allTests,
   splitOnHeaders,
@@ -21,7 +24,7 @@ const context = {
     documentUri: ns.ex.document,
   }),
   path: 'file.md',
-  pointer: rdf.clownface({ dataset: rdf.dataset(), term: ns.ex.file }),
+  pointer: grapoi({ dataset: rdf.dataset(), factory: rdf, term: ns.ex.file }),
 }
 
 describe('toRDF', async function () {

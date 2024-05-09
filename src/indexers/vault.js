@@ -1,8 +1,7 @@
 import { once } from 'events'
-import pkg from 'glob'
+import { glob } from 'glob'
 import { getNameFromPath, pathWithoutTrail } from '../strings/uris.js'
 
-const { Glob } = pkg
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
@@ -18,16 +17,16 @@ async function createVaultFromDir (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
   }
 
   async function index () {
-    const search = new Glob(pattern, {
-      nodir: true, cwd: basePath,
+
+    const files = await glob(pattern, {
+      cwd: basePath, nodir: true,
     })
-    search.on('match', filePath => {
-      addFile(filePath)
-    })
-    const files = (await once(search, 'end'))[0]
-    const directories = (await once(new Glob('**/', {
-      nodir: false, cwd: basePath,
-    }), 'end'))[0].map(dir => `./${dir.slice(0, -1)}`)
+    files.forEach(addFile)
+
+    const directories = (await glob('**/', {
+      cwd: basePath, nodir: false,
+    })).map(dir => `./${dir.slice(0, -1)}`)
+
     return { files, directories }
   }
 

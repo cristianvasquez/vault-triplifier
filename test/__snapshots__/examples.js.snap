@@ -108,6 +108,32 @@ exports[`triplify examples Person.md 1`] = `
 "
 `;
 
+exports[`triplify examples T2.canvas 1`] = `
+"@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://example.org/> .
+@prefix dot: <http://pkm-united.org/> .
+
+_:b10 schema:description \\"\\"\\"## Alice
+
+\\"\\"\\" ;
+	<http://example.org/property/undefined> _:b11 .
+
+_:b11 schema:description \\"## Ice cream\\" .
+
+<http://example.org/property/undefined> schema:name \\"undefined\\" .
+
+<http://example.org/note/T2.canvas> dot:contains [
+		schema:description \\"## Bob\\" ;
+		<http://example.org/property/undefined> _:b10, _:b12 ;
+	], _:b10, _:b11 ;
+	schema:name \\"T2.canvas\\" .
+
+"
+`;
+
 exports[`triplify examples Test Canvas.canvas 1`] = `
 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
@@ -309,13 +335,13 @@ exports[`triplify examples bob/links.md 1`] = `
 			dot:selector \\"Produce two simple links\\" ;
 			rdf:type dot:Block ;
 			dot:external <http://web1.org>, <http://web2.org> ;
-		], _:b13, [
+		], _:b29, [
 			dot:wikipath \\"bob/links.md\\" ;
 			schema:name \\"More data\\" ;
 			dot:selector \\"More data\\" ;
 			rdf:type dot:Block ;
 			dot:external <http://example.com>, <http://example2.com>, <http://example3.com> ;
-			dot:related <http://example.org/note/bob/links.md>, _:b13, <http://example.org/note/houses/img.png>, <http://example.org/note/dot%20triples.md>, <http://example.org/note/bob/Bob%20Details.md>, [
+			dot:related <http://example.org/note/bob/links.md>, _:b29, <http://example.org/note/houses/img.png>, <http://example.org/note/dot%20triples.md>, <http://example.org/note/bob/Bob%20Details.md>, [
 				dot:wikipath \\"link 1 \\" ;
 				schema:name \\"Alias 1\\" ;
 			], [
@@ -328,7 +354,7 @@ exports[`triplify examples bob/links.md 1`] = `
 		] ;
 	] .
 
-_:b13 dot:wikipath \\"bob/links.md\\" ;
+_:b29 dot:wikipath \\"bob/links.md\\" ;
 	schema:name \\"Alias\\" ;
 	dot:selector \\"Alias\\" ;
 	a dot:Block ;

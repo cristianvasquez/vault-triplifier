@@ -1,4 +1,4 @@
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 import { isString } from '../strings/string.js'
 import { isHTTP } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'

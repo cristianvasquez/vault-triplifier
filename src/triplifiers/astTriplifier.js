@@ -1,5 +1,5 @@
 import ns from '../namespaces.js'
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { populateLink } from './populateLink.js'

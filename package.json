@@ -8,20 +8,17 @@
     "test": "mocha --recursive"
   },
   "dependencies": {
-    "@rdfjs/dataset": "^2.0.1",
-    "@rdfjs/namespace": "^2.0.0",
-    "@rdfjs/term-map": "^2.0.0",
-    "@rdfjs/term-set": "^2.0.1",
-    "clownface": "^1.5.1",
-    "docs-and-graphs": "^0.2.2",
-    "glob": "^8.1.0"
+    "docs-and-graphs": "^0.2.4",
+    "glob": "^10.3.14",
+    "grapoi": "^1.1.2",
+    "rdf-ext": "^2.5.1"
   },
   "devDependencies": {
-    "@rdfjs-elements/formats-pretty": "^0.5.1",
-    "expect": "^29.3.1",
+    "@rdfjs-elements/formats-pretty": "^0.6.7",
+    "get-stream": "^9.0.1",
+    "expect": "^29.7.0",
     "expect-mocha-snapshot": "^2.1.5",
-    "mocha": "^10.1.0",
-    "readable-stream": "^4.2.0"
+    "mocha": "^10.4.0"
   },
   "repository": {
     "type": "git",

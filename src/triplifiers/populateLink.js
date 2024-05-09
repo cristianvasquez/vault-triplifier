@@ -1,5 +1,5 @@
 import ns from '../namespaces.js'
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 
 function populateLink (link, context, options) {
   const {

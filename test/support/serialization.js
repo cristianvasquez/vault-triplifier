@@ -1,7 +1,6 @@
-import { turtle } from '@rdfjs-elements/formats-pretty/serializers'
-import ns from '../../src/namespaces.js'
+import { TurtleSerializer } from '@rdfjs-elements/formats-pretty'
 import getStream from 'get-stream'
-import { Readable } from 'readable-stream'
+import ns from '../../src/namespaces.js'
 
 function toPlain (prefixes) {
   const result = {}
@@ -11,44 +10,12 @@ function toPlain (prefixes) {
   return result
 }
 
-function readableFrom (iterable) {
-  let reading = false
-  const iterator = iterable[Symbol.iterator]()
+async function prettyPrint (dataset) {
 
-  const next = () => {
-    try {
-      const { value, done } = iterator.next()
-
-      if (done) {
-        readable.push(null)
-      } else if (readable.push(value)) {
-        next()
-      } else {
-        reading = false
-      }
-    } catch (err) {
-      readable.destroy(err)
-    }
-  }
-
-  const readable = new Readable({
-    objectMode: true, read: () => {
-      if (!reading) {
-        reading = true
-        next()
-      }
-    },
+  const turtleSink = new TurtleSerializer({
+    prefixes: toPlain(ns),
   })
-
-  return readable
-}
-
-async function prettyPrint (dataset, prefixes = ns) {
-  const sink = await turtle({
-    prefixes: toPlain(prefixes),
-  })
-
-  const stream = await sink.import(readableFrom(dataset))
+  const stream = await turtleSink.import(dataset.toStream())
   return await getStream(stream)
 }
 

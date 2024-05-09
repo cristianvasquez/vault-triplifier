@@ -1,4 +1,4 @@
-import rdf from './rdf-ext.js'
+import rdf from 'rdf-ext'
 
 const ns = {
   rdf: rdf.namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#'),

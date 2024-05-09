@@ -1,4 +1,4 @@
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 
 function createTermMapper ({
   getPathByName,

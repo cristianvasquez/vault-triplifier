@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 
 function getKnownLinks (links, context, options) {
   return links.map(({ type, value, alias }) => ({

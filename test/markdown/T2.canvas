@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"type":"text","text":"## Bob","id":"05f8fdf93ab87df8","x":-1541,"y":-1233,"width":250,"height":56},
+		{"type":"text","text":"## Alice\n\n","id":"ccee2d298466cc2d","x":-1081,"y":-1233,"width":250,"height":56},
+		{"type":"text","text":"## Ice cream","id":"e9992f3480f8494f","x":-1081,"y":-1064,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"13c9429dda51bafb","fromNode":"05f8fdf93ab87df8","fromSide":"top","toNode":"69ee38b926932dfa","toSide":"bottom"},
+		{"id":"bd10acd7519ed80a","fromNode":"05f8fdf93ab87df8","fromSide":"right","toNode":"ccee2d298466cc2d","toSide":"left"},
+		{"id":"b2a8d2ae3aed5b9b","fromNode":"ccee2d298466cc2d","fromSide":"bottom","toNode":"e9992f3480f8494f","toSide":"top"}
+	]
+}

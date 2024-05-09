@@ -1,8 +1,9 @@
+import grapoi from 'grapoi'
+import rdf from 'rdf-ext'
 import { canvasToRDF } from './src/canvas-to-RDF.js'
 import { createVaultFromDir } from './src/indexers/vault.js'
 import { markdownToRDF } from './src/markdown-to-RDF.js'
 import { postProcess } from './src/postProcess.js'
-import rdf from './src/rdf-ext.js'
 import { pathWithoutTrail } from './src/strings/uris.js'
 import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
 
@@ -52,7 +53,7 @@ function fromTermMapper (termMapper) {
     }
 
     const term = termMapper.pathToUri(path, options)
-    const pointer = rdf.clownface({ dataset: rdf.dataset(), term })
+    const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term })
 
     if (path.endsWith('.canvas')) {
       const json = shouldParse(contents) ? JSON.parse(contents) : contents

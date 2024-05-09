@@ -1,10 +1,11 @@
 import ns from '../namespaces.js'
-import rdf from '../rdf-ext.js'
+import rdf from 'rdf-ext'
 import { getNameFromPath } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
 
 const isFile = (x) => x.type === 'file'
 const isGroup = (x) => x.type === 'group'
+const isText = (x) => x.type === 'text'
 
 const contains = (node, otherNode) => {
   return (otherNode !== node && otherNode.x >= node.x && otherNode.y >=
@@ -45,6 +46,14 @@ function canvasTriplifier (canvas, context, options) {
       }
       if (options.includeWikipaths) {
         pointer.node(o).addOut(ns.dot.wikipath, rdf.literal(path))
+      }
+      nodeMap.set(node.id, o)
+    } else if (isText(node)){
+      const text = node.text
+      const o = rdf.blankNode()
+      if (options.addLabels) {
+        pointer.node(o).
+          addOut(ns.schema.description, rdf.literal(text))
       }
       nodeMap.set(node.id, o)
     }
@@ -97,6 +106,8 @@ function canvasTriplifier (canvas, context, options) {
       pointer.addOut(ns.dot.contains, uri)
     }
   }
+
+
 
   return pointer
 }
