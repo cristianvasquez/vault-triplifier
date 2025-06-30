@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs and Graphs Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 100vh;
+        }
+
+        .input-panel, .output-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        textarea {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #markdown-input {
+            resize: vertical;
+        }
+
+        #json-output {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="input-panel">
+    <h2>Markdown Input</h2>
+    <textarea id="markdown-input" placeholder="Enter your markdown here...">---
+hello: world
+---
+
+# Heading 1
+
+Some text under Heading 1
+
+Text that has (inline::variables)
+
+## Inline elements
+
+- Tana and logseq likes
+  - embedded nodes</textarea>
+</div>
+
+<div class="output-panel">
+    <h2>JSON AST Output</h2>
+    <textarea id="json-output" readonly></textarea>
+</div>
+
+<script type="importmap">
+    {
+        "imports": {
+            "docs-and-graphs": "../index.js"
+        }
+    }
+</script>
+
+<script type="module">
+
+  import { simpleAst } from './index.js'
+
+  const markdownInput = document.getElementById('markdown-input')
+  const jsonOutput = document.getElementById('json-output')
+
+  function updateOutput () {
+    if (!simpleAst) return
+
+    try {
+      const ast = simpleAst(markdownInput.value, { includePosition: true })
+      jsonOutput.value = JSON.stringify(ast, null, 2)
+    } catch (error) {
+      jsonOutput.value = `Error: ${error.message}`
+    }
+  }
+
+  markdownInput.addEventListener('input', updateOutput)
+
+  // Initial render
+  if (simpleAst) {
+    updateOutput()
+  }
+</script>
+</body>
+</html>

@@ -5,20 +5,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
     "docs-and-graphs": "^0.2.4",
-    "glob": "^10.3.14",
-    "grapoi": "^1.1.2",
-    "rdf-ext": "^2.5.1"
+    "glob": "^11.0.3",
+    "grapoi": "^1.1.3",
+    "rdf-ext": "^2.5.2"
   },
   "devDependencies": {
-    "@rdfjs-elements/formats-pretty": "^0.6.7",
+    "@rdfjs-elements/formats-pretty": "^0.6.8",
     "get-stream": "^9.0.1",
-    "expect": "^29.7.0",
+    "expect": "^30.0.3",
     "expect-mocha-snapshot": "^2.1.5",
-    "mocha": "^10.4.0"
+    "mocha": "^11.7.1",
+    "vite": "^7.0.0"
   },
   "repository": {
     "type": "git",

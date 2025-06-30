@@ -5,10 +5,6 @@ import { createTriplifier } from './index.js'
 import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
-const dir = './example-vault'
-
-const triplifier = await createTriplifier(dir)
-
 const triplifyOptions = {
   customMappings: {
     // Will map an attribute to a known rdf-property
@@ -19,8 +15,11 @@ const triplifyOptions = {
   baseNamespace: ns.ex,
   addLabels: true,
   namespaces: ns,
-  includeWikipaths: false,
+  includeWikipaths: true,
 }
+
+const dir = './example-vault'
+const triplifier = await createTriplifier(dir)
 
 const dataset = rdf.dataset()
 

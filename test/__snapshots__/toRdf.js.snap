@@ -11,7 +11,7 @@ exports[`splitOnHeader splitOnHeader:false 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -72,7 +72,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -108,18 +108,18 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70, _:b72 ;
+	<http://my-vault.org/property/foaf:knows> _:b26, _:b28 ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71, _:b73 ;
+	<http://my-vault.org/property/foaf:knows> _:b27, _:b29 ;
 	schema:name \\"Alison\\" .
 
 "
@@ -136,7 +136,7 @@ exports[`splitOnHeader splitOnHeader:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -219,7 +219,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -255,18 +255,18 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70, _:b72 ;
+	<http://my-vault.org/property/foaf:knows> _:b26, _:b28 ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71, _:b73 ;
+	<http://my-vault.org/property/foaf:knows> _:b27, _:b29 ;
 	schema:name \\"Alison\\" .
 
 "
@@ -283,7 +283,7 @@ exports[`splitOnHeader splitOnHeader:true addLabels:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -392,7 +392,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -428,18 +428,18 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70, _:b72 ;
+	<http://my-vault.org/property/foaf:knows> _:b26, _:b28 ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71, _:b73 ;
+	<http://my-vault.org/property/foaf:knows> _:b27, _:b29 ;
 	schema:name \\"Alison\\" .
 
 "
@@ -456,7 +456,7 @@ exports[`splitOnHeader splitOnHeader:true includeWikiPaths:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -587,7 +587,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -623,18 +623,18 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70, _:b72 ;
+	<http://my-vault.org/property/foaf:knows> _:b26, _:b28 ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71, _:b73 ;
+	<http://my-vault.org/property/foaf:knows> _:b27, _:b29 ;
 	schema:name \\"Alison\\" .
 
 "
@@ -651,7 +651,7 @@ exports[`splitOnId splitOnId:false 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -712,7 +712,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -748,7 +748,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 "
 `;
@@ -764,7 +764,7 @@ exports[`splitOnId splitOnId:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -825,7 +825,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -861,17 +861,17 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70 .
+	<http://my-vault.org/property/foaf:knows> _:b26 .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71 .
+	<http://my-vault.org/property/foaf:knows> _:b27 .
 
 "
 `;
@@ -887,7 +887,7 @@ exports[`splitOnId splitOnId:true addLabels:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -948,7 +948,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 	<http://my-vault.org/property/inline> \\"field\\" ;
 	<http://my-vault.org/property/**Thoughts**> \\"It was decent.\\" ;
 	<http://my-vault.org/property/**Rating**> \\"6'\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b68, _:b69 ;
+	<http://my-vault.org/property/foaf:knows> _:b24, _:b25 ;
 	<http://my-vault.org/property/name> \\"Alice\\", \\"Bob\\", \\"Charlie\\" .
 
 <http://example.org/file/1> dot:wikipath \\"file.md\\" ;
@@ -984,18 +984,18 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 <http://example.org/file/alice> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alice\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b70, _:b72 ;
+	<http://my-vault.org/property/foaf:knows> _:b26, _:b28 ;
 	schema:name \\"Alice\\" .
 
 <http://example.org/file/alison> dot:wikipath \\"file.md\\" ;
 	a dot:Block ;
 	dot:selector \\"Alison\\" ;
-	<http://my-vault.org/property/foaf:knows> _:b71, _:b73 ;
+	<http://my-vault.org/property/foaf:knows> _:b27, _:b29 ;
 	schema:name \\"Alison\\" .
 
 "
@@ -1012,7 +1012,7 @@ exports[`splitOnTag splitOnTag:false 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1078,7 +1078,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 "
 `;
@@ -1094,7 +1094,7 @@ exports[`splitOnTag splitOnTag:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1174,7 +1174,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 "
 `;
@@ -1190,7 +1190,7 @@ exports[`splitOnTag splitOnTag:true addLabels:true 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1286,7 +1286,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 "
 `;
@@ -1302,7 +1302,7 @@ exports[`toRDF BlockIds 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1363,7 +1363,7 @@ exports[`toRDF Inline fields 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1428,7 +1428,7 @@ ex:file dot:wikipath \\"file.md\\" ;
 
 <http://my-vault.org/property/Too> <http://my-vault.org/property/many> \\"inline\\" .
 
-_:b58 <http://my-vault.org/property/foaf:knows> _:b59 .
+_:b14 <http://my-vault.org/property/foaf:knows> _:b15 .
 
 "
 `;
@@ -1444,7 +1444,7 @@ exports[`toRDF Links 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1475,7 +1475,7 @@ exports[`toRDF Outline 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1506,7 +1506,7 @@ exports[`toRDF People 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [
@@ -1584,7 +1584,7 @@ exports[`toRDF Yaml 1`] = `
 ex:file dot:wikipath \\"file.md\\" ;
 	dot:external <https://example-2.com/>, <https://example-2.com/something>, <http://example.com>, <https://example2.com> ;
 	a dot:Note ;
-	<http://my-vault.org/property/has%20image> _:b45 ;
+	<http://my-vault.org/property/has%20image> _:b1 ;
 	dot:related [
 		dot:wikipath \\"link 1\\" ;
 	], [

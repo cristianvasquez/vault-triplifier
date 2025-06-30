@@ -1,7 +1,5 @@
-import { once } from 'events'
 import { glob } from 'glob'
 import { getNameFromPath, pathWithoutTrail } from '../strings/uris.js'
-
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
