@@ -1,5 +1,6 @@
-import ns from '../namespaces.js'
 import rdf from 'rdf-ext'
+import ns from '../namespaces.js'
+import { blockUri } from '../termMapper/termMapper.js'
 import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { populateLink } from './populateLink.js'
@@ -80,13 +81,13 @@ function traverseAst (node, context, options) {
 }
 
 function handleSplit (node, context, options) {
-  const { pointer, termMapper } = context
+  const { pointer } = context
 
   if (options.splitOnId && node.type !== 'root' && node.ids) {
     const [id] = node.ids
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
-      : termMapper.blockUri(pointer.term, id)
+      : blockUri(pointer.term, id)
     return { shouldSplit: true, childUri }
   }
 

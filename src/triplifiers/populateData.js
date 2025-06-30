@@ -2,17 +2,15 @@ import rdf from 'rdf-ext'
 import { isString } from '../strings/string.js'
 import { isHTTP } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
-import { reservedProperties } from './specialData.js'
+import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 
-function maybeKnown (str, { knownLinks, termMapper }, options) {
+function maybeKnown (str, { knownLinks }, options) {
 
   // This code smells
   // @TODO this should return a context, a label with the link to be displayed in the UIs
   const knownLink = knownLinks.find(link => str.includes(link.value))
   if (knownLink) {
     const { label, uri, wikipath, selector } = knownLink
-
-    // console.log('knownLink',knownLink, uri, termMapper.getPathByName(wikipath))
 
     // Added as postprocess
     // if (options.includeWikipaths && wikipath) {
@@ -57,13 +55,13 @@ function addTriple (
 
   // predicate
   const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
-    maybeKnown(predicate, { termMapper, knownLinks }, options) ??
-    termMapper.propertyToUri(predicate, options)
+    maybeKnown(predicate, { knownLinks }, options) ??
+    propertyToUri(predicate, options)
 
   // object
   const o = resolvedObject ?? onlyIfTerm(object) ??
-    maybeKnown(object, { termMapper, knownLinks }, options) ??
-    termMapper.newLiteral(object, options)
+    maybeKnown(object, {  knownLinks }, options) ??
+    newLiteral(object, options)
 
   pointer.node(s).addOut(p, o)
 }
@@ -99,7 +97,7 @@ function asLiteralLike (value) {
 }
 
 function populateYamlLike (data, context, options) {
-  const { pointer, termMapper, knownLinks } = context
+  const { pointer, knownLinks } = context
 
   for (const [predicate, value] of Object.entries(data)) {
 
