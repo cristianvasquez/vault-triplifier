@@ -10,7 +10,7 @@ import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
 const shouldParse = (contents) => (typeof contents === 'string' ||
   contents instanceof String)
 
-async function createTriplifier (dir) {
+async function createTriplifier (dir, options = {}) {
 
   if (!dir) {
     throw Error('Requires a directory')
@@ -22,6 +22,8 @@ async function createTriplifier (dir) {
   const termMapper = createTermMapper({
     getPathByName,
   })
+
+  const customProcessors = options.processors || {}
 
   const getMarkdownFiles = () => getFiles().filter(x => x.endsWith('.md')).
     map(pathWithoutTrail)
@@ -35,12 +37,27 @@ async function createTriplifier (dir) {
     getFiles,
     getDirectories,
     termMapper,
-    toRDF: fromTermMapper(termMapper),
+    toRDF: fromTermMapper(termMapper, customProcessors),
   }
 
 }
 
-function fromTermMapper (termMapper) {
+function fromTermMapper (termMapper, customProcessors = {}) {
+
+  const defaultProcessors = new Map([
+    ['.canvas', (contents, context, options) => {
+      const json = shouldParse(contents) ? JSON.parse(contents) : contents
+      return canvasToRDF(json, context, options)
+    }],
+    ['.md', markdownToRDF]
+  ])
+
+  const processors = new Map([...defaultProcessors, ...Object.entries(customProcessors)])
+
+  function getFileExtension(path) {
+    const lastDot = path.lastIndexOf('.')
+    return lastDot !== -1 ? path.substring(lastDot) : ''
+  }
 
   function populatePointer (contents, context, options) {
     const { path } = context
@@ -55,11 +72,11 @@ function fromTermMapper (termMapper) {
     const term = termMapper.pathToUri(path, options)
     const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term })
 
-    if (path.endsWith('.canvas')) {
-      const json = shouldParse(contents) ? JSON.parse(contents) : contents
-      return canvasToRDF(json, { termMapper, pointer, path }, options)
-    } else if (path.endsWith('.md')) {
-      return markdownToRDF(contents, { termMapper, pointer, path }, options)
+    const extension = getFileExtension(path)
+    const processor = processors.get(extension)
+    
+    if (processor) {
+      return processor(contents, { termMapper, pointer, path }, options)
     } else {
       console.log('I don\'t know how to triplify', path)
       return pointer
