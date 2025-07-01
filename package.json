@@ -16,7 +16,8 @@
     "rdf-ext": "^2.5.2"
   },
   "devDependencies": {
-    "@rdfjs/formats": "^4.0.1",
+    "@rdfjs-elements/formats-pretty": "^0.6.8",
+    "get-stream": "^9.0.1",
     "expect": "^30.0.3",
     "mocha": "^11.7.1",
     "vite": "^7.0.0"
