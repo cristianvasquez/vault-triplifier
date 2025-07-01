@@ -2,6 +2,7 @@ import ns from '../namespaces.js'
 import rdf from 'rdf-ext'
 import { getNameFromPath } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
+import { pathToUri, propertyToUri } from '../termMapper/termMapper.js'
 
 const isFile = (x) => x.type === 'file'
 const isGroup = (x) => x.type === 'group'
@@ -39,7 +40,7 @@ function canvasTriplifier (canvas, context, options) {
       nodeMap.set(node.id, o)
     } else if (isFile(node)) {
       const path = node.file
-      const o = termMapper.pathToUri(path, options)
+      const o = pathToUri(path, options)
       if (options.addLabels) {
         pointer.node(o).
           addOut(ns.schema.name, rdf.literal(getNameFromPath(path)))
@@ -93,7 +94,7 @@ function canvasTriplifier (canvas, context, options) {
 
     const s = resolvedSubject ?? subject
     const p = resolvedPredicate ??
-      termMapper.propertyToUri(label, options)
+      propertyToUri(label, options)
     const o = resolvedObject ?? object
 
     pointer.node(s).addOut(p, o)

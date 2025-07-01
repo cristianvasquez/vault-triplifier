@@ -137,7 +137,7 @@ function populateYamlLike (data, context, options) {
           { subject: pointer.term, predicate, object: childUri },
           context, options)
         populateYamlLike(value,
-          { pointer: pointer.node(childUri), termMapper, knownLinks }, options)
+          { pointer: pointer.node(childUri), knownLinks }, options)
       }
     }
   }

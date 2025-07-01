@@ -8,7 +8,7 @@ import { toRDF } from './src/toRDF.js'
 
 async function triplifyVault (dir, options) {
 
-  const { getPathByName } = createPathResolver(dir)
+  const { getPathByName } = await createPathResolver(dir)
   const dataset = rdf.dataset()
   const files = await glob('./**/+(*.md|*.png|*.jpg|*.svg|*.canvas)', {
     cwd: dir,

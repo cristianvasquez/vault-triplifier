@@ -3,33 +3,35 @@ import { getNameFromPath, pathWithoutTrail } from './strings/uris.js'
 
 const DEFAULT_SEARCH_PATTERN = './**/+(*.md|*.png|*.jpg|*.svg|*.canvas)'
 
-function createPathResolver(basePath, pattern = DEFAULT_SEARCH_PATTERN) {
-  let nameToPathCache = null
+async function createPathResolver (basePath, pattern = DEFAULT_SEARCH_PATTERN) {
+  let nameToPathCache = new Map()
+  await buildCache()
 
-  async function getPathByName(noteMD) {
-    if (!nameToPathCache) {
-      await buildCache()
-    }
-    
-    const name = getNameFromPath(noteMD)
-    const path = nameToPathCache.get(name)
-    return path ? { path: pathWithoutTrail(path) } : undefined
-  }
-
-  async function buildCache() {
+  async function buildCache () {
     const files = await glob(pattern, {
       cwd: basePath,
       nodir: true,
     })
-    
-    nameToPathCache = new Map()
-    files.forEach(file => {
-      const key = getNameFromPath(file)
-      nameToPathCache.set(key, file)
-    })
+
+    for (const file of files) {
+      const name = getNameFromPath(file)
+      nameToPathCache.set(name, file)
+    }
   }
 
-  return { getPathByName }
+  function getPathByName (noteMD) {
+    const name = getNameFromPath(noteMD)
+
+    const filePath = nameToPathCache.get(name)
+    return filePath ? { path: pathWithoutTrail(filePath) } : undefined
+  }
+
+  return {
+    getPathByName,
+    refreshCache: async () => {
+      await buildCache()
+    },
+  }
 }
 
 export { createPathResolver }
