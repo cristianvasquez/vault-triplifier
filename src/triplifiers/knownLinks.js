@@ -1,5 +1,5 @@
-import { resolve } from 'path'
 import rdf from 'rdf-ext'
+import { nameToUri, pathToUri } from '../termMapper/termMapper.js'
 
 function getKnownLinks (links, context, options) {
   return links.map(({ type, value, alias }) => ({
@@ -22,7 +22,7 @@ function searchUriBySelector (node, selector) {
 }
 
 function urisAndPaths ({ type, value }, context, options) {
-  const { termMapper, rootNode } = context
+  const { rootNode } = context
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
@@ -33,7 +33,7 @@ function urisAndPaths ({ type, value }, context, options) {
   if (!head) {
     const maybeUri = searchUriBySelector(rootNode, selector)
     return {
-      uri: maybeUri ?? termMapper.pathToUri(context.path, options),
+      uri: maybeUri ?? pathToUri(context.path, options),
       wikipath: context.path,
       selector,
     }
@@ -43,12 +43,12 @@ function urisAndPaths ({ type, value }, context, options) {
     activePath(context.path), head) : head
 
   // Wiki-links
-  const maybePath = termMapper.getPathByName ? termMapper.getPathByName(
-    resolvedPath, activePath(context.path)) : resolvedPath
+  const uri = nameToUri(resolvedPath, options)
 
   return {
-    uri: maybePath && maybePath.path ? termMapper.pathToUri(maybePath.path,
-      options) : rdf.blankNode(), wikipath: resolvedPath, selector,
+    uri,
+    wikipath: resolvedPath,
+    selector,
   }
 
 }
@@ -71,7 +71,20 @@ function resolvePath (activePath, head) {
   if (!activePath) {
     return head
   }
-  return resolve('/', activePath, head).replace(/^\//, '')
+  
+  // Browser-compatible path resolution
+  const parts = ['/', activePath, head].join('/').split('/')
+  const resolved = []
+  
+  for (const part of parts) {
+    if (part === '..') {
+      resolved.pop()
+    } else if (part !== '.' && part !== '') {
+      resolved.push(part)
+    }
+  }
+  
+  return resolved.join('/').replace(/^\//, '')
 }
 
 export { getKnownLinks }

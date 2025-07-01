@@ -1,78 +1,34 @@
-import grapoi from 'grapoi'
+import { readFile } from 'fs/promises'
+import { glob } from 'glob'
+import { resolve } from 'path'
 import rdf from 'rdf-ext'
-import { canvasToRDF } from './src/canvas-to-RDF.js'
-import { createVaultFromDir } from './src/indexers/vault.js'
-import { markdownToRDF } from './src/markdown-to-RDF.js'
+import { createPathResolver } from './src/pathResolver.js'
 import { postProcess } from './src/postProcess.js'
-import { pathWithoutTrail } from './src/strings/uris.js'
-import { createTermMapper } from './src/termMapper/defaultTermMapper.js'
+import { toRDF } from './src/toRDF.js'
 
-const shouldParse = (contents) => (typeof contents === 'string' ||
-  contents instanceof String)
+async function triplifyVault (dir, options) {
 
-async function createTriplifier (dir) {
-
-  if (!dir) {
-    throw Error('Requires a directory')
-  }
-
-  const { getPathByName, getFiles, getDirectories } = await createVaultFromDir(
-    dir)
-
-  const termMapper = createTermMapper({
-    getPathByName,
+  const { getPathByName } = createPathResolver(dir)
+  const dataset = rdf.dataset()
+  const files = await glob('./**/+(*.md|*.png|*.jpg|*.svg|*.canvas)', {
+    cwd: dir,
+    nodir: true,
   })
+  for (const file of files) {
+    console.log('Processing file:', file)
+    const text = await readFile(resolve(dir, file), 'utf8')
+    const pointer = toRDF(text,
+      { path: file }, options)
+    const result = postProcess({ pointer, getPathByName },
+      options)
 
-  const getMarkdownFiles = () => getFiles().filter(x => x.endsWith('.md')).
-    map(pathWithoutTrail)
-
-  const getCanvasFiles = () => getFiles().filter(x => x.endsWith('.canvas')).
-    map(pathWithoutTrail)
-
-  return {
-    getMarkdownFiles,
-    getCanvasFiles,
-    getFiles,
-    getDirectories,
-    termMapper,
-    toRDF: fromTermMapper(termMapper),
+    for (const quad of result.dataset) {
+      dataset.add(quad)
+    }
   }
+  return dataset
 
 }
 
-function fromTermMapper (termMapper) {
-
-  function populatePointer (contents, context, options) {
-    const { path } = context
-    if (!path) {
-      throw Error('Requires a path')
-    }
-
-    if (!options.baseNamespace) {
-      throw Error('Requires baseNamespace')
-    }
-
-    const term = termMapper.pathToUri(path, options)
-    const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term })
-
-    if (path.endsWith('.canvas')) {
-      const json = shouldParse(contents) ? JSON.parse(contents) : contents
-      return canvasToRDF(json, { termMapper, pointer, path }, options)
-    } else if (path.endsWith('.md')) {
-      return markdownToRDF(contents, { termMapper, pointer, path }, options)
-    } else {
-      console.log('I don\'t know how to triplify', path)
-      return pointer
-    }
-  }
-
-  function toRDF (contents, context, options) {
-    const pointer = populatePointer(contents, context, options)
-    return pointer ? postProcess({ termMapper, pointer }, options) : pointer
-  }
-
-  return toRDF
-}
-
-export { fromTermMapper, createTriplifier }
+export { triplifyVault }
 

@@ -2,17 +2,18 @@ import rdf from 'rdf-ext'
 import { isString } from '../strings/string.js'
 import { isHTTP } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
-import { reservedProperties } from './specialData.js'
+import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 
-function maybeKnown (str, { knownLinks, termMapper }, options) {
+// Properties that should not be converted to RDF triples
+const reservedProperties = new Set()
+
+function maybeKnown (str, { knownLinks }, options) {
 
   // This code smells
   // @TODO this should return a context, a label with the link to be displayed in the UIs
   const knownLink = knownLinks.find(link => str.includes(link.value))
   if (knownLink) {
     const { label, uri, wikipath, selector } = knownLink
-
-    // console.log('knownLink',knownLink, uri, termMapper.getPathByName(wikipath))
 
     // Added as postprocess
     // if (options.includeWikipaths && wikipath) {
@@ -53,17 +54,17 @@ function addTriple (
   // subject
   const s = resolvedSubject ?? onlyIfTerm(subject) ??
     maybeKnown(subject, { termMapper, knownLinks }, options) ??
-    termMapper.propertyToUri(subject, options)
+    propertyToUri(subject, options)
 
   // predicate
   const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
-    maybeKnown(predicate, { termMapper, knownLinks }, options) ??
-    termMapper.propertyToUri(predicate, options)
+    maybeKnown(predicate, { knownLinks }, options) ??
+    propertyToUri(predicate, options)
 
   // object
   const o = resolvedObject ?? onlyIfTerm(object) ??
-    maybeKnown(object, { termMapper, knownLinks }, options) ??
-    termMapper.newLiteral(object, options)
+    maybeKnown(object, {  knownLinks }, options) ??
+    newLiteral(object, options)
 
   pointer.node(s).addOut(p, o)
 }
@@ -99,7 +100,7 @@ function asLiteralLike (value) {
 }
 
 function populateYamlLike (data, context, options) {
-  const { pointer, termMapper, knownLinks } = context
+  const { pointer, knownLinks } = context
 
   for (const [predicate, value] of Object.entries(data)) {
 
@@ -124,7 +125,7 @@ function populateYamlLike (data, context, options) {
               { subject: pointer.term, predicate, object: childUri },
               context, options)
             populateYamlLike(value,
-              { pointer: pointer.node(childUri), termMapper, knownLinks },
+              { pointer: pointer.node(childUri), knownLinks },
               options)
           }
         })
