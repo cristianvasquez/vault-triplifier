@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import rdf from 'rdf-ext'
 import { nameToUri, pathToUri } from '../termMapper/termMapper.js'
 
@@ -72,7 +71,20 @@ function resolvePath (activePath, head) {
   if (!activePath) {
     return head
   }
-  return resolve('/', activePath, head).replace(/^\//, '')
+  
+  // Browser-compatible path resolution
+  const parts = ['/', activePath, head].join('/').split('/')
+  const resolved = []
+  
+  for (const part of parts) {
+    if (part === '..') {
+      resolved.pop()
+    } else if (part !== '.' && part !== '') {
+      resolved.push(part)
+    }
+  }
+  
+  return resolved.join('/').replace(/^\//, '')
 }
 
 export { getKnownLinks }

@@ -4,6 +4,9 @@ import { isHTTP } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
 import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 
+// Properties that should not be converted to RDF triples
+const reservedProperties = new Set()
+
 function maybeKnown (str, { knownLinks }, options) {
 
   // This code smells
@@ -51,7 +54,7 @@ function addTriple (
   // subject
   const s = resolvedSubject ?? onlyIfTerm(subject) ??
     maybeKnown(subject, { termMapper, knownLinks }, options) ??
-    termMapper.propertyToUri(subject, options)
+    propertyToUri(subject, options)
 
   // predicate
   const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
@@ -122,7 +125,7 @@ function populateYamlLike (data, context, options) {
               { subject: pointer.term, predicate, object: childUri },
               context, options)
             populateYamlLike(value,
-              { pointer: pointer.node(childUri), termMapper, knownLinks },
+              { pointer: pointer.node(childUri), knownLinks },
               options)
           }
         })
