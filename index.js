@@ -30,5 +30,11 @@ async function triplifyVault (dir, options) {
 
 }
 
-export { triplifyVault }
+async function triplifyFile (file, options) {
+  const text = await readFile(file, 'utf8')
+  const pointer = toRDF(text, { path: file }, options)
+  return pointer.dataset
+}
+
+export { triplifyVault, triplifyFile }
 
