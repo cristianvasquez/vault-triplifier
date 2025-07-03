@@ -5,7 +5,6 @@ import { prettyPrint } from './test/support/serialization.js'
 const options = {
 // will split the document into a tree when it encounters headings
   splitOnHeader: true,
-
   // will resolve the specified vocabularies
   namespaces: ns,
   customMappings: {
@@ -17,6 +16,8 @@ const options = {
 
   // includes the offsets
   includeSelectors: false,
+  includeRaw: true,
+
 }
 
 // A pointer is the dataset + the root

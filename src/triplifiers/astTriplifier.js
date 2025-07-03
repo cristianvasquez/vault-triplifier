@@ -41,7 +41,7 @@ function assignInternalUris (node, context, options) {
 
 function traverseAst (node, context, options) {
 
-  const { addLabels, includeSelectors } = options
+  const { addLabels, includeSelectors, includeRaw } = options
   const { pointer } = context
 
   for (const tag of node.tags ?? []) {
@@ -59,13 +59,24 @@ function traverseAst (node, context, options) {
     }
   }
 
+
   knownLinks.filter(link => !link.mapped).
     forEach(link => populateLink(link, context, options))
+
+  let currentRawStart = null
+  let currentRawPointer = null
 
   for (const child of node.children ?? []) {
     const { shouldSplit } = handleSplit(child, context, options)
 
     if (shouldSplit) {
+      // Finalize previous block's raw content if we have one
+      if (includeRaw && currentRawStart !== null && currentRawPointer && child.position && context.text) {
+        const rawContent = context.text.substring(currentRawStart, child.position.start.offset).trim()
+        if (rawContent) {
+          currentRawPointer.addOut(ns.dot.raw, rdf.literal(rawContent))
+        }
+      }
 
       if (addLabels && child.value) {
         pointer.node(child.uri).addOut(ns.rdfs.label, rdf.literal(child.value))
@@ -76,13 +87,25 @@ function traverseAst (node, context, options) {
       }
 
       pointer.node(child.uri).addOut(ns.rdf.type, ns.dot.Block)
-
       pointer.addOut(ns.dot.contains, child.uri)
 
-      traverseAst(child, { ...context, pointer: pointer.node(child.uri) },
-        options)
+      // Set up for raw content collection for this block
+      if (includeRaw && child.position && context.text) {
+        currentRawStart = child.position.end.offset
+        currentRawPointer = pointer.node(child.uri)
+      }
+
+      traverseAst(child, { ...context, pointer: pointer.node(child.uri) }, options)
     } else {
       traverseAst(child, context, options)
+    }
+  }
+
+  // Finalize the last block's raw content if we have one
+  if (includeRaw && currentRawStart !== null && currentRawPointer && context.text) {
+    const rawContent = context.text.substring(currentRawStart).trim()
+    if (rawContent) {
+      currentRawPointer.addOut(ns.dot.raw, rdf.literal(rawContent))
     }
   }
 

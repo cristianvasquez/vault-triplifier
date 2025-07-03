@@ -7,13 +7,14 @@ const defaultOptions = {
   splitOnId: true,
   addLabels: false,
   includeSelectors: true, // A selector for a portion of the resource
+  includeRaw: false,
 }
 
 function markdownToRDF (fullText, { pointer, path }, options = {}) {
   const node = simpleAst(fullText,
     { normalize: true, inlineAsArray: true, includePosition: true })
   return astTriplifier(node, {
-    pointer, path,
+    pointer, path, text: fullText,
   }, { ...defaultOptions, ...options })
 
 }
