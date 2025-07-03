@@ -11,7 +11,9 @@ const options = {
     'lives in': ns.schema.address,
   },
   addLabels: true,
+  includeText: true,
   includeSelectors: true, // includes the offsets where the
+  includeRaw: true,
 }
 
 const dir = './example-vault'

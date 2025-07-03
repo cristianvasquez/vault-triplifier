@@ -4,109 +4,125 @@ import { getNameFromPath } from '../strings/uris.js'
 import { getMapper } from '../termMapper/defaultCustomMapper.js'
 import { pathToUri, propertyToUri } from '../termMapper/termMapper.js'
 
-const isFile = (x) => x.type === 'file'
-const isGroup = (x) => x.type === 'group'
-const isText = (x) => x.type === 'text'
+const NODE_TYPES = {
+  FILE: 'file',
+  GROUP: 'group',
+  TEXT: 'text',
+}
 
-const contains = (node, otherNode) => {
-  return (otherNode !== node && otherNode.x >= node.x && otherNode.y >=
-    node.y && otherNode.x + otherNode.width <= node.x + node.width &&
-    otherNode.y + otherNode.height <= node.y + node.height)
+const contains = (parent, child) => {
+  return child !== parent &&
+    child.x >= parent.x &&
+    child.y >= parent.y &&
+    child.x + child.width <= parent.x + parent.width &&
+    child.y + child.height <= parent.y + parent.height
 }
 
 function canvasTriplifier (canvas, context, options) {
-
   const { pointer } = context
-  const maybeMapped = getMapper(options)
-
+  const mapper = getMapper(options)
   const { nodes, edges } = canvas
   const nodeMap = new Map()
 
-  // Build URIs
-  for (const node of nodes) {
-    if (isGroup(node)) {
-      const { label } = node
-
-      const {
-        resolvedObject,
-      } = maybeMapped(
-        { subject: pointer.term, predicate: undefined, object: label }, context)
-
-      const o = resolvedObject ?? rdf.blankNode()
-      if (options.addLabels && o) {
-        pointer.node(o).addOut(ns.rdfs.label, rdf.literal(label))
-      }
-
-      nodeMap.set(node.id, o)
-    } else if (isFile(node)) {
-      const path = node.file
-      const o = pathToUri(path)
-      if (options.addLabels) {
-        pointer.node(o).
-          addOut(ns.rdfs.label, rdf.literal(getNameFromPath(path)))
-      }
-
-      nodeMap.set(node.id, o)
-    } else if (isText(node)) {
-      const text = node.text
-      const o = rdf.blankNode()
-      if (options.addLabels) {
-        pointer.node(o).
-          addOut(ns.schema.description, rdf.literal(text))
-      }
-      nodeMap.set(node.id, o)
+  // Process nodes by type
+  nodes.forEach(node => {
+    const uri = createNodeUri(node, pointer, mapper, context, options)
+    if (uri) {
+      nodeMap.set(node.id, uri)
     }
-  }
+  })
 
-  // Add containment
-  for (const node of nodes.filter(isGroup)) {
-    for (const otherNode of nodes) {
-      if (contains(node, otherNode)) {
-
-        const s = nodeMap.get(node.id)
-        const p = ns.dot.contains
-        const o = nodeMap.get(otherNode.id)
-
-        pointer.node(s).addOut(p, o)
+  // Add containment relationships
+  const groupNodes = nodes.filter(n => n.type === NODE_TYPES.GROUP)
+  groupNodes.forEach(parent => {
+    nodes.filter(child => contains(parent, child)).forEach(child => {
+      const parentUri = nodeMap.get(parent.id)
+      const childUri = nodeMap.get(child.id)
+      if (parentUri && childUri) {
+        pointer.node(parentUri).addOut(ns.dot.contains, childUri)
       }
-    }
-  }
+    })
+  })
 
-  // Add edges
-  for (const edge of edges) {
-    const { fromNode, toNode, label } = edge
+  // Process edges
+  edges.forEach(edge => {
+    const subject = nodeMap.get(edge.fromNode)
+    const object = nodeMap.get(edge.toNode)
 
-    const subject = nodeMap.get(fromNode)
-    const object = nodeMap.get(toNode)
+    if (!subject || !object) return
 
-    const {
-      resolvedSubject,
-      resolvedPredicate,
-      resolvedObject,
-    } = maybeMapped(
-      {
-        subject,
-        predicate: label,
-        object,
-      }, context)
+    const { resolvedSubject, resolvedPredicate, resolvedObject } = mapper({
+      subject,
+      predicate: edge.label,
+      object,
+    }, context)
 
     const s = resolvedSubject ?? subject
-    const p = resolvedPredicate ??
-      propertyToUri(label)
+    const p = resolvedPredicate ?? propertyToUri(edge.label)
     const o = resolvedObject ?? object
 
     pointer.node(s).addOut(p, o)
-  }
+  })
 
-  // All the nodes that are not contained somewhere will hang from the canvas itself
-  for (const uri of nodeMap.values()) {
-    const containers = pointer.node(uri).in(ns.dot.contains).terms
-    if (containers.length === 0) {
+  // Add uncontained nodes to canvas
+  nodeMap.forEach(uri => {
+    const hasContainers = pointer.node(uri).in(ns.dot.contains).terms.length > 0
+    if (!hasContainers) {
       pointer.addOut(ns.dot.contains, uri)
     }
-  }
+  })
 
   return pointer
+}
+
+function createNodeUri (node, pointer, mapper, context, options) {
+  switch (node.type) {
+    case NODE_TYPES.GROUP:
+      return createGroupNode(node, pointer, mapper, context, options)
+    case NODE_TYPES.FILE:
+      return createFileNode(node, pointer, options)
+    case NODE_TYPES.TEXT:
+      return createTextNode(node, pointer, options)
+    default:
+      return null
+  }
+}
+
+function createGroupNode (node, pointer, mapper, context, options) {
+  const { resolvedObject } = mapper({
+    subject: pointer.term,
+    predicate: undefined,
+    object: node.label,
+  }, context)
+
+  const uri = resolvedObject ?? rdf.blankNode()
+
+  if (options.addLabels && node.label) {
+    pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(node.label))
+  }
+
+  return uri
+}
+
+function createFileNode (node, pointer, options) {
+  const uri = pathToUri(node.file)
+
+  if (options.addLabels) {
+    const label = getNameFromPath(node.file)
+    pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(label))
+  }
+
+  return uri
+}
+
+function createTextNode (node, pointer, options) {
+  const uri = rdf.blankNode()
+
+  if (options.addLabels && node.text) {
+    pointer.node(uri).addOut(ns.schema.description, rdf.literal(node.text))
+  }
+
+  return uri
 }
 
 export { canvasTriplifier }
