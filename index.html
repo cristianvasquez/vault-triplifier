@@ -105,6 +105,7 @@
         <label><input type="checkbox" id="splitOnId" checked> splitOnId</label>
         <label><input type="checkbox" id="addLabels" checked> addLabels</label>
         <label><input type="checkbox" id="includeSelectors" checked> includeSelectors</label>
+        <label><input type="checkbox" id="includeText"> includeText</label>
         <label><input type="checkbox" id="includeWikipaths" checked> includeWikipaths</label>
     </div>
     <textarea id="markdown-input" placeholder="Enter your markdown here...">---
@@ -165,6 +166,7 @@ Content under level 4
   const splitOnIdInput = document.getElementById('splitOnId')
   const addLabelsInput = document.getElementById('addLabels')
   const includeSelectorsInput = document.getElementById('includeSelectors')
+  const includeTextInput = document.getElementById('includeText')
   const includeWikipathsInput = document.getElementById('includeWikipaths')
 
   let hasChanges = false
@@ -176,6 +178,7 @@ Content under level 4
       splitOnId: splitOnIdInput.checked,
       addLabels: addLabelsInput.checked,
       includeSelectors: includeSelectorsInput.checked,
+      includeText: includeTextInput.checked,
       includeWikipaths: includeWikipathsInput.checked,
       baseNamespace: ns.ex,
       namespaces: ns,
@@ -211,6 +214,7 @@ Content under level 4
   splitOnIdInput.addEventListener('change', updateOutput)
   addLabelsInput.addEventListener('change', updateOutput)
   includeSelectorsInput.addEventListener('change', updateOutput)
+  includeTextInput.addEventListener('change', updateOutput)
   includeWikipathsInput.addEventListener('change', updateOutput)
   updateDiagramBtn.addEventListener('click', updateDiagram)
 

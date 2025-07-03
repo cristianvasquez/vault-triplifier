@@ -14,7 +14,7 @@
     "glob": "^11.0.3",
     "grapoi": "^1.1.3",
     "rdf-ext": "^2.5.2",
-    "rdf-literal": "^2.0.0",
+    "rdf-literal": "^2.0.0"
   },
   "devDependencies": {
     "rdf2dot-wc": "^0.2.7",
