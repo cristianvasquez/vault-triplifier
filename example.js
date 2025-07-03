@@ -3,20 +3,18 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
-
-  // AST related
-  addLabels: true,
-  namespaces: ns,
-  includeWikipaths: true,
-// will split the document using the nested headers, creating connected rdf-entities.
+// will split the document into a tree
   splitOnHeader: true,
 
-  // Post-processing related
+  // will resolve these
+  namespaces: ns,
   customMappings: {
     // Will map an attribute to a known rdf-property
     'lives in': ns.schema.address,
   },
-  baseNamespace: ns.ex,
+  addLabels: true,
+  includeSelectors: false, // includes the offsets where the
+
 }
 
 const dir = './example-vault'

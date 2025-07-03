@@ -6,10 +6,8 @@ describe('Vault Triplifier', () => {
   it('should process example vault and generate RDF', async () => {
     const options = {
       splitOnHeader: true,
-      baseNamespace: ns.ex,
       addLabels: true,
       namespaces: ns,
-      includeWikipaths: true,
     }
 
     const dataset = await triplifyVault('./example-vault', options)

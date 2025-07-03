@@ -35,13 +35,14 @@ function assignInternalUris (node, context, options) {
       traverse(child, context, options)
     }
   }
+
   traverse(node, context, options)
 }
 
 function traverseAst (node, context, options) {
 
   const { addLabels, includeSelectors } = options
-  const { pointer, path } = context
+  const { pointer } = context
 
   for (const tag of node.tags ?? []) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
