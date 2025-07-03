@@ -21,7 +21,7 @@ function searchUriBySelector (node, selector) {
   return traverse(node)
 }
 
-function urisAndPaths ({ type, value }, context, options) {
+function urisAndPaths ({ type, value }, context) {
   const { rootNode } = context
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
@@ -33,7 +33,7 @@ function urisAndPaths ({ type, value }, context, options) {
   if (!head) {
     const maybeUri = searchUriBySelector(rootNode, selector)
     return {
-      uri: maybeUri ?? pathToUri(context.path, options),
+      uri: maybeUri ?? pathToUri(context.path),
       wikipath: context.path,
       selector,
     }
@@ -43,7 +43,7 @@ function urisAndPaths ({ type, value }, context, options) {
     activePath(context.path), head) : head
 
   // Wiki-links
-  const uri = nameToUri(resolvedPath, options)
+  const uri = nameToUri(resolvedPath)
 
   return {
     uri,
@@ -71,11 +71,11 @@ function resolvePath (activePath, head) {
   if (!activePath) {
     return head
   }
-  
+
   // Browser-compatible path resolution
   const parts = ['/', activePath, head].join('/').split('/')
   const resolved = []
-  
+
   for (const part of parts) {
     if (part === '..') {
       resolved.pop()
@@ -83,7 +83,7 @@ function resolvePath (activePath, head) {
       resolved.push(part)
     }
   }
-  
+
   return resolved.join('/').replace(/^\//, '')
 }
 

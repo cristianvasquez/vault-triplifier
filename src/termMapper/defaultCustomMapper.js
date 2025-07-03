@@ -17,14 +17,15 @@ function inspectNamespaces (ns, str) {
   }
 }
 
-function inspectCustomMappings(customMappings, str){
-  return customMappings?customMappings[str]:undefined
+function inspectCustomMappings (customMappings, str) {
+  return customMappings ? customMappings[str] : undefined
 }
 
 function getMapper (options) {
 
   const { namespaces, customMappings } = options
-  const resolve = (str) => inspectCustomMappings(customMappings, str) ?? inspectNamespaces(namespaces, str)
+  const resolve = (str) => inspectCustomMappings(customMappings, str) ??
+    inspectNamespaces(namespaces, str)
   return ({ subject, predicate, object }, context) => {
     return {
       resolvedSubject: resolve(subject),

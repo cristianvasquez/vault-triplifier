@@ -13,12 +13,8 @@ function maybeKnown (str, { knownLinks }, options) {
   // @TODO this should return a context, a label with the link to be displayed in the UIs
   const knownLink = knownLinks.find(link => str.includes(link.value))
   if (knownLink) {
-    const { label, uri, wikipath, selector } = knownLink
+    const { label, uri, selector } = knownLink
 
-    // Added as postprocess
-    // if (options.includeWikipaths && wikipath) {
-    //   pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))
-    // }
     knownLink.mapped = true
     return uri
   }
@@ -54,17 +50,17 @@ function addTriple (
   // subject
   const s = resolvedSubject ?? onlyIfTerm(subject) ??
     maybeKnown(subject, { termMapper, knownLinks }, options) ??
-    propertyToUri(subject, options)
+    propertyToUri(subject)
 
   // predicate
   const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
     maybeKnown(predicate, { knownLinks }, options) ??
-    propertyToUri(predicate, options)
+    propertyToUri(predicate)
 
   // object
   const o = resolvedObject ?? onlyIfTerm(object) ??
-    maybeKnown(object, {  knownLinks }, options) ??
-    newLiteral(object, options)
+    maybeKnown(object, { knownLinks }, options) ??
+    newLiteral(object)
 
   pointer.node(s).addOut(p, o)
 }

@@ -5,11 +5,24 @@ import { getKnownLinks } from './knownLinks.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { populateLink } from './populateLink.js'
 
+import {
+  toRdf,
+} from 'rdf-literal'
+
 function astTriplifier (node, context, options) {
   assignInternalUris(node, context, options)
   const pointer = traverseAst(node, { ...context, rootNode: node }, options)
-  pointer.addOut(ns.rdf.type,ns.dot.Note)
+  pointer.addOut(ns.rdf.type, ns.dot.Note)
   return pointer
+}
+
+function appendPosition (node, position) {
+  const { start, end } = position
+  node.addOut(ns.oa.hasSelector,
+    positionSelector => positionSelector.addOut(ns.rdf.type,
+      ns.oa.TextPositionSelector).
+      addOut(ns.oa.start, toRdf(start.offset)).
+      addOut(ns.oa.end, toRdf(end.offset)))
 }
 
 function assignInternalUris (node, context, options) {
@@ -22,18 +35,13 @@ function assignInternalUris (node, context, options) {
       traverse(child, context, options)
     }
   }
-
   traverse(node, context, options)
 }
 
 function traverseAst (node, context, options) {
 
-  const { addLabels, includeWikipaths, includeSelectors } = options
+  const { addLabels, includeSelectors } = options
   const { pointer, path } = context
-
-  if (includeWikipaths) {
-    pointer.addOut(ns.dot.wikipath, rdf.literal(path))
-  }
 
   for (const tag of node.tags ?? []) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
@@ -59,15 +67,15 @@ function traverseAst (node, context, options) {
     if (shouldSplit) {
 
       if (addLabels && child.value) {
-        pointer.node(child.uri).addOut(ns.schema.name, rdf.literal(child.value))
+        pointer.node(child.uri).addOut(ns.rdfs.label, rdf.literal(child.value))
       }
 
       if (includeSelectors && child.type === 'block') {
-        pointer.node(child.uri).
-          addOut(ns.dot.selector, rdf.literal(child.value))
+        appendPosition(pointer.node(child.uri), child.position)
       }
 
-      pointer.node(child.uri).addOut(ns.rdf.type,ns.dot.Block)
+      pointer.node(child.uri).addOut(ns.rdf.type, ns.dot.Block)
+
       pointer.addOut(ns.dot.contains, child.uri)
 
       traverseAst(child, { ...context, pointer: pointer.node(child.uri) },

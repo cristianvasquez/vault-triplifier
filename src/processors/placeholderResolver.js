@@ -1,17 +1,17 @@
 import { nameFromUri, pathToUri } from '../termMapper/termMapper.js'
 
-function resolvePlaceholders (pointer, getPathByName, options) {
+function resolvePlaceholders (pointer, getPathByName) {
   const quadsToReplace = []
 
   const resolvePlaceholder = (term) => {
     if (term.termType !== 'NamedNode') return term
 
-    const placeholderName = nameFromUri(term, options)
+    const placeholderName = nameFromUri(term)
     if (!placeholderName) return term
 
     const resolvedPath = getPathByName(placeholderName)
     if (resolvedPath?.path) {
-      return pathToUri(resolvedPath.path, options)
+      return pathToUri(resolvedPath.path)
     }
 
     return term
@@ -26,7 +26,11 @@ function resolvePlaceholders (pointer, getPathByName, options) {
       newObject !== quad.object) {
       quadsToReplace.push({
         old: quad,
-        new: { subject: newSubject, predicate: newPredicate, object: newObject },
+        new: {
+          subject: newSubject,
+          predicate: newPredicate,
+          object: newObject,
+        },
       })
     }
   }

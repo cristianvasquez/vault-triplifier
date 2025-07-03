@@ -7,6 +7,8 @@ const ns = {
   rdfs: rdf.namespace('http://www.w3.org/2000/01/rdf-schema#'),
   ex: rdf.namespace('http://example.org/'),
   dot: rdf.namespace('http://pkm-united.org/'),
+  prov: rdf.namespace('http://www.w3.org/ns/prov#'),
+  lpd: rdf.namespace('http://www.w3.org/ns/ldp#'),
+  oa: rdf.namespace('http://www.w3.org/ns/oa#'),
 }
-
 export default ns

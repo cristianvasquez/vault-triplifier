@@ -6,11 +6,11 @@ function populateLink (link, context, options) {
     type, value, alias, uri, wikipath, selector,
   } = link
 
-  const { addLabels, includeWikipaths, includeSelectors } = options
+  const { addLabels, includeSelectors } = options
   const { pointer } = context
 
   if (addLabels && alias) {
-    pointer.node(uri).addOut(ns.schema.name, alias)
+    pointer.node(uri).addOut(ns.dot.alias, alias)
   }
 
   if (type === 'external') {
@@ -21,11 +21,8 @@ function populateLink (link, context, options) {
     throw Error(`I don't know how to handle link of type:${type}`)
   }
 
-  if (wikipath && includeWikipaths) {
-    pointer.node(uri).addOut(ns.dot.wikipath, rdf.literal(wikipath))
-  }
-
   if (selector && includeSelectors) {
+    // [[OtherNote#SomeSection]] : selector -> SomeSection
     pointer.node(uri).addOut(ns.dot.selector, rdf.literal(selector))
   }
 

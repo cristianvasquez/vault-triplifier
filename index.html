@@ -101,7 +101,7 @@ Content under level 4
 </div>
 <!-- Main logic -->
 <script type="module">
-  import { toRDF } from './src/toRDF.js'
+  import { deleteMe } from './src/deleteMe.js'
   import ns from './src/namespaces.js'
 ``
   const markdownInput = document.getElementById('markdown-input')
@@ -119,7 +119,7 @@ Content under level 4
       namespaces: ns,
     }
 
-    const pointer = toRDF(markdownInput.value, { path: 'demo.md' }, options)
+    const pointer = markdownToRDF(markdownInput.value, { path: 'demo.md' }, options)
 
     rdfOutput.value = pointer.dataset.toString()
 

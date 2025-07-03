@@ -104,7 +104,7 @@ const options = {
 }
 
 // Creates separate entities for Alice and Bob
-const pointer = toRDF(markdown, { path: 'people.md' }, options)
+const pointer = deleteMe(markdown, { path: 'people.md' }, options)
 ```
 
 ### Custom Mappings
@@ -125,7 +125,7 @@ lives in:: New York
 knows:: [[Bob]]
 `
 
-const pointer = toRDF(markdown, { path: 'alice.md' }, options)
+const pointer = deleteMe(markdown, { path: 'alice.md' }, options)
 ```
 
 ### Block Identifiers
@@ -148,7 +148,7 @@ const options = {
 }
 
 // Creates URIs ending with /alice and /bob
-const pointer = toRDF(markdown, { path: 'people.md' }, options)
+const pointer = deleteMe(markdown, { path: 'people.md' }, options)
 ```
 
 ### Tags
@@ -171,7 +171,7 @@ const options = {
 }
 
 // Creates separate entities for tagged elements
-const pointer = toRDF(markdown, { path: 'people.md' }, options)
+const pointer = deleteMe(markdown, { path: 'people.md' }, options)
 ```
 
 ## Built-in Property Mappings

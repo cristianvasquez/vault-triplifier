@@ -16,7 +16,7 @@ const contains = (node, otherNode) => {
 
 function canvasTriplifier (canvas, context, options) {
 
-  const { pointer, termMapper, path } = context
+  const { pointer } = context
   const maybeMapped = getMapper(options)
 
   const { nodes, edges } = canvas
@@ -34,22 +34,20 @@ function canvasTriplifier (canvas, context, options) {
 
       const o = resolvedObject ?? rdf.blankNode()
       if (options.addLabels && o) {
-        pointer.node(o).addOut(ns.schema.name, rdf.literal(label))
+        pointer.node(o).addOut(ns.rdfs.label, rdf.literal(label))
       }
 
       nodeMap.set(node.id, o)
     } else if (isFile(node)) {
       const path = node.file
-      const o = pathToUri(path, options)
+      const o = pathToUri(path)
       if (options.addLabels) {
         pointer.node(o).
-          addOut(ns.schema.name, rdf.literal(getNameFromPath(path)))
+          addOut(ns.rdfs.label, rdf.literal(getNameFromPath(path)))
       }
-      if (options.includeWikipaths) {
-        pointer.node(o).addOut(ns.dot.wikipath, rdf.literal(path))
-      }
+
       nodeMap.set(node.id, o)
-    } else if (isText(node)){
+    } else if (isText(node)) {
       const text = node.text
       const o = rdf.blankNode()
       if (options.addLabels) {
@@ -94,7 +92,7 @@ function canvasTriplifier (canvas, context, options) {
 
     const s = resolvedSubject ?? subject
     const p = resolvedPredicate ??
-      propertyToUri(label, options)
+      propertyToUri(label)
     const o = resolvedObject ?? object
 
     pointer.node(s).addOut(p, o)
@@ -107,8 +105,6 @@ function canvasTriplifier (canvas, context, options) {
       pointer.addOut(ns.dot.contains, uri)
     }
   }
-
-
 
   return pointer
 }
