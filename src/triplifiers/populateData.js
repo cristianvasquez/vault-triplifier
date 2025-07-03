@@ -7,137 +7,154 @@ import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 // Properties that should not be converted to RDF triples
 const reservedProperties = new Set()
 
-function maybeKnown (str, { knownLinks }, options) {
-
-  // This code smells
-  // @TODO this should return a context, a label with the link to be displayed in the UIs
-  const knownLink = knownLinks.find(link => str.includes(link.value))
-  if (knownLink) {
-    const { label, uri, selector } = knownLink
-
-    knownLink.mapped = true
-    return uri
+/**
+ * Resolve a term through various strategies
+ */
+function resolveTerm(value, termType, context, options) {
+  // Already an RDF term
+  if (value?.termType) {
+    return value
   }
 
-  if (isHTTP(str)) {
-    return rdf.namedNode(str)
+  // Apply custom mapper
+  const mapper = getMapper(options)
+  const mapped = mapper({ [termType]: value }, context)
+  if (mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]) {
+    return mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]
   }
 
+  // Check known links
+  if (isString(value)) {
+    const knownLink = context.knownLinks?.find(link => value.includes(link.value))
+    if (knownLink) {
+      knownLink.mapped = true
+      return knownLink.uri
+    }
+
+    // Handle HTTP URIs
+    if (isHTTP(value)) {
+      return rdf.namedNode(value)
+    }
+  }
+
+  // Apply default transformation based on term type
+  if (termType === 'object') {
+    return newLiteral(value)
+  } else {
+    return propertyToUri(value)
+  }
 }
 
-function onlyIfTerm (term) {
-  return term.termType ? term : undefined
-
-}
-
-function addTriple (
-  pointer, { subject, predicate, object },
-  context,
-  options) {
-  const { termMapper, knownLinks } = context
-
-  if (!(isString(object) || object.termType)) {
-    throw Error(JSON.stringify(object, null, 2))
+/**
+ * Add a triple to the graph with proper resolution
+ */
+function addTriple(pointer, { subject, predicate, object }, context, options) {
+  // Validate inputs
+  if (!(isString(object) || object?.termType)) {
+    throw new Error(`Invalid object: ${JSON.stringify(object, null, 2)}`)
   }
 
-  const maybeMapped = getMapper(options)
-  const {
-    resolvedSubject,
-    resolvedPredicate,
-    resolvedObject,
-  } = maybeMapped({ subject, predicate, object }, context)
+  // Resolve all terms
+  const s = subject === pointer.term
+    ? subject
+    : resolveTerm(subject, 'subject', context, options)
 
-  // subject
-  const s = resolvedSubject ?? onlyIfTerm(subject) ??
-    maybeKnown(subject, { termMapper, knownLinks }, options) ??
-    propertyToUri(subject)
-
-  // predicate
-  const p = resolvedPredicate ?? onlyIfTerm(predicate) ??
-    maybeKnown(predicate, { knownLinks }, options) ??
-    propertyToUri(predicate)
-
-  // object
-  const o = resolvedObject ?? onlyIfTerm(object) ??
-    maybeKnown(object, { knownLinks }, options) ??
-    newLiteral(object)
+  const p = resolveTerm(predicate, 'predicate', context, options)
+  const o = resolveTerm(object, 'object', context, options)
 
   pointer.node(s).addOut(p, o)
 }
 
 /**
- * If array contains 2 elements P and O, add the triple Current-P-O
- *
- * If array contains 3 elements S, P and O, add the triple S-P-O
- *
- * If there are more elements, the semantics are not specified (yet). The tailing elements are ignored
+ * Process inline array data
+ * [p, o] -> current-p-o
+ * [s, p, o] -> s-p-o
  */
-function populateInline (data, context, options) {
+function populateInline(data, context, options) {
   const { pointer } = context
+
   if (data.length === 2) {
-    const [p, o] = data
-    addTriple(pointer,
-      { subject: pointer.term, predicate: p, object: o }, context,
-      options)
-
-  } else if (data.length > 2) {
-    const [s, p, o] = data
-    addTriple(pointer,
-      { subject: s, predicate: p, object: o },
-      context, options)
+    const [predicate, object] = data
+    addTriple(pointer, {
+      subject: pointer.term,
+      predicate,
+      object
+    }, context, options)
+  } else if (data.length >= 3) {
+    const [subject, predicate, object] = data
+    addTriple(pointer, {
+      subject,
+      predicate,
+      object
+    }, context, options)
   }
+  // Silently ignore arrays with < 2 elements
 }
 
-function asLiteralLike (value) {
-  if (typeof value === 'string' || typeof value ===
-    'boolean' || typeof value === 'number') {
-    return `${value}`
+/**
+ * Convert value to literal if possible
+ */
+function asLiteral(value) {
+  const type = typeof value
+  if (type === 'string' || type === 'boolean' || type === 'number') {
+    return String(value)
   }
+  return null
 }
 
-function populateYamlLike (data, context, options) {
-  const { pointer, knownLinks } = context
+/**
+ * Process YAML-like object data
+ */
+function populateYamlLike(data, context, options) {
+  const { pointer } = context
 
   for (const [predicate, value] of Object.entries(data)) {
-
-    const object = asLiteralLike(value)
-    if (!reservedProperties.has(predicate)) {
-      // Handle literals
-      if (object) {
-        addTriple(pointer,
-          { subject: pointer.term, predicate, object },
-          context, options)
-        // Handle arrays
-      } else if (Array.isArray(value) && value.length) {
-        value.forEach(x => {
-          const object = asLiteralLike(x)
-          if (object) {
-            addTriple(pointer,
-              { subject: pointer.term, predicate, object },
-              context, options)
-          } else {
-            const childUri = rdf.blankNode()
-            addTriple(pointer,
-              { subject: pointer.term, predicate, object: childUri },
-              context, options)
-            populateYamlLike(value,
-              { pointer: pointer.node(childUri), knownLinks },
-              options)
-          }
-        })
-        // Handle Objects
-      } else if (typeof value === 'object' && value !== null && value !==
-        undefined) {
-        const childUri = rdf.blankNode()
-        addTriple(pointer,
-          { subject: pointer.term, predicate, object: childUri },
-          context, options)
-        populateYamlLike(value,
-          { pointer: pointer.node(childUri), knownLinks }, options)
-      }
+    if (reservedProperties.has(predicate)) {
+      continue
     }
+
+    processValue(pointer, predicate, value, context, options)
+  }
+}
+
+/**
+ * Process a single value based on its type
+ */
+function processValue(pointer, predicate, value, context, options) {
+  // Handle primitives
+  const literal = asLiteral(value)
+  if (literal !== null) {
+    addTriple(pointer, {
+      subject: pointer.term,
+      predicate,
+      object: literal
+    }, context, options)
+    return
   }
 
+  // Handle arrays
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      processValue(pointer, predicate, item, context, options)
+    }
+    return
+  }
+
+  // Handle objects
+  if (value && typeof value === 'object') {
+    const childNode = rdf.blankNode()
+    addTriple(pointer, {
+      subject: pointer.term,
+      predicate,
+      object: childNode
+    }, context, options)
+
+    // Recursively process the nested object
+    populateYamlLike(value, {
+      ...context,
+      pointer: pointer.node(childNode)
+    }, options)
+  }
 }
 
 export { populateYamlLike, populateInline }

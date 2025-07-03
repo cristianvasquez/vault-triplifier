@@ -1,90 +1,87 @@
 import rdf from 'rdf-ext'
 import { nameToUri, pathToUri } from '../termMapper/termMapper.js'
 
-function getKnownLinks (links, context, options) {
-  return links.map(({ type, value, alias }) => ({
-    type, value, alias, ...urisAndPaths({ type, value }, context, options),
+function getKnownLinks(links, context, options) {
+  return links.map(link => ({
+    ...link,
+    ...resolveLink(link, context, options)
   }))
 }
 
-function searchUriBySelector (node, selector) {
-  function traverse (node) {
-    if (node.uri && node.value === selector) {
-      return node.uri
-    }
-    for (const child of node.children ?? []) {
-      const result = traverse(child)
-      if (result) return result
-    }
-  }
-
-  return traverse(node)
-}
-
-function urisAndPaths ({ type, value }, context) {
-  const { rootNode } = context
+function resolveLink({ type, value }, context) {
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
 
-  const { head, selector } = splitHash(value)
+  const { head, selector } = parseHashPath(value)
 
-  // [[#hello]]
+  // Internal reference: [[#hello]]
   if (!head) {
-    const maybeUri = searchUriBySelector(rootNode, selector)
+    const uri = findUriBySelector(context.rootNode, selector) ?? pathToUri(context.path)
     return {
-      uri: maybeUri ?? pathToUri(context.path),
+      uri,
       wikipath: context.path,
-      selector,
+      selector
     }
   }
 
-  const resolvedPath = head.startsWith('.') ? resolvePath(
-    activePath(context.path), head) : head
-
-  // Wiki-links
-  const uri = nameToUri(resolvedPath)
+  // Wiki-link with optional selector: [[path]] or [[path#selector]]
+  const resolvedPath = head.startsWith('.')
+    ? resolveRelativePath(context.path, head)
+    : head
 
   return {
-    uri,
+    uri: nameToUri(resolvedPath),
     wikipath: resolvedPath,
-    selector,
+    selector
   }
-
 }
 
-function splitHash (value) {
-  const [head, ...tail] = value.split('#')
+function findUriBySelector(node, targetSelector) {
+  if (node.uri && node.value === targetSelector) {
+    return node.uri
+  }
+
+  for (const child of node.children ?? []) {
+    const found = findUriBySelector(child, targetSelector)
+    if (found) return found
+  }
+
+  return null
+}
+
+function parseHashPath(value) {
+  const hashIndex = value.indexOf('#')
+
+  if (hashIndex === -1) {
+    return { head: value, selector: undefined }
+  }
+
   return {
-    head: head.length ? head : undefined,
-    selector: tail.length ? tail.join('#') : undefined,
+    head: hashIndex === 0 ? undefined : value.slice(0, hashIndex),
+    selector: value.slice(hashIndex + 1)
   }
 }
 
-function activePath (path) {
-  const split = path.split('/')
-  return split.length === 1 ? split[0] : split.slice(0, -1).
-    join('/')
-}
+function resolveRelativePath(currentPath, relativePath) {
+  // Get directory from current path
+  const lastSlash = currentPath.lastIndexOf('/')
+  const baseDir = lastSlash === -1 ? '' : currentPath.slice(0, lastSlash)
 
-function resolvePath (activePath, head) {
-  if (!activePath) {
-    return head
-  }
-
-  // Browser-compatible path resolution
-  const parts = ['/', activePath, head].join('/').split('/')
+  // Normalize path
+  const fullPath = baseDir ? `${baseDir}/${relativePath}` : relativePath
+  const parts = fullPath.split('/')
   const resolved = []
 
   for (const part of parts) {
     if (part === '..') {
       resolved.pop()
-    } else if (part !== '.' && part !== '') {
+    } else if (part && part !== '.') {
       resolved.push(part)
     }
   }
 
-  return resolved.join('/').replace(/^\//, '')
+  return resolved.join('/')
 }
 
 export { getKnownLinks }

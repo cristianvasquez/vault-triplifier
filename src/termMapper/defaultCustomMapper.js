@@ -1,38 +1,33 @@
 import ns from '../namespaces.js'
-import { isString } from '../strings/string.js'
 
-const wellKnown = {
+const WELL_KNOWN = {
   'is a': ns.rdf.type,
   'same as': ns.rdf.sameAs,
 }
 
-function inspectNamespaces (ns, str) {
-  if (str && isString(str)) {
-    // Predicate is of the form schema:name
-    if (ns && str.split(':').length === 2) {
-      const [vocabulary, property] = str.split(':')
-      return ns[vocabulary] ? ns[vocabulary][property] : undefined
-    }
-    return wellKnown[str]
-  }
+function resolveNamespace(namespaces, str) {
+  if (!str || typeof str !== 'string') return null
+
+  const colonIndex = str.indexOf(':')
+  if (colonIndex === -1) return WELL_KNOWN[str]
+
+  const vocabulary = str.slice(0, colonIndex)
+  const property = str.slice(colonIndex + 1)
+
+  return namespaces?.[vocabulary]?.[property]
 }
 
-function inspectCustomMappings (customMappings, str) {
-  return customMappings ? customMappings[str] : undefined
-}
-
-function getMapper (options) {
-
+function getMapper(options = {}) {
   const { namespaces, customMappings } = options
-  const resolve = (str) => inspectCustomMappings(customMappings, str) ??
-    inspectNamespaces(namespaces, str)
-  return ({ subject, predicate, object }, context) => {
-    return {
-      resolvedSubject: resolve(subject),
-      resolvedPredicate: resolve(predicate),
-      resolvedObject: resolve(object),
-    }
-  }
+
+  const resolve = (value) =>
+    customMappings?.[value] ?? resolveNamespace(namespaces, value)
+
+  return ({ subject, predicate, object }) => ({
+    resolvedSubject: resolve(subject),
+    resolvedPredicate: resolve(predicate),
+    resolvedObject: resolve(object)
+  })
 }
 
 export { getMapper }

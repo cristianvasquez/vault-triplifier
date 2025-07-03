@@ -1,45 +1,40 @@
 import { nameFromUri, pathToUri } from '../termMapper/termMapper.js'
 
-function resolvePlaceholders (pointer, getPathByName) {
-  const quadsToReplace = []
-
-  const resolvePlaceholder = (term) => {
+function resolvePlaceholders(pointer, getPathByName) {
+  const resolveTerm = (term) => {
     if (term.termType !== 'NamedNode') return term
 
     const placeholderName = nameFromUri(term)
     if (!placeholderName) return term
 
     const resolvedPath = getPathByName(placeholderName)
-    if (resolvedPath?.path) {
-      return pathToUri(resolvedPath.path)
-    }
-
-    return term
+    return resolvedPath?.path ? pathToUri(resolvedPath.path) : term
   }
+
+  // Process all quads and collect replacements
+  const replacements = []
 
   for (const quad of pointer.dataset) {
-    const newSubject = resolvePlaceholder(quad.subject)
-    const newPredicate = resolvePlaceholder(quad.predicate)
-    const newObject = resolvePlaceholder(quad.object)
+    const resolved = {
+      subject: resolveTerm(quad.subject),
+      predicate: resolveTerm(quad.predicate),
+      object: resolveTerm(quad.object)
+    }
 
-    if (newSubject !== quad.subject || newPredicate !== quad.predicate ||
-      newObject !== quad.object) {
-      quadsToReplace.push({
-        old: quad,
-        new: {
-          subject: newSubject,
-          predicate: newPredicate,
-          object: newObject,
-        },
-      })
+    // Check if any term changed
+    if (resolved.subject !== quad.subject ||
+      resolved.predicate !== quad.predicate ||
+      resolved.object !== quad.object) {
+      replacements.push({ quad, resolved })
     }
   }
 
-  // Replace quads with resolved placeholders
-  for (const { old, new: newQuad } of quadsToReplace) {
-    pointer.dataset.delete(old)
+  // Apply all replacements
+  for (const { quad, resolved } of replacements) {
+    pointer.dataset.delete(quad)
     pointer.dataset.add(
-      pointer.factory.quad(newQuad.subject, newQuad.predicate, newQuad.object))
+      pointer.factory.quad(resolved.subject, resolved.predicate, resolved.object)
+    )
   }
 
   return pointer
