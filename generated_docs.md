@@ -11,76 +11,73 @@ npm install vault-triplifier
 ## Usage
 
 ```javascript
-import { toRDF } from 'vault-triplifier'
+import { triplifyFile } from 'vault-triplifier'
 import ns from 'vault-triplifier/namespaces'
 
-const markdown = `
-# Alice
-age:: 30
-knows:: [[Bob]]
-`
-
 const options = {
-  baseNamespace: ns.ex,
   splitOnHeader: true,
   addLabels: true,
   namespaces: ns
 }
 
-const pointer = toRDF(markdown, { path: 'alice.md' }, options)
+// For a single file
+const pointer = await triplifyFile('alice.md', options)
 console.log([...pointer.dataset]) // RDF quads
+
+// For an entire directory (this will resolve links between notes)
+import { triplifyVault } from 'vault-triplifier'
+
+const dataset = await triplifyVault('./my-vault', options)
+console.log([...dataset]) // All RDF quads from all files
 ```
 
 ## Options
 
-### Required Options
+### Configuration Options
 
-| Option | Type | Description |
-|--------|------|-------------|
-| `baseNamespace` | Function | **Required.** Base namespace for generated URIs (e.g., `ns.ex`) |
+All options are optional and have sensible defaults.
 
 ### Document Splitting Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `splitOnHeader` | Boolean | `false` | Create separate RDF entities for each header block |
-| `splitOnTag` | Boolean | `false` | Create separate RDF entities for elements with tags (#tag) |
-| `splitOnId` | Boolean | `true` | Create separate RDF entities for elements with block identifiers (^id) |
+| Option          | Type    | Default | Description                                                            |
+|-----------------|---------|---------|------------------------------------------------------------------------|
+| `splitOnHeader` | Boolean | `false` | Create separate RDF entities for each header block                     |
+| `splitOnTag`    | Boolean | `false` | Create separate RDF entities for elements with tags (#tag)             |
+| `splitOnId`     | Boolean | `true`  | Create separate RDF entities for elements with block identifiers (^id) |
 
 ### Link and Path Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `includeWikipaths` | Boolean | `true` | Add `dot:wikipath` triples containing file paths |
-| `includeSelectors` | Boolean | `true` | Add `dot:selector` triples for block selectors |
+| Option             | Type    | Default | Description                                    |
+|--------------------|---------|---------|------------------------------------------------|
+| `includeSelectors` | Boolean | `true`  | Add `dot:selector` triples for block selectors |
 
 ### Label and Naming Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
+| Option      | Type    | Default | Description                                              |
+|-------------|---------|---------|----------------------------------------------------------|
 | `addLabels` | Boolean | `false` | Automatically add `schema:name` labels to generated URIs |
 
 ### Mapping and Transformation Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `customMappings` | Object | `undefined` | Map custom property names to known RDF properties |
-| `namespaces` | Object | `undefined` | Namespace functions for resolving prefixed properties |
+| Option           | Type   | Default     | Description                                           |
+|------------------|--------|-------------|-------------------------------------------------------|
+| `customMappings` | Object | `undefined` | Map custom property names to known RDF properties     |
+| `namespaces`     | Object | `undefined` | Namespace functions for resolving prefixed properties |
 
 ## Examples
 
 ### Basic Usage
 
 ```javascript
-import { toRDF } from 'vault-triplifier'
+import { triplifyFile } from 'vault-triplifier'
 import ns from 'vault-triplifier/namespaces'
 
 const options = {
-  baseNamespace: ns.ex,
   namespaces: ns
 }
 
-const pointer = toRDF('# Hello\nauthor:: John', { path: 'test.md' }, options)
+// Process a single file
+const pointer = await triplifyFile('test.md', options)
 ```
 
 ### Split on Headers
@@ -97,21 +94,19 @@ age:: 25
 `
 
 const options = {
-  baseNamespace: ns.ex,
   splitOnHeader: true,
   addLabels: true,
   namespaces: ns
 }
 
 // Creates separate entities for Alice and Bob
-const pointer = deleteMe(markdown, { path: 'people.md' }, options)
+const pointer = await triplifyFile('people.md', options)
 ```
 
 ### Custom Mappings
 
 ```javascript
 const options = {
-  baseNamespace: ns.ex,
   customMappings: {
     'lives in': ns.schema.address,
     'knows': ns.foaf.knows
@@ -125,7 +120,7 @@ lives in:: New York
 knows:: [[Bob]]
 `
 
-const pointer = deleteMe(markdown, { path: 'alice.md' }, options)
+const pointer = await triplifyFile('alice.md', options)
 ```
 
 ### Block Identifiers
@@ -142,13 +137,12 @@ age:: 25
 `
 
 const options = {
-  baseNamespace: ns.ex,
   splitOnId: true, // default
   namespaces: ns
 }
 
 // Creates URIs ending with /alice and /bob
-const pointer = deleteMe(markdown, { path: 'people.md' }, options)
+const pointer = await triplifyFile('people.md', options)
 ```
 
 ### Tags
@@ -165,13 +159,12 @@ age:: 25
 `
 
 const options = {
-  baseNamespace: ns.ex,
   splitOnTag: true,
   namespaces: ns
 }
 
 // Creates separate entities for tagged elements
-const pointer = deleteMe(markdown, { path: 'people.md' }, options)
+const pointer = await triplifyFile('people.md', options)
 ```
 
 ## Built-in Property Mappings
@@ -199,6 +192,7 @@ When using the `namespaces` option, these prefixes are available:
 
 ```markdown
 # Note Title
+
 property:: value
 another:: [[linked note]]
 inline:: (property:: value)
@@ -208,6 +202,7 @@ inline:: (property:: value)
 
 ```markdown
 ## Section Name ^section-id
+
 content here
 ```
 
@@ -215,6 +210,7 @@ content here
 
 ```markdown
 ## Item Name #category
+
 content here
 ```
 
@@ -223,7 +219,7 @@ content here
 ```yaml
 ---
 title: My Note
-tags: [example, demo]
+tags: [ example, demo ]
 author: John Doe
 ---
 ```
@@ -240,23 +236,24 @@ Same options apply to canvas processing, with edge labels supporting custom mapp
 
 ## API Reference
 
-### `toRDF(markdown, fileInfo, options)`
+### `triplifyFile(filePath, options)`
 
-Convert markdown to RDF.
+Process a single markdown or canvas file.
 
 **Parameters:**
-- `markdown` (string) - Markdown content
-- `fileInfo` (object) - File information with `path` property
+
+- `filePath` (string) - Path to the file to process
 - `options` (object) - Configuration options
 
-**Returns:** Grapoi pointer with RDF dataset
+**Returns:** Promise resolving to a Grapoi pointer with RDF dataset
 
-### `triplifyVault(files, options)`
+### `triplifyVault(directory, options)`
 
-Process multiple files from a vault.
+Process all markdown and canvas files in a directory.
 
 **Parameters:**
-- `files` (array) - Array of file objects with `path` and `content`
-- `options` (object) - Configuration options with `getPathByName` function
 
-**Returns:** Grapoi pointer with combined RDF dataset
+- `directory` (string) - Directory path to process
+- `options` (object) - Configuration options
+
+**Returns:** Promise resolving to an RDF dataset containing all triples

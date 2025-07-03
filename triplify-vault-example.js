@@ -3,9 +3,6 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
-// will split the document into a tree
-  splitOnHeader: true,
-
   // will resolve these
   namespaces: ns,
   customMappings: {
@@ -13,8 +10,7 @@ const options = {
     'lives in': ns.schema.address,
   },
   addLabels: true,
-  includeSelectors: false, // includes the offsets where the
-
+  includeSelectors: true, // includes the offsets where the
 }
 
 const dir = './example-vault'
