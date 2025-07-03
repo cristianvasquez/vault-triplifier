@@ -1,68 +1,67 @@
 import rdf from 'rdf-ext'
 
-function toUri (txt, baseNamespace) {
-  return baseNamespace[`${encodeURI(txt)}`]
+// Base conversion functions
+function toUri(text, namespace) {
+  return namespace[encodeURI(text)]
 }
 
-function fromUri (term, baseNamespace) {
-  const base = baseNamespace().value
-  const inNamespace = term.value.startsWith(base)
-  if (!inNamespace) {
-    return undefined
+function fromUri(term, namespace) {
+  const base = namespace().value
+  if (!term.value.startsWith(base)) {
+    return null
   }
-  const withoutBase = term.value.replace(new RegExp(`^${base}`), '')
-  return decodeURI(withoutBase)
+
+  const suffix = term.value.slice(base.length)
+  return decodeURI(suffix)
 }
 
-// Note
-const resourceNamespace = rdf.namespace('urn:resource:')
-
-function pathToUri (txt, options) {
-  if (options) throw Error('You shall not pass')
-  return toUri(txt, resourceNamespace)
+// Namespaces
+const namespaces = {
+  resource: rdf.namespace('urn:resource:'),
+  property: rdf.namespace('urn:property:'),
+  name: rdf.namespace('urn:name:')
 }
 
-function pathFromUri (term, options) {
-  if (options) throw Error('You shall not pass')
-  return fromUri(term, resourceNamespace)
+// Resource/Path functions
+function pathToUri(path) {
+  return toUri(path, namespaces.resource)
 }
 
-const propertyNamespace = rdf.namespace('urn:property:')
+function pathFromUri(term) {
+  return fromUri(term, namespaces.resource)
+}
 
-// Properties
+// Property functions
 // "has name" -> http://some-vault/property/has-name
-function propertyToUri (txt, options) {
-  if (options) throw Error('You shall not pass')
-  return toUri(txt, propertyNamespace)
+function propertyToUri(property) {
+  return toUri(property, namespaces.property)
 }
 
-function propertyFromUri (term, options) {
-  if (options) throw Error('You shall not pass')
-  return fromUri(term, propertyNamespace)
+function propertyFromUri(term) {
+  return fromUri(term, namespaces.property)
 }
 
-const nameNamespace = rdf.namespace('urn:name:')
 //Names, symbols that denote notes. [[Alice]]
 // "Alice" -> http://some-vault/placeholder/alice
-function nameToUri (txt, options) {
-  if (options) throw Error('You shall not pass')
-  return toUri(txt, nameNamespace)
+function nameToUri(name) {
+  return toUri(name, namespaces.name)
 }
 
-function nameFromUri (term, options) {
-  if (options) throw Error('You shall not pass')
-  return fromUri(term, nameNamespace)
+function nameFromUri(term) {
+  return fromUri(term, namespaces.name)
 }
 
 // Literal factory
-function newLiteral (txt, options) {
-  if (options) throw Error('You shall not pass')
-  return rdf.literal(txt)
+function newLiteral(text) {
+  return rdf.literal(text)
 }
 
+// Block URI builder
 // http://example.com/ + ^blockId -> http://example.com/blockId
-const blockUri = (uri, blockId) => rdf.namedNode(
-  `${uri.value}/${blockId.replace(/^\^/, '')}`)
+function blockUri(baseUri, blockId) {
+  const cleanId = blockId.replace(/^\^/, '')
+  return rdf.namedNode(`${baseUri.value}/${cleanId}`)
+}
 
 export {
   pathToUri,
@@ -72,5 +71,5 @@ export {
   nameToUri,
   nameFromUri,
   newLiteral,
-  blockUri,
+  blockUri
 }
