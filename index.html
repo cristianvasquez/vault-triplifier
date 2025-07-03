@@ -9,12 +9,12 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
             height: 100vh;
         }
 
-        .input-panel, .output-panel {
+        .input-panel, .output-panel, .visualization-panel {
             display: flex;
             flex-direction: column;
         }
@@ -50,6 +50,7 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .controls label {
@@ -59,6 +60,40 @@
         .controls input[type="checkbox"] {
             margin-right: 5px;
         }
+
+        rdf2dot-default {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: auto;
+            display: block;
+        }
+
+        .visualization-controls {
+            margin: 10px 0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #update-diagram {
+            padding: 8px 16px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #update-diagram:hover {
+            background: #005a9e;
+        }
+
+        #update-diagram:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -66,7 +101,10 @@
     <h2>Markdown Input</h2>
     <div class="controls">
         <label><input type="checkbox" id="splitOnHeader" checked> splitOnHeader</label>
+        <label><input type="checkbox" id="splitOnTag"> splitOnTag</label>
+        <label><input type="checkbox" id="splitOnId" checked> splitOnId</label>
         <label><input type="checkbox" id="addLabels" checked> addLabels</label>
+        <label><input type="checkbox" id="includeSelectors" checked> includeSelectors</label>
         <label><input type="checkbox" id="includeWikipaths" checked> includeWikipaths</label>
     </div>
     <textarea id="markdown-input" placeholder="Enter your markdown here...">---
@@ -99,23 +137,45 @@ Content under level 4
 
     <textarea id="rdf-output"></textarea>
 </div>
+
+<div class="visualization-panel">
+    <h2>RDF Visualization</h2>
+    <div class="visualization-controls">
+        <button id="update-diagram">Update Diagram</button>
+    </div>
+    <rdf2dot-default id="rdf-viewer" data=""></rdf2dot-default>
+</div>
+<!-- External dependencies for rdf2dot -->
+<script src="https://eyereasoner.github.io/eye-js/16/latest/index.js"></script>
+<script src="https://unpkg.com/@viz-js/viz@3.1.0/lib/viz-standalone.js"></script>
+
 <!-- Main logic -->
 <script type="module">
   import grapoi from 'grapoi'
   import { markdownToRDF } from './src/markdown-to-RDF.js'
   import ns from './src/namespaces.js'
   import rdf from 'rdf-ext'
-
+  import 'rdf2dot-wc/rdf2dot-wc.js'
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
+  const rdfViewer = document.getElementById('rdf-viewer')
+  const updateDiagramBtn = document.getElementById('update-diagram')
   const splitOnHeaderInput = document.getElementById('splitOnHeader')
+  const splitOnTagInput = document.getElementById('splitOnTag')
+  const splitOnIdInput = document.getElementById('splitOnId')
   const addLabelsInput = document.getElementById('addLabels')
+  const includeSelectorsInput = document.getElementById('includeSelectors')
   const includeWikipathsInput = document.getElementById('includeWikipaths')
+
+  let hasChanges = false
 
   async function updateOutput () {
     const options = {
       splitOnHeader: splitOnHeaderInput.checked,
+      splitOnTag: splitOnTagInput.checked,
+      splitOnId: splitOnIdInput.checked,
       addLabels: addLabelsInput.checked,
+      includeSelectors: includeSelectorsInput.checked,
       includeWikipaths: includeWikipathsInput.checked,
       baseNamespace: ns.ex,
       namespaces: ns,
@@ -128,16 +188,36 @@ Content under level 4
     const result = markdownToRDF(markdownInput.value, { pointer, path: file }, options)
 
     rdfOutput.value = result.dataset.toString()
+    
+    // Mark that there are changes
+    hasChanges = true
+    updateDiagramBtn.textContent = 'Update Diagram'
+    updateDiagramBtn.disabled = false
 
+  }
+
+  function updateDiagram() {
+    if (hasChanges) {
+      rdfViewer.data = rdfOutput.value
+      hasChanges = false
+      updateDiagramBtn.textContent = 'Up to date'
+      updateDiagramBtn.disabled = true
+    }
   }
 
   markdownInput.addEventListener('input', updateOutput)
   splitOnHeaderInput.addEventListener('change', updateOutput)
+  splitOnTagInput.addEventListener('change', updateOutput)
+  splitOnIdInput.addEventListener('change', updateOutput)
   addLabelsInput.addEventListener('change', updateOutput)
+  includeSelectorsInput.addEventListener('change', updateOutput)
   includeWikipathsInput.addEventListener('change', updateOutput)
+  updateDiagramBtn.addEventListener('click', updateDiagram)
 
   // Initial render
   updateOutput()
+  // Initial diagram update
+  setTimeout(updateDiagram, 100)
 </script>
 </body>
 </html>

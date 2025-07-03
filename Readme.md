@@ -99,11 +99,16 @@ ex:s ex:p ex:o .
 
 ```
 
-Note that the concepts of Alice and the White rabbit are different entities than the Notes.
 
 ## Usage
 
 See the [generated_docs](./generated_docs.md) for details
+
+## Diagram
+
+Note that the concepts of Alice and the White rabbit are different entities than the Notes.
+
+![](./example-vault/example.svg)
 
 ## Status
 

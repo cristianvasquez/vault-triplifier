@@ -3,6 +3,7 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
+  splitOnHeader:true,
   // will resolve these
   namespaces: ns,
   customMappings: {

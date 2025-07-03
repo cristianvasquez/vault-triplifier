@@ -1,0 +1,291 @@
+<svg width="576pt" height="692pt" viewBox="0.00 0.00 575.58 692.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 688.4)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-688.4 571.58,-688.4 571.58,4 -4,4"></polygon>
+<!-- b8_sk_0 -->
+<g id="node1" class="node">
+<title>b8_sk_0</title>
+<g id="a_node1"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#e_b2_1">
+<polygon fill="none" stroke="black" points="8,-353.6 8,-376.4 90.21,-376.4 90.21,-353.6 8,-353.6"></polygon>
+<text text-anchor="start" x="35.11" y="-361.8" font-family="Times,serif" font-style="italic" font-size="14.00">label</text>
+<polygon fill="none" stroke="black" points="90.21,-353.6 90.21,-376.4 212.06,-376.4 212.06,-353.6 90.21,-353.6"></polygon>
+<text text-anchor="start" x="107.6" y="-360.8" font-family="Times,serif" font-size="14.00">Wozenderlands</text>
+<polygon fill="none" stroke="black" points="8,-330.8 8,-353.6 90.21,-353.6 90.21,-330.8 8,-330.8"></polygon>
+<text text-anchor="start" x="37.45" y="-339" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="90.21,-330.8 90.21,-353.6 212.06,-353.6 212.06,-330.8 90.21,-330.8"></polygon>
+<text text-anchor="start" x="134.42" y="-338" font-family="Times,serif" font-size="14.00">Block</text>
+<polygon fill="none" stroke="black" points="8,-308 8,-330.8 90.21,-330.8 90.21,-308 8,-308"></polygon>
+<text text-anchor="start" x="37.45" y="-316.2" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="90.21,-308 90.21,-330.8 212.06,-330.8 212.06,-308 90.21,-308"></polygon>
+<text text-anchor="start" x="135.98" y="-315.2" font-family="Times,serif" font-size="14.00">Place</text>
+<polygon fill="none" stroke="black" points="8,-285.2 8,-308 90.21,-308 90.21,-285.2 8,-285.2"></polygon>
+<text text-anchor="start" x="17.22" y="-293.4" font-family="Times,serif" font-style="italic" font-size="14.00">postalCode</text>
+<polygon fill="none" stroke="black" points="90.21,-285.2 90.21,-308 212.06,-308 212.06,-285.2 90.21,-285.2"></polygon>
+<text text-anchor="start" x="137.14" y="-292.4" font-family="Times,serif" font-size="14.00">4879</text>
+<polygon fill="none" stroke="black" points="8,-262.4 8,-285.2 90.21,-285.2 90.21,-262.4 8,-262.4"></polygon>
+<text text-anchor="start" x="11" y="-270.6" font-family="Times,serif" font-style="italic" font-size="14.00">streetAddress</text>
+<polygon fill="none" stroke="black" points="90.21,-262.4 90.21,-285.2 212.06,-285.2 212.06,-262.4 90.21,-262.4"></polygon>
+<text text-anchor="start" x="93.21" y="-269.6" font-family="Times,serif" font-size="14.00">5 Wonderland Street</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_5 -->
+<g id="node6" class="node">
+<title>b8_sk_5</title>
+<g id="a_node6"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#bn_2">
+<polygon fill="none" stroke="black" points="13.48,-178.8 13.48,-201.6 45.16,-201.6 45.16,-178.8 13.48,-178.8"></polygon>
+<text text-anchor="start" x="17.66" y="-187" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="45.16,-178.8 45.16,-201.6 168.58,-201.6 168.58,-178.8 45.16,-178.8"></polygon>
+<text text-anchor="start" x="48.16" y="-186" font-family="Times,serif" font-size="14.00">TextPositionSelector</text>
+<polygon fill="none" stroke="black" points="13.48,-156 13.48,-178.8 45.16,-178.8 45.16,-156 13.48,-156"></polygon>
+<text text-anchor="start" x="16.48" y="-164.2" font-family="Times,serif" font-style="italic" font-size="14.00">start</text>
+<polygon fill="none" stroke="black" points="45.16,-156 45.16,-178.8 168.58,-178.8 168.58,-156 45.16,-156"></polygon>
+<text text-anchor="start" x="96.37" y="-163.2" font-family="Times,serif" font-size="14.00">215</text>
+<polygon fill="none" stroke="black" points="13.48,-133.2 13.48,-156 45.16,-156 45.16,-133.2 13.48,-133.2"></polygon>
+<text text-anchor="start" x="19.21" y="-141.4" font-family="Times,serif" font-style="italic" font-size="14.00">end</text>
+<polygon fill="none" stroke="black" points="45.16,-133.2 45.16,-156 168.58,-156 168.58,-133.2 45.16,-133.2"></polygon>
+<text text-anchor="start" x="96.37" y="-140.4" font-family="Times,serif" font-size="14.00">231</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_0&#45;&gt;b8_sk_5 -->
+<g id="edge1" class="edge">
+<title>b8_sk_0-&gt;b8_sk_5</title>
+<g id="a_edge1"><a xlink:title="hasSelector">
+<path fill="none" stroke="#b2df8a" d="M102.47,-258.69C100.71,-244.78 98.85,-230.15 97.16,-216.81"></path>
+<polygon fill="#b2df8a" stroke="#b2df8a" points="100.65,-216.45 95.92,-206.97 93.7,-217.33 100.65,-216.45"></polygon>
+</a>
+</g>
+<g id="a_edge1-label"><a xlink:href="http://www.w3.org/ns/oa#hasSelector" xlink:title="hasSelector">
+<text text-anchor="middle" x="132.23" y="-227.8" font-family="Times,serif" font-size="14.00">hasSelector</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_1 -->
+<g id="node2" class="node">
+<title>b8_sk_1</title>
+<g id="a_node2"><a xlink:href="urn:resource:Alice.md" xlink:title="urn:resource:Alice.md">
+<defs>
+<linearGradient id="l_0" gradientUnits="userSpaceOnUse" x1="245.84" y1="-353.6" x2="370.22" y2="-353.6">
+<stop offset="0" style="stop-color:#7fc97f;stop-opacity:1.;"></stop>
+<stop offset="1" style="stop-color:#fdc086;stop-opacity:1.;"></stop>
+</linearGradient>
+</defs>
+<polygon fill="url(#l_0)" stroke="none" points="245.84,-342.2 245.84,-365 370.22,-365 370.22,-342.2 245.84,-342.2"></polygon>
+<polygon fill="none" stroke="black" points="245.84,-342.2 245.84,-365 370.22,-365 370.22,-342.2 245.84,-342.2"></polygon>
+<text text-anchor="start" x="282.18" y="-349.4" font-family="Times,serif" font-size="14.00">Alice.md</text>
+<polygon fill="none" stroke="black" points="245.84,-319.4 245.84,-342.2 312.51,-342.2 312.51,-319.4 245.84,-319.4"></polygon>
+<text text-anchor="start" x="265.18" y="-327.6" font-family="Times,serif" font-style="italic" font-size="14.00">label</text>
+<polygon fill="none" stroke="black" points="312.51,-319.4 312.51,-342.2 370.22,-342.2 370.22,-319.4 312.51,-319.4"></polygon>
+<text text-anchor="start" x="326.21" y="-326.6" font-family="Times,serif" font-size="14.00">Alice</text>
+<polygon fill="none" stroke="black" points="245.84,-296.6 245.84,-319.4 312.51,-319.4 312.51,-296.6 245.84,-296.6"></polygon>
+<text text-anchor="start" x="267.52" y="-304.8" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="312.51,-296.6 312.51,-319.4 370.22,-319.4 370.22,-296.6 312.51,-296.6"></polygon>
+<text text-anchor="start" x="327.76" y="-303.8" font-family="Times,serif" font-size="14.00">Note</text>
+<polygon fill="none" stroke="black" points="245.84,-273.8 245.84,-296.6 312.51,-296.6 312.51,-273.8 245.84,-273.8"></polygon>
+<text text-anchor="start" x="248.84" y="-282" font-family="Times,serif" font-style="italic" font-size="14.00">atLocation</text>
+<polygon fill="none" stroke="black" points="312.51,-273.8 312.51,-296.6 370.22,-296.6 370.22,-273.8 312.51,-273.8"></polygon>
+<text text-anchor="start" x="315.51" y="-281" font-family="Times,serif" font-size="14.00">Alice.md</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_2 -->
+<g id="node3" class="node">
+<title>b8_sk_2</title>
+<g id="a_node3"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#bn_6">
+<polygon fill="none" stroke="black" points="203.01,-178.8 203.01,-201.6 243.22,-201.6 243.22,-178.8 203.01,-178.8"></polygon>
+<text text-anchor="start" x="209.12" y="-187" font-family="Times,serif" font-style="italic" font-size="14.00">label</text>
+<polygon fill="none" stroke="black" points="243.22,-178.8 243.22,-201.6 451.06,-201.6 451.06,-178.8 243.22,-178.8"></polygon>
+<text text-anchor="start" x="331.98" y="-186" font-family="Times,serif" font-size="14.00">Alice</text>
+<polygon fill="none" stroke="black" points="203.01,-156 203.01,-178.8 243.22,-178.8 243.22,-156 203.01,-156"></polygon>
+<text text-anchor="start" x="211.45" y="-164.2" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="243.22,-156 243.22,-178.8 451.06,-178.8 451.06,-156 243.22,-156"></polygon>
+<text text-anchor="start" x="330.42" y="-163.2" font-family="Times,serif" font-size="14.00">Block</text>
+<polygon fill="none" stroke="black" points="203.01,-133.2 203.01,-156 243.22,-156 243.22,-133.2 203.01,-133.2"></polygon>
+<text text-anchor="start" x="206.01" y="-141.4" font-family="Times,serif" font-style="italic" font-size="14.00">image</text>
+<polygon fill="none" stroke="black" points="243.22,-133.2 243.22,-156 451.06,-156 451.06,-133.2 243.22,-133.2"></polygon>
+<text text-anchor="start" x="246.22" y="-140.4" font-family="Times,serif" font-size="14.00">1*xupcHn3b0jEFPkjvuH5Pbw.jpeg</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_1&#45;&gt;b8_sk_2 -->
+<g id="edge4" class="edge">
+<title>b8_sk_1-&gt;b8_sk_2</title>
+<g id="a_edge4"><a xlink:title="contains">
+<path fill="none" stroke="#e31a1c" d="M314.15,-270.11C316.34,-252.83 318.8,-233.37 320.98,-216.14"></path>
+<polygon fill="#e31a1c" stroke="#e31a1c" points="324.4,-217.04 322.18,-206.68 317.45,-216.16 324.4,-217.04"></polygon>
+</a>
+</g>
+<g id="a_edge4-label"><a xlink:href="http://pkm-united.org/contains" xlink:title="contains">
+<text text-anchor="middle" x="343.12" y="-227.8" font-family="Times,serif" font-size="14.00">contains</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_6 -->
+<g id="node7" class="node">
+<title>b8_sk_6</title>
+<g id="a_node7"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#bn_8">
+<polygon fill="none" stroke="black" points="249.48,-49.6 249.48,-72.4 281.16,-72.4 281.16,-49.6 249.48,-49.6"></polygon>
+<text text-anchor="start" x="253.66" y="-57.8" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="281.16,-49.6 281.16,-72.4 404.58,-72.4 404.58,-49.6 281.16,-49.6"></polygon>
+<text text-anchor="start" x="284.16" y="-56.8" font-family="Times,serif" font-size="14.00">TextPositionSelector</text>
+<polygon fill="none" stroke="black" points="249.48,-26.8 249.48,-49.6 281.16,-49.6 281.16,-26.8 249.48,-26.8"></polygon>
+<text text-anchor="start" x="252.48" y="-35" font-family="Times,serif" font-style="italic" font-size="14.00">start</text>
+<polygon fill="none" stroke="black" points="281.16,-26.8 281.16,-49.6 404.58,-49.6 404.58,-26.8 281.16,-26.8"></polygon>
+<text text-anchor="start" x="339.37" y="-34" font-family="Times,serif" font-size="14.00">0</text>
+<polygon fill="none" stroke="black" points="249.48,-4 249.48,-26.8 281.16,-26.8 281.16,-4 249.48,-4"></polygon>
+<text text-anchor="start" x="255.21" y="-12.2" font-family="Times,serif" font-style="italic" font-size="14.00">end</text>
+<polygon fill="none" stroke="black" points="281.16,-4 281.16,-26.8 404.58,-26.8 404.58,-4 281.16,-4"></polygon>
+<text text-anchor="start" x="339.37" y="-11.2" font-family="Times,serif" font-size="14.00">7</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_2&#45;&gt;b8_sk_6 -->
+<g id="edge2" class="edge">
+<title>b8_sk_2-&gt;b8_sk_6</title>
+<g id="a_edge2"><a xlink:title="hasSelector">
+<path fill="none" stroke="#b2df8a" d="M327.03,-129.27C327.03,-116.2 327.03,-101.33 327.03,-87.49"></path>
+<polygon fill="#b2df8a" stroke="#b2df8a" points="330.53,-87.67 327.03,-77.67 323.53,-87.67 330.53,-87.67"></polygon>
+</a>
+</g>
+<g id="a_edge2-label"><a xlink:href="http://www.w3.org/ns/oa#hasSelector" xlink:title="hasSelector">
+<text text-anchor="middle" x="359.3" y="-98.6" font-family="Times,serif" font-size="14.00">hasSelector</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_3 -->
+<g id="node4" class="node">
+<title>b8_sk_3</title>
+<g id="a_node4"><a xlink:href="urn:resource:WhiteRabbit.md" xlink:title="urn:resource:WhiteRabbit.md">
+<defs>
+<linearGradient id="l_1" gradientUnits="userSpaceOnUse" x1="129.23" y1="-669" x2="294.83" y2="-669">
+<stop offset="0" style="stop-color:#7fc97f;stop-opacity:1.;"></stop>
+<stop offset="1" style="stop-color:#fdc086;stop-opacity:1.;"></stop>
+</linearGradient>
+</defs>
+<polygon fill="url(#l_1)" stroke="none" points="129.23,-657.6 129.23,-680.4 294.83,-680.4 294.83,-657.6 129.23,-657.6"></polygon>
+<polygon fill="none" stroke="black" points="129.23,-657.6 129.23,-680.4 294.83,-680.4 294.83,-657.6 129.23,-657.6"></polygon>
+<text text-anchor="start" x="165.57" y="-664.8" font-family="Times,serif" font-size="14.00">WhiteRabbit.md</text>
+<polygon fill="none" stroke="black" points="129.23,-634.8 129.23,-657.6 195.9,-657.6 195.9,-634.8 129.23,-634.8"></polygon>
+<text text-anchor="start" x="148.57" y="-643" font-family="Times,serif" font-style="italic" font-size="14.00">label</text>
+<polygon fill="none" stroke="black" points="195.9,-634.8 195.9,-657.6 294.83,-657.6 294.83,-634.8 195.9,-634.8"></polygon>
+<text text-anchor="start" x="209.6" y="-642" font-family="Times,serif" font-size="14.00">WhiteRabbit</text>
+<polygon fill="none" stroke="black" points="129.23,-612 129.23,-634.8 195.9,-634.8 195.9,-612 129.23,-612"></polygon>
+<text text-anchor="start" x="150.91" y="-620.2" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="195.9,-612 195.9,-634.8 294.83,-634.8 294.83,-612 195.9,-612"></polygon>
+<text text-anchor="start" x="231.76" y="-619.2" font-family="Times,serif" font-size="14.00">Note</text>
+<polygon fill="none" stroke="black" points="129.23,-589.2 129.23,-612 195.9,-612 195.9,-589.2 129.23,-589.2"></polygon>
+<text text-anchor="start" x="132.23" y="-597.4" font-family="Times,serif" font-style="italic" font-size="14.00">atLocation</text>
+<polygon fill="none" stroke="black" points="195.9,-589.2 195.9,-612 294.83,-612 294.83,-589.2 195.9,-589.2"></polygon>
+<text text-anchor="start" x="198.9" y="-596.4" font-family="Times,serif" font-size="14.00">WhiteRabbit.md</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_4 -->
+<g id="node5" class="node">
+<title>b8_sk_4</title>
+<g id="a_node5"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#bn_12">
+<polygon fill="none" stroke="black" points="86.08,-505.6 86.08,-528.4 126.3,-528.4 126.3,-505.6 86.08,-505.6"></polygon>
+<text text-anchor="start" x="92.19" y="-513.8" font-family="Times,serif" font-style="italic" font-size="14.00">label</text>
+<polygon fill="none" stroke="black" points="126.3,-505.6 126.3,-528.4 337.98,-528.4 337.98,-505.6 126.3,-505.6"></polygon>
+<text text-anchor="start" x="196.96" y="-512.8" font-family="Times,serif" font-size="14.00">White rabbit</text>
+<polygon fill="none" stroke="black" points="86.08,-482.8 86.08,-505.6 126.3,-505.6 126.3,-482.8 86.08,-482.8"></polygon>
+<text text-anchor="start" x="94.53" y="-491" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="126.3,-482.8 126.3,-505.6 337.98,-505.6 337.98,-482.8 126.3,-482.8"></polygon>
+<text text-anchor="start" x="215.42" y="-490" font-family="Times,serif" font-size="14.00">Block</text>
+<polygon fill="none" stroke="black" points="86.08,-460 86.08,-482.8 126.3,-482.8 126.3,-460 86.08,-460"></polygon>
+<text text-anchor="start" x="94.53" y="-468.2" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="126.3,-460 126.3,-482.8 337.98,-482.8 337.98,-460 126.3,-460"></polygon>
+<text text-anchor="start" x="213.47" y="-467.2" font-family="Times,serif" font-size="14.00">Rabbit</text>
+<polygon fill="none" stroke="black" points="86.08,-437.2 86.08,-460 126.3,-460 126.3,-437.2 86.08,-437.2"></polygon>
+<text text-anchor="start" x="89.08" y="-445.4" font-family="Times,serif" font-style="italic" font-size="14.00">image</text>
+<polygon fill="none" stroke="black" points="126.3,-437.2 126.3,-460 337.98,-460 337.98,-437.2 126.3,-437.2"></polygon>
+<text text-anchor="start" x="129.3" y="-444.4" font-family="Times,serif" font-size="14.00">1*HZazTjGg9EBSOoz34IN-tA.jpeg</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_3&#45;&gt;b8_sk_4 -->
+<g id="edge5" class="edge">
+<title>b8_sk_3-&gt;b8_sk_4</title>
+<g id="a_edge5"><a xlink:title="contains">
+<path fill="none" stroke="#e31a1c" d="M212.03,-585.51C212.03,-572.2 212.03,-557.59 212.03,-543.7"></path>
+<polygon fill="#e31a1c" stroke="#e31a1c" points="215.53,-543.77 212.03,-533.77 208.53,-543.77 215.53,-543.77"></polygon>
+</a>
+</g>
+<g id="a_edge5-label"><a xlink:href="http://pkm-united.org/contains" xlink:title="contains">
+<text text-anchor="middle" x="235.36" y="-554.6" font-family="Times,serif" font-size="14.00">contains</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_4&#45;&gt;b8_sk_0 -->
+<g id="edge6" class="edge">
+<title>b8_sk_4-&gt;b8_sk_0</title>
+<g id="a_edge6"><a xlink:title="contains">
+<path fill="none" stroke="#e31a1c" d="M124.8,-433.45C119.58,-427.89 114.99,-421.82 111.38,-415.2 107.41,-407.95 104.95,-399.9 103.56,-391.64"></path>
+<polygon fill="#e31a1c" stroke="#e31a1c" points="107.05,-391.35 102.45,-381.81 100.09,-392.14 107.05,-391.35"></polygon>
+</a>
+</g>
+<g id="a_edge6-label"><a xlink:href="http://pkm-united.org/contains" xlink:title="contains">
+<text text-anchor="middle" x="134.7" y="-402.6" font-family="Times,serif" font-size="14.00">contains</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_4&#45;&gt;b8_sk_0 -->
+<g id="edge7" class="edge">
+<title>b8_sk_4-&gt;b8_sk_0</title>
+<g id="a_edge7"><a xlink:title="address">
+<path fill="none" stroke="#fdbf6f" d="M181.43,-433.37C172.76,-419.66 163.16,-404.47 153.88,-389.78"></path>
+<polygon fill="#fdbf6f" stroke="#fdbf6f" points="156.95,-388.08 148.64,-381.5 151.03,-391.82 156.95,-388.08"></polygon>
+</a>
+</g>
+<g id="a_edge7-label"><a xlink:href="http://schema.org/address" xlink:title="address">
+<text text-anchor="middle" x="188.13" y="-402.6" font-family="Times,serif" font-size="14.00">address</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_4&#45;&gt;b8_sk_1 -->
+<g id="edge8" class="edge">
+<title>b8_sk_4-&gt;b8_sk_1</title>
+<g id="a_edge8"><a xlink:title="loves%20to%20drink%20tea%20with">
+<path fill="none" stroke="#ff7f00" d="M229.11,-433.5C234.01,-421.7 239.78,-409.34 246.18,-398.4 250.2,-391.53 254.78,-384.61 259.58,-377.87"></path>
+<polygon fill="#ff7f00" stroke="#ff7f00" points="262.23,-380.18 265.34,-370.05 256.59,-376.03 262.23,-380.18"></polygon>
+</a>
+</g>
+<g id="a_edge8-label"><a xlink:href="urn:property:loves%20to%20drink%20tea%20with" xlink:title="loves%20to%20drink%20tea%20with">
+<text text-anchor="middle" x="353.11" y="-402.6" font-family="Times,serif" font-size="14.00">loves%20to%20drink%20tea%20with</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_7 -->
+<g id="node8" class="node">
+<title>b8_sk_7</title>
+<g id="a_node8"><a xlink:title="https://eyereasoner.github.io/.well-known/genid/42abb25c-aa6c-421c-a776-0eb0b85fc9b7#bn_14">
+<polygon fill="none" stroke="black" points="404.48,-330.8 404.48,-353.6 436.16,-353.6 436.16,-330.8 404.48,-330.8"></polygon>
+<text text-anchor="start" x="408.66" y="-339" font-family="Times,serif" font-style="italic" font-size="14.00">type</text>
+<polygon fill="none" stroke="black" points="436.16,-330.8 436.16,-353.6 559.58,-353.6 559.58,-330.8 436.16,-330.8"></polygon>
+<text text-anchor="start" x="439.16" y="-338" font-family="Times,serif" font-size="14.00">TextPositionSelector</text>
+<polygon fill="none" stroke="black" points="404.48,-308 404.48,-330.8 436.16,-330.8 436.16,-308 404.48,-308"></polygon>
+<text text-anchor="start" x="407.48" y="-316.2" font-family="Times,serif" font-style="italic" font-size="14.00">start</text>
+<polygon fill="none" stroke="black" points="436.16,-308 436.16,-330.8 559.58,-330.8 559.58,-308 436.16,-308"></polygon>
+<text text-anchor="start" x="494.37" y="-315.2" font-family="Times,serif" font-size="14.00">0</text>
+<polygon fill="none" stroke="black" points="404.48,-285.2 404.48,-308 436.16,-308 436.16,-285.2 404.48,-285.2"></polygon>
+<text text-anchor="start" x="410.21" y="-293.4" font-family="Times,serif" font-style="italic" font-size="14.00">end</text>
+<polygon fill="none" stroke="black" points="436.16,-285.2 436.16,-308 559.58,-308 559.58,-285.2 436.16,-285.2"></polygon>
+<text text-anchor="start" x="490.87" y="-292.4" font-family="Times,serif" font-size="14.00">14</text>
+</a>
+</g>
+</g>
+<!-- b8_sk_4&#45;&gt;b8_sk_7 -->
+<g id="edge3" class="edge">
+<title>b8_sk_4-&gt;b8_sk_7</title>
+<g id="a_edge3"><a xlink:title="hasSelector">
+<path fill="none" stroke="#b2df8a" d="M345.73,-458.65C395.03,-447.54 443.03,-432.79 460.03,-415.2 471.95,-402.86 477.88,-385.39 480.69,-368.8"></path>
+<polygon fill="#b2df8a" stroke="#b2df8a" points="484.14,-369.41 481.98,-359.04 477.2,-368.49 484.14,-369.41"></polygon>
+</a>
+</g>
+<g id="a_edge3-label"><a xlink:href="http://www.w3.org/ns/oa#hasSelector" xlink:title="hasSelector">
+<text text-anchor="middle" x="502.81" y="-402.6" font-family="Times,serif" font-size="14.00">hasSelector</text>
+</a>
+</g>
+</g>
+</g>
+</svg>
