@@ -6,12 +6,12 @@ const defaultOptions = {
   splitOnHeader: false,
   splitOnId: true,
   addLabels: false,
-  includeWikipaths: true, // Real path to a resource
   includeSelectors: true, // A selector for a portion of the resource
 }
 
 function markdownToRDF (fullText, { pointer, path }, options = {}) {
-  const node = simpleAst(fullText, { normalize: true, inlineAsArray: true })
+  const node = simpleAst(fullText,
+    { normalize: true, inlineAsArray: true, includePosition: true })
   return astTriplifier(node, {
     pointer, path,
   }, { ...defaultOptions, ...options })

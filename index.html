@@ -101,9 +101,11 @@ Content under level 4
 </div>
 <!-- Main logic -->
 <script type="module">
-  import { toRDF } from './src/toRDF.js'
+  import grapoi from 'grapoi'
+  import { markdownToRDF } from './src/markdown-to-RDF.js'
   import ns from './src/namespaces.js'
-``
+  import rdf from 'rdf-ext'
+
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
   const splitOnHeaderInput = document.getElementById('splitOnHeader')
@@ -119,9 +121,13 @@ Content under level 4
       namespaces: ns,
     }
 
-    const pointer = toRDF(markdownInput.value, { path: 'demo.md' }, options)
+    const file = 'demo.md'
+    const term = rdf.namedNode(`file://${file}`)
+    const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term })
 
-    rdfOutput.value = pointer.dataset.toString()
+    const result = markdownToRDF(markdownInput.value, { pointer, path: file }, options)
+
+    rdfOutput.value = result.dataset.toString()
 
   }
 

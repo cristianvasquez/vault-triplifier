@@ -48,40 +48,59 @@ After running the triplifier, one gets the following RDF data:
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <http://example.org/> .
 @prefix dot: <http://pkm-united.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix lpd: <http://www.w3.org/ns/ldp#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
 
-<http://example.org/note/WhiteRabbit.md> a dot:Note ;
-     schema:name "WhiteRabbit" ;
-     dot:contains [  
-                     rdf:type dot:Block, ex:Rabbit ;
-                     schema:name "White rabbit" ;
-                     dot:selector "White rabbit" ;
-                     schema:image <https://miro.medium.com/max/720/1*HZazTjGg9EBSOoz34IN-tA.jpeg> ;
-                     dot:contains _:b4 ;
-                     schema:address _:b4 ;
-                     <http://example.org/property/loves%20to%20drink%20tea%20with> <http://example.org/note/Alice.md> ;
-                 ] .
+_:b2 rdfs:label "Wozenderlands" ;
+        oa:hasSelector [
+                rdf:type oa:TextPositionSelector ;
+                oa:start 215 ;
+                oa:end 231 ;
+        ] ;
+        a dot:Block, schema:Place ;
+        schema:postalCode "4879" ;
+        schema:streetAddress "5 Wonderland Street" .
 
-_:b4 a dot:Block, schema:Place ;
-     schema:name "Wozenderlands" ;
-     dot:selector "Wozenderlands" ;
-     schema:postalCode "4879" ;
-     schema:streetAddress "5 Wonderland Street" .
+<urn:property:loves%20to%20drink%20tea%20with> rdfs:label "loves to drink tea with" .
 
-<http://example.org/note/Alice.md> schema:name "Alice" ;
-       a dot:Note ;
-       dot:contains [
-               schema:name "Alice" ;
-               dot:selector "Alice" ;
-               rdf:type dot:Block ;
-               schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
-           ] .
+<urn:resource:Alice.md> rdfs:label "Alice" ;
+        a dot:Note ;
+        dot:contains [
+                rdfs:label "Alice" ;
+                oa:hasSelector [
+                        rdf:type oa:TextPositionSelector ;
+                        oa:start 0 ;
+                        oa:end 7 ;
+                ] ;
+                rdf:type dot:Block ;
+                schema:image <https://miro.medium.com/max/1100/1*xupcHn3b0jEFPkjvuH5Pbw.jpeg> ;
+        ] ;
+        prov:atLocation <file:///home/cvasquez/github.com/cristianvasquez/vault-triplifier/example-vault/Alice.md> .
+
+<urn:resource:WhiteRabbit.md> rdfs:label "WhiteRabbit" ;
+        a dot:Note ;
+        dot:contains [
+                rdfs:label "White rabbit" ;
+                oa:hasSelector [
+                        rdf:type oa:TextPositionSelector ;
+                        oa:start 0 ;
+                        oa:end 14 ;
+                ] ;
+                rdf:type dot:Block, ex:Rabbit ;
+                dot:contains _:b2 ;
+                schema:address _:b2 ;
+                <urn:property:loves%20to%20drink%20tea%20with> <urn:resource:Alice.md> ;
+                schema:image <https://miro.medium.com/max/720/1*HZazTjGg9EBSOoz34IN-tA.jpeg> ;
+        ] ;
+        prov:atLocation <file:///home/cvasquez/github.com/cristianvasquez/vault-triplifier/example-vault/WhiteRabbit.md> .
 
 ex:s ex:p ex:o .
 
-<http://example.org/property/loves%20to%20drink%20tea%20with> schema:name "loves to drink tea with" .
 ```
 
 Note that the concepts of Alice and the White rabbit are different entities than the Notes.
+
 ## Usage
 
 See the [generated_docs](./generated_docs.md) for details

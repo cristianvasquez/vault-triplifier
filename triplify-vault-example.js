@@ -3,19 +3,18 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
+  // will resolve these
+  namespaces: ns,
   customMappings: {
     // Will map an attribute to a known rdf-property
     'lives in': ns.schema.address,
   },
-  // will split the document using the nested headers, creating connected rdf-entities.
-  splitOnHeader: true,
-  baseNamespace: ns.ex,
   addLabels: true,
-  namespaces: ns,
-  includeWikipaths: true,
+  includeSelectors: true, // includes the offsets where the
 }
 
 const dir = './example-vault'
+
 const dataset = await triplifyVault(dir, options)
 
 console.log(await prettyPrint(dataset, ns))
