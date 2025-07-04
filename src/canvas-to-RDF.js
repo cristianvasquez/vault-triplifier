@@ -1,8 +1,6 @@
 import { canvasTriplifier } from './triplifiers/canvasTriplifier.js'
 
-const defaultOptions = {
-  addLabels: false,
-}
+import { OptionsSchema } from './schemas.js'
 
 function canvasToRDF (contents, { termMapper, pointer, path }, options = {}) {
 
@@ -12,7 +10,7 @@ function canvasToRDF (contents, { termMapper, pointer, path }, options = {}) {
 
   return canvasTriplifier(json, {
     pointer, termMapper, path,
-  }, { ...defaultOptions, ...options })
+  }, OptionsSchema.parse(options))
 
 }
 

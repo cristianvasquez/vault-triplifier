@@ -1,14 +1,15 @@
 import rdf from 'rdf-ext'
+import ns from '../namespaces.js'
 import { nameToUri, pathToUri } from '../termMapper/termMapper.js'
 
-function getKnownLinks(links, context, options) {
+function getKnownLinks (links, context) {
   return links.map(link => ({
     ...link,
-    ...resolveLink(link, context, options)
+    ...resolveLink(link, context),
   }))
 }
 
-function resolveLink({ type, value }, context) {
+function resolveLink ({ type, value }, context) {
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
@@ -17,11 +18,12 @@ function resolveLink({ type, value }, context) {
 
   // Internal reference: [[#hello]]
   if (!head) {
-    const uri = findUriBySelector(context.rootNode, selector) ?? pathToUri(context.path)
+    const uri = findUriBySelector(context.rootNode, selector) ??
+      pathToUri(context.path)
     return {
       uri,
       wikipath: context.path,
-      selector
+      selector,
     }
   }
 
@@ -33,11 +35,11 @@ function resolveLink({ type, value }, context) {
   return {
     uri: nameToUri(resolvedPath),
     wikipath: resolvedPath,
-    selector
+    selector,
   }
 }
 
-function findUriBySelector(node, targetSelector) {
+function findUriBySelector (node, targetSelector) {
   if (node.uri && node.value === targetSelector) {
     return node.uri
   }
@@ -50,7 +52,7 @@ function findUriBySelector(node, targetSelector) {
   return null
 }
 
-function parseHashPath(value) {
+function parseHashPath (value) {
   const hashIndex = value.indexOf('#')
 
   if (hashIndex === -1) {
@@ -59,11 +61,11 @@ function parseHashPath(value) {
 
   return {
     head: hashIndex === 0 ? undefined : value.slice(0, hashIndex),
-    selector: value.slice(hashIndex + 1)
+    selector: value.slice(hashIndex + 1),
   }
 }
 
-function resolveRelativePath(currentPath, relativePath) {
+function resolveRelativePath (currentPath, relativePath) {
   // Get directory from current path
   const lastSlash = currentPath.lastIndexOf('/')
   const baseDir = lastSlash === -1 ? '' : currentPath.slice(0, lastSlash)
@@ -84,4 +86,27 @@ function resolveRelativePath(currentPath, relativePath) {
   return resolved.join('/')
 }
 
-export { getKnownLinks }
+function populateLink (link, context, options) {
+  const {
+    type, alias, uri, selector,
+  } = link
+
+  const { addLabels } = options
+  const { pointer } = context
+
+  if (addLabels && alias) {
+    pointer.node(uri).addOut(ns.dot.alias, alias)
+  }
+
+  if (type === 'external') {
+    pointer.addOut(ns.dot.external, uri)
+  } else if (type === 'internal') {
+    pointer.addOut(ns.dot.related,
+      findUriBySelector(context.rootNode, selector) ?? uri)
+  } else {
+    throw Error(`I don't know how to handle link of type:${type}`)
+  }
+
+}
+
+export { getKnownLinks, populateLink }

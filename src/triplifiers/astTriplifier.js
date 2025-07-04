@@ -1,9 +1,9 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
 import { blockUri } from '../termMapper/termMapper.js'
-import { getKnownLinks } from './knownLinks.js'
+import { getKnownLinks } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
-import { populateLink } from './populateLink.js'
+import { populateLink } from './links.js'
 import { toRdf } from 'rdf-literal'
 
 function astTriplifier(node, context, options) {

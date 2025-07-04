@@ -1,11 +1,12 @@
 import ns from '../namespaces.js'
+import { OptionsSchema } from '../schemas.js'
 
 const WELL_KNOWN = {
   'is a': ns.rdf.type,
   'same as': ns.rdf.sameAs,
 }
 
-function resolveNamespace(namespaces, str) {
+function resolveNamespace(parsedNamespaces, str) {
   if (!str || typeof str !== 'string') return null
 
   const colonIndex = str.indexOf(':')
@@ -14,11 +15,12 @@ function resolveNamespace(namespaces, str) {
   const vocabulary = str.slice(0, colonIndex)
   const property = str.slice(colonIndex + 1)
 
-  return namespaces?.[vocabulary]?.[property]
+  return parsedNamespaces?.[vocabulary]?.[property]
 }
 
 function getMapper(options = {}) {
-  const { namespaces, customMappings } = options
+  const parsedOptions = OptionsSchema.parse(options)
+  const { namespaces, customMappings } = parsedOptions
 
   const resolve = (value) =>
     customMappings?.[value] ?? resolveNamespace(namespaces, value)

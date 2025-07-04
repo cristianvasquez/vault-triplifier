@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 2fr;
             gap: 20px;
             height: 100vh;
         }
@@ -106,31 +106,38 @@
         <label><input type="checkbox" id="addLabels" checked> addLabels</label>
         <label><input type="checkbox" id="includeSelectors" checked> includeSelectors</label>
         <label><input type="checkbox" id="includeRaw"> includeRaw</label>
-        <label><input type="checkbox" id="includeWikipaths" checked> includeWikipaths</label>
     </div>
     <textarea id="markdown-input" placeholder="Enter your markdown here...">---
 hello: world
-agent: "[[osg-knowledge-agent]]"
 ---
 
-# Heading 1
-author:: John Doe
-Some text under Heading 1
+# Alice
 
-Text that has (inline::variables)
+One can declare properties in this way:
 
-## Level 2 Header
+is a :: Person
 
-### Level 3 Header
-status:: draft
-Content under level 3
+# Playground
 
-#### Level 4 Header
-rating:: 5
-Content under level 4
+Text can include embedded variables (answer::42), that will be appended to the block.
 
-- Tana and logseq likes
-  - embedded nodes</textarea>
+# Book
+
+Also blocks can be connected to other blocks
+
+Written-by :: [[#Alice]]
+
+## Chapter 3
+
+It is also possible to name paragraphs using the symbol ^  for example ^ref_1
+
+Or create other relations, outside the blocks (or the document)
+
+Bob :: knows :: [[#Alice]]
+
+One can also define namespaces, for example the well-known [schema](http://schema.org)
+
+Bob :: schema:name :: Bobby</textarea>
 </div>
 
 <div class="output-panel">
@@ -167,7 +174,6 @@ Content under level 4
   const addLabelsInput = document.getElementById('addLabels')
   const includeSelectorsInput = document.getElementById('includeSelectors')
   const includeRawInput = document.getElementById('includeRaw')
-  const includeWikipathsInput = document.getElementById('includeWikipaths')
 
   let hasChanges = false
 
@@ -179,8 +185,6 @@ Content under level 4
       addLabels: addLabelsInput.checked,
       includeSelectors: includeSelectorsInput.checked,
       includeRaw: includeRawInput.checked,
-      includeWikipaths: includeWikipathsInput.checked,
-      baseNamespace: ns.ex,
       namespaces: ns,
     }
 
@@ -191,7 +195,7 @@ Content under level 4
     const result = markdownToRDF(markdownInput.value, { pointer, path: file }, options)
 
     rdfOutput.value = result.dataset.toString()
-    
+
     // Mark that there are changes
     hasChanges = true
     updateDiagramBtn.textContent = 'Update Diagram'
@@ -208,14 +212,18 @@ Content under level 4
     }
   }
 
+  function updateBoth(){
+    updateOutput()
+    updateDiagram()
+  }
+
   markdownInput.addEventListener('input', updateOutput)
-  splitOnHeaderInput.addEventListener('change', updateOutput)
-  splitOnTagInput.addEventListener('change', updateOutput)
-  splitOnIdInput.addEventListener('change', updateOutput)
-  addLabelsInput.addEventListener('change', updateOutput)
-  includeSelectorsInput.addEventListener('change', updateOutput)
-  includeRawInput.addEventListener('change', updateOutput)
-  includeWikipathsInput.addEventListener('change', updateOutput)
+  splitOnHeaderInput.addEventListener('change', updateBoth)
+  splitOnTagInput.addEventListener('change', updateBoth)
+  splitOnIdInput.addEventListener('change', updateBoth)
+  addLabelsInput.addEventListener('change', updateBoth)
+  includeSelectorsInput.addEventListener('change', updateBoth)
+  includeRawInput.addEventListener('change', updateBoth)
   updateDiagramBtn.addEventListener('click', updateDiagram)
 
   // Initial render
