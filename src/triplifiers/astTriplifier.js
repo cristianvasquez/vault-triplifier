@@ -107,7 +107,7 @@ function appendPosition(node, position) {
 function getNodeUri(node, context, options) {
   const { pointer } = context
 
-  if (options.splitOnId && node.type !== 'root' && node.ids) {
+  if (options.partitionBy.includes('identifier') && node.type !== 'root' && node.ids) {
     const [id] = node.ids
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
@@ -115,11 +115,11 @@ function getNodeUri(node, context, options) {
     return { shouldSplit: true, childUri }
   }
 
-  if (options.splitOnTag && node.type !== 'root' && node.tags) {
+  if (options.partitionBy.includes('tag') && node.type !== 'root' && node.tags) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
-  if (options.splitOnHeader && node.type === 'block') {
+  if (options.partitionBy.includes('header') && node.type === 'block') {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 

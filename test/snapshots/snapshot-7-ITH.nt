@@ -1,0 +1,69 @@
+<urn:name:partition-test-document> <http://www.w3.org/2000/01/rdf-schema#label> "partition-test-document" .
+<urn:name:partition-test-document> <http://www.w3.org/ns/prov#atLocation> <file://./test/partition-test-document.md> .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "test" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "partition" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "comprehensive" .
+<urn:name:partition-test-document> "title" "Partition Test Document" .
+<urn:name:partition-test-document> "author" "Test Suite" .
+<urn:name:partition-test-document> "type" "comprehensive" .
+<urn:name:partition-test-document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Note> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> _:b58 .
+_:b58 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b58 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "TestDocument" .
+_:b58 <http://pkm-united.org/contains> _:b59 .
+_:b58 <http://pkm-united.org/contains> _:b63 .
+_:b58 <http://www.w3.org/ns/oa#hasSelector> _:b66 .
+_:b58 "created" "2024-01-01" .
+_:b66 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b66 <http://www.w3.org/ns/oa#start> "118"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b66 <http://www.w3.org/ns/oa#end> "139"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b59 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b59 <http://pkm-united.org/contains> <urn:name:partition-test-document/section1> .
+_:b59 <http://pkm-united.org/contains> _:b60 .
+_:b59 <http://pkm-united.org/contains> _:b61 .
+_:b59 <http://www.w3.org/ns/oa#hasSelector> _:b68 .
+_:b59 "has property" "section value" .
+_:b59 "related to" "[[#Another Section]]" .
+_:b59 <http://pkm-united.org/related> _:b63 .
+_:b59 "identifier property" "identifier value" .
+_:b59 "tag property" "tag value" .
+_:b59 "connects to" "https://example.com" .
+_:b59 <http://pkm-united.org/external> <https://example.com> .
+_:b68 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b68 <http://www.w3.org/ns/oa#start> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b68 <http://www.w3.org/ns/oa#end> "322"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b63 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b63 <http://pkm-united.org/contains> <urn:name:partition-test-document/final> .
+_:b63 <http://pkm-united.org/contains> _:b64 .
+_:b63 <http://www.w3.org/ns/oa#hasSelector> _:b76 .
+_:b63 <http://pkm-united.org/related> <urn:resource:./test/partition-test-document.md> .
+_:b63 <http://pkm-united.org/related> <urn:name:NonExistent> .
+_:b63 <http://pkm-united.org/external> <https://example.com> .
+_:b63 "refers to" "[[#section1]]" .
+_:b63 "external link" "[Example](https://example.com)" .
+_:b63 "wiki link" "[[NonExistent]]" .
+_:b63 "final property" "final value" .
+_:b63 "summary" "This document tests all partition scenarios" .
+<urn:name:partition-test-document/section1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b60 <http://pkm-united.org/tag> "test" .
+_:b60 <http://pkm-united.org/tag> "important" .
+_:b60 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b61 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b61 <http://pkm-united.org/contains> <urn:name:partition-test-document/nested> .
+_:b61 <http://pkm-united.org/contains> _:b62 .
+_:b61 <http://www.w3.org/ns/oa#hasSelector> _:b72 .
+_:b61 "nested property" "nested value" .
+_:b61 "combined" "identifier and header" .
+_:b61 "urgent property" "urgent value" .
+_:b72 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b72 <http://www.w3.org/ns/oa#start> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b72 <http://www.w3.org/ns/oa#end> "824"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:partition-test-document/nested> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b62 <http://pkm-united.org/tag> "urgent" .
+_:b62 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b76 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b76 <http://www.w3.org/ns/oa#start> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b76 <http://www.w3.org/ns/oa#end> "1119"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:partition-test-document/final> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b64 <http://pkm-united.org/tag> "conclusion" .
+_:b64 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .

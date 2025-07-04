@@ -1,30 +1,5 @@
 import { TurtleSerializer } from '@rdfjs-elements/formats-pretty'
 import getStream from 'get-stream'
-import ns from '../../src/namespaces.js'
-
-function toPlain (prefixes) {
-  const result = {}
-  for (const [key, value] of Object.entries({ ...prefixes })) {
-    result[key] = value().value
-  }
-  return result
-}
-
-import { TurtleSerializer } from '@rdfjs-elements/formats-pretty'
-import getStream from 'get-stream'
-import ns from '../../src/namespaces.js'
-
-function toPlain (prefixes) {
-  const result = {}
-  for (const [key, value] of Object.entries({ ...prefixes })) {
-    result[key] = value().value
-  }
-  return result
-}
-
-import { TurtleSerializer } from '@rdfjs-elements/formats-pretty'
-import getStream from 'get-stream'
-import ns from '../../src/namespaces.js'
 
 function toPlain (prefixes) {
   const result = {}

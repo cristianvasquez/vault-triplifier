@@ -5,7 +5,7 @@ import ns from '../src/namespaces.js'
 describe('Vault Triplifier', () => {
   it('should process example vault and generate RDF', async () => {
     const options = {
-      splitOnHeader: true,
+      partitionBy: ['header'],
       addLabels: true,
     }
 

@@ -1,0 +1,63 @@
+<urn:name:partition-test-document> <http://www.w3.org/2000/01/rdf-schema#label> "partition-test-document" .
+<urn:name:partition-test-document> <http://www.w3.org/ns/prov#atLocation> <file://./test/partition-test-document.md> .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "test" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "partition" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "comprehensive" .
+<urn:name:partition-test-document> "title" "Partition Test Document" .
+<urn:name:partition-test-document> "author" "Test Suite" .
+<urn:name:partition-test-document> "type" "comprehensive" .
+<urn:name:partition-test-document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Note> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> _:b40 .
+_:b40 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b40 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "TestDocument" .
+_:b40 <http://pkm-united.org/contains> _:b41 .
+_:b40 <http://pkm-united.org/contains> _:b45 .
+_:b40 <http://www.w3.org/ns/oa#hasSelector> _:b48 .
+_:b40 "created" "2024-01-01" .
+_:b48 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b48 <http://www.w3.org/ns/oa#start> "118"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b48 <http://www.w3.org/ns/oa#end> "139"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b41 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b41 <http://pkm-united.org/contains> _:b42 .
+_:b41 <http://pkm-united.org/contains> _:b43 .
+_:b41 <http://www.w3.org/ns/oa#hasSelector> _:b50 .
+_:b41 "has property" "section value" .
+_:b41 "related to" "[[#Another Section]]" .
+_:b41 <http://pkm-united.org/related> _:b45 .
+_:b41 "identifier property" "identifier value" .
+_:b41 "tag property" "tag value" .
+_:b41 "connects to" "https://example.com" .
+_:b41 <http://pkm-united.org/external> <https://example.com> .
+_:b50 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b50 <http://www.w3.org/ns/oa#start> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b50 <http://www.w3.org/ns/oa#end> "322"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b45 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b45 <http://pkm-united.org/contains> _:b46 .
+_:b45 <http://www.w3.org/ns/oa#hasSelector> _:b56 .
+_:b45 <http://pkm-united.org/related> <urn:resource:./test/partition-test-document.md> .
+_:b45 <http://pkm-united.org/related> <urn:name:NonExistent> .
+_:b45 <http://pkm-united.org/external> <https://example.com> .
+_:b45 "refers to" "[[#section1]]" .
+_:b45 "external link" "[Example](https://example.com)" .
+_:b45 "wiki link" "[[NonExistent]]" .
+_:b45 "final property" "final value" .
+_:b45 "summary" "This document tests all partition scenarios" .
+_:b42 <http://pkm-united.org/tag> "test" .
+_:b42 <http://pkm-united.org/tag> "important" .
+_:b42 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b43 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b43 <http://pkm-united.org/contains> _:b44 .
+_:b43 <http://www.w3.org/ns/oa#hasSelector> _:b53 .
+_:b43 "nested property" "nested value" .
+_:b43 "combined" "identifier and header" .
+_:b43 "urgent property" "urgent value" .
+_:b53 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b53 <http://www.w3.org/ns/oa#start> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b53 <http://www.w3.org/ns/oa#end> "824"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b44 <http://pkm-united.org/tag> "urgent" .
+_:b44 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b56 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b56 <http://www.w3.org/ns/oa#start> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b56 <http://www.w3.org/ns/oa#end> "1119"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b46 <http://pkm-united.org/tag> "conclusion" .
+_:b46 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .

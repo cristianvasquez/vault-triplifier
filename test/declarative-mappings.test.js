@@ -11,7 +11,7 @@ describe('Declarative Mappings', () => {
     
     const options = {
       addLabels: true,
-      splitOnHeader: true,
+      partitionBy: ['header'],
       mappings,
     };
 

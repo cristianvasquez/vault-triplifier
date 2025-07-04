@@ -3,7 +3,7 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
-  splitOnHeader:true,
+  partitionBy: ['header'],
   addLabels: true,
   includeText: true,
   includeSelectors: true, // includes the offsets where the
