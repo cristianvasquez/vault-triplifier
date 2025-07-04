@@ -10,7 +10,7 @@ describe('Declarative Mappings', () => {
     const mappings = JSON.parse(mappingsJson);
     
     const options = {
-      addLabels: true,
+      includeLabelsFor: ['documents', 'sections', 'properties'],
       partitionBy: ['header'],
       mappings,
     };

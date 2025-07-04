@@ -4,7 +4,7 @@ import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
   partitionBy: ['header'],
-  addLabels: true,
+  includeLabelsFor: ['documents', 'sections', 'properties'],
   includeText: true,
   includeSelectors: true, // includes the offsets where the
   includeRaw: true,

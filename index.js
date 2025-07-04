@@ -35,8 +35,12 @@ async function triplifyFile (file, options) {
   const term = nameToUri(name)
   const text = await readFile(file, 'utf8')
   const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term }).
-    addOut(ns.rdfs.label, rdf.literal(name)).
     addOut(ns.prov.atLocation, rdf.namedNode(`file://${file}`))
+  
+  // Add document label if requested
+  if (parsedOptions.includeLabelsFor.includes('documents')) {
+    pointer.addOut(ns.rdfs.label, rdf.literal(name))
+  }
 
   if (file.endsWith('.md')) {
     return markdownToRDF(text, { pointer, path: file }, parsedOptions)

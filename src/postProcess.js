@@ -7,7 +7,7 @@ function postProcess ({ pointer, getPathByName }, options) {
   resolvePlaceholders(pointer, getPathByName)
 
   // Step 2: Add labels to properties
-  if (options.addLabels) {
+  if (options.includeLabelsFor.includes('properties')) {
     addLabels(pointer)
   }
 

@@ -91,10 +91,10 @@ function populateLink (link, context, options) {
     type, alias, uri, selector,
   } = link
 
-  const { addLabels } = options
+  const { includeLabelsFor } = options
   const { pointer } = context
 
-  if (addLabels && alias) {
+  if (includeLabelsFor.includes('documents') && alias) {
     pointer.node(uri).addOut(ns.dot.alias, alias)
   }
 

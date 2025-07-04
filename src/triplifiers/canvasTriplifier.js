@@ -97,7 +97,7 @@ function createGroupNode (node, pointer, mapper, context, options) {
 
   const uri = resolvedObject ?? rdf.blankNode()
 
-  if (options.addLabels && node.label) {
+  if (options.includeLabelsFor.includes('sections') && node.label) {
     pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(node.label))
   }
 
@@ -107,7 +107,7 @@ function createGroupNode (node, pointer, mapper, context, options) {
 function createFileNode (node, pointer, options) {
   const uri = pathToUri(node.file)
 
-  if (options.addLabels) {
+  if (options.includeLabelsFor.includes('documents')) {
     const label = getNameFromPath(node.file)
     pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(label))
   }
@@ -118,7 +118,7 @@ function createFileNode (node, pointer, options) {
 function createTextNode (node, pointer, options) {
   const uri = rdf.blankNode()
 
-  if (options.addLabels && node.text) {
+  if (options.includeLabelsFor.includes('sections') && node.text) {
     pointer.node(uri).addOut(ns.schema.description, rdf.literal(node.text))
   }
 

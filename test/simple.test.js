@@ -6,7 +6,7 @@ describe('Vault Triplifier', () => {
   it('should process example vault and generate RDF', async () => {
     const options = {
       partitionBy: ['header'],
-      addLabels: true,
+      includeLabelsFor: ['documents', 'sections', 'properties'],
     }
 
     const dataset = await triplifyVault('./example-vault', options)

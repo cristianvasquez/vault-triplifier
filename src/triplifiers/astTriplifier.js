@@ -24,7 +24,7 @@ function assignInternalUris(node, context, options) {
 }
 
 function traverseAst(node, context, options) {
-  const { addLabels, includeSelectors, includeRaw } = options
+  const { includeLabelsFor, includeSelectors, includeRaw } = options
   const { pointer, text } = context
 
   // Add tags
@@ -66,8 +66,14 @@ function traverseAst(node, context, options) {
       childPointer.addOut(ns.rdf.type, ns.dot.Block)
       pointer.addOut(ns.dot.contains, child.uri)
 
-      if (addLabels && child.value) {
+      // Add section label if requested and child has value (header text)
+      if (includeLabelsFor.includes('sections') && child.value) {
         childPointer.addOut(ns.rdfs.label, rdf.literal(child.value))
+      }
+      
+      // Add anchor label if requested and child has identifier
+      if (includeLabelsFor.includes('anchors') && child.ids && child.ids.length > 0) {
+        childPointer.addOut(ns.rdfs.label, rdf.literal(child.ids[0]))
       }
 
       if (includeSelectors && child.type === 'block' && child.position) {

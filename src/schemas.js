@@ -40,7 +40,7 @@ const MappingsSchema = z.object({
 }).default(DEFAULT_MAPPINGS)
 
 const TriplifierOptions = z.object({
-  addLabels: z.boolean().default(false),
+  includeLabelsFor: z.array(z.enum(['documents', 'sections', 'anchors', 'properties'])).default([]),
   mappings: MappingsSchema,
 })
 

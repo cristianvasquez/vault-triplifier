@@ -5,8 +5,8 @@ import { prettyPrint } from './test/support/serialization.js'
 const options = {
 // will partition the document into blocks when it encounters headings
   partitionBy: ['header'],
-  // Will add labels to properties
-  addLabels: true,
+  // Include labels for documents, sections and properties (great for querying)
+  includeLabelsFor: ['documents', 'sections', 'properties'],
 
   // includes the offsets
   includeSelectors: false,
