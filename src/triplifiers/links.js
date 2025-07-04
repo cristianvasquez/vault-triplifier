@@ -40,7 +40,7 @@ function resolveLink ({ type, value }, context) {
 }
 
 function findUriBySelector (node, targetSelector) {
-  if (node.uri && node.value === targetSelector) {
+  if (node.type === 'block' && node.value === targetSelector && node.uri) {
     return node.uri
   }
 
