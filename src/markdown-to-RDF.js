@@ -1,5 +1,15 @@
 import { simpleAst } from 'docs-and-graphs'
 import { astTriplifier } from './triplifiers/astTriplifier.js'
+import * as z from "zod/v4";
+
+const MarkdownOptions = z.object({
+  splitOnTag: z.boolean(),
+  splitOnHeader: z.boolean(),
+  splitOnId: z.boolean(),
+  addLabels: z.boolean(),
+  includeSelectors: z.boolean(),
+  includeRaw: z.boolean(),
+});
 
 const defaultOptions = {
   splitOnTag: false,
