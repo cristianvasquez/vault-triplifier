@@ -1,6 +1,6 @@
 import { canvasTriplifier } from './triplifiers/canvasTriplifier.js'
 
-import { OptionsSchema } from './schemas.js'
+import { TriplifierOptions } from './schemas.js'
 
 function canvasToRDF (contents, { termMapper, pointer, path }, options = {}) {
 
@@ -10,7 +10,7 @@ function canvasToRDF (contents, { termMapper, pointer, path }, options = {}) {
 
   return canvasTriplifier(json, {
     pointer, termMapper, path,
-  }, OptionsSchema.parse(options))
+  }, TriplifierOptions.parse(options))
 
 }
 

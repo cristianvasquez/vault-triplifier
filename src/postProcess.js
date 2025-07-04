@@ -1,5 +1,5 @@
-import { resolvePlaceholders } from './processors/placeholderResolver.js'
-import { addLabels } from './processors/labelAdder.js'
+import { resolvePlaceholders } from './processors/resolveExternalPaths.js'
+import { addLabels } from './processors/appendLabels.js'
 
 function postProcess ({ pointer, getPathByName }, options) {
 

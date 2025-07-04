@@ -1,15 +1,18 @@
 import { strict as assert } from 'assert';
+import { readFile } from 'fs/promises';
 import { triplifyFile } from '../index.js';
 import ns from '../src/namespaces.js';
 import rdf from 'rdf-ext';
 
 describe('Declarative Mappings', () => {
   it('should apply mappings from a JSON file', async () => {
+    const mappingsJson = await readFile('test/support/declarative-mappings.json', 'utf8');
+    const mappings = JSON.parse(mappingsJson);
+    
     const options = {
-      declarativeMappingsPath: 'test/support/declarative-mappings.json',
       addLabels: true,
-      namespaces: ns,
       splitOnHeader: true,
+      mappings,
     };
 
     const pointer = await triplifyFile('./example-vault/WhiteRabbit.md', options);

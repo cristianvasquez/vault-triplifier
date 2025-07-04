@@ -1,7 +1,7 @@
 import ns from '../namespaces.js'
 import rdf from 'rdf-ext'
 import { getNameFromPath } from '../strings/uris.js'
-import { getMapper } from '../termMapper/defaultCustomMapper.js'
+import { createMapper } from '../termMapper/customMapper.js'
 import { pathToUri, propertyToUri } from '../termMapper/termMapper.js'
 
 const NODE_TYPES = {
@@ -20,7 +20,7 @@ const contains = (parent, child) => {
 
 function canvasTriplifier (canvas, context, options) {
   const { pointer } = context
-  const mapper = getMapper(options)
+  const mapper = createMapper(options.mappings)
   const { nodes, edges } = canvas
   const nodeMap = new Map()
 

@@ -7,13 +7,13 @@ import { canvasToRDF } from './src/canvas-to-RDF.js'
 import { markdownToRDF } from './src/markdown-to-RDF.js'
 import { postProcess } from './src/postProcess.js'
 import { createPathResolver } from './src/pathResolver.js'
-import { OptionsSchema } from './src/schemas.js'
+import { MarkdownTriplifierOptions } from './src/schemas.js'
 import { getNameFromPath } from './src/strings/uris.js'
 import { nameToUri } from './src/termMapper/termMapper.js'
 import ns from './src/namespaces.js'
 
 async function triplifyVault (dir, options) {
-  const parsedOptions = OptionsSchema.parse(options)
+  const parsedOptions = MarkdownTriplifierOptions.parse(options)
   const { getPathByName } = await createPathResolver(dir)
   const dataset = rdf.dataset()
 
@@ -29,7 +29,8 @@ async function triplifyVault (dir, options) {
 }
 
 async function triplifyFile (file, options) {
-  const parsedOptions = OptionsSchema.parse(options)
+  const parsedOptions = MarkdownTriplifierOptions.parse(options)
+  
   const name = getNameFromPath(file)
   const term = nameToUri(name)
   const text = await readFile(file, 'utf8')

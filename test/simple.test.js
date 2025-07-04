@@ -7,7 +7,6 @@ describe('Vault Triplifier', () => {
     const options = {
       splitOnHeader: true,
       addLabels: true,
-      namespaces: ns,
     }
 
     const dataset = await triplifyVault('./example-vault', options)

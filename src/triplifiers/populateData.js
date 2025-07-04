@@ -1,7 +1,7 @@
 import rdf from 'rdf-ext'
 import { isString } from '../strings/string.js'
 import { isHTTP } from '../strings/uris.js'
-import { getMapper } from '../termMapper/defaultCustomMapper.js'
+import { createMapper } from '../termMapper/customMapper.js'
 import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 
 // Properties that should not be converted to RDF triples
@@ -17,7 +17,7 @@ function resolveTerm(value, termType, context, options) {
   }
 
   // Apply custom mapper
-  const mapper = getMapper(options)
+  const mapper = createMapper(options.mappings)
   const mapped = mapper({ [termType]: value }, context)
   if (mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]) {
     return mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]

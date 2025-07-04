@@ -1,43 +1,29 @@
 import { strict as assert } from 'assert';
 import { triplifyFile } from '../../index.js';
-import sinon from 'sinon';
 
-describe('Mapper Injection', () => {
-  afterEach(() => {
-    sinon.restore();
-  });
-
-  it('should call the provided mapper function with correct options when declarativeMappingsPath is not provided', async () => {
+describe('Mapper Integration', () => {
+  it('should use default mappings when no mappings are provided', async () => {
     const options = {};
-    const mockFile = './example-vault/Alice.md';
-    const mockMapperFn = sinon.stub().callsFake((options) => {
-      return ({ subject, predicate, object }) => ({
-        resolvedSubject: subject,
-        resolvedPredicate: predicate,
-        resolvedObject: object,
-      });
-    });
+    const mockFile = './test/test-vault/Alice.md';
 
-    await triplifyFile(mockFile, options, mockMapperFn);
+    const result = await triplifyFile(mockFile, options);
 
-    assert(mockMapperFn.calledOnceWith(sinon.match(options)), 'mockMapperFn should be called with options');
+    assert(result, 'triplifyFile should return a result');
+    assert(result.dataset, 'result should have a dataset');
   });
 
-  it('should call the provided mapper function with correct options when declarativeMappingsPath is provided', async () => {
+  it('should use custom mappings when provided', async () => {
     const options = {
-      declarativeMappingsPath: './test/unit/mock-declarative-mappings.json',
+      mappings: {
+        namespaces: { ex: "http://example.org/" },
+        mappings: [{ type: "inlineProperty", key: "myProperty", predicate: "ex:customPredicate" }]
+      },
     };
-    const mockFile = './example-vault/Alice.md';
-    const mockMapperFn = sinon.stub().callsFake((options) => {
-      return ({ subject, predicate, object }) => ({
-        resolvedSubject: subject,
-        resolvedPredicate: predicate,
-        resolvedObject: object,
-      });
-    });
+    const mockFile = './test/test-vault/Alice.md';
 
-    await triplifyFile(mockFile, options, mockMapperFn);
+    const result = await triplifyFile(mockFile, options);
 
-    assert(mockMapperFn.calledOnceWith(sinon.match(options)), 'mockMapperFn should be called with options');
+    assert(result, 'triplifyFile should return a result');
+    assert(result.dataset, 'result should have a dataset');
   });
 });

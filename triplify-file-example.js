@@ -5,12 +5,6 @@ import { prettyPrint } from './test/support/serialization.js'
 const options = {
 // will split the document into a tree when it encounters headings
   splitOnHeader: true,
-  // will resolve the specified vocabularies
-  namespaces: ns,
-  customMappings: {
-    // Will map an attribute to a known rdf-property
-    'lives in': ns.schema.address,
-  },
   // Will add labels to properties
   addLabels: true,
 
@@ -18,10 +12,23 @@ const options = {
   includeSelectors: false,
   includeRaw: true,
 
+  // Custom mappings for term resolution
+  mappings: {
+    namespaces: {
+      schema: "http://schema.org/"
+    },
+    mappings: [
+      {
+        type: "inlineProperty",
+        key: "lives in", 
+        predicate: "schema:address"
+      }
+    ]
+  }
 }
 
 // A pointer is the dataset + the root
-const pointer = await triplifyFile('./example-vault/Alice.md', options)
+const pointer = await triplifyFile('./test/test-vault/Alice.md', options)
 
 const dataset = pointer.dataset
 
