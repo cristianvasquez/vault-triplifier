@@ -26,14 +26,20 @@ function createMapper(mappings) {
       return value
     }
 
+    // Not a string - can't resolve
+    if (typeof value !== 'string') {
+      return null
+    }
+
     // Check property mappings first
     if (propertyMap[value]) {
       const mapped = propertyMap[value]
-      return resolvePrefixed(mapped) || rdf.namedNode(mapped)
+      const resolved = resolvePrefixed(mapped)
+      return resolved || rdf.namedNode(mapped)
     }
 
     // Try to resolve as prefixed term
-    return resolvePrefixed(value) || value
+    return resolvePrefixed(value)
   }
 
   function resolvePrefixed(str) {
@@ -44,14 +50,14 @@ function createMapper(mappings) {
 
     const prefix = str.slice(0, colonIndex)
     const localName = str.slice(colonIndex + 1)
-    
+
     return namespaceMap[prefix]?.[localName]
   }
 
   return ({ subject, predicate, object }) => ({
     resolvedSubject: resolve(subject),
     resolvedPredicate: resolve(predicate),
-    resolvedObject: resolve(object)
+    resolvedObject: resolve(object),
   })
 }
 

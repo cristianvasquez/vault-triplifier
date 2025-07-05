@@ -1,19 +1,16 @@
 import rdf from 'rdf-ext'
+import { toRdf } from 'rdf-literal'
 import ns from '../namespaces.js'
 import { blockUri } from '../termMapper/termMapper.js'
-import { getKnownLinks } from './links.js'
+import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
-import { populateLink } from './links.js'
-import { toRdf } from 'rdf-literal'
 
-function astTriplifier(node, context, options) {
+function astTriplifier (node, context, options) {
   assignInternalUris(node, context, options)
-  const pointer = traverseAst(node, { ...context, rootNode: node }, options)
-  pointer.addOut(ns.rdf.type, ns.dot.Note)
-  return pointer
+  return traverseAst(node, { ...context, rootNode: node }, options)
 }
 
-function assignInternalUris(node, context, options) {
+function assignInternalUris (node, context, options) {
   for (const child of node.children ?? []) {
     const { childUri } = getNodeUri(child, context, options)
     if (childUri) {
@@ -23,7 +20,7 @@ function assignInternalUris(node, context, options) {
   }
 }
 
-function traverseAst(node, context, options) {
+function traverseAst (node, context, options) {
   const { includeLabelsFor, includeSelectors, includeRaw } = options
   const { pointer, text } = context
 
@@ -42,9 +39,8 @@ function traverseAst(node, context, options) {
     populateFn(data, { ...context, knownLinks }, options)
   }
 
-  knownLinks
-  .filter(link => !link.mapped)
-  .forEach(link => populateLink(link, context, options))
+  knownLinks.filter(link => !link.mapped).
+    forEach(link => populateLink(link, context, options))
 
   // Process children
   let rawStart = null
@@ -55,7 +51,8 @@ function traverseAst(node, context, options) {
 
     if (shouldSplit) {
       // Finalize previous block's raw content
-      if (includeRaw && rawStart !== null && rawPointer && child.position && text) {
+      if (includeRaw && rawStart !== null && rawPointer && child.position &&
+        text) {
         const raw = text.substring(rawStart, child.position.start.offset).trim()
         if (raw) rawPointer.addOut(ns.dot.raw, rdf.literal(raw))
       }
@@ -70,9 +67,10 @@ function traverseAst(node, context, options) {
       if (includeLabelsFor.includes('sections') && child.value) {
         childPointer.addOut(ns.rdfs.label, rdf.literal(child.value))
       }
-      
+
       // Add anchor label if requested and child has identifier
-      if (includeLabelsFor.includes('anchors') && child.ids && child.ids.length > 0) {
+      if (includeLabelsFor.includes('anchors') && child.ids &&
+        child.ids.length > 0) {
         childPointer.addOut(ns.rdfs.label, rdf.literal(child.ids[0]))
       }
 
@@ -101,19 +99,20 @@ function traverseAst(node, context, options) {
   return pointer
 }
 
-function appendPosition(node, position) {
+function appendPosition (node, position) {
   const { start, end } = position
   node.addOut(ns.oa.hasSelector, sel =>
-    sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector)
-    .addOut(ns.oa.start, toRdf(start.offset))
-    .addOut(ns.oa.end, toRdf(end.offset))
+    sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector).
+      addOut(ns.oa.start, toRdf(start.offset)).
+      addOut(ns.oa.end, toRdf(end.offset)),
   )
 }
 
-function getNodeUri(node, context, options) {
+function getNodeUri (node, context, options) {
   const { pointer } = context
 
-  if (options.partitionBy.includes('identifier') && node.type !== 'root' && node.ids) {
+  if (options.partitionBy.includes('identifier') && node.type !== 'root' &&
+    node.ids) {
     const [id] = node.ids
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
@@ -121,7 +120,8 @@ function getNodeUri(node, context, options) {
     return { shouldSplit: true, childUri }
   }
 
-  if (options.partitionBy.includes('tag') && node.type !== 'root' && node.tags) {
+  if (options.partitionBy.includes('tag') && node.type !== 'root' &&
+    node.tags) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 

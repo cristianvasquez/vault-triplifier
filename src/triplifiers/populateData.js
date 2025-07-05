@@ -17,24 +17,30 @@ function resolveTerm(value, termType, context, options) {
   }
 
   // Apply custom mapper
-  const mapper = createMapper(options.mappings)
-  const mapped = mapper({ [termType]: value }, context)
-  if (mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]) {
-    return mapped[`resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`]
+  const mapper = createMapper(options.mappings || {})
+  const mapped = mapper({
+    subject: termType === 'subject' ? value : undefined,
+    predicate: termType === 'predicate' ? value : undefined,
+    object: termType === 'object' ? value : undefined
+  }, context)
+
+  const resolvedKey = `resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`
+  if (mapped[resolvedKey]) {
+    return mapped[resolvedKey]
   }
 
   // Check known links
-  if (isString(value)) {
-    const knownLink = context.knownLinks?.find(link => value.includes(link.value))
+  if (isString(value) && context.knownLinks) {
+    const knownLink = context.knownLinks.find(link => value.includes(link.value))
     if (knownLink) {
       knownLink.mapped = true
       return knownLink.uri
     }
+  }
 
-    // Handle HTTP URIs
-    if (isHTTP(value)) {
-      return rdf.namedNode(value)
-    }
+  // Handle HTTP URIs
+  if (isString(value) && isHTTP(value)) {
+    return rdf.namedNode(value)
   }
 
   // Apply default transformation based on term type

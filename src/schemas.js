@@ -48,6 +48,6 @@ const MarkdownTriplifierOptions = TriplifierOptions.extend({
   includeSelectors: z.boolean().default(true),
   includeRaw: z.boolean().default(false),
   partitionBy: z.array(z.enum(['identifier', 'tag', 'header'])).default(['identifier']),
-})
+}).strict()
 
 export { ContextSchema, TriplifierOptions, MarkdownTriplifierOptions, MappingsSchema }

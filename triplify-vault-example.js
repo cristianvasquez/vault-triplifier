@@ -5,27 +5,25 @@ import { prettyPrint } from './test/support/serialization.js'
 const options = {
   partitionBy: ['header'],
   includeLabelsFor: ['documents', 'sections', 'properties'],
-  includeText: true,
   includeSelectors: true, // includes the offsets where the
-  includeRaw: true,
-  
+  includeRaw: false,
+
   // Custom mappings for term resolution
   mappings: {
     namespaces: {
-      schema: "http://schema.org/"
+      schema: 'http://schema.org/',
     },
     mappings: [
       {
-        type: "inlineProperty",
-        key: "lives in", 
-        predicate: "schema:address"
-      }
-    ]
-  }
+        type: 'inlineProperty',
+        key: 'lives in',
+        predicate: 'schema:address',
+      },
+    ],
+  },
 }
 
-const dir = './test/test-vault'
-
+const dir = './example-vault'
 const dataset = await triplifyVault(dir, options)
 
 console.log(await prettyPrint(dataset, ns))

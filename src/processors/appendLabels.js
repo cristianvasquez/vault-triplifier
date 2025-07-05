@@ -1,3 +1,4 @@
+import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
 import { getNameFromPath } from '../strings/uris.js'
 import { pathFromUri, propertyFromUri } from '../termMapper/termMapper.js'
@@ -19,7 +20,7 @@ function addLabels (pointer) {
   const addLabelToTerm = (term) => {
     const label = getLabelForTerm(term)
     if (label) {
-      pointer.node(term).addOut(ns.rdfs.label, label)
+      pointer.node(term).addOut(ns.rdfs.label, rdf.literal(label))
     }
   }
 

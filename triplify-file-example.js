@@ -20,7 +20,7 @@ const options = {
     mappings: [
       {
         type: "inlineProperty",
-        key: "lives in", 
+        key: "lives in",
         predicate: "schema:address"
       }
     ]
@@ -28,7 +28,7 @@ const options = {
 }
 
 // A pointer is the dataset + the root
-const pointer = await triplifyFile('./test/test-vault/Alice.md', options)
+const pointer = await triplifyFile('./example-vault/Alice.md', options)
 
 const dataset = pointer.dataset
 

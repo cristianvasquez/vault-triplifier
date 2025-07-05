@@ -1,6 +1,14 @@
 import { nameFromUri, pathToUri } from '../termMapper/termMapper.js'
 
 function resolvePlaceholders(pointer, getPathByName) {
+
+  // Reflect about this
+  // If the [[named]] link is not resolved, then we can have
+  // a blank that [	osg:references "Name" ] . This is a 'soft link'
+  // We have also
+  // The URI <urn:git:repo123:notes/gnosis.md> osg:wikilink "Theoria" .
+  // And the perma-links that use the git hash mechanism.
+
   const resolveTerm = (term) => {
     if (term.termType !== 'NamedNode') return term
 
