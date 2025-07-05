@@ -3,21 +3,28 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
-// will split the document into a tree when it encounters headings
-  splitOnHeader: true,
-  // will resolve the specified vocabularies
-  namespaces: ns,
-  customMappings: {
-    // Will map an attribute to a known rdf-property
-    'lives in': ns.schema.address,
-  },
-  // Will add labels to properties
-  addLabels: true,
+// will partition the document into blocks when it encounters headings
+  partitionBy: ['header'],
+  // Include labels for documents, sections and properties (great for querying)
+  includeLabelsFor: ['documents', 'sections', 'properties'],
 
   // includes the offsets
   includeSelectors: false,
   includeRaw: true,
 
+  // Custom mappings for term resolution
+  mappings: {
+    namespaces: {
+      schema: "http://schema.org/"
+    },
+    mappings: [
+      {
+        type: "inlineProperty",
+        key: "lives in",
+        predicate: "schema:address"
+      }
+    ]
+  }
 }
 
 // A pointer is the dataset + the root

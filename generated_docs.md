@@ -123,6 +123,42 @@ knows:: [[Bob]]
 const pointer = await triplifyFile('alice.md', options)
 ```
 
+Alternatively, create a JSON file (e.g., `mappings.json`) with the following structure:
+
+```json
+{
+  "namespaces": {
+    "ex": "http://example.org/",
+    "pkm": "https://pkm.example.com/"
+  },
+  "mappings": [
+    {
+      "type": "inlineProperty",
+      "key": "is a",
+      "predicate": "rdf:type"
+    },
+    {
+      "type": "inlineProperty",
+      "key": "knows",
+      "predicate": "pkm:knows"
+    }
+  ]
+}
+```
+
+Then, pass the path to this file using the `declarativeMappingsPath` option when calling `triplifyFile` or `triplifyVault`:
+
+```javascript
+import { triplifyFile } from 'vault-triplifier';
+
+const options = {
+  declarativeMappingsPath: './mappings.json',
+  // ... other options
+};
+
+const pointer = await triplifyFile('my-note.md', options);
+```
+
 ### Block Identifiers
 
 ```javascript

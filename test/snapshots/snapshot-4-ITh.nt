@@ -1,0 +1,43 @@
+<urn:name:partition-test-document> <http://www.w3.org/2000/01/rdf-schema#label> "partition-test-document" .
+<urn:name:partition-test-document> <http://www.w3.org/ns/prov#atLocation> <file://./test/partition-test-document.md> .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "test" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "partition" .
+<urn:name:partition-test-document> <http://pkm-united.org/tag> "comprehensive" .
+<urn:name:partition-test-document> "title" "Partition Test Document" .
+<urn:name:partition-test-document> "author" "Test Suite" .
+<urn:name:partition-test-document> "type" "comprehensive" .
+<urn:name:partition-test-document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "TestDocument" .
+<urn:name:partition-test-document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Note> .
+<urn:name:partition-test-document> "created" "2024-01-01" .
+<urn:name:partition-test-document> "has property" "section value" .
+<urn:name:partition-test-document> "related to" "[[#Another Section]]" .
+<urn:name:partition-test-document> <http://pkm-united.org/related> <urn:resource:./test/partition-test-document.md> .
+<urn:name:partition-test-document> <http://pkm-united.org/related> <urn:name:NonExistent> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> <urn:name:partition-test-document/section1> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> _:b19 .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> <urn:name:partition-test-document/nested> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> _:b20 .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> <urn:name:partition-test-document/final> .
+<urn:name:partition-test-document> <http://pkm-united.org/contains> _:b21 .
+<urn:name:partition-test-document> "identifier property" "identifier value" .
+<urn:name:partition-test-document> "tag property" "tag value" .
+<urn:name:partition-test-document> "connects to" "https://example.com" .
+<urn:name:partition-test-document> <http://pkm-united.org/external> <https://example.com> .
+<urn:name:partition-test-document> "nested property" "nested value" .
+<urn:name:partition-test-document> "combined" "identifier and header" .
+<urn:name:partition-test-document> "urgent property" "urgent value" .
+<urn:name:partition-test-document> "refers to" "[[#section1]]" .
+<urn:name:partition-test-document> "external link" "[Example](https://example.com)" .
+<urn:name:partition-test-document> "wiki link" "[[NonExistent]]" .
+<urn:name:partition-test-document> "final property" "final value" .
+<urn:name:partition-test-document> "summary" "This document tests all partition scenarios" .
+<urn:name:partition-test-document/section1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b19 <http://pkm-united.org/tag> "test" .
+_:b19 <http://pkm-united.org/tag> "important" .
+_:b19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+<urn:name:partition-test-document/nested> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b20 <http://pkm-united.org/tag> "urgent" .
+_:b20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+<urn:name:partition-test-document/final> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .
+_:b21 <http://pkm-united.org/tag> "conclusion" .
+_:b21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/Block> .

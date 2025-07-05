@@ -9,12 +9,12 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             display: grid;
-            grid-template-columns: 2fr 1fr 2fr;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             height: 100vh;
         }
 
-        .input-panel, .output-panel, .visualization-panel {
+        .input-panel, .output-panel {
             display: flex;
             flex-direction: column;
         }
@@ -94,18 +94,93 @@
             background: #ccc;
             cursor: not-allowed;
         }
+
+        /* Tab styles */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #007acc;
+            margin-bottom: 10px;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-top: 2px solid transparent;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+        .tab-button:first-child {
+            border-left: 2px solid #ccc;
+        }
+
+        .tab-button:last-child {
+            border-right: 2px solid #ccc;
+        }
+
+        .tab-button.active {
+            background: #007acc;
+            color: white;
+            border-top: 2px solid #005a9e;
+        }
+
+        .tab-content {
+            display: none;
+            flex: 1;
+        }
+
+        .tab-content.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mappings editor styles */
+        .mappings-section {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .mappings-editor {
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            flex: 1;
+            resize: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
 <div class="input-panel">
     <h2>Markdown Input</h2>
     <div class="controls">
-        <label><input type="checkbox" id="splitOnHeader" checked> splitOnHeader</label>
-        <label><input type="checkbox" id="splitOnTag"> splitOnTag</label>
-        <label><input type="checkbox" id="splitOnId" checked> splitOnId</label>
-        <label><input type="checkbox" id="addLabels" checked> addLabels</label>
-        <label><input type="checkbox" id="includeSelectors" checked> includeSelectors</label>
-        <label><input type="checkbox" id="includeRaw"> includeRaw</label>
+        <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
+            <legend>Partition By:</legend>
+            <label><input type="checkbox" id="partitionByHeader" checked> header</label>
+            <label><input type="checkbox" id="partitionByTag"> tag</label>
+            <label><input type="checkbox" id="partitionByIdentifier" checked> identifier</label>
+        </fieldset>
+        <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
+            <legend>Include Labels For:</legend>
+            <label><input type="checkbox" id="labelDocuments" checked> documents</label>
+            <label><input type="checkbox" id="labelSections" checked> sections</label>
+            <label><input type="checkbox" id="labelAnchors"> anchors</label>
+            <label><input type="checkbox" id="labelProperties" checked> properties</label>
+        </fieldset>
+        <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
+            <legend>Include:</legend>
+            <label><input type="checkbox" id="includeSelectors" checked> selectors</label>
+            <label><input type="checkbox" id="includeRaw"> raw</label>
+        </fieldset>
     </div>
     <textarea id="markdown-input" placeholder="Enter your markdown here...">---
 hello: world
@@ -142,16 +217,30 @@ Bob :: schema:name :: Bobby</textarea>
 
 <div class="output-panel">
     <h2>RDF Output</h2>
-
-    <textarea id="rdf-output"></textarea>
-</div>
-
-<div class="visualization-panel">
-    <h2>RDF Visualization</h2>
-    <div class="visualization-controls">
-        <button id="update-diagram">Update Diagram</button>
+    <div class="tabs">
+        <button class="tab-button active" data-tab="diagram">Visualization</button>
+        <button class="tab-button" data-tab="turtle">Turtle</button>
+        <button class="tab-button" data-tab="mappings">Mappings</button>
     </div>
-    <rdf2dot-default id="rdf-viewer" data=""></rdf2dot-default>
+    
+    <div id="diagram-tab" class="tab-content active">
+        <div class="visualization-controls">
+            <button id="update-diagram">Update Diagram</button>
+        </div>
+        <rdf2dot-default id="rdf-viewer" data=""></rdf2dot-default>
+    </div>
+    
+    <div id="turtle-tab" class="tab-content">
+        <textarea id="rdf-output"></textarea>
+    </div>
+    
+    <div id="mappings-tab" class="tab-content">
+        <div class="mappings-section">
+            <h3>Mappings Configuration</h3>
+            <textarea id="mappings-editor" class="mappings-editor" placeholder="Enter mappings JSON..."></textarea>
+            <button id="reset-mappings" style="margin-top: 5px; padding: 5px 10px; font-size: 12px;">Reset to Default</button>
+        </div>
+    </div>
 </div>
 <!-- External dependencies for rdf2dot -->
 <script src="https://eyereasoner.github.io/eye-js/16/latest/index.js"></script>
@@ -161,31 +250,76 @@ Bob :: schema:name :: Bobby</textarea>
 <script type="module">
   import grapoi from 'grapoi'
   import { markdownToRDF } from './src/markdown-to-RDF.js'
-  import ns from './src/namespaces.js'
   import rdf from 'rdf-ext'
   import 'rdf2dot-wc/rdf2dot-wc.js'
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
   const rdfViewer = document.getElementById('rdf-viewer')
   const updateDiagramBtn = document.getElementById('update-diagram')
-  const splitOnHeaderInput = document.getElementById('splitOnHeader')
-  const splitOnTagInput = document.getElementById('splitOnTag')
-  const splitOnIdInput = document.getElementById('splitOnId')
-  const addLabelsInput = document.getElementById('addLabels')
+  const partitionByHeaderInput = document.getElementById('partitionByHeader')
+  const partitionByTagInput = document.getElementById('partitionByTag')
+  const partitionByIdentifierInput = document.getElementById('partitionByIdentifier')
+  const labelDocumentsInput = document.getElementById('labelDocuments')
+  const labelSectionsInput = document.getElementById('labelSections')
+  const labelAnchorsInput = document.getElementById('labelAnchors')
+  const labelPropertiesInput = document.getElementById('labelProperties')
   const includeSelectorsInput = document.getElementById('includeSelectors')
   const includeRawInput = document.getElementById('includeRaw')
+  const mappingsEditor = document.getElementById('mappings-editor')
+  const resetMappingsBtn = document.getElementById('reset-mappings')
 
   let hasChanges = false
+  
+  // Default mappings
+  const defaultMappings = {
+    namespaces: {
+      rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      rdfs: "http://www.w3.org/2000/01/rdf-schema#",
+      schema: "http://schema.org/"
+    },
+    mappings: [
+      {
+        type: "inlineProperty",
+        key: "is a",
+        predicate: "rdf:type"
+      },
+      {
+        type: "inlineProperty",
+        key: "same as",
+        predicate: "rdf:sameAs"
+      }
+    ]
+  }
+  
+  // Initialize mappings editor
+  mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
 
   async function updateOutput () {
+    const partitionBy = []
+    if (partitionByHeaderInput.checked) partitionBy.push('header')
+    if (partitionByTagInput.checked) partitionBy.push('tag')
+    if (partitionByIdentifierInput.checked) partitionBy.push('identifier')
+
+    const includeLabelsFor = []
+    if (labelDocumentsInput.checked) includeLabelsFor.push('documents')
+    if (labelSectionsInput.checked) includeLabelsFor.push('sections')
+    if (labelAnchorsInput.checked) includeLabelsFor.push('anchors')
+    if (labelPropertiesInput.checked) includeLabelsFor.push('properties')
+
+    // Parse mappings from editor
+    let mappings = defaultMappings
+    try {
+      mappings = JSON.parse(mappingsEditor.value)
+    } catch (e) {
+      console.warn('Invalid mappings JSON, using defaults:', e)
+    }
+
     const options = {
-      splitOnHeader: splitOnHeaderInput.checked,
-      splitOnTag: splitOnTagInput.checked,
-      splitOnId: splitOnIdInput.checked,
-      addLabels: addLabelsInput.checked,
+      partitionBy,
+      includeLabelsFor,
       includeSelectors: includeSelectorsInput.checked,
       includeRaw: includeRawInput.checked,
-      namespaces: ns,
+      mappings
     }
 
     const file = 'demo.md'
@@ -217,14 +351,52 @@ Bob :: schema:name :: Bobby</textarea>
     updateDiagram()
   }
 
+  // Tab switching functionality
+  function switchTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active')
+    })
+    
+    // Remove active class from all tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.classList.remove('active')
+    })
+    
+    // Show selected tab content
+    document.getElementById(tabName + '-tab').classList.add('active')
+    
+    // Add active class to selected tab button
+    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active')
+  }
+
+  // Reset mappings function
+  function resetMappings() {
+    mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
+    updateBoth()
+  }
+
+  // Event listeners
   markdownInput.addEventListener('input', updateOutput)
-  splitOnHeaderInput.addEventListener('change', updateBoth)
-  splitOnTagInput.addEventListener('change', updateBoth)
-  splitOnIdInput.addEventListener('change', updateBoth)
-  addLabelsInput.addEventListener('change', updateBoth)
+  partitionByHeaderInput.addEventListener('change', updateBoth)
+  partitionByTagInput.addEventListener('change', updateBoth)
+  partitionByIdentifierInput.addEventListener('change', updateBoth)
+  labelDocumentsInput.addEventListener('change', updateBoth)
+  labelSectionsInput.addEventListener('change', updateBoth)
+  labelAnchorsInput.addEventListener('change', updateBoth)
+  labelPropertiesInput.addEventListener('change', updateBoth)
   includeSelectorsInput.addEventListener('change', updateBoth)
   includeRawInput.addEventListener('change', updateBoth)
+  mappingsEditor.addEventListener('input', updateOutput)
+  resetMappingsBtn.addEventListener('click', resetMappings)
   updateDiagramBtn.addEventListener('click', updateDiagram)
+
+  // Tab button event listeners
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', () => {
+      switchTab(button.dataset.tab)
+    })
+  })
 
   // Initial render
   updateOutput()

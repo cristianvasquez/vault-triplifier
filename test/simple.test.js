@@ -5,9 +5,8 @@ import ns from '../src/namespaces.js'
 describe('Vault Triplifier', () => {
   it('should process example vault and generate RDF', async () => {
     const options = {
-      splitOnHeader: true,
-      addLabels: true,
-      namespaces: ns,
+      partitionBy: ['header'],
+      includeLabelsFor: ['documents', 'sections', 'properties'],
     }
 
     const dataset = await triplifyVault('./example-vault', options)
@@ -19,9 +18,9 @@ describe('Vault Triplifier', () => {
     const quads = [...dataset]
     const hasNoteTriple = quads.some(q =>
       q.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
-      q.object.value === 'http://pkm-united.org/Note',
+      q.object.value === 'http://pkm-united.org/NamedNote',
     )
-    assert(hasNoteTriple, 'Should contain Note type triples')
+    assert(hasNoteTriple, 'Should contain NamedNote type triples')
 
   })
 

@@ -1,5 +1,5 @@
-import { resolvePlaceholders } from './processors/placeholderResolver.js'
-import { addLabels } from './processors/labelAdder.js'
+import { resolvePlaceholders } from './processors/resolveExternalPaths.js'
+import { addLabels } from './processors/appendLabels.js'
 
 function postProcess ({ pointer, getPathByName }, options) {
 
@@ -7,7 +7,7 @@ function postProcess ({ pointer, getPathByName }, options) {
   resolvePlaceholders(pointer, getPathByName)
 
   // Step 2: Add labels to properties
-  if (options.addLabels) {
+  if (options.includeLabelsFor.includes('properties')) {
     addLabels(pointer)
   }
 
