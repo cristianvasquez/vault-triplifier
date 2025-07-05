@@ -40,10 +40,21 @@ function resolveLink ({ type, value }, context) {
 }
 
 function findUriBySelector (node, targetSelector) {
-  if (node.type === 'block' && node.value === targetSelector && node.uri) {
-    return node.uri
+  // Check if this node matches the selector
+  // It can match by value (for headers) or by id (for anchors)
+  if (node.uri) {
+    // Check header text
+    if (node.type === 'block' && node.value === targetSelector) {
+      return node.uri
+    }
+
+    // Check anchor IDs
+    if (node.ids && node.ids.includes(targetSelector)) {
+      return node.uri
+    }
   }
 
+  // Recursively search children
   for (const child of node.children ?? []) {
     const found = findUriBySelector(child, targetSelector)
     if (found) return found

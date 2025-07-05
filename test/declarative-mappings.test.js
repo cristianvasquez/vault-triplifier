@@ -26,10 +26,18 @@ describe('Declarative Mappings', () => {
     )?.subject;
 
     assert(whiteRabbitBlockNode, 'White rabbit block node not found');
-    const wozenderlandsUri = rdf.namedNode('urn:resource:Wozenderlands');
+    
+    // Find the actual Wozenderlands block (not a fabricated URI)
+    const wozenderlandsBlockNode = [...dataset].find(quad =>
+      quad.predicate.equals(ns.rdfs.label) &&
+      quad.object.value === 'Wozenderlands' &&
+      quad.subject.termType === 'BlankNode'
+    )?.subject;
+    
+    assert(wozenderlandsBlockNode, 'Wozenderlands block node not found');
 
     const typeRabbitTriple = rdf.quad(whiteRabbitBlockNode, ns.rdf.type, rdf.namedNode('http://example.org/Rabbit'));
-    const addressWozenderlandsTriple = rdf.quad(whiteRabbitBlockNode, ns.schema.address, wozenderlandsUri);
+    const addressWozenderlandsTriple = rdf.quad(whiteRabbitBlockNode, ns.schema.address, wozenderlandsBlockNode);
 
     // Assertions
     console.log(dataset.toString());

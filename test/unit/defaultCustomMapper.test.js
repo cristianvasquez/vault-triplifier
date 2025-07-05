@@ -33,10 +33,10 @@ describe('defaultCustomMapper', () => {
     assert.deepStrictEqual(resolvedPredicate, ns.schema.name);
   });
 
-  it('should return the original string for unmapped terms', () => {
+  it('should return null for unmapped terms', () => {
     const mapper = createMapper(testMappings);
     const { resolvedPredicate } = mapper({ predicate: 'unknownProperty' });
-    assert.deepStrictEqual(resolvedPredicate, 'unknownProperty');
+    assert.deepStrictEqual(resolvedPredicate, null);
   });
 
   it('should return the original RDF term if already an RDF term', () => {
