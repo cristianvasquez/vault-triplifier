@@ -64,8 +64,8 @@ _:b2 rdfs:label "Wozenderlands" ;
 
 <urn:property:loves%20to%20drink%20tea%20with> rdfs:label "loves to drink tea with" .
 
-<urn:resource:Alice.md> rdfs:label "Alice" ;
-        a dot:Note ;
+<urn:name:Alice> rdfs:label "Alice" ;
+        a dot:NamedNote ;
         dot:contains [
                 rdfs:label "Alice" ;
                 oa:hasSelector [
@@ -79,7 +79,7 @@ _:b2 rdfs:label "Wozenderlands" ;
         prov:atLocation <file:///home/cvasquez/github.com/cristianvasquez/vault-triplifier/example-vault/Alice.md> .
 
 <urn:resource:WhiteRabbit.md> rdfs:label "WhiteRabbit" ;
-        a dot:Note ;
+        a dot:NamedNote ;
         dot:contains [
                 rdfs:label "White rabbit" ;
                 oa:hasSelector [

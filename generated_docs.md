@@ -12,12 +12,23 @@ npm install vault-triplifier
 
 ```javascript
 import { triplifyFile } from 'vault-triplifier'
-import ns from 'vault-triplifier/namespaces'
 
 const options = {
-  splitOnHeader: true,
-  addLabels: true,
-  namespaces: ns
+  partitionBy: ['header'],
+  includeLabelsFor: ['documents', 'sections', 'properties'],
+  mappings: {
+    namespaces: {
+      schema: 'http://schema.org/',
+      ex: 'http://example.org/'
+    },
+    mappings: [
+      {
+        type: 'inlineProperty',
+        key: 'is a',
+        predicate: 'rdf:type'
+      }
+    ]
+  }
 }
 
 // For a single file
@@ -37,32 +48,30 @@ console.log([...dataset]) // All RDF quads from all files
 
 All options are optional and have sensible defaults.
 
-### Document Splitting Options
+### Document Partitioning Options
 
-| Option          | Type    | Default | Description                                                            |
-|-----------------|---------|---------|------------------------------------------------------------------------|
-| `splitOnHeader` | Boolean | `false` | Create separate RDF entities for each header block                     |
-| `splitOnTag`    | Boolean | `false` | Create separate RDF entities for elements with tags (#tag)             |
-| `splitOnId`     | Boolean | `true`  | Create separate RDF entities for elements with block identifiers (^id) |
+| Option        | Type     | Default         | Description                                                            |
+|---------------|----------|-----------------|------------------------------------------------------------------------|
+| `partitionBy` | Array    | `['identifier']` | Array of partitioning strategies: `'header'`, `'tag'`, `'identifier'` |
 
-### Link and Path Options
+### Content Options
 
-| Option             | Type    | Default | Description                                    |
-|--------------------|---------|---------|------------------------------------------------|
-| `includeSelectors` | Boolean | `true`  | Add `dot:selector` triples for block selectors |
+| Option             | Type    | Default | Description                                           |
+|--------------------|---------|---------|-------------------------------------------------------|
+| `includeSelectors` | Boolean | `true`  | Add text position selectors for blocks               |
+| `includeRaw`       | Boolean | `false` | Include raw markdown content in blocks               |
 
-### Label and Naming Options
+### Label Options
 
-| Option      | Type    | Default | Description                                              |
-|-------------|---------|---------|----------------------------------------------------------|
-| `addLabels` | Boolean | `false` | Automatically add `schema:name` labels to generated URIs |
+| Option            | Type  | Default | Description                                                    |
+|-------------------|-------|---------|----------------------------------------------------------------|
+| `includeLabelsFor` | Array | `[]`    | Add labels for: `'documents'`, `'sections'`, `'anchors'`, `'properties'` |
 
-### Mapping and Transformation Options
+### Mapping Options
 
-| Option           | Type   | Default     | Description                                           |
-|------------------|--------|-------------|-------------------------------------------------------|
-| `customMappings` | Object | `undefined` | Map custom property names to known RDF properties     |
-| `namespaces`     | Object | `undefined` | Namespace functions for resolving prefixed properties |
+| Option     | Type   | Default | Description                                    |
+|------------|--------|---------|------------------------------------------------|
+| `mappings` | Object | Built-in defaults | Custom mappings with namespaces and properties |
 
 ## Examples
 
@@ -70,17 +79,17 @@ All options are optional and have sensible defaults.
 
 ```javascript
 import { triplifyFile } from 'vault-triplifier'
-import ns from 'vault-triplifier/namespaces'
 
 const options = {
-  namespaces: ns
+  partitionBy: ['identifier'], // default
+  includeLabelsFor: []
 }
 
 // Process a single file
 const pointer = await triplifyFile('test.md', options)
 ```
 
-### Split on Headers
+### Partition on Headers
 
 ```javascript
 const markdown = `
@@ -94,9 +103,8 @@ age:: 25
 `
 
 const options = {
-  splitOnHeader: true,
-  addLabels: true,
-  namespaces: ns
+  partitionBy: ['header'],
+  includeLabelsFor: ['sections']
 }
 
 // Creates separate entities for Alice and Bob
@@ -107,11 +115,24 @@ const pointer = await triplifyFile('people.md', options)
 
 ```javascript
 const options = {
-  customMappings: {
-    'lives in': ns.schema.address,
-    'knows': ns.foaf.knows
-  },
-  namespaces: ns
+  mappings: {
+    namespaces: {
+      schema: 'http://schema.org/',
+      foaf: 'http://xmlns.com/foaf/0.1/'
+    },
+    mappings: [
+      {
+        type: 'inlineProperty',
+        key: 'lives in',
+        predicate: 'schema:address'
+      },
+      {
+        type: 'inlineProperty',
+        key: 'knows',
+        predicate: 'foaf:knows'
+      }
+    ]
+  }
 }
 
 const markdown = `
@@ -146,14 +167,30 @@ Alternatively, create a JSON file (e.g., `mappings.json`) with the following str
 }
 ```
 
-Then, pass the path to this file using the `declarativeMappingsPath` option when calling `triplifyFile` or `triplifyVault`:
+Then, pass the mappings object directly:
 
 ```javascript
 import { triplifyFile } from 'vault-triplifier';
 
 const options = {
-  declarativeMappingsPath: './mappings.json',
-  // ... other options
+  mappings: {
+    namespaces: {
+      "ex": "http://example.org/",
+      "pkm": "https://pkm.example.com/"
+    },
+    mappings: [
+      {
+        "type": "inlineProperty",
+        "key": "is a",
+        "predicate": "rdf:type"
+      },
+      {
+        "type": "inlineProperty",
+        "key": "knows",
+        "predicate": "pkm:knows"
+      }
+    ]
+  }
 };
 
 const pointer = await triplifyFile('my-note.md', options);
@@ -173,8 +210,7 @@ age:: 25
 `
 
 const options = {
-  splitOnId: true, // default
-  namespaces: ns
+  partitionBy: ['identifier'] // default
 }
 
 // Creates URIs ending with /alice and /bob
@@ -195,8 +231,7 @@ age:: 25
 `
 
 const options = {
-  splitOnTag: true,
-  namespaces: ns
+  partitionBy: ['tag']
 }
 
 // Creates separate entities for tagged elements
