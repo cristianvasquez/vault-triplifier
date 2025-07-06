@@ -14,3 +14,4 @@ if you want, you can pass by! some coordinates:
 
 schema:postalCode :: 4879
 schema:streetAddress :: 5 Wonderland Street
+another image :: [[img.png]]

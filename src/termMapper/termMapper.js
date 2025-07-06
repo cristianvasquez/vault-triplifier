@@ -1,11 +1,11 @@
 import rdf from 'rdf-ext'
 
 // Base conversion functions
-function toUri(text, namespace) {
+function toUri (text, namespace) {
   return namespace[encodeURI(text)]
 }
 
-function fromUri(term, namespace) {
+function fromUri (term, namespace) {
   const base = namespace().value
   if (!term.value.startsWith(base)) {
     return null
@@ -19,48 +19,52 @@ function fromUri(term, namespace) {
 const namespaces = {
   resource: rdf.namespace('urn:resource:'),
   property: rdf.namespace('urn:property:'),
-  name: rdf.namespace('urn:name:')
+  name: rdf.namespace('urn:name:'),
 }
 
 // Resource/Path functions
-function pathToUri(path) {
+function pathToUri (path) {
   return toUri(path, namespaces.resource)
 }
 
-function pathFromUri(term) {
+function pathFromUri (term) {
   return fromUri(term, namespaces.resource)
 }
 
 // Property functions
 // "has name" -> http://some-vault/property/has-name
-function propertyToUri(property) {
+function propertyToUri (property) {
   return toUri(property, namespaces.property)
 }
 
-function propertyFromUri(term) {
+function propertyFromUri (term) {
   return fromUri(term, namespaces.property)
 }
 
 //Names, symbols that denote notes. [[Alice]]
 // "Alice" -> http://some-vault/placeholder/alice
-function nameToUri(name) {
+function nameToUri (name) {
   return toUri(name, namespaces.name)
 }
 
-function nameFromUri(term) {
+function nameFromUri (term) {
   return fromUri(term, namespaces.name)
 }
 
 // Literal factory
-function newLiteral(text) {
+function newLiteral (text) {
   return rdf.literal(text)
 }
 
 // Block URI builder
 // http://example.com/ + ^blockId -> http://example.com/blockId
-function blockUri(baseUri, blockId) {
+function blockUri (baseUri, blockId) {
   const cleanId = blockId.replace(/^\^/, '')
   return rdf.namedNode(`${baseUri.value}/${cleanId}`)
+}
+
+function fileUri (file) {
+  return rdf.namedNode(`file://${file}`)
 }
 
 export {
@@ -71,5 +75,6 @@ export {
   nameToUri,
   nameFromUri,
   newLiteral,
-  blockUri
+  blockUri,
+  fileUri,
 }

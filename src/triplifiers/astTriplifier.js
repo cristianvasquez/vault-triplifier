@@ -1,7 +1,7 @@
 import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
 import ns from '../namespaces.js'
-import { blockUri } from '../termMapper/termMapper.js'
+import { blockUri, fileUri } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 
@@ -21,8 +21,8 @@ function assignInternalUris (node, context, options) {
 }
 
 function traverseAst (node, context, options) {
-  const { includeLabelsFor, includeSelectors, includeRaw } = options
-  const { pointer, text } = context
+  const { includeLabelsFor, includeSelectors } = options
+  const { pointer, path} = context
 
   // Add tags
   for (const tag of node.tags ?? []) {
@@ -42,25 +42,15 @@ function traverseAst (node, context, options) {
   knownLinks.filter(link => !link.mapped).
     forEach(link => populateLink(link, context, options))
 
-  // Process children
-  let rawStart = null
-  let rawPointer = null
-
   for (const child of node.children ?? []) {
     const { shouldSplit } = getNodeUri(child, context, options)
 
     if (shouldSplit) {
-      // Finalize previous block's raw content
-      if (includeRaw && rawStart !== null && rawPointer && child.position &&
-        text) {
-        const raw = text.substring(rawStart, child.position.start.offset).trim()
-        if (raw) rawPointer.addOut(ns.dot.raw, rdf.literal(raw))
-      }
 
       const childPointer = pointer.node(child.uri)
 
       // Set up block
-      childPointer.addOut(ns.rdf.type, ns.dot.Block)
+      childPointer.addOut(ns.rdf.type, ns.oa.Annotation)
       pointer.addOut(ns.dot.contains, child.uri)
 
       // Add section label if requested and child has value (header text)
@@ -75,13 +65,8 @@ function traverseAst (node, context, options) {
       }
 
       if (includeSelectors && child.type === 'block' && child.position) {
-        appendPosition(childPointer, child.position)
-      }
-
-      // Update raw content tracking
-      if (includeRaw && child.position && text) {
-        rawStart = child.position.end.offset
-        rawPointer = childPointer
+        const documentTerm = fileUri(path)
+        appendPosition(childPointer, documentTerm, child.position)
       }
 
       traverseAst(child, { ...context, pointer: childPointer }, options)
@@ -90,18 +75,16 @@ function traverseAst (node, context, options) {
     }
   }
 
-  // Finalize last block's raw content
-  if (includeRaw && rawStart !== null && rawPointer && text) {
-    const raw = text.substring(rawStart).trim()
-    if (raw) rawPointer.addOut(ns.dot.raw, rdf.literal(raw))
-  }
-
   return pointer
 }
 
-function appendPosition (node, position) {
+function appendPosition (node, documentTerm, position) {
   const { start, end } = position
-  node.addOut(ns.oa.hasSelector, sel =>
+
+
+  node
+  .addOut(ns.oa.hasSource, documentTerm)
+  .addOut(ns.oa.hasSelector, sel =>
     sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector).
       addOut(ns.oa.start, toRdf(start.offset)).
       addOut(ns.oa.end, toRdf(end.offset)),

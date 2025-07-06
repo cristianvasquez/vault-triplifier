@@ -1,0 +1,27 @@
+# Version 1: Simple extraction
+- pattern: "(.*) works on (.*)"
+  template:
+    subject: "$1"
+    predicate: "schema:worksOn"
+    object: "$2"
+
+# Version 2: With entity types
+- pattern: "(.*) works on (.*)"
+  template:
+    subject:
+      value: "$1"
+      type: "foaf:Person"
+    predicate: "schema:worksOn"
+    object:
+      value: "$2"
+      type: "schema:Topic"
+
+# Version 3: With confidence rules
+- pattern: "(.*) works on (.*)"
+  conditions:
+    - precedingWord: [ "Mr.", "Teacher" ]
+      confidenceBoost: 0.1
+  template:
+    subject: "$1"
+    predicate: "schema:worksOn"
+    object: "$2"

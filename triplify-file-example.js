@@ -9,7 +9,7 @@ const options = {
   includeLabelsFor: ['documents', 'sections', 'properties'],
 
   // includes the offsets
-  includeSelectors: false,
+  includeSelectors: true,
   includeRaw: true,
 
   // Custom mappings for term resolution

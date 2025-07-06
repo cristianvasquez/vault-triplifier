@@ -24,6 +24,6 @@ const options = {
 }
 
 const dir = './example-vault'
-const dataset = await triplifyVault(dir, options)
-
-console.log(await prettyPrint(dataset, ns))
+for await (const pointer of triplifyVault(dir, options)) {
+  console.log(await prettyPrint(pointer.dataset, ns))
+}
