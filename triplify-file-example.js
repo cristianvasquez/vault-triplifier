@@ -4,7 +4,7 @@ import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
 // will partition the document into blocks when it encounters headings
-  partitionBy: ['header'],
+  partitionBy: ['headers-h1-h2'],
   // Include labels for documents, sections and properties (great for querying)
   includeLabelsFor: ['documents', 'sections', 'properties'],
 
@@ -28,7 +28,7 @@ const options = {
 }
 
 // A pointer is the dataset + the root
-const pointer = await triplifyFile('./example-vault/Alice.md', options)
+const pointer = await triplifyFile('./example-vault/White Rabbit.md', options)
 
 const dataset = pointer.dataset
 

@@ -166,6 +166,8 @@
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
             <legend>Partition By:</legend>
             <label><input type="checkbox" id="partitionByHeader" checked> header</label>
+            <label><input type="checkbox" id="partitionByHeadersH1H2"> headers-h1-h2</label>
+            <label><input type="checkbox" id="partitionByHeadersH1H2H3"> headers-h1-h2-h3</label>
             <label><input type="checkbox" id="partitionByTag"> tag</label>
             <label><input type="checkbox" id="partitionByIdentifier" checked> identifier</label>
         </fieldset>
@@ -257,6 +259,8 @@ Bob :: schema:name :: Bobby</textarea>
   const rdfViewer = document.getElementById('rdf-viewer')
   const updateDiagramBtn = document.getElementById('update-diagram')
   const partitionByHeaderInput = document.getElementById('partitionByHeader')
+  const partitionByHeadersH1H2Input = document.getElementById('partitionByHeadersH1H2')
+  const partitionByHeadersH1H2H3Input = document.getElementById('partitionByHeadersH1H2H3')
   const partitionByTagInput = document.getElementById('partitionByTag')
   const partitionByIdentifierInput = document.getElementById('partitionByIdentifier')
   const labelDocumentsInput = document.getElementById('labelDocuments')
@@ -297,6 +301,8 @@ Bob :: schema:name :: Bobby</textarea>
   async function updateOutput () {
     const partitionBy = []
     if (partitionByHeaderInput.checked) partitionBy.push('header')
+    if (partitionByHeadersH1H2Input.checked) partitionBy.push('headers-h1-h2')
+    if (partitionByHeadersH1H2H3Input.checked) partitionBy.push('headers-h1-h2-h3')
     if (partitionByTagInput.checked) partitionBy.push('tag')
     if (partitionByIdentifierInput.checked) partitionBy.push('identifier')
 
@@ -379,6 +385,8 @@ Bob :: schema:name :: Bobby</textarea>
   // Event listeners
   markdownInput.addEventListener('input', updateOutput)
   partitionByHeaderInput.addEventListener('change', updateBoth)
+  partitionByHeadersH1H2Input.addEventListener('change', updateBoth)
+  partitionByHeadersH1H2H3Input.addEventListener('change', updateBoth)
   partitionByTagInput.addEventListener('change', updateBoth)
   partitionByIdentifierInput.addEventListener('change', updateBoth)
   labelDocumentsInput.addEventListener('change', updateBoth)

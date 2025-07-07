@@ -112,6 +112,16 @@ function getNodeUri (node, context, options) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
+  if (options.partitionBy.includes('headers-h1-h2') && node.type === 'block' && 
+      node.depth && (node.depth === 1 || node.depth === 2)) {
+    return { shouldSplit: true, childUri: rdf.blankNode() }
+  }
+
+  if (options.partitionBy.includes('headers-h1-h2-h3') && node.type === 'block' && 
+      node.depth && (node.depth === 1 || node.depth === 2 || node.depth === 3)) {
+    return { shouldSplit: true, childUri: rdf.blankNode() }
+  }
+
   return { shouldSplit: false }
 }
 
