@@ -250,9 +250,7 @@ Bob :: schema:name :: Bobby</textarea>
 
 <!-- Main logic -->
 <script type="module">
-  import grapoi from 'grapoi'
-  import { markdownToRDF } from './src/markdown-to-RDF.js'
-  import rdf from 'rdf-ext'
+  import { contentToRDF } from './src/file-to-RDF.js'
   import 'rdf2dot-wc/rdf2dot-wc.js'
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
@@ -272,7 +270,6 @@ Bob :: schema:name :: Bobby</textarea>
   const mappingsEditor = document.getElementById('mappings-editor')
   const resetMappingsBtn = document.getElementById('reset-mappings')
 
-  let hasChanges = false
   
   // Default mappings
   const defaultMappings = {
@@ -298,7 +295,7 @@ Bob :: schema:name :: Bobby</textarea>
   // Initialize mappings editor
   mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
 
-  async function updateOutput () {
+  async function generateRDF() {
     const partitionBy = []
     if (partitionByHeaderInput.checked) partitionBy.push('header')
     if (partitionByHeadersH1H2Input.checked) partitionBy.push('headers-h1-h2')
@@ -328,33 +325,35 @@ Bob :: schema:name :: Bobby</textarea>
       mappings
     }
 
-    const file = 'demo.md'
-    const term = rdf.namedNode(`file://${file}`)
-    const pointer = grapoi({ dataset: rdf.dataset(), factory: rdf, term })
+    // Simulate a real file processing scenario
+    const simulatedFilePath = '/vault/playground-demo.md'
+    const content = markdownInput.value
+    
+    const result = await contentToRDF(content, { 
+      path: simulatedFilePath
+    }, options)
 
-    const result = markdownToRDF(markdownInput.value, { pointer, path: file }, options)
+    return result.dataset.toString()
+  }
 
-    rdfOutput.value = result.dataset.toString()
-
-    // Mark that there are changes
-    hasChanges = true
+  async function updateRDFOutput() {
+    rdfOutput.value = await generateRDF()
     updateDiagramBtn.textContent = 'Update Diagram'
     updateDiagramBtn.disabled = false
-
   }
 
-  function updateDiagram() {
-    if (hasChanges) {
-      rdfViewer.data = rdfOutput.value
-      hasChanges = false
-      updateDiagramBtn.textContent = 'Up to date'
-      updateDiagramBtn.disabled = true
-    }
+  async function updateRDFAndDiagram() {
+    const rdfData = await generateRDF()
+    rdfOutput.value = rdfData
+    rdfViewer.data = rdfData
+    updateDiagramBtn.textContent = 'Up to date'
+    updateDiagramBtn.disabled = true
   }
 
-  function updateBoth(){
-    updateOutput()
-    updateDiagram()
+  function updateDiagramOnly() {
+    rdfViewer.data = rdfOutput.value
+    updateDiagramBtn.textContent = 'Up to date'
+    updateDiagramBtn.disabled = true
   }
 
   // Tab switching functionality
@@ -379,25 +378,25 @@ Bob :: schema:name :: Bobby</textarea>
   // Reset mappings function
   function resetMappings() {
     mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
-    updateBoth()
+    updateRDFAndDiagram()
   }
 
   // Event listeners
-  markdownInput.addEventListener('input', updateOutput)
-  partitionByHeaderInput.addEventListener('change', updateBoth)
-  partitionByHeadersH1H2Input.addEventListener('change', updateBoth)
-  partitionByHeadersH1H2H3Input.addEventListener('change', updateBoth)
-  partitionByTagInput.addEventListener('change', updateBoth)
-  partitionByIdentifierInput.addEventListener('change', updateBoth)
-  labelDocumentsInput.addEventListener('change', updateBoth)
-  labelSectionsInput.addEventListener('change', updateBoth)
-  labelAnchorsInput.addEventListener('change', updateBoth)
-  labelPropertiesInput.addEventListener('change', updateBoth)
-  includeSelectorsInput.addEventListener('change', updateBoth)
-  includeRawInput.addEventListener('change', updateBoth)
-  mappingsEditor.addEventListener('input', updateOutput)
+  markdownInput.addEventListener('input', updateRDFOutput)
+  partitionByHeaderInput.addEventListener('change', updateRDFAndDiagram)
+  partitionByHeadersH1H2Input.addEventListener('change', updateRDFAndDiagram)
+  partitionByHeadersH1H2H3Input.addEventListener('change', updateRDFAndDiagram)
+  partitionByTagInput.addEventListener('change', updateRDFAndDiagram)
+  partitionByIdentifierInput.addEventListener('change', updateRDFAndDiagram)
+  labelDocumentsInput.addEventListener('change', updateRDFAndDiagram)
+  labelSectionsInput.addEventListener('change', updateRDFAndDiagram)
+  labelAnchorsInput.addEventListener('change', updateRDFAndDiagram)
+  labelPropertiesInput.addEventListener('change', updateRDFAndDiagram)
+  includeSelectorsInput.addEventListener('change', updateRDFAndDiagram)
+  includeRawInput.addEventListener('change', updateRDFAndDiagram)
+  mappingsEditor.addEventListener('input', updateRDFOutput)
   resetMappingsBtn.addEventListener('click', resetMappings)
-  updateDiagramBtn.addEventListener('click', updateDiagram)
+  updateDiagramBtn.addEventListener('click', updateDiagramOnly)
 
   // Tab button event listeners
   document.querySelectorAll('.tab-button').forEach(button => {
@@ -407,9 +406,7 @@ Bob :: schema:name :: Bobby</textarea>
   })
 
   // Initial render
-  updateOutput()
-  // Initial diagram update
-  setTimeout(updateDiagram, 100)
+  updateRDFAndDiagram()
 </script>
 </body>
 </html>
