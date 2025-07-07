@@ -328,3 +328,23 @@ Process all markdown and canvas files in a directory.
 - `options` (object) - Configuration options
 
 **Returns:** Promise resolving to an RDF dataset containing all triples
+
+## Documentation
+
+For comprehensive documentation including progressive examples, syntax reference, and configuration guide, see the [`docs/`](docs/) directory:
+
+- **[Complete Documentation](docs/index.md)** - Main documentation hub with examples and guides
+- **[Basic Properties](docs/examples/01-basic-properties.md)** - Learn the fundamental syntax
+- **[Namespace Prefixes](docs/examples/02-namespace-prefixes.md)** - Using semantic vocabularies
+- **[Links and References](docs/examples/03-links-and-references.md)** - Connecting documents
+- **[Inline Semantics](docs/examples/04-inline-semantics.md)** - Embedding properties in prose
+- **[Document Partitioning](docs/examples/05-document-partitioning.md)** - Controlling semantic sections
+- **[Advanced Mappings](docs/examples/06-advanced-mappings.md)** - Complex relationships
+- **[Frontmatter Integration](docs/examples/07-frontmatter-integration.md)** - YAML metadata support
+- **[Syntax Reference](docs/syntax-reference.md)** - Complete syntax guide
+- **[Configuration Guide](docs/configuration.md)** - Options and customization
+- **[RDF Output Guide](docs/rdf-output.md)** - Understanding generated RDF
+
+---
+
+*Note: The comprehensive documentation in the `docs/` directory was created by Claude Code to provide detailed examples and guidance for semantic document creation and AI agent training.*
