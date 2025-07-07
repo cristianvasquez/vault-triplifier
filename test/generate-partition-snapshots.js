@@ -6,17 +6,17 @@ const combinations = [
   { name: 'none', partitionBy: [] },
   { name: 'identifier', partitionBy: ['identifier'] }, // current default
   { name: 'tag', partitionBy: ['tag'] },
-  { name: 'header', partitionBy: ['header'] },
+  { name: 'headers-all', partitionBy: ['headers-all'] },
   { name: 'headers-h1-h2', partitionBy: ['headers-h1-h2'] },
   { name: 'headers-h1-h2-h3', partitionBy: ['headers-h1-h2-h3'] },
   { name: 'identifier-tag', partitionBy: ['identifier', 'tag'] },
-  { name: 'identifier-header', partitionBy: ['identifier', 'header'] },
+  { name: 'identifier-headers-all', partitionBy: ['identifier', 'headers-all'] },
   { name: 'identifier-headers-h1-h2', partitionBy: ['identifier', 'headers-h1-h2'] },
   { name: 'identifier-headers-h1-h2-h3', partitionBy: ['identifier', 'headers-h1-h2-h3'] },
-  { name: 'tag-header', partitionBy: ['tag', 'header'] },
+  { name: 'tag-headers-all', partitionBy: ['tag', 'headers-all'] },
   { name: 'tag-headers-h1-h2', partitionBy: ['tag', 'headers-h1-h2'] },
   { name: 'tag-headers-h1-h2-h3', partitionBy: ['tag', 'headers-h1-h2-h3'] },
-  { name: 'identifier-tag-header', partitionBy: ['identifier', 'tag', 'header'] }
+  { name: 'identifier-tag-headers-all', partitionBy: ['identifier', 'tag', 'headers-all'] }
 ]
 
 async function generateSnapshots() {

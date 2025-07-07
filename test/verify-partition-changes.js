@@ -6,11 +6,11 @@ const combinationMappings = [
   { old: { splitOnId: false, splitOnTag: false, splitOnHeader: false }, new: { partitionBy: [] } },
   { old: { splitOnId: true,  splitOnTag: false, splitOnHeader: false }, new: { partitionBy: ['identifier'] } },
   { old: { splitOnId: false, splitOnTag: true,  splitOnHeader: false }, new: { partitionBy: ['tag'] } },
-  { old: { splitOnId: false, splitOnTag: false, splitOnHeader: true },  new: { partitionBy: ['header'] } },
+  { old: { splitOnId: false, splitOnTag: false, splitOnHeader: true },  new: { partitionBy: ['headers-all'] } },
   { old: { splitOnId: true,  splitOnTag: true,  splitOnHeader: false }, new: { partitionBy: ['identifier', 'tag'] } },
-  { old: { splitOnId: true,  splitOnTag: false, splitOnHeader: true },  new: { partitionBy: ['identifier', 'header'] } },
-  { old: { splitOnId: false, splitOnTag: true,  splitOnHeader: true },  new: { partitionBy: ['tag', 'header'] } },
-  { old: { splitOnId: true,  splitOnTag: true,  splitOnHeader: true },   new: { partitionBy: ['identifier', 'tag', 'header'] } }
+  { old: { splitOnId: true,  splitOnTag: false, splitOnHeader: true },  new: { partitionBy: ['identifier', 'headers-all'] } },
+  { old: { splitOnId: false, splitOnTag: true,  splitOnHeader: true },  new: { partitionBy: ['tag', 'headers-all'] } },
+  { old: { splitOnId: true,  splitOnTag: true,  splitOnHeader: true },   new: { partitionBy: ['identifier', 'tag', 'headers-all'] } }
 ]
 
 function normalizeDataset(dataset) {

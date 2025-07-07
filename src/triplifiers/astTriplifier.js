@@ -5,9 +5,22 @@ import { blockUri, fileUri } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 
+// State to track previous selector for end position updates
+let previousSelectorData = null
+
 function astTriplifier (node, context, options) {
+  // Reset selector tracking for each document
+  previousSelectorData = null
+  
   assignInternalUris(node, context, options)
-  return traverseAst(node, { ...context, rootNode: node }, options)
+  const result = traverseAst(node, { ...context, rootNode: node }, options)
+  
+  // Finalize the last selector if it exists
+  if (previousSelectorData && context.text) {
+    finalizeFinalSelector(context.text.length)
+  }
+  
+  return result
 }
 
 function assignInternalUris (node, context, options) {
@@ -79,16 +92,52 @@ function traverseAst (node, context, options) {
 }
 
 function appendPosition (node, documentTerm, position) {
-  const { start, end } = position
+  const { start } = position
 
+  // Update previous selector's end position to current start
+  if (previousSelectorData) {
+    updatePreviousSelectorEnd(start.offset)
+  }
 
+  // Create selector with start position (end will be updated later)
+  let selectorPointer = null
   node
-  .addOut(ns.oa.hasSource, documentTerm)
-  .addOut(ns.oa.hasSelector, sel =>
-    sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector).
-      addOut(ns.oa.start, toRdf(start.offset)).
-      addOut(ns.oa.end, toRdf(end.offset)),
-  )
+    .addOut(ns.oa.hasSource, documentTerm)
+    .addOut(ns.oa.hasSelector, sel => {
+      selectorPointer = sel
+      return sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector)
+        .addOut(ns.oa.start, toRdf(start.offset))
+        .addOut(ns.oa.end, toRdf(start.offset)) // Temporary end, will be updated
+    })
+
+  // Store current selector data for future end position update
+  previousSelectorData = {
+    selectorPointer,
+    startOffset: start.offset
+  }
+}
+
+function updatePreviousSelectorEnd(newEndOffset) {
+  if (previousSelectorData) {
+    // Remove old end and add new end
+    const { selectorPointer } = previousSelectorData
+    // Find and update the end triple
+    for (const quad of selectorPointer.dataset) {
+      if (quad.subject.equals(selectorPointer.term) && 
+          quad.predicate.equals(ns.oa.end)) {
+        selectorPointer.dataset.delete(quad)
+        break
+      }
+    }
+    selectorPointer.addOut(ns.oa.end, toRdf(newEndOffset))
+  }
+}
+
+function finalizeFinalSelector(documentEndOffset) {
+  if (previousSelectorData) {
+    updatePreviousSelectorEnd(documentEndOffset)
+    previousSelectorData = null
+  }
 }
 
 function getNodeUri (node, context, options) {
@@ -108,7 +157,7 @@ function getNodeUri (node, context, options) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
-  if (options.partitionBy.includes('header') && node.type === 'block') {
+  if (options.partitionBy.includes('headers-all') && node.type === 'block') {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
