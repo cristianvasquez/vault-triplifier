@@ -8,14 +8,14 @@ describe('Declarative Mappings', () => {
   it('should apply mappings from a JSON file', async () => {
     const mappingsJson = await readFile('test/support/declarative-mappings.json', 'utf8');
     const mappings = JSON.parse(mappingsJson);
-    
+
     const options = {
       includeLabelsFor: ['documents', 'sections', 'properties'],
       partitionBy: ['header'],
       mappings,
     };
 
-    const pointer = await triplifyFile('./example-vault/WhiteRabbit.md', options);
+    const pointer = await triplifyFile('./example-vault/White Rabbit.md', options);
     const dataset = pointer.dataset;
 
     // Expected triples
@@ -26,14 +26,14 @@ describe('Declarative Mappings', () => {
     )?.subject;
 
     assert(whiteRabbitBlockNode, 'White rabbit block node not found');
-    
+
     // Find the actual Wozenderlands block (not a fabricated URI)
     const wozenderlandsBlockNode = [...dataset].find(quad =>
       quad.predicate.equals(ns.rdfs.label) &&
       quad.object.value === 'Wozenderlands' &&
       quad.subject.termType === 'BlankNode'
     )?.subject;
-    
+
     assert(wozenderlandsBlockNode, 'Wozenderlands block node not found');
 
     const typeRabbitTriple = rdf.quad(whiteRabbitBlockNode, ns.rdf.type, rdf.namedNode('http://example.org/Rabbit'));

@@ -69,7 +69,7 @@ async function triplifyFile (file, options) {
 
   documentPointer.
     addOut(ns.dot.represents, term).
-    addOut(ns.prov.atLocation, documentUri).
+    addOut(ns.prov.atLocation, rdf.literal(file)).
     addOut(ns.prov.generatedAtTime, toRdf(new Date()))
 
   if (options.includeLabelsFor?.includes('documents')) {

@@ -64,7 +64,8 @@ function blockUri (baseUri, blockId) {
 }
 
 function fileUri (file) {
-  return rdf.namedNode(`file://${file}`)
+  const url = new URL(`file://${file}`)
+  return rdf.namedNode(url.href)
 }
 
 export {
