@@ -1,35 +1,24 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
+import { TriplifierOptions } from '../schemas.js'
 
-function createMapper(mappings) {
+function createMapper(optionsInput) {
+  // Validate and normalize options
+  const options = TriplifierOptions.parse(optionsInput)
+  const { prefix, mappings } = options
+
   // Build namespace map
   const namespaceMap = { ...ns }
-  if (mappings.namespaces) {
-    Object.entries(mappings.namespaces).forEach(([prefix, uri]) => {
-      namespaceMap[prefix] = rdf.namespace(uri)
-    })
-  }
+  Object.entries(prefix).forEach(([pfx, uri]) => {
+    namespaceMap[pfx] = rdf.namespace(uri)
+  })
 
-  // Build property mappings
-  const propertyMap = {}
-  if (mappings.mappings) {
-    mappings.mappings.forEach(mapping => {
-      if (mapping.type === 'inlineProperty') {
-        propertyMap[mapping.key] = mapping.predicate
-      }
-    })
-  }
+  // mappings are now a simple { label: 'prefix:term' } object
+  const propertyMap = { ...mappings }
 
   function resolve(value) {
-    // Already an RDF term - return as-is
-    if (value?.termType) {
-      return value
-    }
-
-    // Not a string - can't resolve
-    if (typeof value !== 'string') {
-      return null
-    }
+    if (value?.termType) return value
+    if (typeof value !== 'string') return null
 
     // Check property mappings first
     if (propertyMap[value]) {
@@ -51,7 +40,7 @@ function createMapper(mappings) {
     const prefix = str.slice(0, colonIndex)
     const localName = str.slice(colonIndex + 1)
 
-    return namespaceMap[prefix]?.[localName]
+    return namespaceMap[prefix]?.[localName] ?? null
   }
 
   return ({ subject, predicate, object }) => ({

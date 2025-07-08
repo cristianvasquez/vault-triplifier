@@ -17,12 +17,12 @@ function resolveTerm(value, termType, context, options) {
   }
 
   // Apply custom mapper
-  const mapper = createMapper(options.mappings || {})
+  const mapper = createMapper(options)
   const mapped = mapper({
     subject: termType === 'subject' ? value : undefined,
     predicate: termType === 'predicate' ? value : undefined,
     object: termType === 'object' ? value : undefined
-  }, context)
+  })
 
   const resolvedKey = `resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`
   if (mapped[resolvedKey]) {

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
- const ContextSchema = z.object({
+const ContextSchema = z.object({
   pointer: z.any(), // Grapoi pointer
   path: z.string(),
   text: z.string().optional(),
@@ -8,46 +8,36 @@ import { z } from 'zod'
   knownLinks: z.array(z.any()).optional(), // Array of known links
 })
 
-const MappingEntrySchema = z.object({
-  type: z.literal('inlineProperty'),
-  key: z.string(),
-  predicate: z.string()
-})
-
 const DEFAULT_MAPPINGS = {
-  namespaces: {
-    rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    rdfs: "http://www.w3.org/2000/01/rdf-schema#",
-    schema: "http://schema.org/"
+  prefix: {
+    rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+    schema: 'http://schema.org/',
   },
-  mappings: [
-    {
-      type: "inlineProperty",
-      key: "is a",
-      predicate: "rdf:type"
-    },
-    {
-      type: "inlineProperty", 
-      key: "same as",
-      predicate: "rdf:sameAs"
-    }
-  ]
+  mappings: {
+    'same as': 'rdfs:sameAs',
+    'is a': 'rdf:type',
+  },
 }
 
-const MappingsSchema = z.object({
-  namespaces: z.record(z.string()).optional(),
-  mappings: z.array(MappingEntrySchema).optional()
-}).default(DEFAULT_MAPPINGS)
-
 const TriplifierOptions = z.object({
-  includeLabelsFor: z.array(z.enum(['documents', 'sections', 'anchors', 'properties'])).default([]),
-  mappings: MappingsSchema,
+  includeLabelsFor: z.array(
+    z.enum(['documents', 'sections', 'anchors', 'properties']),
+  ).default([]),
+  prefix: z.record(z.string()).optional().default(DEFAULT_MAPPINGS.prefix),
+  mappings: z.record(z.string()).optional().default(DEFAULT_MAPPINGS.mappings),
 })
 
 const MarkdownTriplifierOptions = TriplifierOptions.extend({
   includeSelectors: z.boolean().default(true),
   includeRaw: z.boolean().default(false),
-  partitionBy: z.array(z.enum(['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h1-h2-h3'])).default(['identifier']),
+  partitionBy: z.array(z.enum(
+    ['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h1-h2-h3'])).
+    default(['identifier']),
 }).strict()
 
-export { ContextSchema, TriplifierOptions, MarkdownTriplifierOptions, MappingsSchema }
+export {
+  ContextSchema,
+  TriplifierOptions,
+  MarkdownTriplifierOptions,
+}

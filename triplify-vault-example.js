@@ -3,24 +3,19 @@ import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
 const options = {
-  partitionBy: ['header'],
+  partitionBy: ['headers-all'],
   includeLabelsFor: ['documents', 'sections', 'properties'],
   includeSelectors: true, // includes the offsets where the
   includeRaw: false,
 
   // Custom mappings for term resolution
-  mappings: {
-    namespaces: {
-      schema: 'http://schema.org/',
-    },
-    mappings: [
-      {
-        type: 'inlineProperty',
-        key: 'lives in',
-        predicate: 'schema:address',
-      },
-    ],
+  prefix: {
+    schema: 'http://schema.org/',
   },
+  mappings: {
+    'lives in': 'schema:address',
+  },
+
 }
 
 const dir = './example-vault'

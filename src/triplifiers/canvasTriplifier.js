@@ -20,7 +20,7 @@ const contains = (parent, child) => {
 
 function canvasTriplifier (canvas, context, options) {
   const { pointer } = context
-  const mapper = createMapper(options.mappings)
+  const mapper = createMapper(options)
   const { nodes, edges } = canvas
   const nodeMap = new Map()
 

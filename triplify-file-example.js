@@ -13,18 +13,14 @@ const options = {
   includeRaw: true,
 
   // Custom mappings for term resolution
+  prefix: {
+    schema: 'http://schema.org/',
+  },
   mappings: {
-    namespaces: {
-      schema: "http://schema.org/"
-    },
-    mappings: [
-      {
-        type: "inlineProperty",
-        key: "lives in",
-        predicate: "schema:address"
-      }
-    ]
-  }
+    'same as': 'rdfs:sameAs',
+    'is a': 'rdf:type',
+  },
+
 }
 
 // A pointer is the dataset + the root

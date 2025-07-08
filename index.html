@@ -231,23 +231,24 @@ Bob :: schema:name :: Bobby</textarea>
         <button class="tab-button" data-tab="turtle">Turtle</button>
         <button class="tab-button" data-tab="mappings">Mappings</button>
     </div>
-    
+
     <div id="diagram-tab" class="tab-content active">
         <div class="visualization-controls">
             <button id="update-diagram">Update Diagram</button>
         </div>
         <rdf2dot-default id="rdf-viewer" data=""></rdf2dot-default>
     </div>
-    
+
     <div id="turtle-tab" class="tab-content">
         <textarea id="rdf-output"></textarea>
     </div>
-    
+
     <div id="mappings-tab" class="tab-content">
         <div class="mappings-section">
             <h3>Mappings Configuration</h3>
             <textarea id="mappings-editor" class="mappings-editor" placeholder="Enter mappings JSON..."></textarea>
-            <button id="reset-mappings" style="margin-top: 5px; padding: 5px 10px; font-size: 12px;">Reset to Default</button>
+            <button id="reset-mappings" style="margin-top: 5px; padding: 5px 10px; font-size: 12px;">Reset to Default
+            </button>
         </div>
     </div>
 </div>
@@ -259,6 +260,7 @@ Bob :: schema:name :: Bobby</textarea>
 <script type="module">
   import { contentToRDF } from './src/file-to-RDF.js'
   import 'rdf2dot-wc/rdf2dot-wc.js'
+
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
   const rdfViewer = document.getElementById('rdf-viewer')
@@ -275,40 +277,31 @@ Bob :: schema:name :: Bobby</textarea>
   const mappingsEditor = document.getElementById('mappings-editor')
   const resetMappingsBtn = document.getElementById('reset-mappings')
 
-  
   // Default mappings
   const defaultMappings = {
-    namespaces: {
-      rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-      rdfs: "http://www.w3.org/2000/01/rdf-schema#",
-      schema: "http://schema.org/"
+    prefix: {
+      rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+      schema: 'http://schema.org/',
     },
-    mappings: [
-      {
-        type: "inlineProperty",
-        key: "is a",
-        predicate: "rdf:type"
-      },
-      {
-        type: "inlineProperty",
-        key: "same as",
-        predicate: "rdf:sameAs"
-      }
-    ]
+    mappings: {
+      'is a': 'rdf:type',
+      'same as': 'rdf:sameAs',
+    },
   }
-  
+
   // Initialize mappings editor
   mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
 
-  async function generateRDF() {
+  async function generateRDF () {
     const partitionBy = []
-    
+
     // Get selected header partition option
     const selectedHeaderPartition = document.querySelector('input[name="headerPartition"]:checked')?.value
     if (selectedHeaderPartition && selectedHeaderPartition !== 'none') {
       partitionBy.push(selectedHeaderPartition)
     }
-    
+
     // Add other partition options
     if (partitionByTagInput.checked) partitionBy.push('tag')
     if (partitionByIdentifierInput.checked) partitionBy.push('identifier')
@@ -332,27 +325,27 @@ Bob :: schema:name :: Bobby</textarea>
       includeLabelsFor,
       includeSelectors: includeSelectorsInput.checked,
       includeRaw: includeRawInput.checked,
-      mappings
+      ...mappings,
     }
 
     // Simulate a real file processing scenario
     const simulatedFilePath = '/vault/playground-demo.md'
     const content = markdownInput.value
-    
-    const result = await contentToRDF(content, { 
-      path: simulatedFilePath
+
+    const result = await contentToRDF(content, {
+      path: simulatedFilePath,
     }, options)
 
     return result.dataset.toString()
   }
 
-  async function updateRDFOutput() {
+  async function updateRDFOutput () {
     rdfOutput.value = await generateRDF()
     updateDiagramBtn.textContent = 'Update Diagram'
     updateDiagramBtn.disabled = false
   }
 
-  async function updateRDFAndDiagram() {
+  async function updateRDFAndDiagram () {
     const rdfData = await generateRDF()
     rdfOutput.value = rdfData
     rdfViewer.data = rdfData
@@ -360,33 +353,33 @@ Bob :: schema:name :: Bobby</textarea>
     updateDiagramBtn.disabled = true
   }
 
-  function updateDiagramOnly() {
+  function updateDiagramOnly () {
     rdfViewer.data = rdfOutput.value
     updateDiagramBtn.textContent = 'Up to date'
     updateDiagramBtn.disabled = true
   }
 
   // Tab switching functionality
-  function switchTab(tabName) {
+  function switchTab (tabName) {
     // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
       content.classList.remove('active')
     })
-    
+
     // Remove active class from all tab buttons
     document.querySelectorAll('.tab-button').forEach(button => {
       button.classList.remove('active')
     })
-    
+
     // Show selected tab content
     document.getElementById(tabName + '-tab').classList.add('active')
-    
+
     // Add active class to selected tab button
     document.querySelector(`[data-tab="${tabName}"]`).classList.add('active')
   }
 
   // Reset mappings function
-  function resetMappings() {
+  function resetMappings () {
     mappingsEditor.value = JSON.stringify(defaultMappings, null, 2)
     updateRDFAndDiagram()
   }
