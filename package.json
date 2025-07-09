@@ -1,6 +1,6 @@
 {
   "name": "vault-triplifier",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "Convert markdown files and Obsidian canvas files to RDF/Turtle format with rich semantic relationships",
   "main": "index.js",
