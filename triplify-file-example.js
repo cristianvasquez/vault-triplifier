@@ -27,6 +27,4 @@ const options = {
 const filePath = resolve('./example-vault/White Rabbit.md')
 const { term, dataset } = await triplifyFile(filePath, options)
 
-// const str = await prettyPrint(dataset, ns)
-
-console.log(dataset.toString())
+console.log(await prettyPrint(dataset, ns))
