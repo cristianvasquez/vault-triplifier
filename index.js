@@ -9,7 +9,15 @@ export {
 
 // Re-export termMapper for convenience
 export {
-  fileUri, nameFromUri, propertyFromUri, pathFromUri,
+  pathToUri,
+  pathFromUri,
+  propertyToUri,
+  propertyFromUri,
+  nameToUri,
+  nameFromUri,
+  newLiteral,
+  blockUri,
+  fileUri,
 } from './src/termMapper/termMapper.js'
 
 // Re-export namespaces for convenience
