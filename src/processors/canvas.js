@@ -1,6 +1,6 @@
 import ns from '../namespaces.js'
 import rdf from 'rdf-ext'
-import { getNameFromPath } from '../strings/uris.js'
+import { TriplifierOptions } from '../schemas.js'
 import { createMapper } from '../termMapper/customMapper.js'
 import { pathToUri, propertyToUri } from '../termMapper/termMapper.js'
 
@@ -18,7 +18,7 @@ const contains = (parent, child) => {
     child.y + child.height <= parent.y + parent.height
 }
 
-function canvasTriplifier (canvas, context, options) {
+function canvas (canvas, context, options) {
   const { pointer } = context
   const mapper = createMapper(options)
   const { nodes, edges } = canvas
@@ -125,4 +125,16 @@ function createTextNode (node, pointer, options) {
   return uri
 }
 
-export { canvasTriplifier }
+function processCanvas (contents, { termMapper, pointer, path }, options = {}) {
+
+  const shouldParse = (contents) => (typeof contents === 'string' ||
+    contents instanceof String)
+  const json = shouldParse(contents) ? JSON.parse(contents) : contents
+
+  return canvas(json, {
+    pointer, termMapper, path,
+  }, TriplifierOptions.parse(options))
+
+}
+
+export { processCanvas }

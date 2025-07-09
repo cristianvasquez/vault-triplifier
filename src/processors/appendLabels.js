@@ -1,7 +1,7 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
-import { getNameFromPath } from '../strings/uris.js'
 import { pathFromUri, propertyFromUri } from '../termMapper/termMapper.js'
+import { getNameFromPath } from '../utils/uris.js'
 
 function addLabels (pointer) {
 

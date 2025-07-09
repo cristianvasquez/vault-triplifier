@@ -258,7 +258,7 @@ Bob :: schema:name :: Bobby</textarea>
 
 <!-- Main logic -->
 <script type="module">
-  import { contentToRDF } from './src/file-to-RDF.js'
+  import { triplify } from './index.js'
   import 'rdf2dot-wc/rdf2dot-wc.js'
 
   const markdownInput = document.getElementById('markdown-input')
@@ -332,9 +332,7 @@ Bob :: schema:name :: Bobby</textarea>
     const simulatedFilePath = '/vault/playground-demo.md'
     const content = markdownInput.value
 
-    const result = await contentToRDF(content, {
-      path: simulatedFilePath,
-    }, options)
+    const result = await triplify(simulatedFilePath, content, options)
 
     return result.dataset.toString()
   }

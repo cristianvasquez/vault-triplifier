@@ -1,4 +1,5 @@
-import { triplifyFile, triplifyVault } from './index.js'
+import { resolve } from 'path'
+import { triplifyFile } from './node/file-reader.js'
 import ns from './src/namespaces.js'
 import { prettyPrint } from './test/support/serialization.js'
 
@@ -23,9 +24,9 @@ const options = {
 
 }
 
-// A pointer is the dataset + the root
-const pointer = await triplifyFile('./example-vault/White Rabbit.md', options)
+const filePath = resolve('./example-vault/White Rabbit.md')
+const { term, dataset } = await triplifyFile(filePath, options)
 
-const dataset = pointer.dataset
+// const str = await prettyPrint(dataset, ns)
 
-console.log(await prettyPrint(dataset, ns))
+console.log(dataset.toString())

@@ -4,6 +4,16 @@
   "type": "module",
   "description": "Convert markdown files and Obsidian canvas files to RDF/Turtle format with rich semantic relationships",
   "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "default": "./index.js"
+    },
+    "./node": {
+      "import": "./node/file-reader.js",
+      "default": "./node/file-reader.js"
+    }
+  },
   "scripts": {
     "test": "mocha 'test/**/*.test.js'",
     "dev": "vite",

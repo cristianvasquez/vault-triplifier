@@ -1,25 +1,27 @@
 import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
 import ns from '../namespaces.js'
+import { MarkdownTriplifierOptions } from '../schemas.js'
 import { blockUri, fileUri } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
+import { simpleAst } from 'docs-and-graphs'
 
 // State to track previous selector for end position updates
 let previousSelectorData = null
 
-function astTriplifier (node, context, options) {
+function markdown (node, context, options) {
   // Reset selector tracking for each document
   previousSelectorData = null
-  
+
   assignInternalUris(node, context, options)
   const result = traverseAst(node, { ...context, rootNode: node }, options)
-  
+
   // Finalize the last selector if it exists
   if (previousSelectorData && context.text) {
     finalizeFinalSelector(context.text.length)
   }
-  
+
   return result
 }
 
@@ -35,7 +37,7 @@ function assignInternalUris (node, context, options) {
 
 function traverseAst (node, context, options) {
   const { includeLabelsFor, includeSelectors } = options
-  const { pointer, path} = context
+  const { pointer, path } = context
 
   // Add tags
   for (const tag of node.tags ?? []) {
@@ -101,30 +103,28 @@ function appendPosition (node, documentTerm, position) {
 
   // Create selector with start position (end will be updated later)
   let selectorPointer = null
-  node
-    .addOut(ns.oa.hasSource, documentTerm)
-    .addOut(ns.oa.hasSelector, sel => {
-      selectorPointer = sel
-      return sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector)
-        .addOut(ns.oa.start, toRdf(start.offset))
-        .addOut(ns.oa.end, toRdf(start.offset)) // Temporary end, will be updated
-    })
+  node.addOut(ns.oa.hasSource, documentTerm).addOut(ns.oa.hasSelector, sel => {
+    selectorPointer = sel
+    return sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector).
+      addOut(ns.oa.start, toRdf(start.offset)).
+      addOut(ns.oa.end, toRdf(start.offset)) // Temporary end, will be updated
+  })
 
   // Store current selector data for future end position update
   previousSelectorData = {
     selectorPointer,
-    startOffset: start.offset
+    startOffset: start.offset,
   }
 }
 
-function updatePreviousSelectorEnd(newEndOffset) {
+function updatePreviousSelectorEnd (newEndOffset) {
   if (previousSelectorData) {
     // Remove old end and add new end
     const { selectorPointer } = previousSelectorData
     // Find and update the end triple
     for (const quad of selectorPointer.dataset) {
-      if (quad.subject.equals(selectorPointer.term) && 
-          quad.predicate.equals(ns.oa.end)) {
+      if (quad.subject.equals(selectorPointer.term) &&
+        quad.predicate.equals(ns.oa.end)) {
         selectorPointer.dataset.delete(quad)
         break
       }
@@ -133,7 +133,7 @@ function updatePreviousSelectorEnd(newEndOffset) {
   }
 }
 
-function finalizeFinalSelector(documentEndOffset) {
+function finalizeFinalSelector (documentEndOffset) {
   if (previousSelectorData) {
     updatePreviousSelectorEnd(documentEndOffset)
     previousSelectorData = null
@@ -161,17 +161,27 @@ function getNodeUri (node, context, options) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
-  if (options.partitionBy.includes('headers-h1-h2') && node.type === 'block' && 
-      node.depth && (node.depth === 1 || node.depth === 2)) {
+  if (options.partitionBy.includes('headers-h1-h2') && node.type === 'block' &&
+    node.depth && (node.depth === 1 || node.depth === 2)) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
-  if (options.partitionBy.includes('headers-h1-h2-h3') && node.type === 'block' && 
-      node.depth && (node.depth === 1 || node.depth === 2 || node.depth === 3)) {
+  if (options.partitionBy.includes('headers-h1-h2-h3') && node.type ===
+    'block' &&
+    node.depth && (node.depth === 1 || node.depth === 2 || node.depth === 3)) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
   return { shouldSplit: false }
 }
 
-export { astTriplifier }
+function processMarkdown (fullText, { pointer, path }, options = {}) {
+  const node = simpleAst(fullText,
+    { normalize: true, inlineAsArray: true, includePosition: true })
+  return markdown(node, {
+    pointer, path, text: fullText,
+  }, MarkdownTriplifierOptions.parse(options))
+
+}
+
+export { processMarkdown }
