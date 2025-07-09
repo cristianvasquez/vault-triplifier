@@ -64,14 +64,17 @@ npm install vault-triplifier
 ```
 
 ```javascript
-import { triplifyFile } from 'vault-triplifier'
+import { triplify } from 'vault-triplifier'
 
-const pointer = await triplifyFile('./my-document.md', {
+const content = `# My Document
+is a :: Document`
+
+const { term, dataset } = triplify('./my-document.md', content, {
   partitionBy: ['headers-h1-h2', 'identifier'],
   includeLabelsFor: ['documents', 'sections']
 })
 
-console.log(pointer.dataset.toString())
+console.log(dataset.toString())
 ```
 
 ## Why Semantic Markdown?

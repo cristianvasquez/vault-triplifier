@@ -1,6 +1,6 @@
-# Vault Triplifier
+# Vault Triplifier API
 
-Convert markdown and canvas files to RDF/Turtle format with rich semantic relationships.
+Convert markdown content to RDF/Turtle format with semantic relationships.
 
 ## Installation
 
@@ -11,35 +11,19 @@ npm install vault-triplifier
 ## Usage
 
 ```javascript
-import { triplifyFile } from 'vault-triplifier'
+// Content-based processing
+import { triplify } from 'vault-triplifier'
 
-const options = {
-  partitionBy: ['header'],
-  includeLabelsFor: ['documents', 'sections', 'properties'],
-  mappings: {
-    namespaces: {
-      schema: 'http://schema.org/',
-      ex: 'http://example.org/'
-    },
-    mappings: [
-      {
-        type: 'inlineProperty',
-        key: 'is a',
-        predicate: 'rdf:type'
-      }
-    ]
-  }
-}
+const content = `# Alice
+is a :: Person
+age :: 25`
 
-// For a single file
-const pointer = await triplifyFile('alice.md', options)
-console.log([...pointer.dataset]) // RDF quads
+const { term, dataset } = triplify('./alice.md', content)
 
-// For an entire directory (this will resolve links between notes)
-import { triplifyVault } from 'vault-triplifier'
+// File-based processing
+import { triplifyFile } from 'vault-triplifier/node'
 
-const dataset = await triplifyVault('./my-vault', options)
-console.log([...dataset]) // All RDF quads from all files
+const { term, dataset } = await triplifyFile('./alice.md', options)
 ```
 
 ## Options
@@ -78,70 +62,52 @@ All options are optional and have sensible defaults.
 ### Basic Usage
 
 ```javascript
-import { triplifyFile } from 'vault-triplifier'
+import { triplify } from 'vault-triplifier'
 
-const options = {
-  partitionBy: ['identifier'], // default
-  includeLabelsFor: []
-}
+const content = `# Test
+is a :: Document`
 
-// Process a single file
-const pointer = await triplifyFile('test.md', options)
+const { term, dataset } = triplify('./test.md', content)
 ```
 
 ### Partition on Headers
 
 ```javascript
-const markdown = `
-# People
+const content = `# People
 
 ## Alice
-age:: 30
+age :: 30
 
 ## Bob  
-age:: 25
-`
+age :: 25`
 
 const options = {
-  partitionBy: ['header'],
+  partitionBy: ['headers-h1-h2'],
   includeLabelsFor: ['sections']
 }
 
-// Creates separate entities for Alice and Bob
-const pointer = await triplifyFile('people.md', options)
+const { term, dataset } = triplify('./people.md', content, options)
 ```
 
 ### Custom Mappings
 
 ```javascript
 const options = {
+  prefix: {
+    schema: 'http://schema.org/',
+    foaf: 'http://xmlns.com/foaf/0.1/'
+  },
   mappings: {
-    namespaces: {
-      schema: 'http://schema.org/',
-      foaf: 'http://xmlns.com/foaf/0.1/'
-    },
-    mappings: [
-      {
-        type: 'inlineProperty',
-        key: 'lives in',
-        predicate: 'schema:address'
-      },
-      {
-        type: 'inlineProperty',
-        key: 'knows',
-        predicate: 'foaf:knows'
-      }
-    ]
+    'lives in': 'schema:address',
+    'knows': 'foaf:knows'
   }
 }
 
-const markdown = `
-# Alice
-lives in:: New York
-knows:: [[Bob]]
-`
+const content = `# Alice
+lives in :: New York
+knows :: [[Bob]]`
 
-const pointer = await triplifyFile('alice.md', options)
+const { term, dataset } = triplify('./alice.md', content, options)
 ```
 
 Alternatively, create a JSON file (e.g., `mappings.json`) with the following structure:
@@ -170,72 +136,58 @@ Alternatively, create a JSON file (e.g., `mappings.json`) with the following str
 Then, pass the mappings object directly:
 
 ```javascript
-import { triplifyFile } from 'vault-triplifier';
+import { triplify } from 'vault-triplifier'
 
 const options = {
+  prefix: {
+    "ex": "http://example.org/",
+    "pkm": "https://pkm.example.com/"
+  },
   mappings: {
-    namespaces: {
-      "ex": "http://example.org/",
-      "pkm": "https://pkm.example.com/"
-    },
-    mappings: [
-      {
-        "type": "inlineProperty",
-        "key": "is a",
-        "predicate": "rdf:type"
-      },
-      {
-        "type": "inlineProperty",
-        "key": "knows",
-        "predicate": "pkm:knows"
-      }
-    ]
+    "is a": "rdf:type",
+    "knows": "pkm:knows"
   }
-};
+}
 
-const pointer = await triplifyFile('my-note.md', options);
+const content = `# My Note
+is a :: Document`
+const { term, dataset } = triplify('./my-note.md', content, options)
 ```
 
 ### Block Identifiers
 
 ```javascript
-const markdown = `
-# People
+const content = `# People
 
 ## Alice ^alice
-age:: 30
+age :: 30
 
 ## Bob ^bob
-age:: 25
-`
+age :: 25`
 
 const options = {
-  partitionBy: ['identifier'] // default
+  partitionBy: ['identifier']
 }
 
-// Creates URIs ending with /alice and /bob
-const pointer = await triplifyFile('people.md', options)
+const { term, dataset } = triplify('./people.md', content, options)
 ```
 
 ### Tags
 
 ```javascript
-const markdown = `
-# People
+const content = `# People
 
 ## Alice #person
-age:: 30
+age :: 30
 
 ## Bob #person  
-age:: 25
-`
+age :: 25`
 
 const options = {
   partitionBy: ['tag']
 }
 
-// Creates separate entities for tagged elements
-const pointer = await triplifyFile('people.md', options)
+const { term, dataset } = triplify('./people.md', content, options)
 ```
 
 ## Built-in Property Mappings
@@ -307,27 +259,26 @@ Same options apply to canvas processing, with edge labels supporting custom mapp
 
 ## API Reference
 
-### `triplifyFile(filePath, options)`
+### `triplify(path, content, options)`
 
-Process a single markdown or canvas file.
+Process markdown content directly.
 
 **Parameters:**
+- `path` (string) - Path identifier for the content
+- `content` (string) - Markdown content to process
+- `options` (object) - Configuration options
 
+**Returns:** `{ term, dataset }` - Term and RDF dataset
+
+### `triplifyFile(filePath, options)`
+
+Process a markdown or canvas file from filesystem.
+
+**Parameters:**
 - `filePath` (string) - Path to the file to process
 - `options` (object) - Configuration options
 
-**Returns:** Promise resolving to a Grapoi pointer with RDF dataset
-
-### `triplifyVault(directory, options)`
-
-Process all markdown and canvas files in a directory.
-
-**Parameters:**
-
-- `directory` (string) - Directory path to process
-- `options` (object) - Configuration options
-
-**Returns:** Promise resolving to an RDF dataset containing all triples
+**Returns:** Promise resolving to `{ term, dataset }`
 
 ## Documentation
 
