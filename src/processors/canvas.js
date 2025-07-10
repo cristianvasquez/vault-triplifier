@@ -2,7 +2,8 @@ import ns from '../namespaces.js'
 import rdf from 'rdf-ext'
 import { TriplifierOptions } from '../schemas.js'
 import { createMapper } from '../termMapper/customMapper.js'
-import { pathToUri, propertyToUri } from '../termMapper/termMapper.js'
+import { nameToUri, propertyToUri } from '../termMapper/termMapper.js'
+import { getNameFromPath } from '../utils/uris.js'
 
 const NODE_TYPES = {
   FILE: 'file',
@@ -105,11 +106,10 @@ function createGroupNode (node, pointer, mapper, context, options) {
 }
 
 function createFileNode (node, pointer, options) {
-  const uri = pathToUri(node.file)
-
+  const name = getNameFromPath(node.file)
+  const uri = nameToUri(name)
   if (options.includeLabelsFor.includes('documents')) {
-    const label = getNameFromPath(node.file)
-    pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(label))
+    pointer.node(uri).addOut(ns.rdfs.label, rdf.literal(name))
   }
 
   return uri

@@ -9,8 +9,6 @@ export {
 
 // Re-export termMapper for convenience
 export {
-  pathToUri,
-  pathFromUri,
   propertyToUri,
   propertyFromUri,
   nameToUri,

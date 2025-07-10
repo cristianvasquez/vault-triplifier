@@ -17,18 +17,8 @@ function fromUri (term, namespace) {
 
 // Namespaces
 const namespaces = {
-  resource: rdf.namespace('urn:resource:'),
   property: rdf.namespace('urn:property:'),
   name: rdf.namespace('urn:name:'),
-}
-
-// Resource/Path functions
-function pathToUri (path) {
-  return toUri(path, namespaces.resource)
-}
-
-function pathFromUri (term) {
-  return fromUri(term, namespaces.resource)
 }
 
 // Property functions
@@ -69,8 +59,6 @@ function fileUri (file) {
 }
 
 export {
-  pathToUri,
-  pathFromUri,
   propertyToUri,
   propertyFromUri,
   nameToUri,

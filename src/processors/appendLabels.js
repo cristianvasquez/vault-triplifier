@@ -1,7 +1,6 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
-import { pathFromUri, propertyFromUri } from '../termMapper/termMapper.js'
-import { getNameFromPath } from '../utils/uris.js'
+import { propertyFromUri } from '../termMapper/termMapper.js'
 
 function addLabels (pointer) {
 
@@ -10,9 +9,6 @@ function addLabels (pointer) {
 
   const getLabelForTerm = (term) => {
     if (term.termType === 'Literal' || hasLabel(term)) return null
-
-    const path = pathFromUri(term)
-    if (path) return getNameFromPath(path)
 
     return propertyFromUri(term)
   }

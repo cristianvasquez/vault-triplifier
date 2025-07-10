@@ -1,6 +1,7 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
-import { nameToUri, pathToUri } from '../termMapper/termMapper.js'
+import { nameToUri } from '../termMapper/termMapper.js'
+import { getNameFromPath } from '../utils/uris.js'
 
 function getKnownLinks (links, context) {
   return links.map(link => ({
@@ -18,8 +19,9 @@ function resolveLink ({ type, value }, context) {
 
   // Internal reference: [[#hello]]
   if (!head) {
+    const name = getNameFromPath(context.path)
     const uri = findUriBySelector(context.rootNode, selector) ??
-      pathToUri(context.path)
+      nameToUri(name)
     return {
       uri,
       wikipath: context.path,
