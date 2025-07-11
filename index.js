@@ -15,7 +15,8 @@ export {
   nameFromUri,
   newLiteral,
   blockUri,
-  fileUri,
+  pathToFileURL,
+  fileURLToPath
 } from './src/termMapper/termMapper.js'
 
 // Re-export namespaces for convenience

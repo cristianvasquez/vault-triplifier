@@ -13,4 +13,6 @@ One can declare properties in this way:
 is a :: Person`
 
 const { term, dataset } = triplify('/some/Alice.md', content)
+
+// console.log(dataset.toString())
 console.log(await prettyPrint(dataset, ns))

@@ -6,7 +6,7 @@ import { processMarkdown } from './processors/markdown.js'
 import { processCanvas } from './processors/canvas.js'
 import ns from './namespaces.js'
 import { MarkdownTriplifierOptions } from './schemas.js'
-import { fileUri, nameToUri } from './termMapper/termMapper.js'
+import { pathToFileURL, nameToUri } from './termMapper/termMapper.js'
 import { getNameFromPath } from './utils/uris.js'
 import { getFileExtension } from './utils/extensions.js'
 
@@ -48,14 +48,14 @@ function triplify (path, content, options = {}) {
   if (!processor) {
     // No processor - return concept pointer with content as raw literal if requested
     if (parsedOptions.includeRaw) {
-      const documentUri = fileUri(path)
+      const documentUri = pathToFileURL(path)
       pointer.node(documentUri).addOut(ns.dot.raw, rdf.literal(content))
     }
     return pointer
   }
 
   // Add document type and process content
-  const documentUri = fileUri(path)
+  const documentUri = pathToFileURL(path)
   const documentPointer = pointer.node(documentUri)
   documentPointer.addOut(ns.rdf.type, processor.type)
 
@@ -90,7 +90,7 @@ function createConceptPointer (path, options = {}) {
  * Internal helper to create base pointer structure
  */
 function createBasePointer (path, options = {}) {
-  const documentUri = fileUri(path)
+  const documentUri = pathToFileURL(path)
   const name = getNameFromPath(path)
   const term = nameToUri(name)
 

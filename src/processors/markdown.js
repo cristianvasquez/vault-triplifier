@@ -2,7 +2,7 @@ import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
 import ns from '../namespaces.js'
 import { MarkdownTriplifierOptions } from '../schemas.js'
-import { blockUri, fileUri } from '../termMapper/termMapper.js'
+import { blockUri, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { simpleAst } from 'docs-and-graphs'
@@ -80,7 +80,7 @@ function traverseAst (node, context, options) {
       }
 
       if (includeSelectors && child.type === 'block' && child.position) {
-        const documentTerm = fileUri(path)
+        const documentTerm = pathToFileURL(path)
         appendPosition(childPointer, documentTerm, child.position)
       }
 

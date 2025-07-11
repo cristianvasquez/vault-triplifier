@@ -53,9 +53,65 @@ function blockUri (baseUri, blockId) {
   return rdf.namedNode(`${baseUri.value}/${cleanId}`)
 }
 
-function fileUri (file) {
-  const url = new URL(`file://${file}`)
-  return rdf.namedNode(url.href)
+// Web-compatible implementations of pathToFileURL and fileURLToPath
+
+/**
+ * Convert a file path to a file:// URL (web-compatible)
+ * @param {string} filepath - The file path to convert
+ * @returns {string} The file:// URL
+ */
+function pathToFileURL (filepath) {
+  // Ensure the path starts with a slash for absolute paths
+  if (!filepath.startsWith('/') && !filepath.match(/^[A-Za-z]:/)) {
+    filepath = '/' + filepath
+  }
+
+  // Create a file:// URL with proper encoding
+  // Split the path and encode each segment to handle special characters
+  const segments = filepath.split('/')
+  const encodedSegments = segments.map(segment =>
+    encodeURIComponent(segment).replace(/%2F/g, '/'),
+  )
+
+  // Join back together and create the file:// URL
+  const encodedPath = encodedSegments.join('/')
+
+  // Handle Windows drive letters
+  if (encodedPath.match(/^\/[A-Za-z]:/)) {
+    return 'file:///' + encodedPath.substring(1)
+  }
+
+  return rdf.namedNode('file://' + encodedPath)
+}
+
+/**
+ * Convert a file:// URL to a file path (web-compatible)
+ * @returns {string} The file path
+ * @param term
+ */
+function fileURLToPath (term) {
+
+  const fileUrl = term.value
+
+  if (!fileUrl.startsWith('file://')) {
+    throw new Error('URL must use file: protocol')
+  }
+
+  // Remove the file:// prefix
+  let path = fileUrl.substring(7)
+
+  // Handle Windows file URLs (file:///C:/...)
+  if (path.startsWith('/') && path[2] === ':') {
+    path = path.substring(1)
+  }
+
+  // Decode the path segments
+  const segments = path.split('/')
+  const decodedSegments = segments.map(segment =>
+    decodeURIComponent(segment),
+  )
+
+  return decodedSegments.join('/')
 }
 
 export {
@@ -65,5 +121,6 @@ export {
   nameFromUri,
   newLiteral,
   blockUri,
-  fileUri,
+  pathToFileURL,
+  fileURLToPath,
 }
