@@ -28,13 +28,13 @@
     "zod": "^3.25.71"
   },
   "devDependencies": {
-    "sinon": "^21.0.0",
     "@rdfjs-elements/formats-pretty": "^0.6.8",
     "expect": "^30.0.3",
     "get-stream": "^9.0.1",
     "mocha": "^11.7.1",
     "rdf2dot-wc": "^0.2.7",
     "release-it": "^19.0.3",
+    "sinon": "^21.0.0",
     "vite": "^7.0.0"
   },
   "repository": {

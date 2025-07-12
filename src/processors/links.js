@@ -56,7 +56,7 @@ function parseHashPath (value) {
 
   return {
     head: hashIndex === 0 ? undefined : value.slice(0, hashIndex),
-    selector: value.slice(hashIndex + 1),
+    selector: value.slice(hashIndex),
   }
 }
 
@@ -92,7 +92,7 @@ function populateLink (link, context, options) {
   if (includeLabelsFor.includes('documents') && alias) {
     pointer.node(uri).addOut(ns.dot.alias, alias)
   }
-  pointer.addOut(ns.dot.external, uri)
+  pointer.addOut(ns.dot.link, uri)
 
 }
 

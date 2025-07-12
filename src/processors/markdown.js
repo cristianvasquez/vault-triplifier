@@ -148,7 +148,7 @@ function getNodeUri (node, context, options) {
     const [id] = node.ids
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
-      : appendSelector(pointer.term, id)
+      : appendSelector(pointer.term, `#^${id}`)
     return { shouldSplit: true, childUri }
   }
 
@@ -161,7 +161,7 @@ function getNodeUri (node, context, options) {
     const id = node.value
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
-      : appendSelector(pointer.term, id)
+      : appendSelector(pointer.term, `#${id}`)
     return { shouldSplit: true, childUri }
   }
 

@@ -7,7 +7,7 @@
 <file:///test/test-vault/T2.canvas> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/CanvasDocument> .
 <file:///test/test-vault/T2.canvas> <http://pkm-united.org/represents> <urn:name:T2.canvas> .
 <file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/T2.canvas" .
-<file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T12:21:06.820Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T13:11:10.838Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/T2.canvas> <http://pkm-united.org/raw> "{\n	\"nodes\":[\n		{\"type\":\"text\",\"text\":\"## Bob\",\"id\":\"05f8fdf93ab87df8\",\"x\":-1541,\"y\":-1233,\"width\":250,\"height\":56},\n		{\"type\":\"text\",\"text\":\"## Alice\\n\\n\",\"id\":\"ccee2d298466cc2d\",\"x\":-1081,\"y\":-1233,\"width\":250,\"height\":56},\n		{\"type\":\"text\",\"text\":\"## Ice cream\",\"id\":\"e9992f3480f8494f\",\"x\":-1081,\"y\":-1064,\"width\":250,\"height\":60}\n	],\n	\"edges\":[\n		{\"id\":\"13c9429dda51bafb\",\"fromNode\":\"05f8fdf93ab87df8\",\"fromSide\":\"top\",\"toNode\":\"69ee38b926932dfa\",\"toSide\":\"bottom\"},\n		{\"id\":\"bd10acd7519ed80a\",\"fromNode\":\"05f8fdf93ab87df8\",\"fromSide\":\"right\",\"toNode\":\"ccee2d298466cc2d\",\"toSide\":\"left\"},\n		{\"id\":\"b2a8d2ae3aed5b9b\",\"fromNode\":\"ccee2d298466cc2d\",\"fromSide\":\"bottom\",\"toNode\":\"e9992f3480f8494f\",\"toSide\":\"top\"}\n	]\n}" .
 _:b16 <http://schema.org/description> "## Bob" .
 _:b16 <urn:property:undefined> _:b17 .

@@ -41,9 +41,9 @@ function nameFromUri (term) {
   return fromUri(term, namespaces.name)
 }
 
-// Block URI builder
+// Block URI builder. Known Obsidian selectors are of the form # for headers, #^ for identifiers
 function appendSelector (nameTerm, selector) {
-  return rdf.namedNode(`${nameTerm.value}#${selector}`)
+  return rdf.namedNode(`${nameTerm.value}${encodeURI(selector)}`)
 }
 
 // Literal factory

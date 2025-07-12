@@ -3,8 +3,8 @@
 <urn:name:Bob> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/bob/Bob.md> .
 <urn:name:Bob> <http://www.w3.org/2000/01/rdf-schema#label> "Bob" .
 <urn:name:Bob> <urn:property:with%20image> <urn:name:img.png> .
-<urn:name:Bob> <http://pkm-united.org/external> <urn:name:Link> .
-<urn:name:Bob> <http://pkm-united.org/external> <http://something.com> .
+<urn:name:Bob> <http://pkm-united.org/link> <urn:name:Link> .
+<urn:name:Bob> <http://pkm-united.org/link> <http://something.com> .
 <urn:name:Bob> <urn:property:lives%20in> <urn:name:%20%20%20%20%20../houses/BobHouse.md> .
 <urn:name:Bob> <urn:property:has%20details> <urn:name:test/test-vault/bob/bob/Bob%20Details.md> .
 <urn:name:Bob> <http://example.org/knows> <urn:name:test/test-vault/Alice.md> .
@@ -12,7 +12,7 @@
 <file:///test/test-vault/bob/Bob.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
 <file:///test/test-vault/bob/Bob.md> <http://pkm-united.org/represents> <urn:name:Bob> .
 <file:///test/test-vault/bob/Bob.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/bob/Bob.md" .
-<file:///test/test-vault/bob/Bob.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T12:21:06.857Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/bob/Bob.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T13:11:10.873Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/bob/Bob.md> <http://pkm-united.org/raw> "Some test (with image :: [[img.png]]) embedded\n\nAn untyped [[Link]]\n\nlives in :: [Test with relative](     ../houses/BobHouse.md)\n\nhas details :: [Bob Details.md](./bob/Bob Details.md)\n\nex:knows :: [Alice](../Alice.md)\n\nhas image 1 :: ![Lovely image](../houses/img.png)\n\nis a :: [Test with absolute](/Person.md)\n\nAn untyped <http://something.com>\n" .
 <urn:property:with%20image> <http://www.w3.org/2000/01/rdf-schema#label> "with image" .
 <urn:property:lives%20in> <http://www.w3.org/2000/01/rdf-schema#label> "lives in" .
