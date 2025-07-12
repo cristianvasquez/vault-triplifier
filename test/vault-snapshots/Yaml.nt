@@ -1,0 +1,22 @@
+<urn:name:Yaml> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:Yaml> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/Yaml.md> .
+<urn:name:Yaml> <http://www.w3.org/2000/01/rdf-schema#label> "Yaml" .
+<urn:name:Yaml> <http://pkm-united.org/tag> "cats" .
+<urn:name:Yaml> <http://pkm-united.org/tag> "dogs" .
+<urn:name:Yaml> <urn:property:date%20updated> "2021-08-05T17:10:34+02:00" .
+<urn:name:Yaml> <urn:property:togs> "cats" .
+<urn:name:Yaml> <urn:property:togs> "dogs" .
+<urn:name:Yaml> <urn:property:one> "pepe" .
+<urn:name:Yaml> <urn:property:one> "carlos" .
+<urn:name:Yaml> <urn:property:an-uri> <http://some-uri.com> .
+<urn:name:Yaml> <urn:property:hello> "world" .
+<file:///test/test-vault/Yaml.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
+<file:///test/test-vault/Yaml.md> <http://pkm-united.org/represents> <urn:name:Yaml> .
+<file:///test/test-vault/Yaml.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/Yaml.md" .
+<file:///test/test-vault/Yaml.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T12:18:56.782Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/Yaml.md> <http://pkm-united.org/raw> "---\ndate updated: '2021-08-05T17:10:34+02:00'\ntags: ['cats', 'dogs']\ntogs:\n- 'cats'\n- 'dogs'\none:\n- pepe\n- carlos\nan-uri: http://some-uri.com\nhello: world\n---\n" .
+<urn:property:date%20updated> <http://www.w3.org/2000/01/rdf-schema#label> "date updated" .
+<urn:property:togs> <http://www.w3.org/2000/01/rdf-schema#label> "togs" .
+<urn:property:one> <http://www.w3.org/2000/01/rdf-schema#label> "one" .
+<urn:property:an-uri> <http://www.w3.org/2000/01/rdf-schema#label> "an-uri" .
+<urn:property:hello> <http://www.w3.org/2000/01/rdf-schema#label> "hello" .

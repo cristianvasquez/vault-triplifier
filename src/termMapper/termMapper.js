@@ -42,8 +42,8 @@ function nameFromUri (term) {
 }
 
 // Block URI builder
-function blockUri (baseUri, blockId) {
-  return nameToUri(`${baseUri}#${blockId}`)
+function appendSelector (nameTerm, selector) {
+  return rdf.namedNode(`${nameTerm.value}#${selector}`)
 }
 
 // Literal factory
@@ -84,7 +84,7 @@ export {
   nameToUri,
   nameFromUri,
   newLiteral,
-  blockUri,
+  appendSelector,
   pathToFileURL,
   fileURLToPath,
 }

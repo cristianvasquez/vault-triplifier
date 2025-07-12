@@ -1,0 +1,9 @@
+<urn:name:BobHouse> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:BobHouse> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "House" .
+<urn:name:BobHouse> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/houses/BobHouse.md> .
+<urn:name:BobHouse> <http://www.w3.org/2000/01/rdf-schema#label> "BobHouse" .
+<file:///test/test-vault/houses/BobHouse.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
+<file:///test/test-vault/houses/BobHouse.md> <http://pkm-united.org/represents> <urn:name:BobHouse> .
+<file:///test/test-vault/houses/BobHouse.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/houses/BobHouse.md" .
+<file:///test/test-vault/houses/BobHouse.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T12:18:56.803Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/houses/BobHouse.md> <http://pkm-united.org/raw> "is a :: House\n" .

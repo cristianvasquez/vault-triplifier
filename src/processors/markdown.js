@@ -2,7 +2,7 @@ import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
 import ns from '../namespaces.js'
 import { MarkdownTriplifierOptions } from '../schemas.js'
-import { blockUri, pathToFileURL } from '../termMapper/termMapper.js'
+import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { simpleAst } from 'docs-and-graphs'
@@ -148,7 +148,7 @@ function getNodeUri (node, context, options) {
     const [id] = node.ids
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
-      : blockUri(pointer.term, id)
+      : appendSelector(pointer.term, id)
     return { shouldSplit: true, childUri }
   }
 
@@ -161,7 +161,7 @@ function getNodeUri (node, context, options) {
     const id = node.value
     const childUri = pointer.term.termType === 'BlankNode'
       ? rdf.blankNode()
-      : blockUri(pointer.term, id)
+      : appendSelector(pointer.term, id)
     return { shouldSplit: true, childUri }
   }
 

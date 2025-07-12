@@ -1,6 +1,9 @@
 import rdf from 'rdf-ext'
 import ns from '../namespaces.js'
-import { nameToUri } from '../termMapper/termMapper.js'
+import {
+  nameToUri,
+  appendSelector,
+} from '../termMapper/termMapper.js'
 import { getNameFromPath } from '../utils/uris.js'
 
 function getKnownLinks (links, context) {
@@ -14,14 +17,14 @@ function resolveLink ({ type, value }, context) {
   if (type === 'external') {
     return { uri: rdf.namedNode(value) }
   }
-
+  // Wiki-links [[head]], [[#selector]] or [[head#selector]]
   const { head, selector } = parseHashPath(value)
 
   // Internal reference: [[#hello]]
   if (!head) {
     const name = getNameFromPath(context.path)
-    const uri = findUriBySelector(context.rootNode, selector) ??
-      nameToUri(name)
+    const nameTerm = nameToUri(name)
+    const uri = appendSelector(nameTerm, selector)
     return {
       uri,
       wikipath: context.path,
@@ -29,42 +32,19 @@ function resolveLink ({ type, value }, context) {
     }
   }
 
-  // Wiki-link with optional selector: [[path]] or [[path#selector]]
-  const resolvedPath = head.startsWith('.')
+  // [[head]] or [[head#selector]]
+  const resolvedHead = head.startsWith('.')
     ? resolveRelativePath(context.path, head)
     : head
 
-  const uri = selector ? nameToUri(value) : nameToUri(resolvedPath)
+  const nameTerm = nameToUri(resolvedHead)
+  const uri = selector ? appendSelector(nameTerm, selector) : nameTerm
 
   return {
     uri,
-    wikipath: resolvedPath,
+    wikipath: resolvedHead,
     selector,
   }
-}
-
-function findUriBySelector (node, targetSelector) {
-  // Check if this node matches the selector
-  // It can match by value (for headers) or by id (for anchors)
-  if (node.uri) {
-    // Check header text
-    if (node.type === 'block' && node.value === targetSelector) {
-      return node.uri
-    }
-
-    // Check anchor IDs
-    if (node.ids && node.ids.includes(targetSelector)) {
-      return node.uri
-    }
-  }
-
-  // Recursively search children
-  for (const child of node.children ?? []) {
-    const found = findUriBySelector(child, targetSelector)
-    if (found) return found
-  }
-
-  return null
 }
 
 function parseHashPath (value) {
@@ -112,15 +92,7 @@ function populateLink (link, context, options) {
   if (includeLabelsFor.includes('documents') && alias) {
     pointer.node(uri).addOut(ns.dot.alias, alias)
   }
-
-  if (type === 'external') {
-    pointer.addOut(ns.dot.external, uri)
-  } else if (type === 'internal') {
-    pointer.addOut(ns.dot.related,
-      findUriBySelector(context.rootNode, selector) ?? uri)
-  } else {
-    throw Error(`I don't know how to handle link of type:${type}`)
-  }
+  pointer.addOut(ns.dot.external, uri)
 
 }
 

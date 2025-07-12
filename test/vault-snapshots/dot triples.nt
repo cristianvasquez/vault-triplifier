@@ -1,0 +1,44 @@
+<urn:name:dot%20triples> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:dot%20triples> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/dot%20triples.md> .
+<urn:name:dot%20triples> <http://www.w3.org/2000/01/rdf-schema#label> "dot triples" .
+<urn:name:dot%20triples> <http://pkm-united.org/contains> <urn:name:dot%20triples#Dot triples syntax> .
+<file:///test/test-vault/dot%20triples.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
+<file:///test/test-vault/dot%20triples.md> <http://pkm-united.org/represents> <urn:name:dot%20triples> .
+<file:///test/test-vault/dot%20triples.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/dot triples.md" .
+<file:///test/test-vault/dot%20triples.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T12:18:56.776Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/dot%20triples.md> <http://pkm-united.org/raw> "# Dot triples syntax\n\n## Alice\n\nhas :: 37 years old\n\nex:knows :: [[Bob]]\n\nuntyped [[Bob]]\n\nuntyped [[Alice]]\n\nA :: B :: C :: D\n\n## Embedded\n\n(EA :: EB) && (EC :: ED)\n\n" .
+<urn:name:dot%20triples#Dot triples syntax> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:dot%20triples#Dot triples syntax> <http://www.w3.org/2000/01/rdf-schema#label> "Dot triples syntax" .
+<urn:name:dot%20triples#Dot triples syntax> <http://pkm-united.org/contains> <urn:name:dot%20triples#Alice> .
+<urn:name:dot%20triples#Dot triples syntax> <http://pkm-united.org/contains> <urn:name:dot%20triples#Embedded> .
+<urn:name:dot%20triples#Dot triples syntax> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/dot%20triples.md> .
+<urn:name:dot%20triples#Dot triples syntax> <http://www.w3.org/ns/oa#hasSelector> _:b11 .
+_:b11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b11 <http://www.w3.org/ns/oa#start> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b11 <http://www.w3.org/ns/oa#end> "22"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:dot%20triples#Alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:dot%20triples#Alice> <http://www.w3.org/2000/01/rdf-schema#label> "Alice" .
+<urn:name:dot%20triples#Alice> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/dot%20triples.md> .
+<urn:name:dot%20triples#Alice> <http://www.w3.org/ns/oa#hasSelector> _:b12 .
+<urn:name:dot%20triples#Alice> <urn:property:has> "37 years old" .
+<urn:name:dot%20triples#Alice> <http://example.org/knows> <urn:name:Bob> .
+<urn:name:dot%20triples#Alice> <http://pkm-united.org/external> <urn:name:Bob> .
+<urn:name:dot%20triples#Alice> <http://pkm-united.org/external> <urn:name:Alice> .
+_:b12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b12 <http://www.w3.org/ns/oa#start> "22"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b12 <http://www.w3.org/ns/oa#end> "128"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:property:has> <http://www.w3.org/2000/01/rdf-schema#label> "has" .
+<urn:property:A> <http://www.w3.org/2000/01/rdf-schema#label> "A" .
+<urn:property:A> <urn:property:B> "C" .
+<urn:property:B> <http://www.w3.org/2000/01/rdf-schema#label> "B" .
+<urn:name:dot%20triples#Embedded> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:dot%20triples#Embedded> <http://www.w3.org/2000/01/rdf-schema#label> "Embedded" .
+<urn:name:dot%20triples#Embedded> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/dot%20triples.md> .
+<urn:name:dot%20triples#Embedded> <http://www.w3.org/ns/oa#hasSelector> _:b13 .
+<urn:name:dot%20triples#Embedded> <urn:property:EA> "EB" .
+<urn:name:dot%20triples#Embedded> <urn:property:EC> "ED" .
+_:b13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b13 <http://www.w3.org/ns/oa#start> "128"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b13 <http://www.w3.org/ns/oa#end> "167"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:property:EA> <http://www.w3.org/2000/01/rdf-schema#label> "EA" .
+<urn:property:EC> <http://www.w3.org/2000/01/rdf-schema#label> "EC" .
