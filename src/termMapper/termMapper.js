@@ -41,43 +41,43 @@ function nameFromUri (term) {
   return fromUri(term, namespaces.name)
 }
 
+// Block URI builder
+function blockUri (baseUri, blockId) {
+  return nameToUri(`${baseUri}#${blockId}`)
+}
+
 // Literal factory
 function newLiteral (text) {
   return rdf.literal(text)
 }
 
-// Block URI builder
-function blockUri (baseUri, blockId) {
-  const cleanId = blockId.replace(/^\^/, '')
-  return rdf.namedNode(`${baseUri.value}#${cleanId}`)
-}
-
 // Web-compatible implementations of pathToFileURL and fileURLToPath
 // Convert file path to file:// URL
-function pathToFileURL(filepath) {
+function pathToFileURL (filepath) {
   if (!filepath.startsWith('/') && !filepath.match(/^[A-Za-z]:/)) {
-    filepath = '/' + filepath;
+    filepath = '/' + filepath
   }
-  const encodedPath = filepath.split('/')
-  .map(segment => encodeURIComponent(segment).replace(/%2F/g, '/'))
-  .join('/');
+  const encodedPath = filepath.split('/').
+    map(segment => encodeURIComponent(segment).replace(/%2F/g, '/')).
+    join('/')
   return encodedPath.match(/^\/[A-Za-z]:/)
     ? 'file:///' + encodedPath.slice(1)
-    : rdf.namedNode('file://' + encodedPath);
+    : rdf.namedNode('file://' + encodedPath)
 }
 
 // Convert file:// URL to file path
-function fileURLToPath(term) {
-  const fileUrl = term.value;
+function fileURLToPath (term) {
+  const fileUrl = term.value
   if (!fileUrl.startsWith('file://')) {
-    throw new Error('URL must use file: protocol');
+    throw new Error('URL must use file: protocol')
   }
-  let path = fileUrl.slice(7);
+  let path = fileUrl.slice(7)
   if (path.startsWith('/') && path[2] === ':') {
-    path = path.slice(1);
+    path = path.slice(1)
   }
-  return path.split('/').map(decodeURIComponent).join('/');
+  return path.split('/').map(decodeURIComponent).join('/')
 }
+
 export {
   propertyToUri,
   propertyFromUri,
