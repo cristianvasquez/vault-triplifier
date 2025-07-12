@@ -157,19 +157,27 @@ function getNodeUri (node, context, options) {
     return { shouldSplit: true, childUri: rdf.blankNode() }
   }
 
+  function headerSplit (node) {
+    const id = node.value
+    const childUri = pointer.term.termType === 'BlankNode'
+      ? rdf.blankNode()
+      : blockUri(pointer.term, id)
+    return { shouldSplit: true, childUri }
+  }
+
   if (options.partitionBy.includes('headers-all') && node.type === 'block') {
-    return { shouldSplit: true, childUri: rdf.blankNode() }
+    return headerSplit(node)
   }
 
   if (options.partitionBy.includes('headers-h1-h2') && node.type === 'block' &&
     node.depth && (node.depth === 1 || node.depth === 2)) {
-    return { shouldSplit: true, childUri: rdf.blankNode() }
+    return headerSplit(node)
   }
 
   if (options.partitionBy.includes('headers-h1-h2-h3') && node.type ===
     'block' &&
     node.depth && (node.depth === 1 || node.depth === 2 || node.depth === 3)) {
-    return { shouldSplit: true, childUri: rdf.blankNode() }
+    return headerSplit(node)
   }
 
   return { shouldSplit: false }

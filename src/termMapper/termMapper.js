@@ -47,73 +47,37 @@ function newLiteral (text) {
 }
 
 // Block URI builder
-// http://example.com/ + ^blockId -> http://example.com/blockId
 function blockUri (baseUri, blockId) {
   const cleanId = blockId.replace(/^\^/, '')
-  return rdf.namedNode(`${baseUri.value}/${cleanId}`)
+  return rdf.namedNode(`${baseUri.value}#${cleanId}`)
 }
 
 // Web-compatible implementations of pathToFileURL and fileURLToPath
-
-/**
- * Convert a file path to a file:// URL (web-compatible)
- * @param {string} filepath - The file path to convert
- * @returns {string} The file:// URL
- */
-function pathToFileURL (filepath) {
-  // Ensure the path starts with a slash for absolute paths
+// Convert file path to file:// URL
+function pathToFileURL(filepath) {
   if (!filepath.startsWith('/') && !filepath.match(/^[A-Za-z]:/)) {
-    filepath = '/' + filepath
+    filepath = '/' + filepath;
   }
-
-  // Create a file:// URL with proper encoding
-  // Split the path and encode each segment to handle special characters
-  const segments = filepath.split('/')
-  const encodedSegments = segments.map(segment =>
-    encodeURIComponent(segment).replace(/%2F/g, '/'),
-  )
-
-  // Join back together and create the file:// URL
-  const encodedPath = encodedSegments.join('/')
-
-  // Handle Windows drive letters
-  if (encodedPath.match(/^\/[A-Za-z]:/)) {
-    return 'file:///' + encodedPath.substring(1)
-  }
-
-  return rdf.namedNode('file://' + encodedPath)
+  const encodedPath = filepath.split('/')
+  .map(segment => encodeURIComponent(segment).replace(/%2F/g, '/'))
+  .join('/');
+  return encodedPath.match(/^\/[A-Za-z]:/)
+    ? 'file:///' + encodedPath.slice(1)
+    : rdf.namedNode('file://' + encodedPath);
 }
 
-/**
- * Convert a file:// URL to a file path (web-compatible)
- * @returns {string} The file path
- * @param term
- */
-function fileURLToPath (term) {
-
-  const fileUrl = term.value
-
+// Convert file:// URL to file path
+function fileURLToPath(term) {
+  const fileUrl = term.value;
   if (!fileUrl.startsWith('file://')) {
-    throw new Error('URL must use file: protocol')
+    throw new Error('URL must use file: protocol');
   }
-
-  // Remove the file:// prefix
-  let path = fileUrl.substring(7)
-
-  // Handle Windows file URLs (file:///C:/...)
+  let path = fileUrl.slice(7);
   if (path.startsWith('/') && path[2] === ':') {
-    path = path.substring(1)
+    path = path.slice(1);
   }
-
-  // Decode the path segments
-  const segments = path.split('/')
-  const decodedSegments = segments.map(segment =>
-    decodeURIComponent(segment),
-  )
-
-  return decodedSegments.join('/')
+  return path.split('/').map(decodeURIComponent).join('/');
 }
-
 export {
   propertyToUri,
   propertyFromUri,
