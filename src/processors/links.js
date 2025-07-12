@@ -34,8 +34,10 @@ function resolveLink ({ type, value }, context) {
     ? resolveRelativePath(context.path, head)
     : head
 
+  const uri = selector ? nameToUri(value) : nameToUri(resolvedPath)
+
   return {
-    uri: nameToUri(resolvedPath),
+    uri,
     wikipath: resolvedPath,
     selector,
   }
