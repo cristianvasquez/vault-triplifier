@@ -28,9 +28,8 @@
     "zod": "^3.25.71"
   },
   "devDependencies": {
-    "@rdfjs-elements/formats-pretty": "^0.6.8",
+    "@rdfjs/serializer-turtle": "^1.1.5",
     "expect": "^30.0.3",
-    "get-stream": "^9.0.1",
     "mocha": "^11.7.1",
     "rdf2dot-wc": "^0.2.7",
     "release-it": "^19.0.3",

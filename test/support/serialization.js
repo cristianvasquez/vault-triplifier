@@ -1,21 +1,19 @@
-import { TurtleSerializer } from '@rdfjs-elements/formats-pretty'
-import getStream from 'get-stream'
+import Serializer from '@rdfjs/serializer-turtle'
 
 function toPlain (prefixes) {
-  const result = {}
+  const result = []
   for (const [key, value] of Object.entries({ ...prefixes })) {
-    result[key] = value().value
+    result.push([key, value()])
   }
   return result
 }
 
 async function prettyPrint (dataset, namespaces) {
-
-  const turtleSink = new TurtleSerializer({
-    prefixes: toPlain(namespaces),
+  const serializer = new Serializer({
+    prefixes: toPlain(namespaces)
+    ,
   })
-  const stream = await turtleSink.import(dataset.toStream())
-  return await getStream(stream)
+  return serializer.transform(dataset)
 }
 
 export { prettyPrint }

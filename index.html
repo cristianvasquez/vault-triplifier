@@ -258,8 +258,9 @@ Bob :: schema:name :: Bobby</textarea>
 
 <!-- Main logic -->
 <script type="module">
-  import { triplify } from './index.js'
+  import { ns, triplify } from './index.js'
   import 'rdf2dot-wc/rdf2dot-wc.js'
+  import { prettyPrint } from './test/support/serialization.js'
 
   const markdownInput = document.getElementById('markdown-input')
   const rdfOutput = document.getElementById('rdf-output')
@@ -334,7 +335,7 @@ Bob :: schema:name :: Bobby</textarea>
 
     const result = await triplify(simulatedFilePath, content, options)
 
-    return result.dataset.toString()
+    return prettyPrint(result.dataset, ns)
   }
 
   async function updateRDFOutput () {
