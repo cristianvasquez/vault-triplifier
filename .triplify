@@ -1,0 +1,17 @@
+# OSG Triplifier Configuration
+# Include patterns (like .gitignore but for inclusion)
+
+# All markdown files
+# **/*.md
+
+# All files in docs directory
+docs/**
+.triplify
+CLAUDE.md
+
+# Exclude patterns (prefix with !)
+!node_modules/**
+!.git/**
+!.obsidian/**
+!temp/**
+!tmp/**
