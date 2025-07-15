@@ -10,6 +10,8 @@ const defaultOptions = {
   partitionBy: ['identifier'],
   baseIRI: 'file:///',
   includeSelectors: true,
+  includeCodeBlockContent: true,
+  parseCodeBlockTurtleIn: ['turtle;triplify'],
   useDefaultNamespaces: true,
   namespaces: {},
   mappings: []
@@ -260,6 +262,103 @@ const options = {
   // Can be used with custom IRI generation logic
 }
 ```
+
+## Code Block Configuration
+
+### Code Block Content Inclusion
+```javascript
+const options = {
+  includeCodeBlockContent: true,  // Default - store code content as literals
+  // Set to false to exclude code content from RDF output
+}
+```
+
+### Turtle Code Block Parsing
+```javascript
+const options = {
+  parseCodeBlockTurtleIn: ['turtle;triplify'],  // Default
+  // Parse code blocks with these languages as turtle and include triples
+}
+```
+
+### Code Block Examples
+
+#### Default Behavior
+With default options, both content storage and turtle parsing are enabled:
+
+```markdown
+# Document
+
+\`\`\`turtle;triplify
+<alice> <knows> <bob> .
+<bob> <knows> <charlie> .
+\`\`\`
+
+\`\`\`javascript
+console.log('hello world')
+\`\`\`
+```
+
+Results in:
+- Turtle content parsed and added as RDF triples to the dataset
+- Both code blocks stored with `dot:content` properties
+- Both code blocks have `dot:language` properties
+
+#### Content-Only Mode
+```javascript
+const options = {
+  includeCodeBlockContent: true,
+  parseCodeBlockTurtleIn: []  // Disable turtle parsing
+}
+```
+
+Results in:
+- No turtle parsing - all code blocks treated as regular content
+- Code content stored as `dot:content` literals
+
+#### Turtle-Only Mode  
+```javascript
+const options = {
+  includeCodeBlockContent: false,
+  parseCodeBlockTurtleIn: ['turtle;triplify']  // Enable turtle parsing
+}
+```
+
+Results in:
+- Turtle code blocks parsed and triples added to dataset
+- No `dot:content` properties stored for any code blocks
+- Language metadata still preserved
+
+#### Custom Turtle Languages
+```javascript
+const options = {
+  parseCodeBlockTurtleIn: ['rdf', 'turtle', 'n3', 'custom-rdf']
+}
+```
+
+```markdown
+\`\`\`rdf
+<example> <predicate> <object> .
+\`\`\`
+
+\`\`\`n3
+@prefix ex: <http://example.org/> .
+ex:subject ex:property "value" .
+\`\`\`
+```
+
+### Code Block Error Handling
+When turtle parsing fails, the code block falls back to regular content handling:
+
+```markdown
+\`\`\`turtle;triplify
+Invalid turtle syntax here
+\`\`\`
+```
+
+- Warning logged to console
+- Code block treated as regular content (if `includeCodeBlockContent: true`)
+- No triples added to dataset
 
 ## Selector Configuration
 

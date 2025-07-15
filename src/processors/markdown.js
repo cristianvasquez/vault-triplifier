@@ -1,5 +1,6 @@
 import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
+import { Parser } from 'n3'
 import ns from '../namespaces.js'
 import { MarkdownTriplifierOptions } from '../schemas.js'
 import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
@@ -141,7 +142,7 @@ function createHeaderUri(node, pointer) {
  */
 function processCodeBlock(node, context, options) {
   const { pointer, path, selectorManager } = context
-  const { includeSelectors } = options
+  const { includeSelectors, includeCodeBlockContent, parseCodeBlockTurtleIn } = options
 
   function extractCodeContent(node) {
     const prefix = `\`\`\`${node.lang || ''}\n`
@@ -159,11 +160,28 @@ function processCodeBlock(node, context, options) {
   // Add to container
   pointer.addOut(ns.dot.contains, codeUri)
 
-  // Add type and essential properties
+  // Parse as turtle if language matches
+  if (parseCodeBlockTurtleIn.includes(language)) {
+    try {
+      const parser = new Parser()
+      const quads = parser.parse(codeContent)
+      for (const quad of quads) {
+        codePointer.dataset.add(quad)
+      }
+    } catch (error) {
+      console.warn(`Failed to parse turtle in ${language} block:`, error.message)
+    }
+  }
+
+  // Add code block metadata
   codePointer
-  .addOut(ns.rdf.type, ns.dot.Code)
-  .addOut(ns.dot.content, rdf.literal(codeContent))
-  .addOut(ns.dot.language, rdf.literal(language))
+    .addOut(ns.rdf.type, ns.dot.Code)
+    .addOut(ns.dot.language, rdf.literal(language))
+
+  // Include content if requested
+  if (includeCodeBlockContent) {
+    codePointer.addOut(ns.dot.content, rdf.literal(codeContent))
+  }
 
   // Add position selector if needed
   if (includeSelectors && node.position && selectorManager) {
