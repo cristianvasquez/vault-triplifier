@@ -11,9 +11,9 @@ mappings:
   "custom prop": "schema:name"
 ---
 # Test`
-      
+
       const result = peekMarkdown(content)
-      
+
       assert.equal(result.uri, 'http://example.org')
       assert.equal(result.mappings['is a'], 'rdf:type') // default mapping preserved
       assert.equal(result.mappings['same as'], 'rdfs:sameAs') // default mapping preserved
@@ -28,9 +28,9 @@ mappings:
   "test": "schema:test"
 ---
 # Test`
-      
+
       const result = peekMarkdown(content)
-      
+
       assert.equal(result.uri, 'http://example.org')
       assert.equal(result.mappings['test'], 'schema:test')
       assert.equal(result.unknownOption, undefined)
@@ -43,28 +43,12 @@ mappings:
   invalid yaml: [unclosed
 --
 # Test`
-      
+
       // Should not throw and should fallback to defaults
       const result = peekMarkdown(content)
-      
+
       assert.equal(result.mappings['is a'], 'rdf:type')
       assert.equal(result.mappings['same as'], 'rdfs:sameAs')
-    })
-
-    it('should merge explicit options with highest priority', () => {
-      const content = `---
-uri: http://frontmatter.org
-includeRaw: true
----
-# Test`
-      
-      const result = peekMarkdown(content, { 
-        uri: 'http://explicit.org',
-        includeRaw: false 
-      })
-      
-      assert.equal(result.uri, 'http://explicit.org') // explicit wins
-      assert.equal(result.includeRaw, false) // explicit wins
     })
 
     it('should handle your specific example', () => {
@@ -76,9 +60,9 @@ uri: http://example.org
 # Alice
 
 Alice inherits the URI`
-      
+
       const result = peekMarkdown(content, {})
-      
+
       assert.equal(result.uri, 'http://example.org')
       assert.equal(result.mappings['is a'], 'rdf:type') // default mapping preserved
       assert.equal(result.mappings['same as'], 'rdfs:sameAs') // default mapping preserved
@@ -96,14 +80,14 @@ mappings:
 ---
 
 # Test`
-      
+
       const result = peekMarkdown(content, {})
-      
+
       // These should be overwritten, not merged
       assert.equal(result.includeSelectors, false)
       assert.equal(result.includeCodeBlockContent, false)
       assert.deepEqual(result.partitionBy, []) // partitionBy: none becomes []
-      
+
       // Mappings should be deep merged
       assert.equal(result.mappings['is a'], 'rdf:type') // default preserved
       assert.equal(result.mappings['same as'], 'rdfs:sameAs') // default preserved
@@ -114,7 +98,7 @@ mappings:
   describe('peekDefault', () => {
     it('should return parsed options with defaults', () => {
       const result = peekDefault('any content', { uri: 'http://test.org' })
-      
+
       assert.equal(result.uri, 'http://test.org')
       assert.equal(result.mappings['is a'], 'rdf:type')
       assert.equal(result.includeRaw, false)

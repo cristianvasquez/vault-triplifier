@@ -1,6 +1,23 @@
 import { parse as parseYAML } from 'yaml'
 import { MarkdownTriplifierOptions } from './schemas.js'
 
+// Simple check for plain objects
+const isPlainObject = obj =>
+  obj && typeof obj === 'object' && !Array.isArray(obj)
+
+// Deep merge helper: frontmatter overwrites options
+const deepMerge = (base = {}, override = {}) => {
+  const result = { ...base }
+  for (const [key, value] of Object.entries(override)) {
+    if (isPlainObject(value) && isPlainObject(base[key])) {
+      result[key] = deepMerge(base[key], value)
+    } else {
+      result[key] = value
+    }
+  }
+  return result
+}
+
 const extractFrontmatter = content => {
   const match = String(content || '').match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!match) return {}
@@ -16,10 +33,10 @@ const peekMarkdown = (content, options = {}) => {
   const parsedOptions = MarkdownTriplifierOptions.parse(options)
   const frontmatter = extractFrontmatter(content)
 
-  // Start with parsed options (includes defaults + explicit options)
+  // Start with parsed options
   const result = { ...parsedOptions }
 
-  // List of keys frontmatter can override, with 'none' → []
+  // Keys to overwrite frontmatter if present (with 'none' → [] for arrays)
   const keysToOverride = [
     'uri',
     'includeLabelsFor',
@@ -38,6 +55,16 @@ const peekMarkdown = (content, options = {}) => {
         result[key] = frontmatter[key]
       }
     }
+  }
+
+  // Deep merge mappings if present in frontmatter
+  if (frontmatter.mappings !== undefined) {
+    result.mappings = deepMerge(parsedOptions.mappings, frontmatter.mappings)
+  }
+
+  // Deep merge prefix if present in frontmatter
+  if (frontmatter.prefix !== undefined) {
+    result.prefix = deepMerge(parsedOptions.prefix, frontmatter.prefix)
   }
 
   return result
