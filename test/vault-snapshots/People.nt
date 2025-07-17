@@ -1,16 +1,16 @@
-<urn:name:People> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:People> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
 <urn:name:People> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/People.md> .
 <urn:name:People> <http://www.w3.org/2000/01/rdf-schema#label> "People" .
-<urn:name:People> <http://pkm-united.org/contains> <urn:name:People#People> .
-<file:///test/test-vault/People.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
-<file:///test/test-vault/People.md> <http://pkm-united.org/represents> <urn:name:People> .
+<urn:name:People> <http://pending.org/dot/contains> <urn:name:People#People> .
+<file:///test/test-vault/People.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///test/test-vault/People.md> <http://pending.org/dot/represents> <urn:name:People> .
 <file:///test/test-vault/People.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/People.md" .
-<file:///test/test-vault/People.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T13:11:10.846Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-<file:///test/test-vault/People.md> <http://pkm-united.org/raw> "# People\n\n## Alice ^alice\n\nfoaf:knows :: [[#Alison]]\n\n## Alison ^alison\n\nfoaf:knows :: [[#Alice]]\n" .
+<file:///test/test-vault/People.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.420Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/People.md> <http://pending.org/dot/raw> "# People\n\n## Alice ^alice\n\nfoaf:knows :: [[#Alison]]\n\n## Alison ^alison\n\nfoaf:knows :: [[#Alice]]\n" .
 <urn:name:People#People> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:People#People> <http://www.w3.org/2000/01/rdf-schema#label> "People" .
-<urn:name:People#People> <http://pkm-united.org/contains> <urn:name:People#%5Ealice> .
-<urn:name:People#People> <http://pkm-united.org/contains> <urn:name:People#%5Ealison> .
+<urn:name:People#People> <http://pending.org/dot/contains> <urn:name:People#%5Ealice> .
+<urn:name:People#People> <http://pending.org/dot/contains> <urn:name:People#%5Ealison> .
 <urn:name:People#People> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/People.md> .
 <urn:name:People#People> <http://www.w3.org/ns/oa#hasSelector> _:b25 .
 _:b25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .

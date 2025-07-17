@@ -1,17 +1,17 @@
-<urn:name:Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
 <urn:name:Person> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/Person.md> .
 <urn:name:Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person" .
-<urn:name:Person> <http://pkm-united.org/contains> <urn:name:Person#Person> .
-<file:///test/test-vault/Person.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
-<file:///test/test-vault/Person.md> <http://pkm-united.org/represents> <urn:name:Person> .
+<urn:name:Person> <http://pending.org/dot/contains> <urn:name:Person#Person> .
+<file:///test/test-vault/Person.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///test/test-vault/Person.md> <http://pending.org/dot/represents> <urn:name:Person> .
 <file:///test/test-vault/Person.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/Person.md" .
-<file:///test/test-vault/Person.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T13:11:10.839Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-<file:///test/test-vault/Person.md> <http://pkm-united.org/raw> "# Person\n\ndescription :: the class of persons\n\n## Section ^named\n\nproperty :: A\n\n## Subsection\n\nproperty :: C\n\n## Subsection #person\n\nproperty :: B \n\n" .
+<file:///test/test-vault/Person.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.413Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/Person.md> <http://pending.org/dot/raw> "# Person\n\ndescription :: the class of persons\n\n## Section ^named\n\nproperty :: A\n\n## Subsection\n\nproperty :: C\n\n## Subsection #person\n\nproperty :: B \n\n" .
 <urn:name:Person#Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:Person#Person> <http://www.w3.org/2000/01/rdf-schema#label> "Person" .
-<urn:name:Person#Person> <http://pkm-united.org/contains> <urn:name:Person#%5Enamed> .
-<urn:name:Person#Person> <http://pkm-united.org/contains> <urn:name:Person#Subsection> .
-<urn:name:Person#Person> <http://pkm-united.org/contains> _:b19 .
+<urn:name:Person#Person> <http://pending.org/dot/contains> <urn:name:Person#%5Enamed> .
+<urn:name:Person#Person> <http://pending.org/dot/contains> <urn:name:Person#Subsection> .
+<urn:name:Person#Person> <http://pending.org/dot/contains> _:b19 .
 <urn:name:Person#Person> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/Person.md> .
 <urn:name:Person#Person> <http://www.w3.org/ns/oa#hasSelector> _:b20 .
 <urn:name:Person#Person> <urn:property:description> "the class of persons" .
@@ -42,7 +42,7 @@ _:b19 <http://www.w3.org/2000/01/rdf-schema#label> "Subsection" .
 _:b19 <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/Person.md> .
 _:b19 <http://www.w3.org/ns/oa#hasSelector> _:b24 .
 _:b19 <urn:property:property> "B" .
-_:b19 <http://pkm-united.org/tag> "person" .
+_:b19 <http://pending.org/dot/tag> "person" .
 _:b24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
 _:b24 <http://www.w3.org/ns/oa#start> "111"^^<http://www.w3.org/2001/XMLSchema#integer> .
 _:b24 <http://www.w3.org/ns/oa#end> "150"^^<http://www.w3.org/2001/XMLSchema#integer> .

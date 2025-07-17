@@ -12,7 +12,7 @@ import { simpleAst } from 'docs-and-graphs'
  * Manages text position selectors for RDF annotations
  */
 class SelectorManager {
-  constructor() {
+  constructor () {
     this.previousSelector = null
   }
 
@@ -23,7 +23,7 @@ class SelectorManager {
    * @param {Object} position - Position object with start/end offsets
    * @returns {Object} The created selector pointer
    */
-  createSelector(node, documentTerm, position) {
+  createSelector (node, documentTerm, position) {
     const { start } = position
 
     // Update previous selector's end position
@@ -33,14 +33,13 @@ class SelectorManager {
 
     // Create new selector
     let selectorPointer = null
-    node.addOut(ns.oa.hasSource, documentTerm)
-    .addOut(ns.oa.hasSelector, sel => {
-      selectorPointer = sel
-      return sel
-      .addOut(ns.rdf.type, ns.oa.TextPositionSelector)
-      .addOut(ns.oa.start, toRdf(start.offset))
-      .addOut(ns.oa.end, toRdf(start.offset)) // Temporary end
-    })
+    node.addOut(ns.oa.hasSource, documentTerm).
+      addOut(ns.oa.hasSelector, sel => {
+        selectorPointer = sel
+        return sel.addOut(ns.rdf.type, ns.oa.TextPositionSelector).
+          addOut(ns.oa.start, toRdf(start.offset)).
+          addOut(ns.oa.end, toRdf(start.offset)) // Temporary end
+      })
 
     this.previousSelector = selectorPointer
     return selectorPointer
@@ -51,11 +50,11 @@ class SelectorManager {
    * @param {Object} selectorPointer - Selector to update
    * @param {number} endOffset - New end offset
    */
-  updateSelectorEnd(selectorPointer, endOffset) {
+  updateSelectorEnd (selectorPointer, endOffset) {
     // Remove old end quad
     const endQuads = Array.from(selectorPointer.dataset).filter(quad =>
       quad.subject.equals(selectorPointer.term) &&
-      quad.predicate.equals(ns.oa.end)
+      quad.predicate.equals(ns.oa.end),
     )
 
     endQuads.forEach(quad => selectorPointer.dataset.delete(quad))
@@ -68,14 +67,14 @@ class SelectorManager {
    * Finalizes the last selector with document end position
    * @param {number} documentEndOffset - Document end offset
    */
-  finalize(documentEndOffset) {
+  finalize (documentEndOffset) {
     if (this.previousSelector) {
       this.updateSelectorEnd(this.previousSelector, documentEndOffset)
       this.previousSelector = null
     }
   }
 
-  reset() {
+  reset () {
     this.previousSelector = null
   }
 }
@@ -91,7 +90,7 @@ const URI_STRATEGIES = {
         shouldSplit: true,
         childUri: pointer.term.termType === 'BlankNode'
           ? rdf.blankNode()
-          : appendSelector(pointer.term, `#^${id}`)
+          : appendSelector(pointer.term, `#^${id}`),
       }
     }
     return null
@@ -123,13 +122,13 @@ const URI_STRATEGIES = {
       return createHeaderUri(node, pointer)
     }
     return null
-  }
+  },
 }
 
 /**
  * Creates a URI for header nodes
  */
-function createHeaderUri(node, pointer) {
+function createHeaderUri (node, pointer) {
   const id = node.value
   const childUri = pointer.term.termType === 'BlankNode'
     ? rdf.blankNode()
@@ -140,11 +139,15 @@ function createHeaderUri(node, pointer) {
 /**
  * Processes code block nodes and generates RDF triples
  */
-function processCodeBlock(node, context, options) {
+function processCodeBlock (node, context, options) {
   const { pointer, path, selectorManager } = context
-  const { includeSelectors, includeCodeBlockContent, parseCodeBlockTurtleIn } = options
+  const {
+    includeSelectors,
+    includeCodeBlockContent,
+    parseCodeBlockTurtleIn,
+  } = options
 
-  function extractCodeContent(node) {
+  function extractCodeContent (node) {
     const prefix = `\`\`\`${node.lang || ''}\n`
     return node.value.slice(prefix.length, -4)  // -4 for '\n```'
   }
@@ -169,14 +172,14 @@ function processCodeBlock(node, context, options) {
         codePointer.dataset.add(quad)
       }
     } catch (error) {
-      console.warn(`Failed to parse turtle in ${language} block:`, error.message)
+      console.warn(`Failed to parse turtle in ${language} block:`,
+        error.message)
     }
   }
 
   // Add code block metadata
-  codePointer
-    .addOut(ns.rdf.type, ns.dot.Code)
-    .addOut(ns.dot.language, rdf.literal(language))
+  codePointer.addOut(ns.rdf.type, ns.dot.Code).
+    addOut(ns.dot.language, rdf.literal(language))
 
   // Include content if requested
   if (includeCodeBlockContent) {
@@ -199,7 +202,7 @@ function processCodeBlock(node, context, options) {
  * @param {Object} options - Triplifier options
  * @returns {Object} RDF pointer
  */
-function markdown(node, context, options) {
+function markdown (node, context, options) {
   const selectorManager = new SelectorManager()
 
   // Pre-process: assign URIs to all nodes
@@ -209,7 +212,7 @@ function markdown(node, context, options) {
   const extendedContext = {
     ...context,
     rootNode: node,
-    selectorManager
+    selectorManager,
   }
   const result = traverseAst(node, extendedContext, options)
 
@@ -224,7 +227,7 @@ function markdown(node, context, options) {
 /**
  * Recursively assigns URIs to nodes that need them
  */
-function assignInternalUris(node, context, options) {
+function assignInternalUris (node, context, options) {
   const children = node.children ?? []
 
   for (const child of children) {
@@ -239,12 +242,16 @@ function assignInternalUris(node, context, options) {
 /**
  * Traverses AST and generates RDF triples
  */
-function traverseAst(node, context, options) {
+function traverseAst (node, context, options) {
   const { includeLabelsFor, includeSelectors } = options
   const { pointer, path, selectorManager } = context
 
+  // This is a hack due to bad design, this needs to be revisited
+  const _pointer = node.type === 'root' ? pointer.node(
+    pathToFileURL(path)) : pointer
+
   // Process node tags
-  processNodeTags(node, pointer)
+  processNodeTags(node, _pointer)
 
   // Handle code blocks specially
   if (node.type === 'code') {
@@ -253,12 +260,13 @@ function traverseAst(node, context, options) {
   }
 
   // Process data and links
-  const knownLinks = processNodeData(node, context, options)
+  const knownLinks = processNodeData(node, { ...context, pointer: _pointer },
+    options)
 
   // Process unmapped links
-  knownLinks
-  .filter(link => !link.mapped)
-  .forEach(link => populateLink(link, context, options))
+  knownLinks.filter(link => !link.mapped).
+    forEach(
+      link => populateLink(link, { ...context, pointer: _pointer }, options))
 
   // Process children
   const children = node.children ?? []
@@ -273,16 +281,23 @@ function traverseAst(node, context, options) {
  * Processes tags for a node
  */
 function processNodeTags(node, pointer) {
-  const tags = node.tags ?? []
+  let tags = node.tags ?? []
+
+  // If tags is a string, convert to single-element array
+  if (typeof tags === 'string') {
+    tags = [tags]
+  }
+
   for (const tag of tags) {
     pointer.addOut(ns.dot.tag, rdf.literal(tag))
   }
 }
 
+
 /**
  * Processes data and links for a node
  */
-function processNodeData(node, context, options) {
+function processNodeData (node, context, options) {
   const knownLinks = (node.links && node.type !== 'code')
     ? getKnownLinks(node.links, context, options)
     : []
@@ -299,7 +314,7 @@ function processNodeData(node, context, options) {
 /**
  * Processes a child node
  */
-function processChildNode(child, context, options) {
+function processChildNode (child, context, options) {
   const { includeLabelsFor, includeSelectors } = options
   const { pointer, path, selectorManager } = context
   const { shouldSplit } = getNodeUri(child, context, options)
@@ -331,7 +346,7 @@ function processChildNode(child, context, options) {
 /**
  * Adds appropriate labels to a node
  */
-function addNodeLabels(node, pointer, includeLabelsFor) {
+function addNodeLabels (node, pointer, includeLabelsFor) {
   // Add section label for headers
   if (includeLabelsFor.includes('sections') && node.value) {
     pointer.addOut(ns.rdfs.label, rdf.literal(node.value))
@@ -346,7 +361,7 @@ function addNodeLabels(node, pointer, includeLabelsFor) {
 /**
  * Determines URI generation strategy for a node
  */
-function getNodeUri(node, context, options) {
+function getNodeUri (node, context, options) {
   const { pointer } = context
   const { partitionBy } = options
 
@@ -371,11 +386,11 @@ function getNodeUri(node, context, options) {
  * @param {Object} options - Processing options
  * @returns {Object} RDF pointer with generated triples
  */
-export function processMarkdown(fullText, { pointer, path }, options = {}) {
+export function processMarkdown (fullText, { pointer, path }, options = {}) {
   const astOptions = {
     normalize: true,
     inlineAsArray: true,
-    includePosition: true
+    includePosition: true,
   }
 
   const node = simpleAst(fullText, astOptions)
@@ -384,6 +399,6 @@ export function processMarkdown(fullText, { pointer, path }, options = {}) {
   return markdown(node, {
     pointer,
     path,
-    text: fullText
+    text: fullText,
   }, parsedOptions)
 }

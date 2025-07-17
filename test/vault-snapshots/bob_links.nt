@@ -1,17 +1,17 @@
-<urn:name:links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/NamedConcept> .
+<urn:name:links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
 <urn:name:links> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/bob/links.md> .
 <urn:name:links> <http://www.w3.org/2000/01/rdf-schema#label> "links" .
-<urn:name:links> <http://pkm-united.org/contains> <urn:name:links#Links> .
-<file:///test/test-vault/bob/links.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pkm-united.org/MarkdownDocument> .
-<file:///test/test-vault/bob/links.md> <http://pkm-united.org/represents> <urn:name:links> .
+<urn:name:links> <http://pending.org/dot/contains> <urn:name:links#Links> .
+<file:///test/test-vault/bob/links.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///test/test-vault/bob/links.md> <http://pending.org/dot/represents> <urn:name:links> .
 <file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/bob/links.md" .
-<file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-12T13:11:10.857Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-<file:///test/test-vault/bob/links.md> <http://pkm-united.org/raw> "# Links\n\n## Produce two simple links\n\n<http://web1.org> <http://web2.org>\n\n## Alias\n\n— A.M. Mood, RAND Corporation ([1954](https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf)\n\n## More data\n\n[[#Alias]]\n\n[[links#Alias]]\n\nhas image :: ![Lovely image](../houses/img.png)\n\n[[dot triples]]\n\n[[bob/Bob Details]]\n\n[[bob/links.md]]\n\n[Alias 2](http://example.com)\n\n[[link 1 |Alias 1]]\n\n![[link 1]]\n\n![[img.png]]\n\nThe website is http://example2.com see you!\n~~\n~~The website is [here](http://example3.com) see you!\n\nThe website is [here](protocol) see you!\n" .
+<file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.435Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/bob/links.md> <http://pending.org/dot/raw> "# Links\n\n## Produce two simple links\n\n<http://web1.org> <http://web2.org>\n\n## Alias\n\n— A.M. Mood, RAND Corporation ([1954](https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf)\n\n## More data\n\n[[#Alias]]\n\n[[links#Alias]]\n\nhas image :: ![Lovely image](../houses/img.png)\n\n[[dot triples]]\n\n[[bob/Bob Details]]\n\n[[bob/links.md]]\n\n[Alias 2](http://example.com)\n\n[[link 1 |Alias 1]]\n\n![[link 1]]\n\n![[img.png]]\n\nThe website is http://example2.com see you!\n~~\n~~The website is [here](http://example3.com) see you!\n\nThe website is [here](protocol) see you!\n" .
 <urn:name:links#Links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:links#Links> <http://www.w3.org/2000/01/rdf-schema#label> "Links" .
-<urn:name:links#Links> <http://pkm-united.org/contains> <urn:name:links#Produce%20two%20simple%20links> .
-<urn:name:links#Links> <http://pkm-united.org/contains> <urn:name:links#Alias> .
-<urn:name:links#Links> <http://pkm-united.org/contains> <urn:name:links#More%20data> .
+<urn:name:links#Links> <http://pending.org/dot/contains> <urn:name:links#Produce%20two%20simple%20links> .
+<urn:name:links#Links> <http://pending.org/dot/contains> <urn:name:links#Alias> .
+<urn:name:links#Links> <http://pending.org/dot/contains> <urn:name:links#More%20data> .
 <urn:name:links#Links> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/links.md> .
 <urn:name:links#Links> <http://www.w3.org/ns/oa#hasSelector> _:b29 .
 _:b29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
@@ -21,8 +21,8 @@ _:b29 <http://www.w3.org/ns/oa#end> "9"^^<http://www.w3.org/2001/XMLSchema#integ
 <urn:name:links#Produce%20two%20simple%20links> <http://www.w3.org/2000/01/rdf-schema#label> "Produce two simple links" .
 <urn:name:links#Produce%20two%20simple%20links> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/links.md> .
 <urn:name:links#Produce%20two%20simple%20links> <http://www.w3.org/ns/oa#hasSelector> _:b30 .
-<urn:name:links#Produce%20two%20simple%20links> <http://pkm-united.org/link> <http://web1.org> .
-<urn:name:links#Produce%20two%20simple%20links> <http://pkm-united.org/link> <http://web2.org> .
+<urn:name:links#Produce%20two%20simple%20links> <http://pending.org/dot/link> <http://web1.org> .
+<urn:name:links#Produce%20two%20simple%20links> <http://pending.org/dot/link> <http://web2.org> .
 _:b30 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
 _:b30 <http://www.w3.org/ns/oa#start> "9"^^<http://www.w3.org/2001/XMLSchema#integer> .
 _:b30 <http://www.w3.org/ns/oa#end> "75"^^<http://www.w3.org/2001/XMLSchema#integer> .
@@ -30,32 +30,32 @@ _:b30 <http://www.w3.org/ns/oa#end> "75"^^<http://www.w3.org/2001/XMLSchema#inte
 <urn:name:links#Alias> <http://www.w3.org/2000/01/rdf-schema#label> "Alias" .
 <urn:name:links#Alias> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/links.md> .
 <urn:name:links#Alias> <http://www.w3.org/ns/oa#hasSelector> _:b31 .
-<urn:name:links#Alias> <http://pkm-united.org/link> <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> .
+<urn:name:links#Alias> <http://pending.org/dot/link> <https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> .
 _:b31 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
 _:b31 <http://www.w3.org/ns/oa#start> "75"^^<http://www.w3.org/2001/XMLSchema#integer> .
 _:b31 <http://www.w3.org/ns/oa#end> "189"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> <http://pkm-united.org/alias> "1954" .
+<https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf> <http://pending.org/dot/alias> "1954" .
 <urn:name:links#More%20data> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:links#More%20data> <http://www.w3.org/2000/01/rdf-schema#label> "More data" .
 <urn:name:links#More%20data> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/links.md> .
 <urn:name:links#More%20data> <http://www.w3.org/ns/oa#hasSelector> _:b32 .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:links#Alias> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:dot%20triples> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:bob/Bob%20Details> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:bob/links.md> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <http://example.com> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:link%201%20> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:link%201> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:img.png> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <http://example2.com> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <http://example3.com> .
-<urn:name:links#More%20data> <http://pkm-united.org/link> <urn:name:protocol> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:links#Alias> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:dot%20triples> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:bob/Bob%20Details> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:bob/links.md> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <http://example.com> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:link%201%20> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:link%201> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:img.png> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <http://example2.com> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <http://example3.com> .
+<urn:name:links#More%20data> <http://pending.org/dot/link> <urn:name:protocol> .
 <urn:name:links#More%20data> <urn:property:has%20image> <urn:name:test/test-vault/houses/img.png> .
 _:b32 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
 _:b32 <http://www.w3.org/ns/oa#start> "189"^^<http://www.w3.org/2001/XMLSchema#integer> .
 _:b32 <http://www.w3.org/ns/oa#end> "559"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:has%20image> <http://www.w3.org/2000/01/rdf-schema#label> "has image" .
-<http://example.com> <http://pkm-united.org/alias> "Alias 2" .
-<urn:name:link%201%20> <http://pkm-united.org/alias> "Alias 1" .
-<http://example3.com> <http://pkm-united.org/alias> "here" .
-<urn:name:protocol> <http://pkm-united.org/alias> "here" .
+<http://example.com> <http://pending.org/dot/alias> "Alias 2" .
+<urn:name:link%201%20> <http://pending.org/dot/alias> "Alias 1" .
+<http://example3.com> <http://pending.org/dot/alias> "here" .
+<urn:name:protocol> <http://pending.org/dot/alias> "here" .
