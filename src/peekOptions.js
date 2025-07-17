@@ -31,12 +31,46 @@ const filterBySchema = (obj, schema) => {
   )
 }
 
+// 1. ✅ includeSelectors: false - overwritten (was true by default)
+// 2. ✅ includeCodeBlockContent: false - overwritten (was true by default)
+// 3. ✅ includeRaw: false - overwritten (was false by default, stays false)
+// 4. ✅ partitionBy: none → [] - overwritten (was ['identifier'] by default)
+// 5. ✅ mappings - deep merged (keeps default "is a": "rdf:type" and "same as": "rdfs:sameAs" while adding "custom prop": "schema:name")
 const peekMarkdown = (content, options = {}) => {
   const frontmatter = extractFrontmatter(content)
   const filtered = filterBySchema(frontmatter, MarkdownTriplifierOptions)
   const defaults = MarkdownTriplifierOptions.parse({})
 
-  return [defaults, filtered, options].reduce(deepMerge)
+  // Handle special partitionBy: none case
+  if (filtered.partitionBy === 'none') {
+    filtered.partitionBy = []
+  }
+  if (options.partitionBy === 'none') {
+    options.partitionBy = []
+  }
+
+  // Merge with special handling for nested objects vs primitives/arrays
+  const mergedOptions = { ...defaults }
+
+  // Apply frontmatter
+  for (const [key, value] of Object.entries(filtered)) {
+    if (key === 'mappings') {
+      mergedOptions[key] = deepMerge(mergedOptions[key], value)
+    } else {
+      mergedOptions[key] = value // Overwrite everything else
+    }
+  }
+
+  // Apply explicit options (always overwrite)
+  for (const [key, value] of Object.entries(options)) {
+    if (key === 'mappings') {
+      mergedOptions[key] = deepMerge(mergedOptions[key], value)
+    } else {
+      mergedOptions[key] = value // Overwrite everything else
+    }
+  }
+
+  return mergedOptions
 }
 
 const peekDefault = (content, options = {}) =>

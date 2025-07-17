@@ -85,6 +85,30 @@ Alice inherits the URI`
       // hello should be filtered out as unrecognized
       assert.equal(result.hello, undefined)
     })
+
+    it('should overwrite boolean and array options instead of deep merging', () => {
+      const content = `---
+includeSelectors: false
+includeCodeBlockContent: false
+partitionBy: none
+mappings:
+  "custom prop": "schema:name"
+---
+
+# Test`
+      
+      const result = peekMarkdown(content, {})
+      
+      // These should be overwritten, not merged
+      assert.equal(result.includeSelectors, false)
+      assert.equal(result.includeCodeBlockContent, false)
+      assert.deepEqual(result.partitionBy, []) // partitionBy: none becomes []
+      
+      // Mappings should be deep merged
+      assert.equal(result.mappings['is a'], 'rdf:type') // default preserved
+      assert.equal(result.mappings['same as'], 'rdfs:sameAs') // default preserved
+      assert.equal(result.mappings['custom prop'], 'schema:name') // frontmatter added
+    })
   })
 
   describe('peekDefault', () => {
