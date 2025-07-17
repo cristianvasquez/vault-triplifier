@@ -46,7 +46,6 @@ function triplify (path, content, options = {}) {
 
   const parsedOptions = processor.lookupOptions(content, options)
 
-  console.log(parsedOptions)
   const pointer = createConceptPointer(path, parsedOptions)
 
   // Add document type and process content
