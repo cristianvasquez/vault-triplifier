@@ -26,6 +26,7 @@
     "n3": "^1.21.2",
     "rdf-ext": "^2.5.2",
     "rdf-literal": "^2.0.0",
+    "yaml": "^2.8.0",
     "zod": "^3.25.71"
   },
   "devDependencies": {

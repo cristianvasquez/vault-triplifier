@@ -1,6 +1,7 @@
 import grapoi from 'grapoi'
 import rdf from 'rdf-ext'
 import { toRdf } from 'rdf-literal'
+import { peekDefault, peekMarkdown } from './peekOptions.js'
 import { addLabels } from './processors/appendLabels.js'
 import { processMarkdown } from './processors/markdown.js'
 import { processCanvas } from './processors/canvas.js'
@@ -15,10 +16,12 @@ const FILE_PROCESSORS = {
   '.md': {
     type: ns.dot.MarkdownDocument,
     processor: processMarkdown,
+    lookupOptions: peekMarkdown,
   },
   '.canvas': {
     type: ns.dot.CanvasDocument,
     processor: processCanvas,
+    lookupOptions: peekDefault,
   },
 }
 
@@ -31,28 +34,20 @@ const FILE_PROCESSORS = {
  * @returns {Grapoi} RDF pointer with processed content
  */
 function triplify (path, content, options = {}) {
-  const parsedOptions = MarkdownTriplifierOptions.parse(options)
-
-  // Create base RDF structure
-  const pointer = createBasePointer(path, parsedOptions)
-
-  // If no content, return concept pointer
-  if (!content) {
-    return pointer
-  }
 
   // Process content if we have a processor
   const extension = getFileExtension(path)
   const processor = FILE_PROCESSORS[extension.toLowerCase()]
 
-  if (!processor) {
-    // No processor - return concept pointer with content as raw literal if requested
-    if (parsedOptions.includeRaw) {
-      const documentUri = pathToFileURL(path)
-      pointer.node(documentUri).addOut(ns.dot.raw, rdf.literal(content))
-    }
-    return pointer
+  // If no content, return concept pointer
+  if (!content || !processor) {
+    return createConceptPointer(path, options)
   }
+
+  const parsedOptions = processor.lookupOptions(content, options)
+
+  console.log(parsedOptions)
+  const pointer = createConceptPointer(path, parsedOptions)
 
   // Add document type and process content
   const documentUri = pathToFileURL(path)
@@ -80,19 +75,14 @@ function triplify (path, content, options = {}) {
  *
  * @param {string} path - Path/identifier
  * @param {Object} [options] - Processing options
- * @returns {grapoi} Basic RDF pointer
+ * @returns {Grapoi} Basic RDF pointer
  */
 function createConceptPointer (path, options = {}) {
-  return createBasePointer(path, options)
-}
 
-/**
- * Internal helper to create base pointer structure
- */
-function createBasePointer (path, options = {}) {
   const documentUri = pathToFileURL(path)
+
   const name = getNameFromPath(path)
-  const term = nameToUri(name)
+  const term = options.uri ? rdf.namedNode(options.uri) : nameToUri(name)
 
   const pointer = grapoi({
     dataset: rdf.dataset(),

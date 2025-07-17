@@ -21,6 +21,7 @@ const DEFAULT_MAPPINGS = {
 }
 
 const TriplifierOptions = z.object({
+  uri: z.string().optional(),
   includeLabelsFor: z.array(
     z.enum(['documents', 'sections', 'anchors', 'properties']),
   ).default([]),
