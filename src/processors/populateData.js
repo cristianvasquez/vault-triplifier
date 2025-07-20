@@ -85,15 +85,22 @@ function populateInline (data, context, options) {
 
     // Check if we have internal links that should be used as separate relationship targets
     if (knownLinks) {
-      // Create a triple for each linked entity
-      for (const link of knownLinks.filter(link => link.type === 'internal')) {
-        addTriple(pointer, {
-          subject: pointer.term,
-          predicate,
-          object: link.value, // This will be resolved to a URI by addTriple
-        }, context, options)
+      // Filter links to only those that actually appear in this specific objectValue
+      const relevantLinks = knownLinks.filter(link => 
+        link.type === 'internal' && objectValue.includes(link.value)
+      )
+      
+      if (relevantLinks.length > 0) {
+        // Create a triple for each linked entity that appears in this line
+        for (const link of relevantLinks) {
+          addTriple(pointer, {
+            subject: pointer.term,
+            predicate,
+            object: link.value, // This will be resolved to a URI by addTriple
+          }, context, options)
+        }
+        return // Don't create the original triple with the raw string
       }
-      return // Don't create the original triple with the raw string
     }
 
     // Fallback to original behavior if no relevant links found
