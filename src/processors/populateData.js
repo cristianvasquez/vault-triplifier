@@ -78,14 +78,29 @@ function addTriple (pointer, { subject, predicate, object }, context, options) {
  * [s, p, o] -> s-p-o
  */
 function populateInline (data, context, options) {
-  const { pointer } = context
+  const { pointer, knownLinks } = context
 
   if (data.length === 2) {
-    const [predicate, object] = data
+    const [predicate, objectValue] = data
+
+    // Check if we have internal links that should be used as separate relationship targets
+    if (knownLinks) {
+      // Create a triple for each linked entity
+      for (const link of knownLinks.filter(link => link.type === 'internal')) {
+        addTriple(pointer, {
+          subject: pointer.term,
+          predicate,
+          object: link.value, // This will be resolved to a URI by addTriple
+        }, context, options)
+      }
+      return // Don't create the original triple with the raw string
+    }
+
+    // Fallback to original behavior if no relevant links found
     addTriple(pointer, {
       subject: pointer.term,
       predicate,
-      object,
+      object: objectValue,
     }, context, options)
   } else if (data.length >= 3) {
     const [subject, predicate, object] = data
@@ -167,6 +182,5 @@ function processValue (pointer, predicate, value, context, options) {
 function isString (myVar) {
   return typeof myVar === 'string' || myVar instanceof String
 }
-
 
 export { populateYamlLike, populateInline }

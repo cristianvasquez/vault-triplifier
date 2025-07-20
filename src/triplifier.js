@@ -24,6 +24,7 @@ const FILE_PROCESSORS = {
     lookupOptions: peekDefault,
   },
 }
+const defaults = MarkdownTriplifierOptions.parse({})
 
 /**
  * Main triplifier function - converts content to RDF
@@ -33,7 +34,7 @@ const FILE_PROCESSORS = {
  * @param {Object} [options] - Processing options
  * @returns {Grapoi} RDF pointer with processed content
  */
-function triplify (path, content, options = {}) {
+function triplify (path, content, options = defaults) {
 
   // Process content if we have a processor
   const extension = getFileExtension(path)
