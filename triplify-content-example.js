@@ -10,7 +10,7 @@ hello: world
 
 One can declare properties in this way:
 
-is a :: Person`
+is a :: schema:Person`
 
 const { term, dataset } = triplify('/some/Alice.md', content)
 

@@ -5,7 +5,7 @@
 <file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://pending.org/dot/represents> <urn:name:Bob%20Details> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/bob/Bob Details.md" .
-<file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.458Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.666Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://pending.org/dot/raw> "# More details about Bob\n\n## Section ^1\n\ndescription:: Section 1\nsomewhat related :: [[Bob Details#^2]]\npoints to the document :: [[Bob Details#A header]]\n\n## Section ^2\n\ndescription:: Section 2\nAnd some more [[Bob Details#^3 | Pointer to section 3]]\n\n## Section ^3\n\ndescription:: Section 3\nAnd some more [[Unknown#^1]]\n" .
 <urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/2000/01/rdf-schema#label> "More details about Bob" .

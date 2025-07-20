@@ -5,7 +5,7 @@
 <file:///test/test-vault/dot%20triples.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
 <file:///test/test-vault/dot%20triples.md> <http://pending.org/dot/represents> <urn:name:dot%20triples> .
 <file:///test/test-vault/dot%20triples.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/dot triples.md" .
-<file:///test/test-vault/dot%20triples.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.394Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/dot%20triples.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.625Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/dot%20triples.md> <http://pending.org/dot/raw> "# Dot triples syntax\n\n## Alice\n\nhas :: 37 years old\n\nex:knows :: [[Bob]]\n\nuntyped [[Bob]]\n\nuntyped [[Alice]]\n\nA :: B :: C :: D\n\n## Embedded\n\n(EA :: EB) && (EC :: ED)\n\n" .
 <urn:name:dot%20triples#Dot%20triples%20syntax> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:dot%20triples#Dot%20triples%20syntax> <http://www.w3.org/2000/01/rdf-schema#label> "Dot triples syntax" .

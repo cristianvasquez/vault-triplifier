@@ -5,7 +5,7 @@
 <file:///test/test-vault/bob/links.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
 <file:///test/test-vault/bob/links.md> <http://pending.org/dot/represents> <urn:name:links> .
 <file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/bob/links.md" .
-<file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-17T15:10:46.435Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/bob/links.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.651Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/bob/links.md> <http://pending.org/dot/raw> "# Links\n\n## Produce two simple links\n\n<http://web1.org> <http://web2.org>\n\n## Alias\n\n— A.M. Mood, RAND Corporation ([1954](https://www.rand.org/content/dam/rand/pubs/papers/2008/P899.pdf)\n\n## More data\n\n[[#Alias]]\n\n[[links#Alias]]\n\nhas image :: ![Lovely image](../houses/img.png)\n\n[[dot triples]]\n\n[[bob/Bob Details]]\n\n[[bob/links.md]]\n\n[Alias 2](http://example.com)\n\n[[link 1 |Alias 1]]\n\n![[link 1]]\n\n![[img.png]]\n\nThe website is http://example2.com see you!\n~~\n~~The website is [here](http://example3.com) see you!\n\nThe website is [here](protocol) see you!\n" .
 <urn:name:links#Links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:links#Links> <http://www.w3.org/2000/01/rdf-schema#label> "Links" .
