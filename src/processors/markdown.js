@@ -117,6 +117,13 @@ const URI_STRATEGIES = {
     return null
   },
 
+  'headers-h2-h3': (node, pointer) => {
+    if (node.type === 'block' && node.depth && node.depth >= 2 && node.depth <= 3) {
+      return createHeaderUri(node, pointer)
+    }
+    return null
+  },
+
   'headers-h1-h2-h3': (node, pointer) => {
     if (node.type === 'block' && node.depth && node.depth <= 3) {
       return createHeaderUri(node, pointer)

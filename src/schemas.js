@@ -33,7 +33,7 @@ const MarkdownTriplifierOptions = TriplifierOptions.extend({
   includeSelectors: z.boolean().default(true),
   includeRaw: z.boolean().default(false),
   partitionBy: z.array(z.enum(
-    ['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h1-h2-h3'])).
+    ['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h2-h3', 'headers-h1-h2-h3'])).
     default(['identifier']),
   includeCodeBlockContent: z.boolean().default(true),
   parseCodeBlockTurtleIn: z.array(z.string()).default(['turtle;triplify']),

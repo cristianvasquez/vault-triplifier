@@ -50,6 +50,9 @@ const result = await contentToRDF(content, { path: 'file.md' }, options)
   // Split on H1 and H2 headers
   partitionBy: ['headers-h1-h2']
   
+  // Split on H2 and H3 headers (excludes H1)
+  partitionBy: ['headers-h2-h3']
+  
   // Split on H1, H2, and H3 headers
   partitionBy: ['headers-h1-h2-h3']
   
