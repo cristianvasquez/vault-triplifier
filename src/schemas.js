@@ -29,13 +29,37 @@ const TriplifierOptions = z.object({
   mappings: z.record(z.string()).optional().default(DEFAULT_MAPPINGS.mappings),
 })
 
+// Coercion helper for string-to-boolean conversion  
+const booleanCoercion = z.union([
+  z.boolean(),
+  z.string().transform((val) => {
+    if (val === 'true') return true
+    if (val === 'false') return false
+    throw new Error(`Invalid boolean string: ${val}`)
+  })
+]).default(true)
+
 const MarkdownTriplifierOptions = TriplifierOptions.extend({
-  includeSelectors: z.boolean().default(true),
-  includeRaw: z.boolean().default(false),
+  includeSelectors: booleanCoercion,
+  includeRaw: z.union([
+    z.boolean(),
+    z.string().transform((val) => {
+      if (val === 'true') return true
+      if (val === 'false') return false
+      throw new Error(`Invalid boolean string: ${val}`)
+    })
+  ]).default(false),
   partitionBy: z.array(z.enum(
     ['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h2-h3', 'headers-h1-h2-h3'])).
     default(['identifier']),
-  includeCodeBlockContent: z.boolean().default(true),
+  includeCodeBlockContent: z.union([
+    z.boolean(),
+    z.string().transform((val) => {
+      if (val === 'true') return true
+      if (val === 'false') return false
+      throw new Error(`Invalid boolean string: ${val}`)
+    })
+  ]).default(true),
   parseCodeBlockTurtleIn: z.array(z.string()).default(['turtle;triplify']),
 }).strict()
 

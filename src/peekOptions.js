@@ -67,7 +67,8 @@ const peekMarkdown = (content, options = {}) => {
     result.prefix = deepMerge(parsedOptions.prefix, frontmatter.prefix)
   }
 
-  return result
+  // Parse the final result through Zod to apply transformations (like string-to-boolean)
+  return MarkdownTriplifierOptions.parse(result)
 }
 
 const peekDefault = (content, options = {}) =>
