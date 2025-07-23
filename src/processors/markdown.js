@@ -154,13 +154,8 @@ function processCodeBlock (node, context, options) {
     parseCodeBlockTurtleIn,
   } = options
 
-  function extractCodeContent (node) {
-    const prefix = `\`\`\`${node.lang || ''}\n`
-    return node.value.slice(prefix.length, -4)  // -4 for '\n```'
-  }
-
   // Extract code content and language
-  const codeContent = extractCodeContent(node)
+  const codeContent = node.value
   const language = node.lang || 'plaintext'
 
   // Create a blank node for the code block
