@@ -1,555 +1,401 @@
 # Syntax Reference
 
-Complete reference for all vault-triplifier syntax patterns, properties, and configuration options.
+Reference for vault-triplifier syntax and how it generates RDF triples.
 
-## Basic Property Syntax
+## How Triples Are Formed
 
-### Simple Properties
+Vault-triplifier converts markdown to RDF using three syntaxes:
+
+### 1. Block Properties
+
 ```markdown
-property :: value
-name :: Alice
+# Alice
+
 age :: 25
-location :: Wonderland
+occupation :: student
 ```
 
-### Multiple Values
-```markdown
-# Separate lines
-knows :: Bob
-knows :: Mad Hatter
-knows :: White Rabbit
+**Generates:** `<current-section> <urn:property:age> "25"`
 
-# Comma-separated list
-friends :: Bob, Mad Hatter, White Rabbit
-
-# Array syntax (in frontmatter)
-tags: [adventure, fantasy, children]
-```
-
-### Property Names
-- **Allowed characters**: letters, numbers, hyphens, underscores, spaces
-- **Case sensitive**: `Name` ≠ `name`
-- **Spaces allowed**: `favorite color :: blue`
-- **Unicode supported**: `名前 :: Alice`
+### 2. Inline Properties
 
 ```markdown
-# Valid property names
-name :: Alice
-first-name :: Alice
-first_name :: Alice
-favorite color :: blue
-名前 :: Alice Wonderland
+Alice (age :: 25) is a (occupation :: student).
 ```
 
-## Namespace Syntax
+**Generates:** Same as block properties - attaches to current section.
 
-### Built-in Namespaces
+### 3. Explicit Triples
+
+**For Named Entity Subjects:**
 ```markdown
-# Schema.org
-schema:name :: Alice Wonderland
-schema:email :: alice@example.com
-schema:birthDate :: 1998-03-15
-
-# Friend of a Friend
-foaf:name :: Alice
-foaf:knows :: Bob
-foaf:homepage :: https://alice.example.com
-
-# Dublin Core
-dc:title :: Alice's Adventures
-dc:creator :: Lewis Carroll
-dc:date :: 1865-11-26
-
-# RDF/RDFS/OWL
-rdf:type :: schema:Person
-rdfs:label :: Alice Wonderland
-owl:sameAs :: https://example.com/alice
+[[Alice]] :: age :: 25
+[[Alice]] :: knows :: [[Bob]]
 ```
 
-### Custom Namespaces
+**Generates:** `<urn:name:Alice> <urn:property:age> "25"`
+
+**For Property Namespace Subjects:**
+```markdown
+Alice :: age :: 25
+Alice :: knows :: [[Bob]]
+```
+
+**Generates:** `<urn:property:Alice> <urn:property:age> "25"`
+
+**Rule:** Use `[[Subject]]` for named entities, `Subject` for property namespace.
+
+## Subject-Predicate-Object Rules
+
+- **Subject:** Determined by partitioning and syntax
+- **Predicate:** Properties become `<urn:property:encoded-name>`
+- **Object:** Text becomes literals, `[[Name]]` becomes `<urn:name:Name>`
+
+## Subject Selection by Partitioning
+
+### No Partitioning (`partitionBy: []`)
+
+```markdown
+# Alice
+
+age :: 25
+
+## Bob
+
+age :: 27
+```
+
+**Result:** Both properties attach to document: `<urn:name:filename>`
+
+### Header Partitioning (`partitionBy: ['headers-h1-h2']`)
+
+```markdown
+# Alice
+
+age :: 25 ← <urn:name:filename#Alice>
+
+## Bob
+
+age :: 27 ← <urn:name:filename#Bob>
+```
+
+### Explicit Subjects
+
+```markdown
+[[Alice]] :: age :: 25 ← <urn:name:Alice>
+[[Bob]] :: age :: 27 ← <urn:name:Bob>
+```
+
+## Value Types
+
+### Literals (Strings)
+
+```markdown
+name :: Alice Wonderland → "Alice Wonderland"
+age :: 25 → "25" (currently string, not integer)
+file :: file:///path/to/file → "file:///path/to/file"
+ftp :: ftp://server.com → "ftp://server.com"
+```
+
+### URIs
+
+```markdown
+# Named concepts (wiki links)
+knows :: [[Alice]] → <urn:name:Alice>
+lives in :: [[Wonderland]] → <urn:name:Wonderland>
+
+# Web URIs 
+website :: https://example.com → <https://example.com>
+email :: mailto:alice@test.com → <mailto:alice@test.com>
+```
+
+**Rule:** `[[Name]]` creates named concept URIs. `http://`, `https://`, and `mailto:` URIs are detected automatically. Other URI schemes become literals.
+
+## Property Naming
+
+Properties become URIs in the `urn:property:` namespace:
+
+```markdown
+age :: 25 → <urn:property:age>
+full name :: Alice → <urn:property:full%20name>
+schema:age :: 25 → <http://schema.org/age> (with namespace config)
+```
+
+**Encoding:** Spaces become `%20`, special characters are URI-encoded.
+
+## Namespace Configuration
+
+### Built-in Prefixes
+
+Default prefixes available without configuration:
+
+```markdown
+schema:name :: Alice → <http://schema.org/name>
+foaf:knows :: [[Bob]] → <http://xmlns.com/foaf/0.1/knows>
+dc:title :: My Document → <http://purl.org/dc/terms/title>
+rdf:type :: schema:Person → <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+```
+
+### Custom Prefixes
+
 Configure in options:
+
 ```javascript
 {
-  namespaces: {
-    "wonderland": "http://wonderland.example.org/vocab#",
-    "story": "http://narrative.example.org/terms#"
+  prefix: {
+    "custom": "http://example.org/vocab#",
+    "project": "http://mycompany.com/terms#"
   }
 }
 ```
 
 Use in documents:
+
 ```markdown
-wonderland:magicalAbility :: size-changing
-story:characterRole :: protagonist
+custom:category :: important
+project:status :: active
+```
+
+## Property Mappings
+
+### Default Mappings
+
+Built-in property mappings:
+
+```markdown
+is a :: Person → <rdf:type> "Person"
+same as :: [[Alice]] → <rdfs:sameAs> <urn:name:Alice>
+```
+
+### Custom Mappings
+
+```javascript
+{
+  mappings: {
+    "related to": "rdfs:seeAlso",
+    "instance of": "rdf:type"
+  }
+}
+```
+
+Usage:
+
+```markdown
+related to :: [[Concept]]
+instance of :: schema:Person
 ```
 
 ## Link Syntax
 
 ### Wiki Links
-```markdown
-# Document links
-knows :: [[Bob]]
-lives in :: [[Wonderland]]
-works at :: [[Oxford University]]
 
-# Section links
-setting :: [[#Wonderland]]
-reference :: [[Document#Section]]
-climax :: [[Story#Chapter 5#The Reveal]]
+**External Links** (to other documents/entities):
+```markdown
+knows :: [[Bob]] → <urn:name:Bob>
+lives in :: [[Wonderland]] → <urn:name:Wonderland>
+works at :: [[Oxford University]] → <urn:name:Oxford-University>
 ```
+
+**Internal Links** (to sections within same document):
+```markdown
+# Team Directory
+
+## Alice Johnson
+reports to :: [[#Bob Smith]]
+
+## Bob Smith
+manages :: [[#Alice Johnson]]
+```
+
+**Generates:**
+```turtle
+<urn:name:team-directory#Alice%20Johnson> <urn:property:reports%20to> <urn:name:team-directory#Bob%20Smith> .
+<urn:name:team-directory#Bob%20Smith> <urn:property:manages> <urn:name:team-directory#Alice%20Johnson> .
+```
+
+**Rule:** Use `[[#Section Name]]` for internal document links, `[[Entity Name]]` for external entities.
 
 ### External URLs
-```markdown
-# Web links
-website :: https://alice-wonderland.com
-reference :: https://en.wikipedia.org/wiki/Alice
-social :: https://twitter.com/alice_w
 
-# Special protocols
-email :: mailto:alice@example.com
-phone :: tel:+1-555-0123
-location :: geo:51.7520,-1.2577
+```markdown
+# Auto-detected as URIs
+website :: https://example.com → <https://example.com>
+homepage :: http://example.com → <http://example.com>
+email :: mailto:alice@test.com → <mailto:alice@test.com>
+
+# Other schemes become literals
+phone :: tel:+1234567890 → "tel:+1234567890"
+file :: file:///path/to/file → "file:///path/to/file"
+ftp :: ftp://server.com → "ftp://server.com"
 ```
 
-### Markdown Links
-```markdown
-# Standard markdown links
-university :: [Oxford](https://ox.ac.uk)
-author :: [Lewis Carroll](https://en.wikipedia.org/wiki/Lewis_Carroll)
-book :: [Alice's Adventures](https://gutenberg.org/alice)
-```
+## Partitioning Options
 
-## Inline Syntax
+Controls which entities become subjects:
 
-### Basic Inline Properties
-```markdown
-Alice (age :: 25) lives in (location :: [[Oxford]]) where she 
-(studies :: philosophy) and (knows :: [[Bob]]).
-```
-
-### Multiple Inline Properties
-```markdown
-The White Rabbit (species :: rabbit) (color :: white) (accessory :: pocket watch) 
-(personality :: anxious) ran past Alice (reaction :: surprised).
-```
-
-### Mixed Inline and Block
-```markdown
-Alice (age :: 25) is a student at Oxford.
-
-# Block properties
-full name :: Alice Wonderland
-university :: [[Oxford University]]
-degree :: Philosophy
-
-She met the Mad Hatter (occupation :: hat maker) (personality :: eccentric) 
-at a tea party (time :: 3:00 PM) (location :: [[Wonderland]]).
-```
-
-## Value Types
-
-### Strings
-```markdown
-name :: Alice Wonderland
-description :: A curious student
-quote :: "We're all mad here"
-```
-
-### Numbers
-```markdown
-age :: 25
-height :: 5.5
-temperature :: -10
-percentage :: 95.5
-```
-
-### Dates and Times
-```markdown
-# ISO 8601 format
-birth date :: 1998-03-15
-timestamp :: 2024-03-15T14:30:00Z
-time :: 15:30:00
-
-# Natural formats (converted to ISO)
-published :: March 15, 1998
-event :: 2024-03-15
-```
-
-### Booleans
-```markdown
-is student :: true
-is fictional :: false
-married :: yes
-completed :: no
-```
-
-### Lists and Arrays
-```markdown
-# Comma-separated
-languages :: English, French, Latin
-colors :: red, blue, green
-
-# YAML array (frontmatter)
-skills: [reading, writing, logic]
-interests: [philosophy, adventure, puzzles]
-```
-
-### Structured Values
-```markdown
-# Object notation
-address :: {
-  street :: 123 Wonderland Lane
-  city :: Oxford
-  country :: England
-  postal code :: OX1 2AB
+```javascript
+{
+    partitionBy: [
+        "headers-h1-h2", // Split on # and ##
+        "headers-h2-h3", // Split on ## and ### (default)
+        "headers-h1-h2-h3", // Split on #, ##, ###
+        "headers-all", // Split on all headers
+    ];
 }
-
-# Or flat structure
-street address :: 123 Wonderland Lane
-city :: Oxford
-postal code :: OX1 2AB
 ```
 
-## Subject-Predicate-Object Syntax
+### Examples
 
-### Explicit Triples
+#### Header Partitioning
+
 ```markdown
-# Pattern: Subject :: predicate :: Object
-Alice :: knows :: Bob
-White Rabbit :: leads :: Alice
-Oxford :: has employee :: Alice
+# Alice
 
-# With namespaces
-Alice :: schema:spouse :: Bob
-Person :: rdfs:subClassOf :: schema:Thing
-Alice :: rdf:type :: Student
-```
+age :: 25 ← attaches to <urn:name:doc#Alice>
 
-### Relationship Declarations
-```markdown
-# Bidirectional relationships
-Alice :: friend of :: Bob
-Bob :: friend of :: Alice
+## Details
 
-# Inverse relationships
-Professor :: teaches :: Alice
-Alice :: student of :: Professor
-
-# Complex relationships
-Alice :: met :: Bob {
-  when :: 2020-09-15
-  where :: Oxford
-  context :: university
-}
+height :: 165 ← attaches to <urn:name:doc#Details>
 ```
 
 ## Frontmatter Integration
 
-### YAML Frontmatter
+YAML frontmatter becomes properties on the document:
+
 ```yaml
 ---
-title: Alice's Profile
-author: Lewis Carroll
-date: 1865-11-26
-tags: [fiction, children, fantasy]
-schema:name: Alice Wonderland
-schema:birthDate: 1998-03-15
-foaf:knows: [Bob, Mad Hatter]
+title: My Document
+author: John Doe
+tags: [example, demo]
 ---
 ```
 
-### Nested Structures
-```yaml
----
-character:
-  name: Alice Wonderland
-  age: 25
-  contact:
-    email: alice@example.com
-    phone: "+44-123-456-7890"
-  relationships:
-    knows: [Bob, Mad Hatter]
-    studies_with: Professor Smith
----
+**Generates:** Properties attached to the file entity, NOT configuration overrides.
+
+## Multiple Values
+
+### Comma-Separated Values
+
+```markdown
+languages :: English, French, Spanish
 ```
 
-### Mixed YAML and Markdown
+**Generates:** One triple with the full string as literal: `"English, French, Spanish"`
+
+### Repeated Properties
+
 ```markdown
----
-title: Character Profile
-type: person
----
-
-# Alice
-
-Alice (schema:age :: 25) lives in Oxford.
-
-# Additional details from markdown
-current activity :: studying
-favorite subject :: philosophy
-```
-
-## Partitioning Syntax
-
-### Identifier Anchors
-```markdown
-# Story content
-
-Alice walked through the forest.
-
-^alice-intro
-
-Alice is a curious girl.
-character :: Alice
-personality :: curious
-
-She met a rabbit.
-
-^rabbit-encounter
-
-The rabbit wore a pocket watch.
-character :: White Rabbit
-accessory :: pocket watch
-```
-
-### Tag Sections
-```markdown
-# Story
-
-Alice was walking when she noticed something.
-
-#character-introduction
-
-Alice is twenty-five years old.
-character :: Alice
-age :: 25
-
-#rabbit-encounter
-
-A white rabbit ran past.
-character :: White Rabbit
-behavior :: running
-```
-
-### Header Partitioning
-```markdown
-# Document (entity)
-author :: Lewis Carroll
-
-## Chapter 1 (entity with headers-h1-h2)
-title :: Down the Rabbit Hole
-setting :: Oxford
-
-### Scene 1 (part of Chapter 1 with headers-h1-h2)
-action :: Alice reads
-location :: riverbank
-
-### Scene 2 (part of Chapter 1 with headers-h1-h2)  
-action :: Following rabbit
-location :: rabbit hole
-
-## Chapter 2 (entity with headers-h1-h2)
-title :: The Pool of Tears
-```
-
-## Comments and Annotations
-
-### Comments (Ignored)
-```markdown
-<!-- This is a comment and won't become RDF -->
-
-# Alice
-name :: Alice Wonderland  <!-- This comment is ignored -->
-age :: 25
-
-// This line comment is also ignored
+knows :: [[Alice]]
 knows :: [[Bob]]
+knows :: [[Charlie]]
 ```
 
-### Annotation Syntax
-```markdown
-# Alice
-
-Alice has many interesting qualities.
-
-<!-- annotation: This describes Alice's personality -->
-personality :: curious, brave, kind
-
-<!-- note: Added in version 2.1 -->
-last updated :: 2024-03-15
-```
-
-## Configuration Reference
-
-### Basic Options
-```javascript
-{
-  // Partitioning strategy
-  partitionBy: ['identifier', 'headers-h1-h2'],
-  
-  // Base URI for generated resources
-  baseIRI: 'file:///',
-  
-  // Include text positions (selectors)
-  includeSelectors: true,
-  
-  // Default namespaces
-  useDefaultNamespaces: true
-}
-```
-
-### Namespace Configuration
-```javascript
-{
-  namespaces: {
-    "schema": "http://schema.org/",
-    "foaf": "http://xmlns.com/foaf/0.1/",
-    "dc": "http://purl.org/dc/terms/",
-    "custom": "http://example.org/vocab#"
-  }
-}
-```
-
-### Property Mappings
-```javascript
-{
-  mappings: [
-    {
-      type: "inlineProperty",
-      key: "is a",
-      predicate: "rdf:type"
-    },
-    {
-      type: "inlineProperty", 
-      key: "same as",
-      predicate: "owl:sameAs"
-    }
-  ]
-}
-```
-
-### Partition Options
-```javascript
-{
-  partitionBy: [
-    'none',           // No partitioning (default)
-    'identifier',     // Split on ^anchor
-    'tag',           // Split on #tag
-    'headers-h1-h2', // Split on H1 and H2
-    'headers-h1-h2-h3', // Split on H1, H2, H3
-    'headers-all'    // Split on all headers
-  ]
-}
-```
+**Generates:** Three separate triples.
 
 ## Special Syntax
 
-### Escape Characters
-```markdown
-# Escaping colons
-property\:\:name :: value with\:\:colons
-text :: This has a \:\: double colon
+### Inline with Context
 
-# Escaping brackets  
-link :: \[\[Not a link\]\]
+```markdown
+Alice (age :: 25) (knows :: [[Bob]]) walked to the store.
+```
+
+**Generates:** Properties attach to current section, not to "Alice" entity.
+
+### Comments (Ignored)
+
+```markdown
+<!-- This comment is ignored -->
+
+age :: 25 <!-- This comment is also ignored -->
+```
+
+### Escaping
+
+```markdown
+property\:\:name :: value with\:\:colons
 text :: This has \[\[brackets\]\] but no link
 ```
 
-### Reserved Keywords
+## Common Patterns
+
+### Character Profiles
+
 ```markdown
-# These have special meaning in some contexts
-rdf:type :: schema:Person
-rdfs:label :: Alice Wonderland
-owl:sameAs :: https://example.com/alice
+# Alice
+
+is a :: Person
+age :: 25
+knows :: [[Bob]], [[Mad Hatter]]
 ```
 
-### Case Sensitivity
-```markdown
-# Different properties
-Name :: Alice
-name :: alice
-NAME :: ALICE
+### Explicit Relationships
 
-# Same namespace, different case
-schema:Name :: Alice (not standard)
-schema:name :: Alice (correct)
+```markdown
+[[Alice]] :: friend of :: [[Bob]]
+[[Bob]] :: colleague of :: [[Alice]]
 ```
 
-## Validation Rules
+### Mixed Syntax
 
-### Property Names
-- Must contain at least one character
-- Cannot start or end with whitespace
-- Cannot contain `::` (reserved for separator)
-- Cannot contain `[[` or `]]` (reserved for links)
-
-### Values
-- String values can contain any characters
-- Links must be properly formatted: `[[target]]` or `[text](url)`
-- Numbers must be valid: integers, decimals, scientific notation
-- Dates should be ISO 8601 format for best compatibility
-
-### Namespaces
-- Prefix must be valid XML name
-- Cannot contain `:` (reserved for namespace separator)
-- Must be defined in configuration or built-in
-
-## Error Handling
-
-### Common Syntax Errors
 ```markdown
-# Missing space after ::
-property::value  # ERROR: needs space
-property :: value  # CORRECT
+# Characters
 
-# Multiple :: in value
-property :: value::with::colons  # May be confusing
-property :: value\:\:with\:\:colons  # CORRECT: escaped
+Alice (age :: 25) is the protagonist.
 
-# Incomplete links
-knows :: [[Bob  # ERROR: missing closing ]]
-knows :: [[Bob]]  # CORRECT
+# Additional details
 
-# Invalid dates
-date :: not-a-date  # WARNING: treated as string
-date :: 2024-03-15  # CORRECT: ISO format
+hometown :: Oxford
+university :: [[Oxford University]]
 ```
 
-### Recovery Behavior
-- Invalid syntax is typically treated as literal text
-- Malformed links become plain text
-- Invalid dates become string literals
-- Unknown namespaces create warning but continue processing
+## Common Patterns
 
-## Performance Considerations
-
-### Large Documents
-- Excessive partitioning can create many small entities
-- Very deep nesting may impact performance
-- Large inline property lists can be hard to read
-
-### Optimization Tips
+### Person Profiles
 ```markdown
-# Good: balanced partitioning
-# Headers for major sections
-## Chapter 1
-^important-concept  # Identifiers for key concepts
+# Team
 
-# Avoid: excessive partitioning
-#### Every
-##### Small
-###### Section
-^tiny-concept
-#every-sentence
+## Alice
+schema:name :: Alice Johnson
+schema:jobTitle :: Product Manager
+schema:email :: alice@company.com
+reports to :: [[Director of Product]]
+manages :: [[Bob]], [[Charlie]]
+expertise :: user research, roadmap planning
 ```
 
-## Best Practices Summary
+### Project Documentation
+```markdown
+# Search Enhancement Project
 
-1. **Use standard namespaces** when possible
-2. **Be consistent** with property naming
-3. **Balance readability** with semantic richness
-4. **Choose appropriate partitioning** for your use case
-5. **Validate your output** to ensure correct RDF generation
-6. **Document your conventions** for team collaboration
+## Overview
+status :: in progress
+start date :: 2024-01-15
+deadline :: 2024-06-01
+budget :: $150000
 
-This reference covers all syntax patterns supported by vault-triplifier. See the [examples](examples/) for practical usage patterns and [configuration guide](configuration.md) for detailed setup options.
+## Team
+lead :: [[Alice]]
+developers :: [[Bob]], [[Charlie]]
+designer :: [[Dana]]
+```
+
+### Meeting Notes
+```markdown
+# Sprint Planning
+
+## Session Info
+date :: 2024-03-15
+duration :: 2 hours
+facilitator :: [[Alice]]
+
+Alice (role :: facilitator) opened the session. Bob (concern :: API performance) 
+raised issues with the authentication service (response time :: 2.3 seconds). 
+
+## Decisions
+decision :: optimize database queries
+assigned to :: [[Bob]]
+due date :: 2024-03-22
+```
+
+This reference covers the core syntax for generating RDF triples. For configuration details, see [Configuration Guide](configuration.md).

@@ -4,10 +4,10 @@ import { triplify } from '../src/triplifier.js'
 import { prettyPrint } from './support/serialization.js'
 
 const maxOptions = {
-  includeLabelsFor: ['documents', 'sections', 'anchors', 'properties'],
+  includeLabelsFor: ['documents', 'sections', 'properties'],
   includeSelectors: true,
   includeRaw: true,
-  partitionBy: ['identifier', 'tag', 'headers-all'],
+  partitionBy: ['headers-all'],
 }
 
 const content = `

@@ -5,10 +5,10 @@ import { glob } from 'glob'
 
 // Configuration with all options enabled
 const maxOptions = {
-  includeLabelsFor: ['documents', 'sections', 'anchors', 'properties'],
+  includeLabelsFor: ['documents', 'sections', 'properties'],
   includeSelectors: true,
   includeRaw: true,
-  partitionBy: ['identifier', 'tag', 'headers-all'],
+  partitionBy: ['headers-all'],
 }
 
 async function generateVaultSnapshots () {

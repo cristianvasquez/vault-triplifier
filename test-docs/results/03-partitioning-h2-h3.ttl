@@ -1,0 +1,32 @@
+<urn:name:03-partitioning-h2-h3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
+<urn:name:03-partitioning-h2-h3> <http://www.w3.org/ns/prov#derivedFrom> <file:///./test-docs/03-partitioning-h2-h3.md> .
+<urn:name:03-partitioning-h2-h3> <urn:property:type> "documentation" .
+<urn:name:03-partitioning-h2-h3> <urn:property:created> "2024-03-15" .
+<urn:name:03-partitioning-h2-h3> <http://pending.org/dot/contains> <urn:name:03-partitioning-h2-h3#Section%20Level%202> .
+<urn:name:03-partitioning-h2-h3> <http://pending.org/dot/contains> <urn:name:03-partitioning-h2-h3#Another%20Section> .
+<file:///./test-docs/03-partitioning-h2-h3.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///./test-docs/03-partitioning-h2-h3.md> <http://pending.org/dot/represents> <urn:name:03-partitioning-h2-h3> .
+<file:///./test-docs/03-partitioning-h2-h3.md> <http://www.w3.org/ns/prov#atLocation> "./test-docs/03-partitioning-h2-h3.md" .
+<file:///./test-docs/03-partitioning-h2-h3.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-23T23:43:56.944Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<urn:name:03-partitioning-h2-h3#Section%20Level%202> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:03-partitioning-h2-h3#Section%20Level%202> <http://pending.org/dot/contains> <urn:name:03-partitioning-h2-h3#Subsection%20Level%203> .
+<urn:name:03-partitioning-h2-h3#Section%20Level%202> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/03-partitioning-h2-h3.md> .
+<urn:name:03-partitioning-h2-h3#Section%20Level%202> <http://www.w3.org/ns/oa#hasSelector> _:b4 .
+<urn:name:03-partitioning-h2-h3#Section%20Level%202> <urn:property:section%20prop> "value for section" .
+_:b4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b4 <http://www.w3.org/ns/oa#start> "62"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b4 <http://www.w3.org/ns/oa#end> "116"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:03-partitioning-h2-h3#Subsection%20Level%203> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:03-partitioning-h2-h3#Subsection%20Level%203> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/03-partitioning-h2-h3.md> .
+<urn:name:03-partitioning-h2-h3#Subsection%20Level%203> <http://www.w3.org/ns/oa#hasSelector> _:b5 .
+<urn:name:03-partitioning-h2-h3#Subsection%20Level%203> <urn:property:subsection%20prop> "value for subsection" .
+_:b5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b5 <http://www.w3.org/ns/oa#start> "116"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b5 <http://www.w3.org/ns/oa#end> "180"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:03-partitioning-h2-h3#Another%20Section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:03-partitioning-h2-h3#Another%20Section> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/03-partitioning-h2-h3.md> .
+<urn:name:03-partitioning-h2-h3#Another%20Section> <http://www.w3.org/ns/oa#hasSelector> _:b6 .
+<urn:name:03-partitioning-h2-h3#Another%20Section> <urn:property:another%20prop> "another value" .
+_:b6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b6 <http://www.w3.org/ns/oa#start> "180"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b6 <http://www.w3.org/ns/oa#end> "228"^^<http://www.w3.org/2001/XMLSchema#integer> .

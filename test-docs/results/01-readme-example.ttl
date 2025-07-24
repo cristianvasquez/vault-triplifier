@@ -1,0 +1,31 @@
+<urn:name:01-readme-example> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
+<urn:name:01-readme-example> <http://www.w3.org/ns/prov#derivedFrom> <file:///./test-docs/01-readme-example.md> .
+<urn:name:01-readme-example> <http://pending.org/dot/contains> <urn:name:01-readme-example#Alice%20Johnson> .
+<urn:name:01-readme-example> <http://pending.org/dot/contains> <urn:name:01-readme-example#Bob%20Smith> .
+<file:///./test-docs/01-readme-example.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///./test-docs/01-readme-example.md> <http://pending.org/dot/represents> <urn:name:01-readme-example> .
+<file:///./test-docs/01-readme-example.md> <http://www.w3.org/ns/prov#atLocation> "./test-docs/01-readme-example.md" .
+<file:///./test-docs/01-readme-example.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-23T23:43:56.917Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<urn:name:01-readme-example#Alice%20Johnson> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:01-readme-example#Alice%20Johnson> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/01-readme-example.md> .
+<urn:name:01-readme-example#Alice%20Johnson> <http://www.w3.org/ns/oa#hasSelector> _:b1 .
+<urn:name:01-readme-example#Alice%20Johnson> <http://schema.org/jobTitle> "Product Manager" .
+<urn:name:01-readme-example#Alice%20Johnson> <http://schema.org/email> "alice@company.com" .
+<urn:name:01-readme-example#Alice%20Johnson> <urn:property:manages> <urn:name:01-readme-example#Bob%20Smith> .
+<urn:name:01-readme-example#Alice%20Johnson> <urn:property:manages> <urn:name:Charlie%20Brown> .
+<urn:name:01-readme-example#Alice%20Johnson> <urn:property:expertise> "user research, roadmap planning" .
+<urn:name:01-readme-example#Alice%20Johnson> <http://pending.org/dot/link> <mailto:alice@company.com> .
+_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b1 <http://www.w3.org/ns/oa#start> "18"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b1 <http://www.w3.org/ns/oa#end> "195"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:01-readme-example#Bob%20Smith> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:01-readme-example#Bob%20Smith> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/01-readme-example.md> .
+<urn:name:01-readme-example#Bob%20Smith> <http://www.w3.org/ns/oa#hasSelector> _:b2 .
+<urn:name:01-readme-example#Bob%20Smith> <http://schema.org/jobTitle> "Senior Developer" .
+<urn:name:01-readme-example#Bob%20Smith> <http://schema.org/email> "bob@company.com" .
+<urn:name:01-readme-example#Bob%20Smith> <http://pending.org/dot/link> <mailto:bob@company.com> .
+<urn:name:01-readme-example#Bob%20Smith> <urn:property:reports%20to> <urn:name:01-readme-example#Alice%20Johnson> .
+<urn:name:01-readme-example#Bob%20Smith> <urn:property:specializes%20in> "backend development, databases" .
+_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b2 <http://www.w3.org/ns/oa#start> "195"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b2 <http://www.w3.org/ns/oa#end> "359"^^<http://www.w3.org/2001/XMLSchema#integer> .

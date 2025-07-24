@@ -113,7 +113,7 @@ Content under H4.
 
   it('should not partition headers when not in partitionBy array', () => {
     const { dataset } = triplify('/test.md', testContent, {
-      partitionBy: ['identifier']  // Only identifier partitioning
+      partitionBy: []  // No partitioning
     })
     
     const triples = [...dataset]

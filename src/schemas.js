@@ -23,7 +23,7 @@ const DEFAULT_MAPPINGS = {
 const TriplifierOptions = z.object({
   uri: z.string().optional(),
   includeLabelsFor: z.array(
-    z.enum(['documents', 'sections', 'anchors', 'properties']),
+    z.enum(['documents', 'sections', 'properties']),
   ).default([]),
   prefix: z.record(z.string()).optional().default(DEFAULT_MAPPINGS.prefix),
   mappings: z.record(z.string()).optional().default(DEFAULT_MAPPINGS.mappings),
@@ -50,8 +50,8 @@ const MarkdownTriplifierOptions = TriplifierOptions.extend({
     })
   ]).default(false),
   partitionBy: z.array(z.enum(
-    ['identifier', 'tag', 'headers-all', 'headers-h1-h2', 'headers-h2-h3', 'headers-h1-h2-h3'])).
-    default(['identifier']),
+    ['headers-all', 'headers-h1-h2', 'headers-h2-h3', 'headers-h1-h2-h3'])).
+    default(['headers-h2-h3']),
   includeCodeBlockContent: z.union([
     z.boolean(),
     z.string().transform((val) => {

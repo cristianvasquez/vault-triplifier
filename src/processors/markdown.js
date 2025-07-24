@@ -83,26 +83,6 @@ class SelectorManager {
  * Configuration for node URI generation strategies
  */
 const URI_STRATEGIES = {
-  identifier: (node, pointer) => {
-    if (node.type !== 'root' && node.ids?.length) {
-      const [id] = node.ids
-      return {
-        shouldSplit: true,
-        childUri: pointer.term.termType === 'BlankNode'
-          ? rdf.blankNode()
-          : appendSelector(pointer.term, `#^${id}`),
-      }
-    }
-    return null
-  },
-
-  tag: (node, pointer) => {
-    if (node.type !== 'root' && node.tags?.length) {
-      return { shouldSplit: true, childUri: rdf.blankNode() }
-    }
-    return null
-  },
-
   'headers-all': (node, pointer) => {
     if (node.type === 'block' && node.value) {
       return createHeaderUri(node, pointer)
@@ -354,10 +334,6 @@ function addNodeLabels (node, pointer, includeLabelsFor) {
     pointer.addOut(ns.rdfs.label, rdf.literal(node.value))
   }
 
-  // Add anchor label for identifiers
-  if (includeLabelsFor.includes('anchors') && node.ids?.length > 0) {
-    pointer.addOut(ns.rdfs.label, rdf.literal(node.ids[0]))
-  }
 }
 
 /**

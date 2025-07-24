@@ -1,0 +1,27 @@
+<urn:name:09-frontmatter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
+<urn:name:09-frontmatter> <http://www.w3.org/ns/prov#derivedFrom> <file:///./test-docs/09-frontmatter.md> .
+<urn:name:09-frontmatter> <http://pending.org/dot/contains> <urn:name:09-frontmatter#Test%20Document> .
+<file:///./test-docs/09-frontmatter.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///./test-docs/09-frontmatter.md> <http://pending.org/dot/represents> <urn:name:09-frontmatter> .
+<file:///./test-docs/09-frontmatter.md> <http://www.w3.org/ns/prov#atLocation> "./test-docs/09-frontmatter.md" .
+<file:///./test-docs/09-frontmatter.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-23T23:52:57.709Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///./test-docs/09-frontmatter.md> <http://pending.org/dot/tag> "example" .
+<file:///./test-docs/09-frontmatter.md> <http://pending.org/dot/tag> "demo" .
+<file:///./test-docs/09-frontmatter.md> <urn:property:title> "Test Document" .
+<file:///./test-docs/09-frontmatter.md> <urn:property:author> "John Doe" .
+<file:///./test-docs/09-frontmatter.md> <urn:property:partitionBy> "headers-h1-h2" .
+<urn:name:09-frontmatter#Test%20Document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:09-frontmatter#Test%20Document> <http://pending.org/dot/contains> <urn:name:09-frontmatter#Section> .
+<urn:name:09-frontmatter#Test%20Document> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/09-frontmatter.md> .
+<urn:name:09-frontmatter#Test%20Document> <http://www.w3.org/ns/oa#hasSelector> _:b3 .
+<urn:name:09-frontmatter#Test%20Document> <urn:property:content> "frontmatter test" .
+_:b3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b3 <http://www.w3.org/ns/oa#start> "100"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b3 <http://www.w3.org/ns/oa#end> "145"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:09-frontmatter#Section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:09-frontmatter#Section> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/09-frontmatter.md> .
+<urn:name:09-frontmatter#Section> <http://www.w3.org/ns/oa#hasSelector> _:b4 .
+<urn:name:09-frontmatter#Section> <urn:property:section%20prop> "section value" .
+_:b4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b4 <http://www.w3.org/ns/oa#start> "145"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b4 <http://www.w3.org/ns/oa#end> "185"^^<http://www.w3.org/2001/XMLSchema#integer> .

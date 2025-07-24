@@ -165,25 +165,19 @@
     <div class="controls">
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
             <legend>Partition By:</legend>
-            <div style="margin-bottom: 10px;">
+            <div>
                 Headers:<br>
                 <label><input type="radio" name="headerPartition" value="none"> none</label>
                 <label><input type="radio" name="headerPartition" value="headers-h1-h2"> headers-h1-h2</label>
-                <label><input type="radio" name="headerPartition" value="headers-h2-h3"> headers-h2-h3</label>
+                <label><input type="radio" name="headerPartition" value="headers-h2-h3" checked> headers-h2-h3</label>
                 <label><input type="radio" name="headerPartition" value="headers-h1-h2-h3"> headers-h1-h2-h3</label>
-                <label><input type="radio" name="headerPartition" value="headers-all" checked> headers-all</label>
-            </div>
-            <div>
-                Other:<br>
-                <label><input type="checkbox" id="partitionByTag"> tag</label>
-                <label><input type="checkbox" id="partitionByIdentifier" checked> identifier</label>
+                <label><input type="radio" name="headerPartition" value="headers-all"> headers-all</label>
             </div>
         </fieldset>
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
             <legend>Include Labels For:</legend>
             <label><input type="checkbox" id="labelDocuments" checked> documents</label>
             <label><input type="checkbox" id="labelSections" checked> sections</label>
-            <label><input type="checkbox" id="labelAnchors"> anchors</label>
             <label><input type="checkbox" id="labelProperties" checked> properties</label>
         </fieldset>
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
@@ -268,11 +262,8 @@ Bob :: schema:name :: Bobby</textarea>
   const rdfViewer = document.getElementById('rdf-viewer')
   const updateDiagramBtn = document.getElementById('update-diagram')
   const headerPartitionRadios = document.querySelectorAll('input[name="headerPartition"]')
-  const partitionByTagInput = document.getElementById('partitionByTag')
-  const partitionByIdentifierInput = document.getElementById('partitionByIdentifier')
   const labelDocumentsInput = document.getElementById('labelDocuments')
   const labelSectionsInput = document.getElementById('labelSections')
-  const labelAnchorsInput = document.getElementById('labelAnchors')
   const labelPropertiesInput = document.getElementById('labelProperties')
   const includeSelectorsInput = document.getElementById('includeSelectors')
   const includeRawInput = document.getElementById('includeRaw')
@@ -304,14 +295,9 @@ Bob :: schema:name :: Bobby</textarea>
       partitionBy.push(selectedHeaderPartition)
     }
 
-    // Add other partition options
-    if (partitionByTagInput.checked) partitionBy.push('tag')
-    if (partitionByIdentifierInput.checked) partitionBy.push('identifier')
-
     const includeLabelsFor = []
     if (labelDocumentsInput.checked) includeLabelsFor.push('documents')
     if (labelSectionsInput.checked) includeLabelsFor.push('sections')
-    if (labelAnchorsInput.checked) includeLabelsFor.push('anchors')
     if (labelPropertiesInput.checked) includeLabelsFor.push('properties')
 
     // Parse mappings from editor
@@ -389,11 +375,8 @@ Bob :: schema:name :: Bobby</textarea>
   headerPartitionRadios.forEach(radio => {
     radio.addEventListener('change', updateRDFAndDiagram)
   })
-  partitionByTagInput.addEventListener('change', updateRDFAndDiagram)
-  partitionByIdentifierInput.addEventListener('change', updateRDFAndDiagram)
   labelDocumentsInput.addEventListener('change', updateRDFAndDiagram)
   labelSectionsInput.addEventListener('change', updateRDFAndDiagram)
-  labelAnchorsInput.addEventListener('change', updateRDFAndDiagram)
   labelPropertiesInput.addEventListener('change', updateRDFAndDiagram)
   includeSelectorsInput.addEventListener('change', updateRDFAndDiagram)
   includeRawInput.addEventListener('change', updateRDFAndDiagram)

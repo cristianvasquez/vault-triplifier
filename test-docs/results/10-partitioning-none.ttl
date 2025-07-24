@@ -1,0 +1,31 @@
+<urn:name:10-partitioning-none> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
+<urn:name:10-partitioning-none> <http://www.w3.org/ns/prov#derivedFrom> <file:///./test-docs/10-partitioning-none.md> .
+<urn:name:10-partitioning-none> <http://pending.org/dot/contains> <urn:name:10-partitioning-none#Document%20Title> .
+<file:///./test-docs/10-partitioning-none.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///./test-docs/10-partitioning-none.md> <http://pending.org/dot/represents> <urn:name:10-partitioning-none> .
+<file:///./test-docs/10-partitioning-none.md> <http://www.w3.org/ns/prov#atLocation> "./test-docs/10-partitioning-none.md" .
+<file:///./test-docs/10-partitioning-none.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-23T23:52:57.718Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<urn:name:10-partitioning-none#Document%20Title> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:10-partitioning-none#Document%20Title> <http://pending.org/dot/contains> <urn:name:10-partitioning-none#Section%201> .
+<urn:name:10-partitioning-none#Document%20Title> <http://pending.org/dot/contains> <urn:name:10-partitioning-none#Section%202> .
+<urn:name:10-partitioning-none#Document%20Title> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/10-partitioning-none.md> .
+<urn:name:10-partitioning-none#Document%20Title> <http://www.w3.org/ns/oa#hasSelector> _:b5 .
+<urn:name:10-partitioning-none#Document%20Title> <urn:property:doc%20prop> "doc value" .
+_:b5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b5 <http://www.w3.org/ns/oa#start> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b5 <http://www.w3.org/ns/oa#end> "40"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:10-partitioning-none#Section%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:10-partitioning-none#Section%201> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/10-partitioning-none.md> .
+<urn:name:10-partitioning-none#Section%201> <http://www.w3.org/ns/oa#hasSelector> _:b6 .
+<urn:name:10-partitioning-none#Section%201> <urn:property:section1%20prop> "section1 value" .
+<urn:name:10-partitioning-none#Section%201> <urn:property:subsection%20prop> "subsection value" .
+_:b6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b6 <http://www.w3.org/ns/oa#start> "40"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b6 <http://www.w3.org/ns/oa#end> "138"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:10-partitioning-none#Section%202> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:10-partitioning-none#Section%202> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/10-partitioning-none.md> .
+<urn:name:10-partitioning-none#Section%202> <http://www.w3.org/ns/oa#hasSelector> _:b7 .
+<urn:name:10-partitioning-none#Section%202> <urn:property:section2%20prop> "section2 value" .
+_:b7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b7 <http://www.w3.org/ns/oa#start> "138"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b7 <http://www.w3.org/ns/oa#end> "182"^^<http://www.w3.org/2001/XMLSchema#integer> .

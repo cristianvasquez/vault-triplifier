@@ -1,0 +1,16 @@
+<urn:name:04-inline-vs-block> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
+<urn:name:04-inline-vs-block> <http://www.w3.org/ns/prov#derivedFrom> <file:///./test-docs/04-inline-vs-block.md> .
+<urn:name:04-inline-vs-block> <http://pending.org/dot/contains> <urn:name:04-inline-vs-block#Entity%20Section> .
+<file:///./test-docs/04-inline-vs-block.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
+<file:///./test-docs/04-inline-vs-block.md> <http://pending.org/dot/represents> <urn:name:04-inline-vs-block> .
+<file:///./test-docs/04-inline-vs-block.md> <http://www.w3.org/ns/prov#atLocation> "./test-docs/04-inline-vs-block.md" .
+<file:///./test-docs/04-inline-vs-block.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-23T23:43:56.947Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<urn:name:04-inline-vs-block#Entity%20Section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:04-inline-vs-block#Entity%20Section> <http://www.w3.org/ns/oa#hasSource> <file:///./test-docs/04-inline-vs-block.md> .
+<urn:name:04-inline-vs-block#Entity%20Section> <http://www.w3.org/ns/oa#hasSelector> _:b7 .
+<urn:name:04-inline-vs-block#Entity%20Section> <urn:property:block%20property> "block value" .
+<urn:name:04-inline-vs-block#Entity%20Section> <urn:property:inline%20property> "inline value" .
+<urn:name:04-inline-vs-block#Entity%20Section> <urn:property:another%20inline> "another value" .
+_:b7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b7 <http://www.w3.org/ns/oa#start> "17"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b7 <http://www.w3.org/ns/oa#end> "190"^^<http://www.w3.org/2001/XMLSchema#integer> .
