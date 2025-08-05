@@ -26,4 +26,33 @@ function isHTTP (urlString) {
   }
 }
 
-export { getNameFromPath, pathWithoutTrail, isHTTP }
+function isDelimitedURI (value) {
+  if (typeof value !== 'string') {
+    return false
+  }
+  
+  // Check if value is wrapped in angle brackets
+  if (value.startsWith('<') && value.endsWith('>')) {
+    const uri = value.slice(1, -1) // Remove < and >
+    
+    // Basic URI validation - should contain a scheme
+    try {
+      new URL(uri)
+      return true
+    } catch (e) {
+      // If URL constructor fails, check for other URI schemes
+      return /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(uri)
+    }
+  }
+  
+  return false
+}
+
+function extractDelimitedURI (value) {
+  if (isDelimitedURI(value)) {
+    return value.slice(1, -1) // Remove < and >
+  }
+  return null
+}
+
+export { getNameFromPath, pathWithoutTrail, isHTTP, isDelimitedURI, extractDelimitedURI }
