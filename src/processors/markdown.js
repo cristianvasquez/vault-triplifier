@@ -6,6 +6,7 @@ import { MarkdownTriplifierOptions } from '../schemas.js'
 import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
+import { processYamlMetadata, removeYamlFrontmatter } from './yamlMetadata.js'
 import { simpleAst } from 'docs-and-graphs'
 
 /**
@@ -358,25 +359,44 @@ function getNodeUri (node, context, options) {
 }
 
 /**
- * Public API: Process Markdown text to RDF
- * @param {string} fullText - Markdown content
+ * Process Markdown content only (without YAML frontmatter)
+ * @param {string} contentText - Markdown content without frontmatter
  * @param {Object} context - Processing context with pointer and path
  * @param {Object} options - Processing options
  * @returns {Object} RDF pointer with generated triples
  */
-export function processMarkdown (fullText, { pointer, path }, options = {}) {
+export function processMarkdownContent (contentText, context, options = {}) {
   const astOptions = {
     normalize: true,
     inlineAsArray: true,
     includePosition: true,
   }
 
-  const node = simpleAst(fullText, astOptions)
+  const node = simpleAst(contentText, astOptions)
   const parsedOptions = MarkdownTriplifierOptions.parse(options)
 
   return markdown(node, {
-    pointer,
-    path,
-    text: fullText,
+    ...context,
+    text: contentText,
   }, parsedOptions)
+}
+
+/**
+ * Public API: Process Markdown text to RDF
+ * Handles both YAML frontmatter and markdown content separately
+ * @param {string} fullText - Markdown content with optional YAML frontmatter
+ * @param {Object} context - Processing context with pointer and path
+ * @param {Object} options - Processing options
+ * @returns {Object} RDF pointer with generated triples
+ */
+export function processMarkdown (fullText, context, options = {}) {
+  const parsedOptions = MarkdownTriplifierOptions.parse(options)
+  
+  // Process YAML frontmatter metadata first
+  processYamlMetadata(fullText, context, parsedOptions)
+  
+  // Remove frontmatter and process markdown content
+  const contentWithoutFrontmatter = removeYamlFrontmatter(fullText)
+  
+  return processMarkdownContent(contentWithoutFrontmatter, context, parsedOptions)
 }

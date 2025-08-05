@@ -1,5 +1,5 @@
-import { parse as parseYAML } from 'yaml'
 import { MarkdownTriplifierOptions } from './schemas.js'
+import { extractYamlFrontmatter } from './processors/yamlMetadata.js'
 
 // Simple check for plain objects
 const isPlainObject = obj =>
@@ -18,16 +18,8 @@ const deepMerge = (base = {}, override = {}) => {
   return result
 }
 
-const extractFrontmatter = content => {
-  const match = String(content || '').match(/^---\r?\n([\s\S]*?)\r?\n---/)
-  if (!match) return {}
-
-  try {
-    return parseYAML(match[1]) || {}
-  } catch {
-    return {}
-  }
-}
+// Use the centralized YAML frontmatter extraction
+const extractFrontmatter = extractYamlFrontmatter
 
 const peekMarkdown = (content, options = {}) => {
   const parsedOptions = MarkdownTriplifierOptions.parse(options)
