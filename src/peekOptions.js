@@ -1,5 +1,5 @@
 import { MarkdownTriplifierOptions } from './schemas.js'
-import { extractYamlFrontmatter } from './processors/yamlMetadata.js'
+import { simpleAst } from 'docs-and-graphs'
 
 // Simple check for plain objects
 const isPlainObject = obj =>
@@ -18,8 +18,21 @@ const deepMerge = (base = {}, override = {}) => {
   return result
 }
 
-// Use the centralized YAML frontmatter extraction
-const extractFrontmatter = extractYamlFrontmatter
+// Extract YAML frontmatter from AST (single parsing)
+const extractFrontmatter = (content) => {
+  const astOptions = {
+    normalize: true,
+    inlineAsArray: true,
+    includePosition: false,
+  }
+  
+  try {
+    const node = simpleAst(content, astOptions)
+    return node.yaml || {}
+  } catch {
+    return {}
+  }
+}
 
 const peekMarkdown = (content, options = {}) => {
   const parsedOptions = MarkdownTriplifierOptions.parse(options)

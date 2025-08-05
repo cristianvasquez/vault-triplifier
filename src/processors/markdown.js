@@ -6,7 +6,6 @@ import { MarkdownTriplifierOptions } from '../schemas.js'
 import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
-import { processYamlMetadata, removeYamlFrontmatter } from './yamlMetadata.js'
 import { simpleAst } from 'docs-and-graphs'
 
 /**
@@ -359,31 +358,8 @@ function getNodeUri (node, context, options) {
 }
 
 /**
- * Process Markdown content only (without YAML frontmatter)
- * @param {string} contentText - Markdown content without frontmatter
- * @param {Object} context - Processing context with pointer and path
- * @param {Object} options - Processing options
- * @returns {Object} RDF pointer with generated triples
- */
-export function processMarkdownContent (contentText, context, options = {}) {
-  const astOptions = {
-    normalize: true,
-    inlineAsArray: true,
-    includePosition: true,
-  }
-
-  const node = simpleAst(contentText, astOptions)
-  const parsedOptions = MarkdownTriplifierOptions.parse(options)
-
-  return markdown(node, {
-    ...context,
-    text: contentText,
-  }, parsedOptions)
-}
-
-/**
  * Public API: Process Markdown text to RDF
- * Handles both YAML frontmatter and markdown content separately
+ * Handles both YAML frontmatter and markdown content using single AST parsing
  * @param {string} fullText - Markdown content with optional YAML frontmatter
  * @param {Object} context - Processing context with pointer and path
  * @param {Object} options - Processing options
@@ -392,11 +368,56 @@ export function processMarkdownContent (contentText, context, options = {}) {
 export function processMarkdown (fullText, context, options = {}) {
   const parsedOptions = MarkdownTriplifierOptions.parse(options)
   
-  // Process YAML frontmatter metadata first
-  processYamlMetadata(fullText, context, parsedOptions)
+  const astOptions = {
+    normalize: true,
+    inlineAsArray: true,
+    includePosition: true,
+  }
+
+  // Parse the full text once using simpleAst (handles frontmatter)
+  const node = simpleAst(fullText, astOptions)
   
-  // Remove frontmatter and process markdown content
-  const contentWithoutFrontmatter = removeYamlFrontmatter(fullText)
-  
-  return processMarkdownContent(contentWithoutFrontmatter, context, parsedOptions)
+  // Process YAML frontmatter if present in the AST
+  if (node.yaml) {
+    // Filter out configuration options, only convert metadata to RDF
+    const rdfData = filterYamlForRdf(node.yaml)
+    
+    // Only process if we have actual metadata to convert
+    if (Object.keys(rdfData).length > 0) {
+      populateYamlLike(rdfData, context, parsedOptions)
+    }
+  }
+
+  // Process the markdown content using the same AST
+  return markdown(node, {
+    ...context,
+    text: fullText,
+  }, parsedOptions)
+}
+
+/**
+ * Filters YAML data to exclude configuration options that shouldn't be converted to RDF
+ * @param {Object} yamlData - Raw YAML data
+ * @returns {Object} Filtered YAML data for RDF conversion
+ */
+function filterYamlForRdf(yamlData) {
+  const configOptions = new Set([
+    'uri',
+    'includeLabelsFor', 
+    'includeSelectors',
+    'includeRaw',
+    'partitionBy',
+    'includeCodeBlockContent',
+    'parseCodeBlockTurtleIn',
+    'mappings',
+    'prefix'
+  ])
+
+  const rdfData = {}
+  for (const [key, value] of Object.entries(yamlData)) {
+    if (!configOptions.has(key)) {
+      rdfData[key] = value
+    }
+  }
+  return rdfData
 }
