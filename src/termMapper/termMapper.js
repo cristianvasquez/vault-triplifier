@@ -14,6 +14,9 @@ function parseValue(str) {
 
   const trimmed = str.trim();
 
+  // Handle empty strings
+  if (trimmed === '') return trimmed;
+
   // Handle backtick opt-out - treat as explicit string
   if (trimmed.startsWith('`') && trimmed.endsWith('`')) {
     return trimmed.slice(1, -1); // Remove backticks and return as string
