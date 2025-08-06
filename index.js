@@ -9,6 +9,7 @@ export {
 
 // Re-export termMapper for convenience
 export {
+  parseValue,
   propertyToUri,
   propertyFromUri,
   nameToUri,
