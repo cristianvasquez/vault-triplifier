@@ -1,7 +1,7 @@
 import rdf from 'rdf-ext'
 import { createMapper } from '../termMapper/customMapper.js'
 import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
-import { isHTTP } from '../utils/uris.js'
+import { isHTTP, isDelimitedURI, extractDelimitedURI } from '../utils/uris.js'
 
 // Properties that should not be converted to RDF triples
 const reservedProperties = new Set()
@@ -37,6 +37,12 @@ function resolveTerm (value, termType, context, options) {
       knownLink.mapped = true
       return knownLink.uri
     }
+  }
+
+  // Handle delimited URIs (wrapped in angle brackets)
+  if (isString(value) && isDelimitedURI(value)) {
+    const uri = extractDelimitedURI(value)
+    return rdf.namedNode(uri)
   }
 
   // Handle HTTP URIs
