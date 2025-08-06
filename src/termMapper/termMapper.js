@@ -1,4 +1,61 @@
 import rdf from 'rdf-ext'
+import { toRdf } from 'rdf-literal'
+
+/**
+ * Parse a string value with type inference for booleans, numbers, dates, and strings.
+ * Values wrapped in backticks are treated as explicit strings (opt-out mechanism).
+ * @param {string} str - The string to parse
+ * @returns {boolean|number|Date|string} The parsed value
+ */
+function parseValue(str) {
+  if (typeof str !== 'string') {
+    return str;
+  }
+
+  const trimmed = str.trim();
+
+  // Handle backtick opt-out - treat as explicit string
+  if (trimmed.startsWith('`') && trimmed.endsWith('`')) {
+    return trimmed.slice(1, -1); // Remove backticks and return as string
+  }
+
+  // Boolean parsing
+  if (trimmed === "true") return true;
+  if (trimmed === "false") return false;
+
+  // Number parsing (int or float)
+  const num = Number(trimmed);
+  if (!isNaN(num) && isFinite(num)) return num;
+
+  // Date parsing - try common ISO date formats and other standard formats
+  if (isValidDateString(trimmed)) {
+    const date = new Date(trimmed);
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+  }
+
+  // Fallback: return as string
+  return trimmed;
+}
+
+/**
+ * Check if a string looks like a valid date format
+ * @param {string} str - The string to check
+ * @returns {boolean} True if it looks like a date
+ */
+function isValidDateString(str) {
+  // Common date patterns to recognize
+  const datePatterns = [
+    /^\d{4}-\d{2}-\d{2}$/, // YYYY-MM-DD
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z?$/, // ISO datetime
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}([+-]\d{2}:\d{2})?$/, // ISO with timezone
+    /^\d{4}\/\d{2}\/\d{2}$/, // YYYY/MM/DD
+    /^\d{2}\/\d{2}\/\d{4}$/, // MM/DD/YYYY or DD/MM/YYYY
+  ];
+
+  return datePatterns.some(pattern => pattern.test(str));
+}
 
 // Base conversion functions
 function toUri (text, namespace) {
@@ -46,9 +103,17 @@ function appendSelector (nameTerm, selector) {
   return rdf.namedNode(`${nameTerm.value}${encodeURI(selector)}`)
 }
 
-// Literal factory
+// Literal factory with type inference
 function newLiteral (text) {
-  return rdf.literal(text)
+  const parsedValue = parseValue(text)
+  
+  // If it's still a string after parsing, create a plain literal
+  if (typeof parsedValue === 'string') {
+    return rdf.literal(parsedValue)
+  }
+  
+  // For typed values (boolean, number, date), use rdf-literal's toRdf
+  return toRdf(parsedValue)
 }
 
 // Web-compatible implementations of pathToFileURL and fileURLToPath
@@ -79,6 +144,7 @@ function fileURLToPath (term) {
 }
 
 export {
+  parseValue,
   propertyToUri,
   propertyFromUri,
   nameToUri,
