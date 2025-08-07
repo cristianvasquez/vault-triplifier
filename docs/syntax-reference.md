@@ -28,6 +28,7 @@ Alice (age :: 25) is a (occupation :: student).
 ### 3. Explicit Triples
 
 **For Named Entity Subjects:**
+
 ```markdown
 [[Alice]] :: age :: 25
 [[Alice]] :: knows :: [[Bob]]
@@ -36,6 +37,7 @@ Alice (age :: 25) is a (occupation :: student).
 **Generates:** `<urn:name:Alice> <urn:property:age> "25"`
 
 **For Property Namespace Subjects:**
+
 ```markdown
 Alice :: age :: 25
 Alice :: knows :: [[Bob]]
@@ -101,15 +103,18 @@ ftp :: ftp://server.com → "ftp://server.com"
 
 ```markdown
 # Named concepts (wiki links)
+
 knows :: [[Alice]] → <urn:name:Alice>
 lives in :: [[Wonderland]] → <urn:name:Wonderland>
 
-# Web URIs 
+# Web URIs
+
 website :: https://example.com → <https://example.com>
 email :: mailto:alice@test.com → <mailto:alice@test.com>
 ```
 
-**Rule:** `[[Name]]` creates named concept URIs. `http://`, `https://`, and `mailto:` URIs are detected automatically. Other URI schemes become literals.
+**Rule:** `[[Name]]` creates named concept URIs. `http://`, `https://`, and `mailto:` URIs are detected automatically.
+Other URI schemes become literals.
 
 ## Property Naming
 
@@ -143,8 +148,12 @@ Configure in options:
 ```javascript
 {
   prefix: {
-    "custom": "http://example.org/vocab#",
-    "project": "http://mycompany.com/terms#"
+    "custom"
+  :
+    "http://example.org/vocab#",
+      "project"
+  :
+    "http://mycompany.com/terms#"
   }
 }
 ```
@@ -172,8 +181,12 @@ same as :: [[Alice]] → <rdfs:sameAs> <urn:name:Alice>
 ```javascript
 {
   mappings: {
-    "related to": "rdfs:seeAlso",
-    "instance of": "rdf:type"
+    "related to"
+  :
+    "rdfs:seeAlso",
+      "instance of"
+  :
+    "rdf:type"
   }
 }
 ```
@@ -190,6 +203,7 @@ instance of :: schema:Person
 ### Wiki Links
 
 **External Links** (to other documents/entities):
+
 ```markdown
 knows :: [[Bob]] → <urn:name:Bob>
 lives in :: [[Wonderland]] → <urn:name:Wonderland>
@@ -197,20 +211,28 @@ works at :: [[Oxford University]] → <urn:name:Oxford-University>
 ```
 
 **Internal Links** (to sections within same document):
+
 ```markdown
 # Team Directory
 
 ## Alice Johnson
+
 reports to :: [[#Bob Smith]]
 
 ## Bob Smith
+
 manages :: [[#Alice Johnson]]
 ```
 
 **Generates:**
+
 ```turtle
-<urn:name:team-directory#Alice%20Johnson> <urn:property:reports%20to> <urn:name:team-directory#Bob%20Smith> .
-<urn:name:team-directory#Bob%20Smith> <urn:property:manages> <urn:name:team-directory#Alice%20Johnson> .
+
+<urn:name:team-directory#Alice%20Johnson>
+    <urn:property:reports%20to> <urn:name:team-directory#Bob%20Smith> .
+
+<urn:name:team-directory#Bob%20Smith>
+    <urn:property:manages> <urn:name:team-directory#Alice%20Johnson> .
 ```
 
 **Rule:** Use `[[#Section Name]]` for internal document links, `[[Entity Name]]` for external entities.
@@ -219,11 +241,13 @@ manages :: [[#Alice Johnson]]
 
 ```markdown
 # Auto-detected as URIs
+
 website :: https://example.com → <https://example.com>
 homepage :: http://example.com → <http://example.com>
 email :: mailto:alice@test.com → <mailto:alice@test.com>
 
 # Other schemes become literals
+
 phone :: tel:+1234567890 → "tel:+1234567890"
 file :: file:///path/to/file → "file:///path/to/file"
 ftp :: ftp://server.com → "ftp://server.com"
@@ -235,12 +259,12 @@ Controls which entities become subjects:
 
 ```javascript
 {
-    partitionBy: [
-        "headers-h1-h2", // Split on # and ##
-        "headers-h2-h3", // Split on ## and ### (default)
-        "headers-h1-h2-h3", // Split on #, ##, ###
-        "headers-all", // Split on all headers
-    ];
+  partitionBy: [
+    "headers-h1-h2", // Split on # and ##
+    "headers-h2-h3", // Split on ## and ### (default)
+    "headers-h1-h2-h3", // Split on #, ##, ###
+    "headers-all", // Split on all headers
+  ];
 }
 ```
 
@@ -260,32 +284,44 @@ height :: 165 ← attaches to <urn:name:doc#Details>
 
 #### Custom URI Support in Header Partitions
 
-When using header-based partitioning, you can override the default URI generation with explicit URI declarations:
+When using header-based partitioning, you can override the default URI generation by explicitly declaring a custom URI:
 
 ```markdown
 # Team Directory
 
 ## Alice Johnson
+
 schema:jobTitle :: Product Manager
 uri :: <https://company.com/employees/alice>
 
-## Bob Smith  
+## Bob Smith
+
 schema:jobTitle :: Senior Developer
 uri :: urn:employee:bob-smith
 ```
 
 **Generates:**
+
 ```turtle
-<https://company.com/employees/alice> <http://schema.org/jobTitle> "Product Manager" .
-<urn:employee:bob-smith> <http://schema.org/jobTitle> "Senior Developer" .
+
+<https://company.com/employees/alice>
+    <http://schema.org/jobTitle> "Product Manager" .
+
+<urn:employee:bob-smith>
+    <http://schema.org/jobTitle> "Senior Developer" .
 ```
 
+⚠️ Note on Consistency
+
+This feature allows full control over URIs, but may introduce inconsistencies when linking to specific headers from external notes. In such cases, you may need to explicitly assert identity using owl:sameAs or similar constructs. Use with care.
+
 **Custom URI Rules:**
+
 - Use `uri :: <URI>` or `uri :: URI` syntax within header sections
 - Supports HTTP/HTTPS URLs, URNs, and other URI schemes
-- Both delimited (`<URI>`) and plain (`URI`) formats work
+- Both delimited (`<URI>`) and plain (`URI`) formats are valid
 - The `uri` property is reserved and won't create RDF triples
-- Falls back to default URI pattern if no custom URI is declared
+- If no custom URI is provided, the default pattern is applied
 
 ## Frontmatter Integration
 
@@ -295,7 +331,7 @@ YAML frontmatter becomes properties on the document:
 ---
 title: My Document
 author: John Doe
-tags: [example, demo]
+tags: [ example, demo ]
 ---
 ```
 
@@ -381,10 +417,12 @@ university :: [[Oxford University]]
 ## Common Patterns
 
 ### Person Profiles
+
 ```markdown
 # Team
 
 ## Alice
+
 schema:name :: Alice Johnson
 schema:jobTitle :: Product Manager
 schema:email :: alice@company.com
@@ -394,37 +432,44 @@ expertise :: user research, roadmap planning
 ```
 
 ### Project Documentation
+
 ```markdown
 # Search Enhancement Project
 
 ## Overview
+
 status :: in progress
 start date :: 2024-01-15
 deadline :: 2024-06-01
 budget :: $150000
 
 ## Team
+
 lead :: [[Alice]]
 developers :: [[Bob]], [[Charlie]]
 designer :: [[Dana]]
 ```
 
 ### Meeting Notes
+
 ```markdown
 # Sprint Planning
 
 ## Session Info
+
 date :: 2024-03-15
 duration :: 2 hours
 facilitator :: [[Alice]]
 
-Alice (role :: facilitator) opened the session. Bob (concern :: API performance) 
-raised issues with the authentication service (response time :: 2.3 seconds). 
+Alice (role :: facilitator) opened the session. Bob (concern :: API performance)
+raised issues with the authentication service (response time :: 2.3 seconds).
 
 ## Decisions
+
 decision :: optimize database queries
 assigned to :: [[Bob]]
 due date :: 2024-03-22
 ```
 
-This reference covers the core syntax for generating RDF triples. For configuration details, see [Configuration Guide](configuration.md).
+This reference covers the core syntax for generating RDF triples. For configuration details,
+see [Configuration Guide](configuration.md).

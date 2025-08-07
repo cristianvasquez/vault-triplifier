@@ -5,50 +5,39 @@
 <file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://pending.org/dot/represents> <urn:name:Bob%20Details> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/bob/Bob Details.md" .
-<file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.666Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/bob/Bob%20Details.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-08-07T18:06:30.830Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/bob/Bob%20Details.md> <http://pending.org/dot/raw> "# More details about Bob\n\n## Section ^1\n\ndescription:: Section 1\nsomewhat related :: [[Bob Details#^2]]\npoints to the document :: [[Bob Details#A header]]\n\n## Section ^2\n\ndescription:: Section 2\nAnd some more [[Bob Details#^3 | Pointer to section 3]]\n\n## Section ^3\n\ndescription:: Section 3\nAnd some more [[Unknown#^1]]\n" .
 <urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/2000/01/rdf-schema#label> "More details about Bob" .
-<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://pending.org/dot/contains> <urn:name:Bob%20Details#%5E1> .
-<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://pending.org/dot/contains> <urn:name:Bob%20Details#%5E2> .
-<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://pending.org/dot/contains> <urn:name:Bob%20Details#%5E3> .
+<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://pending.org/dot/contains> <urn:name:Bob%20Details#Section> .
 <urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/Bob%20Details.md> .
-<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/ns/oa#hasSelector> _:b33 .
-_:b33 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b33 <http://www.w3.org/ns/oa#start> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b33 <http://www.w3.org/ns/oa#end> "26"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<urn:name:Bob%20Details#%5E1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:Bob%20Details#%5E1> <http://www.w3.org/2000/01/rdf-schema#label> "Section" .
-<urn:name:Bob%20Details#%5E1> <http://www.w3.org/2000/01/rdf-schema#label> "1" .
-<urn:name:Bob%20Details#%5E1> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/Bob%20Details.md> .
-<urn:name:Bob%20Details#%5E1> <http://www.w3.org/ns/oa#hasSelector> _:b34 .
-<urn:name:Bob%20Details#%5E1> <urn:property:description> "Section 1" .
-<urn:name:Bob%20Details#%5E1> <urn:property:somewhat%20related> <urn:name:Bob%20Details#%5E2> .
-<urn:name:Bob%20Details#%5E1> <urn:property:points%20to%20the%20document> <urn:name:Bob%20Details#A%20header> .
-_:b34 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b34 <http://www.w3.org/ns/oa#start> "26"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b34 <http://www.w3.org/ns/oa#end> "156"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:Bob%20Details#More%20details%20about%20Bob> <http://www.w3.org/ns/oa#hasSelector> _:b25 .
+_:b25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b25 <http://www.w3.org/ns/oa#start> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b25 <http://www.w3.org/ns/oa#end> "26"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/2000/01/rdf-schema#label> "Section" .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/Bob%20Details.md> .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/ns/oa#hasSelector> _:b26 .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/ns/oa#hasSelector> _:b27 .
+<urn:name:Bob%20Details#Section> <http://www.w3.org/ns/oa#hasSelector> _:b28 .
+<urn:name:Bob%20Details#Section> <urn:property:description> "Section 1" .
+<urn:name:Bob%20Details#Section> <urn:property:description> "Section 2" .
+<urn:name:Bob%20Details#Section> <urn:property:description> "Section 3" .
+<urn:name:Bob%20Details#Section> <urn:property:somewhat%20related> <urn:name:Bob%20Details#%5E2> .
+<urn:name:Bob%20Details#Section> <urn:property:points%20to%20the%20document> <urn:name:Bob%20Details#A%20header> .
+<urn:name:Bob%20Details#Section> <http://pending.org/dot/link> <urn:name:Bob%20Details#%5E3%20> .
+<urn:name:Bob%20Details#Section> <http://pending.org/dot/link> <urn:name:Unknown#%5E1> .
+_:b26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b26 <http://www.w3.org/ns/oa#start> "26"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b26 <http://www.w3.org/ns/oa#end> "156"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:description> <http://www.w3.org/2000/01/rdf-schema#label> "description" .
 <urn:property:somewhat%20related> <http://www.w3.org/2000/01/rdf-schema#label> "somewhat related" .
-<urn:name:Bob%20Details#%5E2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:Bob%20Details#%5E2> <http://www.w3.org/2000/01/rdf-schema#label> "Section" .
-<urn:name:Bob%20Details#%5E2> <http://www.w3.org/2000/01/rdf-schema#label> "2" .
-<urn:name:Bob%20Details#%5E2> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/Bob%20Details.md> .
-<urn:name:Bob%20Details#%5E2> <http://www.w3.org/ns/oa#hasSelector> _:b35 .
-<urn:name:Bob%20Details#%5E2> <urn:property:description> "Section 2" .
-<urn:name:Bob%20Details#%5E2> <http://pending.org/dot/link> <urn:name:Bob%20Details#%5E3%20> .
 <urn:property:points%20to%20the%20document> <http://www.w3.org/2000/01/rdf-schema#label> "points to the document" .
-_:b35 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b35 <http://www.w3.org/ns/oa#start> "156"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b35 <http://www.w3.org/ns/oa#end> "252"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b27 <http://www.w3.org/ns/oa#start> "156"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b27 <http://www.w3.org/ns/oa#end> "252"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:name:Bob%20Details#%5E3%20> <http://pending.org/dot/alias> " Pointer to section 3" .
-<urn:name:Bob%20Details#%5E3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:Bob%20Details#%5E3> <http://www.w3.org/2000/01/rdf-schema#label> "Section" .
-<urn:name:Bob%20Details#%5E3> <http://www.w3.org/2000/01/rdf-schema#label> "3" .
-<urn:name:Bob%20Details#%5E3> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/bob/Bob%20Details.md> .
-<urn:name:Bob%20Details#%5E3> <http://www.w3.org/ns/oa#hasSelector> _:b36 .
-<urn:name:Bob%20Details#%5E3> <urn:property:description> "Section 3" .
-<urn:name:Bob%20Details#%5E3> <http://pending.org/dot/link> <urn:name:Unknown#%5E1> .
-_:b36 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b36 <http://www.w3.org/ns/oa#start> "252"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b36 <http://www.w3.org/ns/oa#end> "320"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b28 <http://www.w3.org/ns/oa#start> "252"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b28 <http://www.w3.org/ns/oa#end> "320"^^<http://www.w3.org/2001/XMLSchema#integer> .

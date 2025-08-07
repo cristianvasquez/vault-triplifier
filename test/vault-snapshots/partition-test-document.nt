@@ -5,7 +5,7 @@
 <file:///test/test-vault/partition-test-document.md> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/MarkdownDocument> .
 <file:///test/test-vault/partition-test-document.md> <http://pending.org/dot/represents> <urn:name:partition-test-document> .
 <file:///test/test-vault/partition-test-document.md> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/partition-test-document.md" .
-<file:///test/test-vault/partition-test-document.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.597Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/partition-test-document.md> <http://www.w3.org/ns/prov#generatedAtTime> "2025-08-07T18:06:30.732Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/partition-test-document.md> <http://pending.org/dot/raw> "---\ntitle: Partition Test Document\nauthor: Test Suite\ntype: comprehensive\ntags: [test, partition, comprehensive]\n---\n\n# Main Document Title\n\nThis document tests all partitioning scenarios for the vault-triplifier.\n\nContent before first partition element.\n\nis a :: TestDocument\ncreated :: 2024-01-01\n\n## Section with Header\n\nThis content belongs to the section header block when partitionBy includes 'header'.\n\nhas property :: section value\nrelated to :: [[#Another Section]]\n\n^section1\n\nThis content has an identifier anchor. When partitionBy includes 'identifier', this becomes a separate block.\n\nidentifier property :: identifier value\n\n#important #test\n\nThis content has tags. When partitionBy includes 'tag', this becomes a separate block.\n\ntag property :: tag value\nconnects to :: https://example.com\n\n### Nested Header\n\nNested headers should also trigger partitioning when 'header' is enabled.\n\nnested property :: nested value\n\n^nested-ref\n\nCombined identifier and nested header.\n\ncombined :: identifier and header\n\n#urgent\n\nCombined tag with nested structure.\n\nurgent property :: urgent value\n\n## Another Section\n\nCross-references and links test:\n\nrefers to :: [[#section1]]\nexternal link :: [Example](https://example.com)\nwiki link :: [[NonExistent]]\n\n^final-anchor\n\nFinal test with identifier at end.\n\nfinal property :: final value\n\n#conclusion\n\nDocument conclusion with tag.\n\nsummary :: This document tests all partition scenarios" .
 <file:///test/test-vault/partition-test-document.md> <http://pending.org/dot/tag> "test" .
 <file:///test/test-vault/partition-test-document.md> <http://pending.org/dot/tag> "partition" .
@@ -22,78 +22,61 @@
 <urn:name:partition-test-document#Main%20Document%20Title> <http://pending.org/dot/contains> <urn:name:partition-test-document#Section%20with%20Header> .
 <urn:name:partition-test-document#Main%20Document%20Title> <http://pending.org/dot/contains> <urn:name:partition-test-document#Another%20Section> .
 <urn:name:partition-test-document#Main%20Document%20Title> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/partition-test-document.md> .
-<urn:name:partition-test-document#Main%20Document%20Title> <http://www.w3.org/ns/oa#hasSelector> _:b4 .
-<urn:name:partition-test-document#Main%20Document%20Title> <urn:property:created> "2024-01-01" .
-_:b4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b4 <http://www.w3.org/ns/oa#start> "118"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b4 <http://www.w3.org/ns/oa#end> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<urn:name:partition-test-document#Main%20Document%20Title> <http://www.w3.org/ns/oa#hasSelector> _:b1 .
+<urn:name:partition-test-document#Main%20Document%20Title> <urn:property:created> "2024-01-01T00:00:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b1 <http://www.w3.org/ns/oa#start> "118"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b1 <http://www.w3.org/ns/oa#end> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:created> <http://www.w3.org/2000/01/rdf-schema#label> "created" .
 <urn:name:partition-test-document#Section%20with%20Header> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:partition-test-document#Section%20with%20Header> <http://www.w3.org/2000/01/rdf-schema#label> "Section with Header" .
-<urn:name:partition-test-document#Section%20with%20Header> <http://pending.org/dot/contains> <urn:name:partition-test-document#%5Esection1> .
-<urn:name:partition-test-document#Section%20with%20Header> <http://pending.org/dot/contains> _:b1 .
+<urn:name:partition-test-document#Section%20with%20Header> <http://pending.org/dot/tag> "test" .
+<urn:name:partition-test-document#Section%20with%20Header> <http://pending.org/dot/tag> "important" .
 <urn:name:partition-test-document#Section%20with%20Header> <http://pending.org/dot/contains> <urn:name:partition-test-document#Nested%20Header> .
 <urn:name:partition-test-document#Section%20with%20Header> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/partition-test-document.md> .
-<urn:name:partition-test-document#Section%20with%20Header> <http://www.w3.org/ns/oa#hasSelector> _:b5 .
+<urn:name:partition-test-document#Section%20with%20Header> <http://www.w3.org/ns/oa#hasSelector> _:b2 .
 <urn:name:partition-test-document#Section%20with%20Header> <urn:property:has%20property> "section value" .
 <urn:name:partition-test-document#Section%20with%20Header> <urn:property:related%20to> <urn:name:partition-test-document#Another%20Section> .
 <urn:name:partition-test-document#Section%20with%20Header> <urn:property:identifier%20property> "identifier value" .
 <urn:name:partition-test-document#Section%20with%20Header> <urn:property:tag%20property> "tag value" .
 <urn:name:partition-test-document#Section%20with%20Header> <urn:property:connects%20to> <https://example.com> .
-_:b5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b5 <http://www.w3.org/ns/oa#start> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b5 <http://www.w3.org/ns/oa#end> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b2 <http://www.w3.org/ns/oa#start> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b2 <http://www.w3.org/ns/oa#end> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:has%20property> <http://www.w3.org/2000/01/rdf-schema#label> "has property" .
 <urn:property:related%20to> <http://www.w3.org/2000/01/rdf-schema#label> "related to" .
 <urn:name:partition-test-document#Another%20Section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:partition-test-document#Another%20Section> <http://www.w3.org/2000/01/rdf-schema#label> "Another Section" .
-<urn:name:partition-test-document#Another%20Section> <http://pending.org/dot/contains> <urn:name:partition-test-document#%5Efinal> .
-<urn:name:partition-test-document#Another%20Section> <http://pending.org/dot/contains> _:b3 .
+<urn:name:partition-test-document#Another%20Section> <http://pending.org/dot/tag> "conclusion" .
 <urn:name:partition-test-document#Another%20Section> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/partition-test-document.md> .
-<urn:name:partition-test-document#Another%20Section> <http://www.w3.org/ns/oa#hasSelector> _:b9 .
+<urn:name:partition-test-document#Another%20Section> <http://www.w3.org/ns/oa#hasSelector> _:b4 .
 <urn:name:partition-test-document#Another%20Section> <urn:property:refers%20to> <urn:name:partition-test-document#section1> .
 <urn:name:partition-test-document#Another%20Section> <urn:property:external%20link> <https://example.com> .
 <urn:name:partition-test-document#Another%20Section> <urn:property:wiki%20link> <urn:name:NonExistent> .
 <urn:name:partition-test-document#Another%20Section> <urn:property:final%20property> "final value" .
 <urn:name:partition-test-document#Another%20Section> <urn:property:summary> "This document tests all partition scenarios" .
-<urn:name:partition-test-document#%5Esection1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:partition-test-document#%5Esection1> <http://www.w3.org/2000/01/rdf-schema#label> "section1" .
 <urn:property:identifier%20property> <http://www.w3.org/2000/01/rdf-schema#label> "identifier property" .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-_:b1 <http://pending.org/dot/tag> "test" .
-_:b1 <http://pending.org/dot/tag> "important" .
 <urn:property:tag%20property> <http://www.w3.org/2000/01/rdf-schema#label> "tag property" .
 <urn:property:connects%20to> <http://www.w3.org/2000/01/rdf-schema#label> "connects to" .
 <urn:name:partition-test-document#Nested%20Header> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
 <urn:name:partition-test-document#Nested%20Header> <http://www.w3.org/2000/01/rdf-schema#label> "Nested Header" .
-<urn:name:partition-test-document#Nested%20Header> <http://pending.org/dot/contains> <urn:name:partition-test-document#%5Enested> .
-<urn:name:partition-test-document#Nested%20Header> <http://pending.org/dot/contains> _:b2 .
+<urn:name:partition-test-document#Nested%20Header> <http://pending.org/dot/tag> "urgent" .
 <urn:name:partition-test-document#Nested%20Header> <http://www.w3.org/ns/oa#hasSource> <file:///test/test-vault/partition-test-document.md> .
-<urn:name:partition-test-document#Nested%20Header> <http://www.w3.org/ns/oa#hasSelector> _:b7 .
+<urn:name:partition-test-document#Nested%20Header> <http://www.w3.org/ns/oa#hasSelector> _:b3 .
 <urn:name:partition-test-document#Nested%20Header> <urn:property:nested%20property> "nested value" .
 <urn:name:partition-test-document#Nested%20Header> <urn:property:combined> "identifier and header" .
 <urn:name:partition-test-document#Nested%20Header> <urn:property:urgent%20property> "urgent value" .
-_:b7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b7 <http://www.w3.org/ns/oa#start> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b7 <http://www.w3.org/ns/oa#end> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b3 <http://www.w3.org/ns/oa#start> "807"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b3 <http://www.w3.org/ns/oa#end> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:nested%20property> <http://www.w3.org/2000/01/rdf-schema#label> "nested property" .
-<urn:name:partition-test-document#%5Enested> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:partition-test-document#%5Enested> <http://www.w3.org/2000/01/rdf-schema#label> "-ref" .
-<urn:name:partition-test-document#%5Enested> <http://www.w3.org/2000/01/rdf-schema#label> "nested" .
 <urn:property:combined> <http://www.w3.org/2000/01/rdf-schema#label> "combined" .
-_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-_:b2 <http://pending.org/dot/tag> "urgent" .
 <urn:property:urgent%20property> <http://www.w3.org/2000/01/rdf-schema#label> "urgent property" .
-_:b9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
-_:b9 <http://www.w3.org/ns/oa#start> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:b9 <http://www.w3.org/ns/oa#end> "1440"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#TextPositionSelector> .
+_:b4 <http://www.w3.org/ns/oa#start> "1101"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:b4 <http://www.w3.org/ns/oa#end> "1440"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <urn:property:refers%20to> <http://www.w3.org/2000/01/rdf-schema#label> "refers to" .
 <urn:property:external%20link> <http://www.w3.org/2000/01/rdf-schema#label> "external link" .
 <urn:property:wiki%20link> <http://www.w3.org/2000/01/rdf-schema#label> "wiki link" .
-<urn:name:partition-test-document#%5Efinal> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-<urn:name:partition-test-document#%5Efinal> <http://www.w3.org/2000/01/rdf-schema#label> "-anchor" .
-<urn:name:partition-test-document#%5Efinal> <http://www.w3.org/2000/01/rdf-schema#label> "final" .
 <urn:property:final%20property> <http://www.w3.org/2000/01/rdf-schema#label> "final property" .
-_:b3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/oa#Annotation> .
-_:b3 <http://pending.org/dot/tag> "conclusion" .
 <urn:property:summary> <http://www.w3.org/2000/01/rdf-schema#label> "summary" .

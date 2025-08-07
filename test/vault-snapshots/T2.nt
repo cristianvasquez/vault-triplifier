@@ -1,17 +1,17 @@
 <urn:name:T2.canvas> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/NamedConcept> .
 <urn:name:T2.canvas> <http://www.w3.org/ns/prov#derivedFrom> <file:///test/test-vault/T2.canvas> .
 <urn:name:T2.canvas> <http://www.w3.org/2000/01/rdf-schema#label> "T2.canvas" .
-<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b16 .
-<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b17 .
-<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b18 .
+<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b10 .
+<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b11 .
+<urn:name:T2.canvas> <http://pending.org/dot/contains> _:b12 .
 <file:///test/test-vault/T2.canvas> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://pending.org/dot/CanvasDocument> .
 <file:///test/test-vault/T2.canvas> <http://pending.org/dot/represents> <urn:name:T2.canvas> .
 <file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#atLocation> "test/test-vault/T2.canvas" .
-<file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#generatedAtTime> "2025-07-20T12:52:24.637Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<file:///test/test-vault/T2.canvas> <http://www.w3.org/ns/prov#generatedAtTime> "2025-08-07T18:06:30.794Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <file:///test/test-vault/T2.canvas> <http://pending.org/dot/raw> "{\n	\"nodes\":[\n		{\"type\":\"text\",\"text\":\"## Bob\",\"id\":\"05f8fdf93ab87df8\",\"x\":-1541,\"y\":-1233,\"width\":250,\"height\":56},\n		{\"type\":\"text\",\"text\":\"## Alice\\n\\n\",\"id\":\"ccee2d298466cc2d\",\"x\":-1081,\"y\":-1233,\"width\":250,\"height\":56},\n		{\"type\":\"text\",\"text\":\"## Ice cream\",\"id\":\"e9992f3480f8494f\",\"x\":-1081,\"y\":-1064,\"width\":250,\"height\":60}\n	],\n	\"edges\":[\n		{\"id\":\"13c9429dda51bafb\",\"fromNode\":\"05f8fdf93ab87df8\",\"fromSide\":\"top\",\"toNode\":\"69ee38b926932dfa\",\"toSide\":\"bottom\"},\n		{\"id\":\"bd10acd7519ed80a\",\"fromNode\":\"05f8fdf93ab87df8\",\"fromSide\":\"right\",\"toNode\":\"ccee2d298466cc2d\",\"toSide\":\"left\"},\n		{\"id\":\"b2a8d2ae3aed5b9b\",\"fromNode\":\"ccee2d298466cc2d\",\"fromSide\":\"bottom\",\"toNode\":\"e9992f3480f8494f\",\"toSide\":\"top\"}\n	]\n}" .
-_:b16 <http://schema.org/description> "## Bob" .
-_:b16 <urn:property:undefined> _:b17 .
-_:b17 <http://schema.org/description> "## Alice\n\n" .
-_:b17 <urn:property:undefined> _:b18 .
-_:b18 <http://schema.org/description> "## Ice cream" .
+_:b10 <http://schema.org/description> "## Bob" .
+_:b10 <urn:property:undefined> _:b11 .
+_:b11 <http://schema.org/description> "## Alice\n\n" .
+_:b11 <urn:property:undefined> _:b12 .
+_:b12 <http://schema.org/description> "## Ice cream" .
 <urn:property:undefined> <http://www.w3.org/2000/01/rdf-schema#label> "undefined" .
