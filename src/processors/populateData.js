@@ -4,7 +4,7 @@ import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 import { isHTTP, isDelimitedURI, extractDelimitedURI } from '../utils/uris.js'
 
 // Properties that should not be converted to RDF triples
-const reservedProperties = new Set()
+const reservedProperties = new Set(['uri'])
 
 /**
  * Resolve a term through various strategies

@@ -7,6 +7,7 @@ import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { simpleAst } from 'docs-and-graphs'
+import { isDelimitedURI, extractDelimitedURI } from '../utils/uris.js'
 
 /**
  * Manages text position selectors for RDF annotations
@@ -113,10 +114,43 @@ const URI_STRATEGIES = {
 }
 
 /**
+ * Extracts custom URI declaration from node data
+ */
+function extractCustomUri(node) {
+  if (!node.data) {
+    return null
+  }
+
+  for (const data of node.data) {
+    if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+      // YAML-like object data
+      if (data.uri) {
+        return data.uri
+      }
+    } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
+      // Inline array data [predicate, object]
+      return data[1]
+    }
+  }
+  return null
+}
+
+/**
  * Creates a URI for header nodes
  */
 function createHeaderUri (node, pointer) {
   const id = node.value
+  
+  // Check for explicit URI declaration
+  const customUri = extractCustomUri(node)
+  if (customUri) {
+    // Handle delimited URIs (wrapped in angle brackets)
+    const uriValue = isDelimitedURI(customUri) ? extractDelimitedURI(customUri) : customUri
+    const childUri = rdf.namedNode(uriValue)
+    return { shouldSplit: true, childUri }
+  }
+  
+  // Default behavior - generate URI from header text
   const childUri = pointer.term.termType === 'BlankNode'
     ? rdf.blankNode()
     : appendSelector(pointer.term, `#${id}`)
