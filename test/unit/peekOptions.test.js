@@ -237,5 +237,51 @@ More content.
       assert.equal(result.mappings['is a'], 'rdf:type')
       assert.equal(result.includeRaw, false)
     })
+
+    it('should handle boolean values in frontmatter data', () => {
+      const content = `---
+uri: "http://example.com/test"
+---
+# Test Document
+
+foo :: true`
+
+      const { dataset } = triplify('/test.md', content)
+      const triples = [...dataset]
+      
+      // Find the triple with foo predicate
+      const fooTriple = triples.find(quad => 
+        quad.predicate.value.includes('foo')
+      )
+      
+      assert.ok(fooTriple, 'Should have foo predicate')
+      // Boolean should be converted to literal by our unified processing
+      assert.equal(fooTriple.object.termType, 'Literal')
+      assert.equal(fooTriple.object.value, 'true')
+      assert.equal(fooTriple.object.datatype.value, 'http://www.w3.org/2001/XMLSchema#boolean')
+    })
+
+    it('should handle number values in frontmatter data', () => {
+      const content = `---
+uri: "http://example.com/test"
+---
+# Test Document
+
+bar :: 42`
+
+      const { dataset } = triplify('/test.md', content)
+      const triples = [...dataset]
+      
+      // Find the triple with bar predicate
+      const barTriple = triples.find(quad => 
+        quad.predicate.value.includes('bar')
+      )
+      
+      assert.ok(barTriple, 'Should have bar predicate')
+      // Number should be converted to literal by our unified processing
+      assert.equal(barTriple.object.termType, 'Literal')
+      assert.equal(barTriple.object.value, '42')
+      assert.equal(barTriple.object.datatype.value, 'http://www.w3.org/2001/XMLSchema#integer')
+    })
   })
 })

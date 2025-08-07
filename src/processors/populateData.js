@@ -1,15 +1,27 @@
 import rdf from 'rdf-ext'
 import { createMapper } from '../termMapper/customMapper.js'
-import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
-import { isHTTP, isDelimitedURI, extractDelimitedURI } from '../utils/uris.js'
+import { newLiteral, propertyToUri, nameToUri } from '../termMapper/termMapper.js'
+import { toTerm } from '../utils/uris.js'
 
 // Properties that should not be converted to RDF triples
 const reservedProperties = new Set(['uri'])
 
+
 /**
- * Resolve a term through various strategies
+ * Process a complete triple with unified logic
  */
-function resolveTerm (value, termType, context, options) {
+function processTriple(subject, predicate, object, context, options) {
+  return {
+    subject: subject ? resolveAndConvert(subject, 'subject', context, options) : null,
+    predicate: resolveAndConvert(predicate, 'predicate', context, options),
+    object: resolveAndConvert(object, 'object', context, options)
+  }
+}
+
+/**
+ * Unified resolve and convert function
+ */
+function resolveAndConvert(value, termType, context, options) {
   // Already an RDF term
   if (value?.termType) {
     return value
@@ -23,38 +35,32 @@ function resolveTerm (value, termType, context, options) {
     object: termType === 'object' ? value : undefined,
   })
 
-  const resolvedKey = `resolved${termType.charAt(0).toUpperCase() +
-  termType.slice(1)}`
+  const resolvedKey = `resolved${termType.charAt(0).toUpperCase() + termType.slice(1)}`
   if (mapped[resolvedKey]) {
     return mapped[resolvedKey]
   }
 
   // Check known links
   if (isString(value) && context.knownLinks) {
-    const knownLink = context.knownLinks.find(
-      link => value.includes(link.value))
+    const knownLink = context.knownLinks.find(link => value.includes(link.value))
     if (knownLink) {
       knownLink.mapped = true
       return knownLink.uri
     }
   }
 
-  // Handle delimited URIs (wrapped in angle brackets)
-  if (isString(value) && isDelimitedURI(value)) {
-    const uri = extractDelimitedURI(value)
-    return rdf.namedNode(uri)
-  }
+  // Apply URI detection + position-specific fallback
+  const uriTerm = toTerm(value)
+  if (uriTerm) return uriTerm
 
-  // Handle HTTP URIs
-  if (isString(value) && isHTTP(value)) {
-    return rdf.namedNode(value)
-  }
-
-  // Apply default transformation based on term type
+  // Fallback based on position
   if (termType === 'object') {
     return newLiteral(value)
-  } else {
+  } else if (termType === 'predicate') {
     return propertyToUri(value)
+  } else {
+    // Subject - needs nameToUri import
+    return nameToUri(value)
   }
 }
 
@@ -67,15 +73,15 @@ function addTriple (pointer, { subject, predicate, object }, context, options) {
     throw new Error(`Invalid object: ${JSON.stringify(object, null, 2)}`)
   }
 
-  // Resolve all terms
-  const s = subject === pointer.term
-    ? subject
-    : resolveTerm(subject, 'subject', context, options)
+  // Process all terms with unified logic
+  const processed = processTriple(subject, predicate, object, context, options)
 
-  const p = resolveTerm(predicate, 'predicate', context, options)
-  const o = resolveTerm(object, 'object', context, options)
+  // Handle subject (special case for pointer.term)
+  const s = subject === pointer.term 
+    ? subject 
+    : processed.subject
 
-  pointer.node(s).addOut(p, o)
+  pointer.node(s).addOut(processed.predicate, processed.object)
 }
 
 /**

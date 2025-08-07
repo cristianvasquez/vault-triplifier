@@ -8,7 +8,7 @@ import { processCanvas } from './processors/canvas.js'
 import ns from './namespaces.js'
 import { MarkdownTriplifierOptions } from './schemas.js'
 import { pathToFileURL, nameToUri } from './termMapper/termMapper.js'
-import { getNameFromPath } from './utils/uris.js'
+import { getNameFromPath, toTerm } from './utils/uris.js'
 import { getFileExtension } from './utils/extensions.js'
 
 // File processor registry
@@ -82,7 +82,11 @@ function createConceptPointer (path, options = {}) {
   const documentUri = pathToFileURL(path)
 
   const name = getNameFromPath(path)
-  const term = options.uri ? rdf.namedNode(options.uri) : nameToUri(name)
+  
+  // Process URI using centralized function  
+  const term = options.uri 
+    ? toTerm(options.uri)  // Returns NamedNode or Literal directly
+    : nameToUri(name)
 
   const pointer = grapoi({
     dataset: rdf.dataset(),

@@ -7,7 +7,7 @@ import { appendSelector, pathToFileURL } from '../termMapper/termMapper.js'
 import { getKnownLinks, populateLink } from './links.js'
 import { populateInline, populateYamlLike } from './populateData.js'
 import { simpleAst } from 'docs-and-graphs'
-import { isDelimitedURI, extractDelimitedURI } from '../utils/uris.js'
+import { toTerm } from '../utils/uris.js'
 
 /**
  * Manages text position selectors for RDF annotations
@@ -157,8 +157,7 @@ function createHeaderUri (node, pointer) {
   // Check if we already computed the custom URI for this node
   if (node._cachedCustomUri !== undefined) {
     if (node._cachedCustomUri) {
-      const uriValue = isDelimitedURI(node._cachedCustomUri) ? extractDelimitedURI(node._cachedCustomUri) : node._cachedCustomUri
-      const childUri = rdf.namedNode(uriValue)
+      const childUri = toTerm(node._cachedCustomUri)  // Returns NamedNode or Literal directly
       return { shouldSplit: true, childUri }
     }
   } else {
@@ -167,8 +166,7 @@ function createHeaderUri (node, pointer) {
     node._cachedCustomUri = customUri // Cache result (could be null)
     
     if (customUri) {
-      const uriValue = isDelimitedURI(customUri) ? extractDelimitedURI(customUri) : customUri
-      const childUri = rdf.namedNode(uriValue)
+      const childUri = toTerm(customUri)  // Returns NamedNode or Literal directly
       return { shouldSplit: true, childUri }
     }
   }
