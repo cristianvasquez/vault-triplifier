@@ -117,21 +117,40 @@ const URI_STRATEGIES = {
  * Extracts custom URI declaration from node data
  */
 function extractCustomUri(node) {
-  if (!node.data) {
-    return null
-  }
-
-  for (const data of node.data) {
-    if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
-      // YAML-like object data
-      if (data.uri) {
-        return data.uri
+  // Check for URI in node's own data
+  if (node.data) {
+    for (const data of node.data) {
+      if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+        // YAML-like object data
+        if (data.uri) {
+          return data.uri
+        }
+      } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
+        // Inline array data [predicate, object]
+        return data[1]
       }
-    } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
-      // Inline array data [predicate, object]
-      return data[1]
     }
   }
+
+  // Check for URI in child nodes' data (commonly in text nodes under headers)
+  if (node.children) {
+    for (const child of node.children) {
+      if (child.data) {
+        for (const data of child.data) {
+          if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+            // YAML-like object data
+            if (data.uri) {
+              return data.uri
+            }
+          } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
+            // Inline array data [predicate, object]
+            return data[1]
+          }
+        }
+      }
+    }
+  }
+  
   return null
 }
 
@@ -247,9 +266,9 @@ function assignInternalUris (node, context, options) {
   const children = node.children ?? []
 
   for (const child of children) {
-    const { childUri } = getNodeUri(child, context, options)
-    if (childUri) {
-      child.uri = childUri
+    const result = getNodeUri(child, context, options)
+    if (result && result.childUri) {
+      child.uri = result.childUri
     }
     assignInternalUris(child, context, options)
   }

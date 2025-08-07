@@ -89,6 +89,11 @@ function populateInline (data, context, options) {
   if (data.length === 2) {
     const [predicate, objectValue] = data
 
+    // Skip reserved properties (like 'uri')
+    if (reservedProperties.has(predicate)) {
+      return
+    }
+
     // Check if we have internal links that should be used as separate relationship targets
     if (knownLinks) {
       // Filter links to only those that actually appear in this specific objectValue
@@ -117,6 +122,12 @@ function populateInline (data, context, options) {
     }, context, options)
   } else if (data.length >= 3) {
     const [subject, predicate, object] = data
+    
+    // Skip reserved properties (like 'uri') for 3-element arrays too
+    if (reservedProperties.has(predicate)) {
+      return
+    }
+    
     addTriple(pointer, {
       subject,
       predicate,
