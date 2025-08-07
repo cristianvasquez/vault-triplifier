@@ -16,14 +16,12 @@ const content = `# Team Directory
 ## Alice Johnson
 schema:jobTitle :: Product Manager
 schema:email :: alice@company.com
-uri :: <https://company.com/employees/alice>
 manages :: [[#Bob Smith]], [[Charlie Brown]]
 expertise :: user research, roadmap planning
 
 ## Bob Smith  
 schema:jobTitle :: Senior Developer
 schema:email :: bob@company.com
-uri :: urn:employee:bob-smith
 reports to :: [[#Alice Johnson]]
 specializes in :: backend development, databases`;
 
@@ -36,15 +34,15 @@ const { term, dataset } = triplify("./team.md", content);
 @prefix prop: <urn:property:> .
 @prefix name: <urn:name:> .
 
-<https://company.com/employees/alice> <http://schema.org/jobTitle> "Product Manager" ;
+<urn:name:team-directory#Alice%20Johnson> <http://schema.org/jobTitle> "Product Manager" ;
     <http://schema.org/email> "alice@company.com" ;
     <urn:property:manages> <urn:name:team-directory#Bob%20Smith> ;
     <urn:property:manages> <urn:name:Charlie%20Brown> ;
     <urn:property:expertise> "user research", "roadmap planning" .
 
-<urn:employee:bob-smith> <http://schema.org/jobTitle> "Senior Developer" ;
+<urn:name:team-directory#Bob%20Smith> <http://schema.org/jobTitle> "Senior Developer" ;
     <http://schema.org/email> "bob@company.com" ;
-    <urn:property:reports%20to> <https://company.com/employees/alice> ;
+    <urn:property:reports%20to> <urn:name:team-directory#Alice%20Johnson> ;
     <urn:property:specializes%20in> "backend development", "databases" .
 ```
 
