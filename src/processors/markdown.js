@@ -117,40 +117,33 @@ const URI_STRATEGIES = {
  * Extracts custom URI declaration from node data
  */
 function extractCustomUri(node) {
-  // Check for URI in node's own data
-  if (node.data) {
-    for (const data of node.data) {
-      if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
-        // YAML-like object data
-        if (data.uri) {
-          return data.uri
-        }
-      } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
-        // Inline array data [predicate, object]
-        return data[1]
-      }
-    }
-  }
+  return extractUriFromNodeData(node) || extractUriFromChildrenData(node)
+}
 
-  // Check for URI in child nodes' data (commonly in text nodes under headers)
-  if (node.children) {
-    for (const child of node.children) {
-      if (child.data) {
-        for (const data of child.data) {
-          if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
-            // YAML-like object data
-            if (data.uri) {
-              return data.uri
-            }
-          } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
-            // Inline array data [predicate, object]
-            return data[1]
-          }
-        }
+function extractUriFromNodeData(node) {
+  if (!node.data) return null
+  
+  for (const data of node.data) {
+    if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+      // YAML-like object data
+      if (data.uri) {
+        return data.uri
       }
+    } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
+      // Inline array data [predicate, object]
+      return data[1]
     }
   }
+  return null
+}
+
+function extractUriFromChildrenData(node) {
+  if (!node.children) return null
   
+  for (const child of node.children) {
+    const uri = extractUriFromNodeData(child)
+    if (uri) return uri
+  }
   return null
 }
 
@@ -160,13 +153,23 @@ function extractCustomUri(node) {
 function createHeaderUri (node, pointer) {
   const id = node.value
   
-  // Check for explicit URI declaration
-  const customUri = extractCustomUri(node)
-  if (customUri) {
-    // Handle delimited URIs (wrapped in angle brackets)
-    const uriValue = isDelimitedURI(customUri) ? extractDelimitedURI(customUri) : customUri
-    const childUri = rdf.namedNode(uriValue)
-    return { shouldSplit: true, childUri }
+  // Check if we already computed the custom URI for this node
+  if (node._cachedCustomUri !== undefined) {
+    if (node._cachedCustomUri) {
+      const uriValue = isDelimitedURI(node._cachedCustomUri) ? extractDelimitedURI(node._cachedCustomUri) : node._cachedCustomUri
+      const childUri = rdf.namedNode(uriValue)
+      return { shouldSplit: true, childUri }
+    }
+  } else {
+    // First time - extract and cache the custom URI
+    const customUri = extractCustomUri(node)
+    node._cachedCustomUri = customUri // Cache result (could be null)
+    
+    if (customUri) {
+      const uriValue = isDelimitedURI(customUri) ? extractDelimitedURI(customUri) : customUri
+      const childUri = rdf.namedNode(uriValue)
+      return { shouldSplit: true, childUri }
+    }
   }
   
   // Default behavior - generate URI from header text
@@ -264,14 +267,32 @@ function markdown (node, context, options) {
  */
 function assignInternalUris (node, context, options) {
   const children = node.children ?? []
+  const uriLookup = new Map() // Simple lookup table for internal links
 
-  for (const child of children) {
-    const result = getNodeUri(child, context, options)
+  function processNode(currentNode) {
+    const result = getNodeUri(currentNode, context, options)
     if (result && result.childUri) {
-      child.uri = result.childUri
+      currentNode.uri = result.childUri
+      // If this is a header, add to lookup table for internal links
+      if (currentNode.type === 'block' && currentNode.value) {
+        uriLookup.set(currentNode.value, result.childUri)
+      }
     }
-    assignInternalUris(child, context, options)
+    
+    // Process children
+    const nodeChildren = currentNode.children ?? []
+    for (const child of nodeChildren) {
+      processNode(child)
+    }
   }
+
+  // Process all nodes and build lookup table
+  for (const child of children) {
+    processNode(child)
+  }
+
+  // Attach lookup table to context for internal link resolution
+  context.uriLookup = uriLookup
 }
 
 /**

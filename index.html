@@ -176,13 +176,13 @@
         </fieldset>
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
             <legend>Include Labels For:</legend>
-            <label><input type="checkbox" id="labelDocuments" checked> documents</label>
-            <label><input type="checkbox" id="labelSections" checked> sections</label>
-            <label><input type="checkbox" id="labelProperties" checked> properties</label>
+            <label><input type="checkbox" id="labelDocuments" > documents</label>
+            <label><input type="checkbox" id="labelSections" > sections</label>
+            <label><input type="checkbox" id="labelProperties" > properties</label>
         </fieldset>
         <fieldset style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
             <legend>Include:</legend>
-            <label><input type="checkbox" id="includeSelectors" checked> selectors</label>
+            <label><input type="checkbox" id="includeSelectors" > selectors</label>
             <label><input type="checkbox" id="includeRaw"> raw</label>
         </fieldset>
     </div>
@@ -190,33 +190,15 @@
 hello: world
 ---
 
-# Alice
+# Books
 
-One can declare properties in this way:
+One can declare properties in this way: (answer::42)
 
-is a :: Person
+## Alice's Adventures in Wonderland
 
-# Playground
+Written-by :: [[Lewis Carroll]]
 
-Text can include embedded variables (answer::42), that will be appended to the block.
-
-# Book
-
-Also blocks can be connected to other blocks
-
-Written-by :: [[#Alice]]
-
-## Chapter 3
-
-It is also possible to name paragraphs using the symbol ^  for example ^ref_1
-
-Or create other relations, outside the blocks (or the document)
-
-Bob :: knows :: [[#Alice]]
-
-One can also define namespaces, for example the well-known [schema](http://schema.org)
-
-Bob :: schema:name :: Bobby</textarea>
+    </textarea>
 </div>
 
 <div class="output-panel">
@@ -317,7 +299,7 @@ Bob :: schema:name :: Bobby</textarea>
     }
 
     // Simulate a real file processing scenario
-    const simulatedFilePath = '/vault/playground-demo.md'
+    const simulatedFilePath = '/vault/filename.md'
     const content = markdownInput.value
 
     const result = await triplify(simulatedFilePath, content, options)

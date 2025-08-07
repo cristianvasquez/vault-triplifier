@@ -22,6 +22,20 @@ function resolveLink ({ type, value }, context) {
 
   // Internal reference: [[#hello]]
   if (!head) {
+    // Check if we have a custom URI for this selector
+    // Strip the leading # for lookup
+    const lookupKey = selector.startsWith('#') ? selector.slice(1) : selector
+    
+    if (context.uriLookup && context.uriLookup.has(lookupKey)) {
+      const customUri = context.uriLookup.get(lookupKey)
+      return {
+        uri: customUri,
+        wikipath: context.path,
+        selector,
+      }
+    }
+    
+    // Fallback to default behavior
     const name = getNameFromPath(context.path)
     const nameTerm = nameToUri(name)
     const uri = appendSelector(nameTerm, selector)
