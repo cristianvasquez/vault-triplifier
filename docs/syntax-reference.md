@@ -258,6 +258,35 @@ age :: 25 ← attaches to <urn:name:doc#Alice>
 height :: 165 ← attaches to <urn:name:doc#Details>
 ```
 
+#### Custom URI Support in Header Partitions
+
+When using header-based partitioning, you can override the default URI generation with explicit URI declarations:
+
+```markdown
+# Team Directory
+
+## Alice Johnson
+schema:jobTitle :: Product Manager
+uri :: <https://company.com/employees/alice>
+
+## Bob Smith  
+schema:jobTitle :: Senior Developer
+uri :: urn:employee:bob-smith
+```
+
+**Generates:**
+```turtle
+<https://company.com/employees/alice> <http://schema.org/jobTitle> "Product Manager" .
+<urn:employee:bob-smith> <http://schema.org/jobTitle> "Senior Developer" .
+```
+
+**Custom URI Rules:**
+- Use `uri :: <URI>` or `uri :: URI` syntax within header sections
+- Supports HTTP/HTTPS URLs, URNs, and other URI schemes
+- Both delimited (`<URI>`) and plain (`URI`) formats work
+- The `uri` property is reserved and won't create RDF triples
+- Falls back to default URI pattern if no custom URI is declared
+
 ## Frontmatter Integration
 
 YAML frontmatter becomes properties on the document:

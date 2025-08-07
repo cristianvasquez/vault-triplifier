@@ -11,6 +11,8 @@ Complete guide to configuring vault-triplifier options, namespaces, and mappings
 | `includeCodeBlockContent` | `true` | Store code block content as literals |
 | `parseCodeBlockTurtleIn` | `['turtle;triplify']` | Parse these code blocks as RDF |
 
+**Note:** Header-based partitioning supports custom URI declarations using `uri :: <URI>` syntax within sections to override default URI generation.
+
 ```javascript
 import { triplify } from "vault-triplifier";
 
@@ -59,6 +61,25 @@ expertise :: user research
 - `<urn:name:team-documentation>` (document)
 - `<urn:name:team-documentation#Alice%20Johnson>` (section) 
 - `<urn:name:team-documentation#Alice%20Johnson#Skills>` (subsection)
+
+#### Custom URI Override
+```markdown
+# Team Documentation
+
+## Alice Johnson
+role :: Product Manager
+email :: alice@company.com
+uri :: <https://company.com/employees/alice>
+
+## Bob Smith
+role :: Senior Developer
+uri :: urn:employee:bob-smith
+```
+
+**Entities created:**
+- `<urn:name:team-documentation>` (document)
+- `<https://company.com/employees/alice>` (custom URI)
+- `<urn:employee:bob-smith>` (custom URI)
 
 #### No Partitioning
 ```javascript
