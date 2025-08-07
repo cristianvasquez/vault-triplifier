@@ -117,33 +117,34 @@ const URI_STRATEGIES = {
  * Extracts custom URI declaration from node data
  */
 function extractCustomUri(node) {
-  return extractUriFromNodeData(node) || extractUriFromChildrenData(node)
-}
-
-function extractUriFromNodeData(node) {
-  if (!node.data) return null
-  
-  for (const data of node.data) {
-    if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
-      // YAML-like object data
-      if (data.uri) {
-        return data.uri
+  // Helper to extract URI from data array
+  function findUriInData(dataArray) {
+    if (!dataArray) return null
+    
+    for (const data of dataArray) {
+      if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+        // YAML-like object data
+        if (data.uri) return data.uri
+      } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
+        // Inline array data [predicate, object]
+        return data[1]
       }
-    } else if (Array.isArray(data) && data.length === 2 && data[0] === 'uri') {
-      // Inline array data [predicate, object]
-      return data[1]
+    }
+    return null
+  }
+
+  // Check node's own data first
+  const nodeUri = findUriInData(node.data)
+  if (nodeUri) return nodeUri
+
+  // Check children's data
+  if (node.children) {
+    for (const child of node.children) {
+      const childUri = findUriInData(child.data)
+      if (childUri) return childUri
     }
   }
-  return null
-}
 
-function extractUriFromChildrenData(node) {
-  if (!node.children) return null
-  
-  for (const child of node.children) {
-    const uri = extractUriFromNodeData(child)
-    if (uri) return uri
-  }
   return null
 }
 
@@ -269,7 +270,7 @@ function assignInternalUris (node, context, options) {
   const children = node.children ?? []
   const uriLookup = new Map() // Simple lookup table for internal links
 
-  function processNode(currentNode) {
+  function processNodeForUri(currentNode) {
     const result = getNodeUri(currentNode, context, options)
     if (result && result.childUri) {
       currentNode.uri = result.childUri
@@ -282,13 +283,13 @@ function assignInternalUris (node, context, options) {
     // Process children
     const nodeChildren = currentNode.children ?? []
     for (const child of nodeChildren) {
-      processNode(child)
+      processNodeForUri(child)
     }
   }
 
   // Process all nodes and build lookup table
   for (const child of children) {
-    processNode(child)
+    processNodeForUri(child)
   }
 
   // Attach lookup table to context for internal link resolution
@@ -306,18 +307,8 @@ function traverseAst (node, context, options) {
   const _pointer = node.type === 'root' ? pointer.node(
     pathToFileURL(path)) : pointer
 
-  // Process node tags
-  processNodeTags(node, _pointer)
-
-  // Handle code blocks specially
-  if (node.type === 'code') {
-    processCodeBlock(node, context, options)
-    return pointer
-  }
-
-  // Process data and links
-  const knownLinks = processNodeData(node, { ...context, pointer: _pointer },
-    options)
+  // Process current node using consolidated processor
+  const knownLinks = processNode(node, { ...context, pointer: _pointer }, options)
 
   // Process unmapped links
   knownLinks.filter(link => !link.mapped).
@@ -327,15 +318,63 @@ function traverseAst (node, context, options) {
   // Process children
   const children = node.children ?? []
   for (const child of children) {
-    processChildNode(child, context, options)
+    processChild(child, context, options)
   }
 
   return pointer
 }
 
 /**
- * Processes tags for a node
+ * Consolidated node processor that handles tags, data, and links
  */
+function processNode(node, context, options) {
+  const { pointer } = context
+
+  // Handle code blocks specially
+  if (node.type === 'code') {
+    processCodeBlock(node, context, options)
+    return [] // No links to return
+  }
+
+  // Process node tags
+  processNodeTags(node, pointer)
+
+  // Process data and links  
+  return processNodeData(node, context, options)
+}
+
+/**
+ * Consolidated child processor that handles URI splitting and recursion
+ */
+function processChild(child, context, options) {
+  const { includeLabelsFor, includeSelectors } = options
+  const { pointer, path, selectorManager } = context
+  const { shouldSplit } = getNodeUri(child, context, options)
+
+  if (shouldSplit) {
+    const childPointer = pointer.node(child.uri)
+
+    // Set up annotation
+    childPointer.addOut(ns.rdf.type, ns.oa.Annotation)
+    pointer.addOut(ns.dot.contains, child.uri)
+
+    // Add labels if requested
+    addNodeLabels(child, childPointer, includeLabelsFor)
+
+    // Add position selector if needed
+    if (includeSelectors && child.type === 'block' && child.position) {
+      const documentTerm = pathToFileURL(path)
+      selectorManager.createSelector(childPointer, documentTerm, child.position)
+    }
+
+    // Recursively process child
+    traverseAst(child, { ...context, pointer: childPointer }, options)
+  } else {
+    // Process in-place without creating new node
+    traverseAst(child, context, options)
+  }
+}
+
 function processNodeTags(node, pointer) {
   let tags = node.tags ?? []
 
