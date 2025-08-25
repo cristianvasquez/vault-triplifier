@@ -70,6 +70,7 @@ function triplify (path, content, options = defaults) {
   return result
 }
 
+
 /**
  * Creates a concept pointer without content processing
  *
@@ -85,7 +86,7 @@ function createConceptPointer (path, options = {}) {
   
   // Process URI using centralized function  
   const term = options.uri 
-    ? toTerm(options.uri)  // Returns NamedNode or Literal directly
+    ? toTerm(options.uri) || rdf.namedNode(options.uri)  // Handle URIs in options, fallback to direct NamedNode
     : nameToUri(name)
 
   const pointer = grapoi({

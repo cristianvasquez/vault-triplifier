@@ -125,12 +125,25 @@ function pathToFileURL (filepath) {
   if (!filepath.startsWith('/') && !filepath.match(/^[A-Za-z]:/)) {
     filepath = '/' + filepath
   }
-  const encodedPath = filepath.split('/').
-    map(segment => encodeURIComponent(segment).replace(/%2F/g, '/')).
-    join('/')
-  return encodedPath.match(/^\/[A-Za-z]:/)
-    ? 'file:///' + encodedPath.slice(1)
-    : rdf.namedNode('file://' + encodedPath)
+  
+  // Check for Windows drive letter BEFORE encoding
+  const isWindowsPath = filepath.match(/^\/[A-Za-z]:/)
+  
+  if (isWindowsPath) {
+    // Handle Windows paths: preserve drive letter colon, encode the rest
+    const [, drive, ...pathParts] = filepath.split('/')
+    const encodedParts = pathParts.map(segment => 
+      encodeURIComponent(segment).replace(/%2F/g, '/')
+    )
+    const encodedPath = [drive, ...encodedParts].join('/')
+    return rdf.namedNode('file:///' + encodedPath)
+  } else {
+    // Handle Unix paths: encode all segments
+    const encodedPath = filepath.split('/').
+      map(segment => encodeURIComponent(segment).replace(/%2F/g, '/')).
+      join('/')
+    return rdf.namedNode('file://' + encodedPath)
+  }
 }
 
 // Convert file:// URL to file path

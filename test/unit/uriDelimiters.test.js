@@ -92,9 +92,10 @@ document :: file:///path/to/file`
       assert.ok(websiteTriple, 'Should have website predicate')
       assert.equal(websiteTriple.object.termType, 'NamedNode', 'HTTPS should remain NamedNode')
 
-      // Document should be Literal (existing behavior for file:// without brackets)
+      // Document should now be NamedNode (fixed behavior - file URIs are proper URIs)
       assert.ok(documentTriple, 'Should have document predicate')
-      assert.equal(documentTriple.object.termType, 'Literal', 'file:// should remain Literal without brackets')
+      assert.equal(documentTriple.object.termType, 'NamedNode', 'file:// should be NamedNode (fixed behavior)')
+      assert.equal(documentTriple.object.value, 'file:///path/to/file', 'Should preserve the file URI value')
     })
   })
 

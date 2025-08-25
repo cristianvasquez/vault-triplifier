@@ -1,5 +1,4 @@
 import rdf from 'rdf-ext'
-import { newLiteral, propertyToUri } from '../termMapper/termMapper.js'
 
 // /foo/bar/name.md -> name
 // /foo/bar/name -> name
@@ -10,16 +9,10 @@ function getNameFromPath (filePath) {
     ? fileName.split('.').slice(0, -1).join('.')
     : fileName
 }
-
-// ./hello -> hello
-function pathWithoutTrail (path) {
-  return path.startsWith('./') ? path.replace(/^.\//, '') : path
-}
-
 /**
  * Converts values to appropriate RDF terms
  * Extracts URI from angle brackets and converts to NamedNode or Literal
- * @param {string} value - The value to process 
+ * @param {string} value - The value to process
  * @returns {NamedNode|Literal} - RDF term (NamedNode for URIs, Literal for everything else)
  */
 function toTerm(value) {
@@ -30,7 +23,7 @@ function toTerm(value) {
       return rdf.namedNode(extractedURI)
     }
 
-    // Handle HTTP(S) URIs - convert to NamedNode  
+    // Handle HTTP(S) URIs - convert to NamedNode
     if (isHTTP(value)) {
       return rdf.namedNode(value)
     }
@@ -39,23 +32,15 @@ function toTerm(value) {
     if (isURN(value)) {
       return rdf.namedNode(value)
     }
+
+    // Handle file URIs - convert to NamedNode
+    if (isFile(value)) {
+      return rdf.namedNode(value)
+    }
   }
 
-  // Not a URI
+  // Not a recognized URI pattern
   return null
-}
-
-/**
- * Process predicate and object pair with position-aware logic
- * @param {*} predicate - The predicate value
- * @param {*} object - The object value  
- * @returns {Object} - {predicateTerm, objectTerm}
- */
-function processTermPair(predicate, object) {
-  return {
-    predicateTerm: toTerm(predicate) || propertyToUri(predicate),
-    objectTerm: toTerm(object) || newLiteral(object)
-  }
 }
 
 function isHTTP(urlString) {
@@ -77,23 +62,32 @@ function isURN(value) {
   return /^urn:[a-zA-Z0-9][a-zA-Z0-9-]{0,31}:/.test(value)
 }
 
-function hasURIScheme(value) {
+/**
+ * Check if a value is a file URI
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isFile(value) {
   if (typeof value !== 'string') {
     return false
   }
-  // General URI scheme pattern
-  return /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(value)
+  try {
+    // Check if it starts with file: and is a valid URL
+    return value.startsWith('file:') && Boolean(new URL(value))
+  } catch (e) {
+    return false
+  }
 }
 
 function isDelimitedURI(value) {
   if (typeof value !== 'string') {
     return false
   }
-  
+
   // Check if value is wrapped in angle brackets
   if (value.startsWith('<') && value.endsWith('>')) {
     const uri = value.slice(1, -1) // Remove < and >
-    
+
     // Basic URI validation - should contain a scheme
     try {
       new URL(uri)
@@ -103,7 +97,7 @@ function isDelimitedURI(value) {
       return /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(uri)
     }
   }
-  
+
   return false
 }
 
@@ -114,21 +108,7 @@ function extractDelimitedURI(value) {
   return null
 }
 
-// Legacy functions for backward compatibility
-function isURI(value) {
-  return isURN(value)
-}
-
-export { 
-  getNameFromPath, 
-  pathWithoutTrail, 
+export {
+  getNameFromPath,
   toTerm,
-  processTermPair,
-  isHTTP, 
-  isURN,
-  hasURIScheme,
-  isDelimitedURI, 
-  extractDelimitedURI,
-  // Legacy exports for backward compatibility
-  isURI
 }
