@@ -5,6 +5,7 @@ import {
   appendSelector,
 } from '../termMapper/termMapper.js'
 import { getNameFromPath } from '../utils/uris.js'
+import { encodeAsValidIri } from '../utils/iriValidation.js'
 
 function getKnownLinks (links, context) {
   return links.map(link => ({
@@ -15,7 +16,9 @@ function getKnownLinks (links, context) {
 
 function resolveLink ({ type, value }, context) {
   if (type === 'external') {
-    return { uri: rdf.namedNode(value) }
+    // Encode the URL to ensure it's a valid IRI for RDF processors like Oxigraph
+    const validIri = encodeAsValidIri(value)
+    return { uri: rdf.namedNode(validIri) }
   }
   // Wiki-links [[head]], [[#selector]] or [[head#selector]]
   const { head, selector } = parseHashPath(value)
