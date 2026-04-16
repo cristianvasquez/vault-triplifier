@@ -2,6 +2,8 @@
 
 Transform markdown documents into semantic RDF knowledge graphs with natural syntax.
 
+- replaced by :: [dot-triples](https://github.com/cristianvasquez/dot-triples)
+
 ## Quick Start
 
 ```bash
